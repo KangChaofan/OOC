@@ -19,6 +19,11 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -97,7 +102,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OOCModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Response\BillResponse.cs" />
     <Compile Include="Response\BillServiceResponse.cs" />
+    <Compile Include="Response\FileEntityResponse.cs" />
+    <Compile Include="Response\FileListResponse.cs" />
+    <Compile Include="Response\HashResponse.cs" />
     <Compile Include="Service\BillService.svc.cs">
       <DependentUpon>BillService.svc</DependentUpon>
     </Compile>
@@ -112,13 +121,13 @@
       <DependentUpon>OOCDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Response\ServiceResponse.cs" />
+    <Compile Include="Response\GenericResponse.cs" />
     <Compile Include="Service\IUserService.cs" />
     <Compile Include="Service\UserService.svc.cs">
       <DependentUpon>UserService.svc</DependentUpon>
     </Compile>
     <Compile Include="Response\UserServiceResponse.cs" />
-    <Compile Include="Response\FileServiceResponse.cs" />
+    <Compile Include="Response\FileDescription.cs" />
     <Compile Include="Service\IFileService.cs" />
     <Compile Include="Service\FileService.svc.cs">
       <DependentUpon>FileService.svc</DependentUpon>
@@ -172,7 +181,6 @@
           <CustomServerUrl>
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-          <EnableWcfTestClientForSVCDefaultValue>True</EnableWcfTestClientForSVCDefaultValue>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

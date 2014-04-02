@@ -5,3 +5,5 @@ OpenMIWrapper/obj/*
 .DS_Store
 OOC.dll
 OpenMIWrapper.dll
+/OOCService/bin/MySql.Data.dll
+/OOCService/bin/MySql.Data.Entity.dll

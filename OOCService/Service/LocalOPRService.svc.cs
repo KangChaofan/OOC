@@ -50,7 +50,7 @@ namespace OOC.Service
                 ArrayList listOfListeners = new ArrayList();
 
                 // logfile listener
-                if (composition.LogToFile != null && composition.LogToFile != "")
+                if (!string.IsNullOrEmpty(composition.LogToFile))
                 {
                     // get composition file's directory to logfile is saved in same directory
                     string logFileName = Utils.GetFileInfo(fileInfo.DirectoryName, composition.LogToFile).FullName;

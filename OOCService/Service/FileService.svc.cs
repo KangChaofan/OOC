@@ -16,7 +16,7 @@ namespace OOC.Service
     public class FileService : IFileService
     {
         private oocEntities db = new oocEntities();
-        private string fileRoot = ConfigurationManager.AppSettings["fileRepositoryRoot"];
+        private readonly string fileRoot = ConfigurationManager.AppSettings["fileRepositoryRoot"];
 
         public FileEntityResponse Get(string fileName)
         {

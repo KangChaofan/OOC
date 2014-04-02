@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
-using System.IO;
-using System.Collections;
-using OOC.Response;
+﻿using System.Linq;
 using OOC.ORM;
+using OOC.Response;
 using OOC.Util;
 
 namespace OOC.Service
 {
     public class UserService : IUserService
     {
-        private oocEntities db = new oocEntities();
+        private readonly oocEntities db = new oocEntities();
 
         public HashResponse Hash(string password)
         {
@@ -24,10 +16,10 @@ namespace OOC.Service
 
         public GenericResponse Auth(string username, string password)
         {
-            var result = from o in db.User
-                         where o.username == username && o.passhash == Hash(password).Hash
-                         select o;
-            if (result.Count() > 0)
+            IQueryable<User> result = from o in db.User
+                                      where o.username == username && o.passhash == Hash(password).Hash
+                                      select o;
+            if (result.Any())
             {
                 return new GenericResponse(true);
             }
@@ -53,10 +45,10 @@ namespace OOC.Service
 
         public UserInfoResponse GetByUsername(string Username)
         {
-            var result = from o in db.User
-                         where o.username == Username
-                         select o;
-            if (result.Count() > 0)
+            IQueryable<User> result = from o in db.User
+                                      where o.username == Username
+                                      select o;
+            if (result.Any())
             {
                 return new UserInfoResponse(result.First());
             }
@@ -69,10 +61,10 @@ namespace OOC.Service
 
         public UserInfoResponse GetById(int id)
         {
-            var result = from o in db.User
-                         where o.id == id
-                         select o;
-            if (result.Count() > 0)
+            IQueryable<User> result = from o in db.User
+                                      where o.id == id
+                                      select o;
+            if (result.Any())
             {
                 return new UserInfoResponse(result.First());
             }

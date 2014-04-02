@@ -1,8 +1,7 @@
 OOCService/obj/*
-OOCService/bin/OOC*.dll
 OpenMIWrapper/obj/*
-OpenMIWrapper/bin/Debug/OpenMIWrapper.dll
-OpenMIWrapper/bin/Release/OpenMIWrapper.dll
 *.pdb
 *.suo
 .DS_Store
+OOC.dll
+OpenMIWrapper.dll

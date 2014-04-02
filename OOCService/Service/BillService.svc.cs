@@ -61,6 +61,7 @@ namespace OOC.Service
         {
             var result = from o in db.Bill
                          where o.userId == userId
+                         orderby o.creation
                          select o;
             return new BillListResponse(result.ToList());
         }
@@ -69,6 +70,7 @@ namespace OOC.Service
         {
             var result = from o in db.Bill
                          where o.taskGuid == taskGuid
+                         orderby o.creation
                          select o;
             return new BillListResponse(result.ToList());
         }
@@ -77,6 +79,7 @@ namespace OOC.Service
         {
             var result = from o in db.Bill
                          where o.cmGuid == cmGuid
+                         orderby o.creation
                          select o;
             return new BillListResponse(result.ToList());
         }

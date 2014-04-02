@@ -7,7 +7,7 @@
 #
 # Host: 202.113.2.233 (MySQL 5.6.16)
 # Database: ooc
-# Generation Time: 2014-04-01 04:35:03 +0000
+# Generation Time: 2014-04-02 05:29:55 +0000
 # ************************************************************
 
 
@@ -38,9 +38,9 @@ CREATE TABLE `Bill` (
   KEY `fk_bill_task` (`taskGuid`),
   KEY `fk_bill_cm` (`cmGuid`),
   KEY `fk_bill_user` (`userId`),
-  CONSTRAINT `fk_bill_user` FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
   CONSTRAINT `fk_bill_cm` FOREIGN KEY (`cmGuid`) REFERENCES `CompositionModel` (`guid`),
-  CONSTRAINT `fk_bill_task` FOREIGN KEY (`taskGuid`) REFERENCES `Task` (`guid`)
+  CONSTRAINT `fk_bill_task` FOREIGN KEY (`taskGuid`) REFERENCES `Task` (`guid`),
+  CONSTRAINT `fk_bill_user` FOREIGN KEY (`userId`) REFERENCES `User` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -86,9 +86,9 @@ CREATE TABLE `CompositionLink` (
   KEY `fk_link_comp` (`compositionGuid`),
   KEY `fk_link_source_cm` (`sourceCmGuid`),
   KEY `fk_link_target_cm` (`targetCmGuid`),
-  CONSTRAINT `fk_link_target_cm` FOREIGN KEY (`targetCmGuid`) REFERENCES `CompositionModel` (`guid`),
   CONSTRAINT `fk_link_comp` FOREIGN KEY (`compositionGuid`) REFERENCES `Composition` (`guid`),
-  CONSTRAINT `fk_link_source_cm` FOREIGN KEY (`sourceCmGuid`) REFERENCES `CompositionModel` (`guid`)
+  CONSTRAINT `fk_link_source_cm` FOREIGN KEY (`sourceCmGuid`) REFERENCES `CompositionModel` (`guid`),
+  CONSTRAINT `fk_link_target_cm` FOREIGN KEY (`targetCmGuid`) REFERENCES `CompositionModel` (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -108,8 +108,8 @@ CREATE TABLE `CompositionModel` (
   PRIMARY KEY (`guid`),
   KEY `fk_cm_comp` (`compositionGuid`),
   KEY `fk_cm_model` (`modelGuid`),
-  CONSTRAINT `fk_cm_model` FOREIGN KEY (`modelGuid`) REFERENCES `Model` (`guid`),
-  CONSTRAINT `fk_cm_comp` FOREIGN KEY (`compositionGuid`) REFERENCES `Composition` (`guid`)
+  CONSTRAINT `fk_cm_comp` FOREIGN KEY (`compositionGuid`) REFERENCES `Composition` (`guid`),
+  CONSTRAINT `fk_cm_model` FOREIGN KEY (`modelGuid`) REFERENCES `Model` (`guid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -190,8 +190,8 @@ CREATE TABLE `Task` (
   PRIMARY KEY (`guid`),
   KEY `fk_task_comp` (`compositionGuid`),
   KEY `fk_task_user` (`userId`),
-  CONSTRAINT `fk_task_user` FOREIGN KEY (`userId`) REFERENCES `User` (`id`),
-  CONSTRAINT `fk_task_comp` FOREIGN KEY (`compositionGuid`) REFERENCES `Composition` (`guid`)
+  CONSTRAINT `fk_task_comp` FOREIGN KEY (`compositionGuid`) REFERENCES `Composition` (`guid`),
+  CONSTRAINT `fk_task_user` FOREIGN KEY (`userId`) REFERENCES `User` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -231,15 +231,6 @@ CREATE TABLE `User` (
   KEY `mobile` (`mobile`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `User` WRITE;
-/*!40000 ALTER TABLE `User` DISABLE KEYS */;
-
-INSERT INTO `User` (`id`, `username`, `passhash`, `mobile`, `balance`, `acl`, `creation`, `modification`)
-VALUES
-	(1,'test','123','',0,'','2014-04-01 11:24:38',NULL);
-
-/*!40000 ALTER TABLE `User` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 

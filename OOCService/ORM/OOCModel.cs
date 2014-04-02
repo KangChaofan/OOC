@@ -36,6 +36,7 @@ using System.Runtime.Serialization;
 
 #endregion
 
+
 namespace OOC.ORM
 {
     #region 上下文
@@ -245,6 +246,7 @@ namespace OOC.ORM
         private ObjectSet<TaskFileMapping> _TaskFileMapping;
 
         #endregion
+
         #region AddTo 方法
     
         /// <summary>
@@ -328,10 +330,12 @@ namespace OOC.ORM
         }
 
         #endregion
+
     }
     
 
     #endregion
+
     
     #region 实体
     
@@ -365,6 +369,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
         #region 基元属性
     
         /// <summary>
@@ -563,6 +568,7 @@ namespace OOC.ORM
         partial void OnmodificationChanged();
 
         #endregion
+
     
         #region 导航属性
     
@@ -675,6 +681,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -709,6 +716,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
         #region 基元属性
     
         /// <summary>
@@ -883,6 +891,7 @@ namespace OOC.ORM
         partial void OnmodificationChanged();
 
         #endregion
+
     
         #region 导航属性
     
@@ -986,6 +995,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1026,6 +1036,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
         #region 基元属性
     
         /// <summary>
@@ -1296,6 +1307,7 @@ namespace OOC.ORM
         partial void OnmodificationChanged();
 
         #endregion
+
     
         #region 导航属性
     
@@ -1408,6 +1420,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1440,6 +1453,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
         #region 基元属性
     
         /// <summary>
@@ -1590,6 +1604,7 @@ namespace OOC.ORM
         partial void OnmodificationChanged();
 
         #endregion
+
     
         #region 导航属性
     
@@ -1729,6 +1744,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1763,6 +1779,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
         #region 基元属性
     
         /// <summary>
@@ -1961,6 +1978,7 @@ namespace OOC.ORM
         partial void OnmodificationChanged();
 
         #endregion
+
     
         #region 导航属性
     
@@ -2064,6 +2082,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -2094,6 +2113,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
         #region 基元属性
     
         /// <summary>
@@ -2223,6 +2243,7 @@ namespace OOC.ORM
         partial void OnmodificationChanged();
 
         #endregion
+
     
         #region 导航属性
     
@@ -2263,6 +2284,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -2291,6 +2313,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
         #region 基元属性
     
         /// <summary>
@@ -2444,6 +2467,7 @@ namespace OOC.ORM
         partial void OnadditionalChanged();
 
         #endregion
+
     
         #region 导航属性
     
@@ -2484,6 +2508,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -2518,6 +2543,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
         #region 基元属性
     
         /// <summary>
@@ -2788,6 +2814,7 @@ namespace OOC.ORM
         partial void OnmodificationChanged();
 
         #endregion
+
     
         #region 导航属性
     
@@ -2906,6 +2933,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -2936,6 +2964,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
         #region 基元属性
     
         /// <summary>
@@ -3041,6 +3070,7 @@ namespace OOC.ORM
         partial void OnisDownloadableChanged();
 
         #endregion
+
     
         #region 导航属性
     
@@ -3081,6 +3111,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -3117,6 +3148,7 @@ namespace OOC.ORM
         }
 
         #endregion
+
         #region 基元属性
     
         /// <summary>
@@ -3315,6 +3347,7 @@ namespace OOC.ORM
         partial void OnmodificationChanged();
 
         #endregion
+
     
         #region 导航属性
     
@@ -3403,8 +3436,10 @@ namespace OOC.ORM
         }
 
         #endregion
+
     }
 
     #endregion
+
     
 }

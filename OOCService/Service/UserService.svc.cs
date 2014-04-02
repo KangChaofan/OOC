@@ -42,6 +42,7 @@ namespace OOC.Service
             try
             {
                 db.User.AddObject(user);
+                db.SaveChanges();
                 return new GenericResponse(true);
             }
             catch
@@ -54,6 +55,22 @@ namespace OOC.Service
         {
             var result = from o in db.User
                          where o.username == Username
+                         select o;
+            if (result.Count() > 0)
+            {
+                return new UserInfoResponse(result.First());
+            }
+            else
+            {
+                return new UserInfoResponse(false, 1, "USER_NOT_FOUND");
+            }
+        }
+
+
+        public UserInfoResponse GetById(int id)
+        {
+            var result = from o in db.User
+                         where o.id == id
                          select o;
             if (result.Count() > 0)
             {

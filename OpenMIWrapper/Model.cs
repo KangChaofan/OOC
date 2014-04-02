@@ -40,7 +40,7 @@ namespace OOC.OpenMIWrapper
 	/// <summary>
 	/// Summary description for Model.
 	/// </summary>
-	public class UIModel
+	public class Model
 	{
 		private string _omiFilename;
 	
@@ -49,9 +49,9 @@ namespace OOC.OpenMIWrapper
 		private string _modelID;
 		
 		/// <summary>
-		/// Creates a new instance of <see cref="UIModel">UIModel</see> class.
+		/// Creates a new instance of <see cref="Model">UIModel</see> class.
 		/// </summary>
-		public UIModel()
+		public Model()
 		{
 		}
 

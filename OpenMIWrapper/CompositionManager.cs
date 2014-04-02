@@ -105,7 +105,7 @@ namespace OOC.OpenMIWrapper
         IListener _runListener;
         bool _runInSameThread;
 
-        IList<UIModel> _models;
+        IList<Model> _models;
         ArrayList _connections;
         bool[] _listenedEventTypes;
         DateTime _triggerInvokeTime;
@@ -143,9 +143,9 @@ namespace OOC.OpenMIWrapper
         #region Public properties
 
         /// <summary>
-        /// Gets list of all models (ie. instances of <see cref="UIModel">UIModel</see> class) in composition.
+        /// Gets list of all models (ie. instances of <see cref="Model">UIModel</see> class) in composition.
         /// </summary>
-        public IList<UIModel> Models
+        public IList<Model> Models
         {
             get { return _models; }
             set { _models = value; }
@@ -153,7 +153,7 @@ namespace OOC.OpenMIWrapper
 
 
         /// <summary>
-        /// Gets list of all connections (ie. instances of <see cref="UIConnection">UIConnection</see> class) in composition.
+        /// Gets list of all connections (ie. instances of <see cref="Connection">UIConnection</see> class) in composition.
         /// </summary>
         public ArrayList Connections
         {
@@ -273,7 +273,7 @@ namespace OOC.OpenMIWrapper
         /// </summary>
         public void Initialize()
         {
-            _models = new List<UIModel>();
+            _models = new List<Model>();
             _connections = new ArrayList();
             _listenedEventTypes = new bool[(int)EventType.NUM_OF_EVENT_TYPES];
             for (int i = 0; i < (int)EventType.NUM_OF_EVENT_TYPES; i++)
@@ -321,9 +321,9 @@ namespace OOC.OpenMIWrapper
         /// <returns>Returns newly added model.</returns>
         /// <remarks>See <see cref="Utils.GetFileInfo">Utils.GetFileInfo</see> for more info about how
         /// specified file is searched.</remarks>
-        public UIModel AddModel(string directory, string omiFilename)
+        public Model AddModel(string directory, string omiFilename)
         {
-            UIModel newUiModel = new UIModel();
+            Model newUiModel = new Model();
             newUiModel.ReadOMIFile(directory, omiFilename);
 
             _models.Add(newUiModel);
@@ -339,11 +339,11 @@ namespace OOC.OpenMIWrapper
         /// </summary>
         /// <param name="model">Model to be removed.</param>
         /// <remarks>The <c>Dispose</c> method is called on the model.</remarks>
-        public void RemoveModel(UIModel model)
+        public void RemoveModel(Model model)
         {
             // first remove all links from/to this model
-            UIConnection[] copyOfLinks = (UIConnection[])_connections.ToArray(typeof(UIConnection));
-            foreach (UIConnection uiLink in copyOfLinks)
+            Connection[] copyOfLinks = (Connection[])_connections.ToArray(typeof(Connection));
+            foreach (Connection uiLink in copyOfLinks)
                 if (uiLink.AcceptingModel == model || uiLink.ProvidingModel == model)
                     RemoveConnection(uiLink);
 
@@ -383,14 +383,14 @@ namespace OOC.OpenMIWrapper
         /// <param name="acceptingModel">Target model</param>
         /// <remarks>Connection between two models is just abstraction which can hold links between models.
         /// The direction of connection and its links is same. There can be only one connection between two models.</remarks>
-        public void AddConnection(UIModel providingModel, UIModel acceptingModel)
+        public void AddConnection(Model providingModel, Model acceptingModel)
         {
             if (providingModel == acceptingModel)
                 throw (new Exception("Cannot connect model with itself."));
 
             // Check whether both models exist
             bool providingFound = false, acceptingFound = false;
-            foreach (UIModel model in _models)
+            foreach (Model model in _models)
             {
                 if (model == providingModel)
                     providingFound = true;
@@ -401,7 +401,7 @@ namespace OOC.OpenMIWrapper
                 throw (new Exception("Cannot find providing or accepting."));
 
             // check whether this link isn't already here (if yes, do nothing)
-            foreach (UIConnection link in _connections)
+            foreach (Connection link in _connections)
                 if (link.ProvidingModel == providingModel && link.AcceptingModel == acceptingModel)
                     return;
 
@@ -413,17 +413,17 @@ namespace OOC.OpenMIWrapper
             if (acceptingModel.ModelID == TriggerModelID)
             {
                 ArrayList connectionsToRemove = new ArrayList();
-                foreach (UIConnection uiLink in _connections)
+                foreach (Connection uiLink in _connections)
                 {
                     if (uiLink.AcceptingModel.ModelID == TriggerModelID
                         || uiLink.ProvidingModel.ModelID == TriggerModelID)
                         connectionsToRemove.Add(uiLink);
                 }
-                foreach (UIConnection uiLink in connectionsToRemove)
+                foreach (Connection uiLink in connectionsToRemove)
                     RemoveConnection(uiLink);
             }
 
-            _connections.Add(new UIConnection(providingModel, acceptingModel));
+            _connections.Add(new Connection(providingModel, acceptingModel));
 
             _shouldBeSaved = true;
         }
@@ -433,7 +433,7 @@ namespace OOC.OpenMIWrapper
         /// Removes connection between two models.
         /// </summary>
         /// <param name="connection">Connection to be removed.</param>
-        public void RemoveConnection(UIConnection connection)
+        public void RemoveConnection(Connection connection)
         {
             // remove ILinks from both connected components
             if (!_runPrepareForComputationStarted)
@@ -530,7 +530,7 @@ namespace OOC.OpenMIWrapper
             TimeStamp start = new TimeStamp(double.MaxValue),
                 end = new TimeStamp(double.MinValue);
 
-            foreach (UIModel model in _models)
+            foreach (Model model in _models)
             {
                 if (model.ModelID == CompositionManager.TriggerModelID)
                     continue;
@@ -587,7 +587,7 @@ namespace OOC.OpenMIWrapper
                     description.Append(",");
 
                     description.Append(" composition consists from following models:\n");
-                    foreach (UIModel model in _models)
+                    foreach (Model model in _models)
                     {
                         description.Append(model.ModelID);
                         description.Append(", ");
@@ -618,7 +618,7 @@ namespace OOC.OpenMIWrapper
                     _runListener.OnEvent(theEvent);
 
                     for (int i = 0; i < _runListener.GetAcceptedEventTypeCount(); i++)
-                        foreach (UIModel uimodel in _models)
+                        foreach (Model uimodel in _models)
                         {
                             theEvent = new Event(EventType.Informative);
                             theEvent.Description = "Calling Subscribe() method with EventType." + ((EventType)i).ToString() + " of model " + uimodel.ModelID;
@@ -722,7 +722,7 @@ namespace OOC.OpenMIWrapper
 
             // save UIModels
             XmlElement models = xmlDocument.CreateElement("models");
-            foreach (UIModel model in _models)
+            foreach (Model model in _models)
             {
                 XmlElement xmlUiModel = xmlDocument.CreateElement("model");
 
@@ -743,7 +743,7 @@ namespace OOC.OpenMIWrapper
 
             // save UILinks
             XmlElement links = xmlDocument.CreateElement("links");
-            foreach (UIConnection uiLink in _connections)
+            foreach (Connection uiLink in _connections)
             {
                 XmlElement xmlUiLink = xmlDocument.CreateElement("uilink");
 
@@ -858,7 +858,7 @@ namespace OOC.OpenMIWrapper
             {
                 try
                 {
-                    UIModel uiModel = AddModel(omiRelativeDirectory, xmlUiModel.GetAttribute("omi"));
+                    Model uiModel = AddModel(omiRelativeDirectory, xmlUiModel.GetAttribute("omi"));
                 }
                 catch (Exception e)
                 {
@@ -873,14 +873,14 @@ namespace OOC.OpenMIWrapper
             foreach (XmlElement xmlUiLink in xmlLinks.ChildNodes)
             {
                 // find models corresponding to this UIConnection
-                UIModel providingModel = null, acceptingModel = null;
-                foreach (UIModel uiModel in _models)
+                Model providingModel = null, acceptingModel = null;
+                foreach (Model uiModel in _models)
                     if (uiModel.ModelID == xmlUiLink.GetAttribute("model_providing"))
                     {
                         providingModel = uiModel;
                         break;
                     }
-                foreach (UIModel uiModel in _models)
+                foreach (Model uiModel in _models)
                     if (uiModel.ModelID == xmlUiLink.GetAttribute("model_accepting"))
                     {
                         acceptingModel = uiModel;
@@ -896,7 +896,7 @@ namespace OOC.OpenMIWrapper
                 }
 
                 // construct UIConnection
-                var uiLink = new UIConnection(providingModel, acceptingModel);
+                var uiLink = new Connection(providingModel, acceptingModel);
 
                 // read OpenMI Links
                 foreach (XmlElement xmlLink in xmlUiLink.ChildNodes)
@@ -1034,7 +1034,7 @@ namespace OOC.OpenMIWrapper
         /// </summary>
         private void RunThreadFunction()
         {
-            foreach (UIModel uimodel in _models)
+            foreach (Model uimodel in _models)
             {
                 if (_runListener != null)
                 {
@@ -1057,7 +1057,7 @@ namespace OOC.OpenMIWrapper
                 // run it !!!
                 // trigger.Run(new TimeStamp(CalendarConverter.Gregorian2ModifiedJulian(TriggerInvokeTime)));
                 ITime triggerTime = new TimeStamp(CalendarConverter.Gregorian2ModifiedJulian(TriggerInvokeTime));
-                foreach (UIModel uimodel in _models)
+                foreach (Model uimodel in _models)
                 {
                     LinkableRunEngine runEngine = (LinkableRunEngine)uimodel.LinkableComponent;
                     // Find edge in graph
@@ -1074,7 +1074,7 @@ namespace OOC.OpenMIWrapper
                     _runListener.OnEvent(theEvent);
                 }
 
-                foreach (UIModel uimodel in _models)
+                foreach (Model uimodel in _models)
                 {
                     if (_runListener != null)
                     {

@@ -71,6 +71,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Service\BillService.svc" />
     <Content Include="Service\LocalOPRService.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -85,6 +86,16 @@
     <Content Include="Service\FileService.svc" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ORM\OOCModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OOCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Response\BillServiceResponse.cs" />
+    <Compile Include="Service\BillService.svc.cs">
+      <DependentUpon>BillService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Service\IBillService.cs" />
     <Compile Include="Service\LocalOPRService.svc.cs">
       <DependentUpon>LocalOPRService.svc</DependentUpon>
     </Compile>
@@ -113,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="ORM\OOCDB.edmx">
@@ -125,6 +137,12 @@
       <Project>{EAD62B60-BF9F-463B-B817-AE55C3655C7C}</Project>
       <Name>OpenMIWrapper</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ORM\OOCModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OOCModel.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -37,18 +37,18 @@ namespace OOC.OpenMIWrapper
 	/// This class describes connection between two OpenMI models in one direction,
 	/// which consists of many links in same direction.
 	/// </summary>
-	public class UIConnection
+	public class Connection
 	{
-		UIModel _providingModel;
-		UIModel _acceptingModel;
+		Model _providingModel;
+		Model _acceptingModel;
 		ArrayList _links;
 
 		/// <summary>
-		/// Creates a new instance of <see cref="UIConnection">UIConnection</see> class.
+		/// Creates a new instance of <see cref="Connection">UIConnection</see> class.
 		/// </summary>
 		/// <param name="providingModel">Model providing data.</param>
 		/// <param name="acceptingModel">Model accepting data.</param>
-		public UIConnection(UIModel providingModel, UIModel acceptingModel)
+		public Connection(Model providingModel, Model acceptingModel)
 		{
 			_providingModel = providingModel;
 			_acceptingModel = acceptingModel;
@@ -59,7 +59,7 @@ namespace OOC.OpenMIWrapper
 		/// <summary>
 		/// Gets providing model.
 		/// </summary>
-		public UIModel ProvidingModel
+		public Model ProvidingModel
 		{
 			get { return(_providingModel); }
 		}
@@ -67,7 +67,7 @@ namespace OOC.OpenMIWrapper
 		/// <summary>
 		/// Gets accepting model.
 		/// </summary>
-		public UIModel AcceptingModel
+		public Model AcceptingModel
 		{
 			get { return(_acceptingModel); }
 		}

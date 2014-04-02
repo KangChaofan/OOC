@@ -24,6 +24,9 @@ namespace OOC.Service
 
         [OperationContract]
         UserInfoResponse GetByUsername(string Username);
+
+        [OperationContract]
+        UserInfoResponse GetById(int id);
     }
 
 }

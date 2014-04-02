@@ -525,8 +525,8 @@
           <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="DateTime" Name="modification" />
           <NavigationProperty Name="Composition" Relationship="oocModel.fk_link_comp" FromRole="CompositionLink" ToRole="Composition" />
-          <NavigationProperty Name="CompositionModel" Relationship="oocModel.fk_link_source_cm" FromRole="CompositionLink" ToRole="CompositionModel" />
-          <NavigationProperty Name="CompositionModel1" Relationship="oocModel.fk_link_target_cm" FromRole="CompositionLink" ToRole="CompositionModel" />
+          <NavigationProperty Name="CompositionModelSource" Relationship="oocModel.fk_link_source_cm" FromRole="CompositionLink" ToRole="CompositionModel" />
+          <NavigationProperty Name="CompositionModelTarget" Relationship="oocModel.fk_link_target_cm" FromRole="CompositionLink" ToRole="CompositionModel" />
         </EntityType>
         <EntityType Name="CompositionModel">
           <Key>
@@ -540,8 +540,8 @@
           <Property Type="DateTime" Name="modification" />
           <NavigationProperty Name="Bill" Relationship="oocModel.fk_bill_cm" FromRole="CompositionModel" ToRole="Bill" />
           <NavigationProperty Name="Composition" Relationship="oocModel.fk_cm_comp" FromRole="CompositionModel" ToRole="Composition" />
-          <NavigationProperty Name="CompositionLink" Relationship="oocModel.fk_link_source_cm" FromRole="CompositionModel" ToRole="CompositionLink" />
-          <NavigationProperty Name="CompositionLink1" Relationship="oocModel.fk_link_target_cm" FromRole="CompositionModel" ToRole="CompositionLink" />
+          <NavigationProperty Name="CompositionLinkSource" Relationship="oocModel.fk_link_source_cm" FromRole="CompositionModel" ToRole="CompositionLink" />
+          <NavigationProperty Name="CompositionLinkTarget" Relationship="oocModel.fk_link_target_cm" FromRole="CompositionModel" ToRole="CompositionLink" />
           <NavigationProperty Name="Model" Relationship="oocModel.fk_cm_model" FromRole="CompositionModel" ToRole="Model" />
         </EntityType>
         <EntityType Name="Model">
@@ -949,105 +949,98 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+        <DesignerProperty Name="DDLGenerationTemplate" Value="$(VSEFTools)\DBGen\SSDLToMySQL.tt" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="OOCDB">
-        <EntityTypeShape EntityType="oocModel.User" Width="1.5" PointX="0.75" PointY="0.75" Height="3.3071704101562496" IsExpanded="true" />
-        <EntityTypeShape EntityType="oocModel.Bill" Width="1.5" PointX="3" PointY="1" Height="3.1161507161458331" />
-        <EntityTypeShape EntityType="oocModel.Composition" Width="1.5" PointX="3" PointY="10.25" Height="3.1161507161458317" />
-        <EntityTypeShape EntityType="oocModel.CompositionLink" Width="1.5" PointX="7.5" PointY="9.75" Height="3.6892097981770817" />
-        <EntityTypeShape EntityType="oocModel.CompositionModel" Width="1.5" PointX="5.25" PointY="9.75" Height="3.1161507161458317" />
-        <EntityTypeShape EntityType="oocModel.Model" Width="1.5" PointX="3" PointY="15.125" Height="3.3071704101562478" />
-        <EntityTypeShape EntityType="oocModel.ModelFileMapping" Width="1.5" PointX="5.25" PointY="14.125" Height="2.1610522460937478" />
-        <EntityTypeShape EntityType="oocModel.ModelProperty" Width="1.5" PointX="5.25" PointY="17" Height="2.3520719401041674" />
-        <EntityTypeShape EntityType="oocModel.Task" Width="1.5" PointX="5.25" PointY="5.125" Height="3.8802294921874996" />
-        <EntityTypeShape EntityType="oocModel.TaskFileMapping" Width="1.5" PointX="7.5" PointY="6.125" Height="1.9700325520833317" />
+        <EntityTypeShape EntityType="oocModel.User" Width="1.625" PointX="0.75" PointY="9.125" Height="3.3071704101562496" IsExpanded="true" />
+        <EntityTypeShape EntityType="oocModel.Bill" Width="2" PointX="3.125" PointY="6.25" Height="3.1161507161458353" />
+        <EntityTypeShape EntityType="oocModel.Composition" Width="1.875" PointX="3.125" PointY="10.125" Height="3.1161507161458317" />
+        <EntityTypeShape EntityType="oocModel.CompositionLink" Width="2.25" PointX="11.5" PointY="13.125" Height="3.6892097981770817" />
+        <EntityTypeShape EntityType="oocModel.CompositionModel" Width="2" PointX="8.75" PointY="14.625" Height="3.1161507161458317" />
+        <EntityTypeShape EntityType="oocModel.Model" Width="1.875" PointX="3.125" PointY="15" Height="3.307170410156246" />
+        <EntityTypeShape EntityType="oocModel.ModelFileMapping" Width="1.625" PointX="5.75" PointY="14" Height="2.161052246093746" />
+        <EntityTypeShape EntityType="oocModel.ModelProperty" Width="1.75" PointX="5.75" PointY="16.875" Height="2.3520719401041674" />
+        <EntityTypeShape EntityType="oocModel.Task" Width="1.875" PointX="6.75" PointY="9.25" Height="3.8802294921874996" />
+        <EntityTypeShape EntityType="oocModel.TaskFileMapping" Width="1.625" PointX="9.375" PointY="10.25" Height="1.9700325520833317" />
         <AssociationConnector Association="oocModel.fk_bill_cm" >
-          <ConnectorPoint PointX="5.2511528461538459" PointY="9.75" />
-          <ConnectorPoint PointX="4.875" PointY="9.3738471538461532" />
-          <ConnectorPoint PointX="4.875" PointY="2.5580753580729167" />
-          <ConnectorPoint PointX="4.5" PointY="2.5580753580729167" />
+          <ConnectorPoint PointX="9.03125" PointY="14.625" />
+          <ConnectorPoint PointX="9.03125" PointY="7.71875" />
+          <ConnectorPoint PointX="5.125" PointY="7.71875" />
         </AssociationConnector>
         <AssociationConnector Association="oocModel.fk_bill_task" >
-          <ConnectorPoint PointX="6" PointY="5.125" />
-          <ConnectorPoint PointX="6" PointY="3.3683655371093759" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="3.3683655371093755" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="3.3683655371093759" />
-          <ConnectorPoint PointX="4.5" PointY="3.3683655371093759" />
+          <ConnectorPoint PointX="6.75" PointY="9.7143258580729182" />
+          <ConnectorPoint PointX="5.09375" PointY="9.7143258580729182" />
+          <ConnectorPoint PointX="5.09375" PointY="9.3661507161458353" />
         </AssociationConnector>
         <AssociationConnector Association="oocModel.fk_bill_user" >
-          <ConnectorPoint PointX="2.25" PointY="2.5285852050781248" />
-          <ConnectorPoint PointX="3" PointY="2.5285852050781248" />
+          <ConnectorPoint PointX="2.375" PointY="9.8884129290364591" />
+          <ConnectorPoint PointX="5.078125" PointY="9.8884129290364591" />
+          <ConnectorPoint PointX="5.078125" PointY="9.3661507161458353" />
         </AssociationConnector>
         <AssociationConnector Association="oocModel.fk_cm_comp" >
-          <ConnectorPoint PointX="4.5" PointY="11.558075358072916" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="11.558075358072916" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="11.558075358072916" />
-          <ConnectorPoint PointX="5.25" PointY="11.558075358072916" />
+          <ConnectorPoint PointX="5" PointY="13.216940104166666" />
+          <ConnectorPoint PointX="8.8593725" PointY="13.216940104166666" />
+          <ConnectorPoint PointX="8.8593725" PointY="14.625" />
         </AssociationConnector>
         <AssociationConnector Association="oocModel.fk_comp_author" >
-          <ConnectorPoint PointX="1.5" PointY="4.05717041015625" />
-          <ConnectorPoint PointX="1.5" PointY="11.808075358072916" />
-          <ConnectorPoint PointX="1.8229191666666667" PointY="11.808075358072916" />
-          <ConnectorPoint PointX="1.9895858333333332" PointY="11.808075358072916" />
-          <ConnectorPoint PointX="3" PointY="11.808075358072916" />
+          <ConnectorPoint PointX="2.375" PointY="11.278585204966365" />
+          <ConnectorPoint PointX="3.125" PointY="11.278585204966365" />
         </AssociationConnector>
         <AssociationConnector Association="oocModel.fk_link_comp" >
-          <ConnectorPoint PointX="4.5" PointY="13.147400716145832" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="13.147400716145832" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="13.147400716145832" />
-          <ConnectorPoint PointX="7.5" PointY="13.147400716145832" />
+          <ConnectorPoint PointX="4.0625" PointY="13.241150716145832" />
+          <ConnectorPoint PointX="4.0625" PointY="13.75" />
+          <ConnectorPoint PointX="8.7760391666666653" PointY="13.75" />
+          <ConnectorPoint PointX="8.9427058333333331" PointY="13.75" />
+          <ConnectorPoint PointX="8.9479166666666661" PointY="13.75" />
+          <ConnectorPoint PointX="9.1145833333333339" PointY="13.75" />
+          <ConnectorPoint PointX="11.125" PointY="13.75" />
+          <ConnectorPoint PointX="11.125" PointY="14.969604899088541" />
+          <ConnectorPoint PointX="11.5" PointY="14.969604899088541" />
         </AssociationConnector>
         <AssociationConnector Association="oocModel.fk_task_comp" >
-          <ConnectorPoint PointX="3.75" PointY="10.25" />
-          <ConnectorPoint PointX="3.75" PointY="7.06511474609375" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="7.0651147460937489" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="7.06511474609375" />
-          <ConnectorPoint PointX="5.25" PointY="7.06511474609375" />
+          <ConnectorPoint PointX="5" PointY="11.62761474609375" />
+          <ConnectorPoint PointX="6.75" PointY="11.62761474609375" />
         </AssociationConnector>
         <AssociationConnector Association="oocModel.fk_link_source_cm" >
-          <ConnectorPoint PointX="6.75" PointY="11.308075358072916" />
-          <ConnectorPoint PointX="7.5" PointY="11.308075358072916" />
+          <ConnectorPoint PointX="10.75" PointY="15.954407348632811" />
+          <ConnectorPoint PointX="11.5" PointY="15.954407348632811" />
         </AssociationConnector>
         <AssociationConnector Association="oocModel.fk_link_target_cm" >
-          <ConnectorPoint PointX="6.75" PointY="10.466537679036458" />
-          <ConnectorPoint PointX="7.5" PointY="10.466537679036458" />
+          <ConnectorPoint PointX="10.75" PointY="15.462006123860675" />
+          <ConnectorPoint PointX="11.5" PointY="15.462006123860675" />
         </AssociationConnector>
         <AssociationConnector Association="oocModel.fk_cm_model" >
-          <ConnectorPoint PointX="4.5" PointY="15.126152846153847" />
-          <ConnectorPoint PointX="4.875" PointY="14.751152846153847" />
-          <ConnectorPoint PointX="4.875" PointY="10.622785679036458" />
-          <ConnectorPoint PointX="5.25" PointY="10.622785679036458" />
+          <ConnectorPoint PointX="5" PointY="16.518026123046873" />
+          <ConnectorPoint PointX="8.75" PointY="16.518026123046873" />
         </AssociationConnector>
         <AssociationConnector Association="oocModel.fk_file_model" >
-          <ConnectorPoint PointX="4.5" PointY="15.737355046123797" />
-          <ConnectorPoint PointX="5.25" PointY="15.737355046123797" />
+          <ConnectorPoint PointX="5" PointY="15.580526123046873" />
+          <ConnectorPoint PointX="5.75" PointY="15.580526123046873" />
         </AssociationConnector>
         <AssociationConnector Association="oocModel.fk_model_author" >
-          <ConnectorPoint PointX="1.9062525" PointY="4.05717041015625" />
-          <ConnectorPoint PointX="1.9062525" PointY="16.778585205078123" />
-          <ConnectorPoint PointX="3" PointY="16.778585205078123" />
+          <ConnectorPoint PointX="1.5625" PointY="12.43217041015625" />
+          <ConnectorPoint PointX="1.5625" PointY="16.653585205078123" />
+          <ConnectorPoint PointX="3.125" PointY="16.653585205078123" />
         </AssociationConnector>
         <AssociationConnector Association="oocModel.fk_property_model" >
-          <ConnectorPoint PointX="4.5" PointY="17.716085205078123" />
-          <ConnectorPoint PointX="5.25" PointY="17.716085205078123" />
+          <ConnectorPoint PointX="5" PointY="17.591085205078123" />
+          <ConnectorPoint PointX="5.75" PointY="17.591085205078123" />
         </AssociationConnector>
         <AssociationConnector Association="oocModel.fk_file_task" >
-          <ConnectorPoint PointX="6.75" PointY="7.1100162760416659" />
-          <ConnectorPoint PointX="7.5" PointY="7.1100162760416659" />
+          <ConnectorPoint PointX="8.625" PointY="11.235016276041666" />
+          <ConnectorPoint PointX="8.9479166666666661" PointY="11.235016276041666" />
+          <ConnectorPoint PointX="9.1145833333333339" PointY="11.235016276041666" />
+          <ConnectorPoint PointX="9.375" PointY="11.235016276041666" />
         </AssociationConnector>
         <AssociationConnector Association="oocModel.fk_task_user" >
-          <ConnectorPoint PointX="1.0937475" PointY="4.05717041015625" />
-          <ConnectorPoint PointX="1.0937475" PointY="6.0638048730468741" />
-          <ConnectorPoint PointX="1.4166666666666667" PointY="6.0638048730468732" />
-          <ConnectorPoint PointX="1.5833333333333333" PointY="6.0638048730468741" />
-          <ConnectorPoint PointX="1.8229191666666667" PointY="6.0638048730468732" />
-          <ConnectorPoint PointX="1.9895858333333332" PointY="6.0638048730468741" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="6.0638048730468732" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="6.0638048730468741" />
-          <ConnectorPoint PointX="5.25" PointY="6.0638048730468741" />
+          <ConnectorPoint PointX="2.375" PointY="9.5089882871093767" />
+          <ConnectorPoint PointX="4.994791666666667" PointY="9.5089882871093767" />
+          <ConnectorPoint PointX="5.177083333333333" PointY="9.5089882871093767" />
+          <ConnectorPoint PointX="6.75" PointY="9.5089882871093767" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

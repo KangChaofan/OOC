@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOCService", "OOCService\OO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMIWrapper", "OpenMIWrapper\OpenMIWrapper.csproj", "{EAD62B60-BF9F-463B-B817-AE55C3655C7C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOCHost", "OOCHost\OOCHost.csproj", "{1EC0C3A8-AA46-4AE0-B8DE-ED8ED46DD90D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{EAD62B60-BF9F-463B-B817-AE55C3655C7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAD62B60-BF9F-463B-B817-AE55C3655C7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAD62B60-BF9F-463B-B817-AE55C3655C7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EC0C3A8-AA46-4AE0-B8DE-ED8ED46DD90D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EC0C3A8-AA46-4AE0-B8DE-ED8ED46DD90D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EC0C3A8-AA46-4AE0-B8DE-ED8ED46DD90D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EC0C3A8-AA46-4AE0-B8DE-ED8ED46DD90D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

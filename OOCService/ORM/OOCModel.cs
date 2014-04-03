@@ -33,6 +33,8 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("oocModel", "fk_property_model", "Model", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.ORM.Model), "ModelProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.ModelProperty), true)]
 [assembly: EdmRelationshipAttribute("oocModel", "fk_file_task", "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.ORM.Task), "TaskFileMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.TaskFileMapping), true)]
 [assembly: EdmRelationshipAttribute("oocModel", "fk_task_user", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.ORM.User), "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.Task), true)]
+[assembly: EdmRelationshipAttribute("oocModel", "fk_tag_parent", "ModelTag", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(OOC.ORM.ModelTag), "ModelTag1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.ModelTag), true)]
+[assembly: EdmRelationshipAttribute("oocModel", "ModelTagMapping", "Model", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.Model), "ModelTag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.ModelTag))]
 
 #endregion
 
@@ -244,6 +246,22 @@ namespace OOC.ORM
             }
         }
         private ObjectSet<TaskFileMapping> _TaskFileMapping;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<ModelTag> ModelTag
+        {
+            get
+            {
+                if ((_ModelTag == null))
+                {
+                    _ModelTag = base.CreateObjectSet<ModelTag>("ModelTag");
+                }
+                return _ModelTag;
+            }
+        }
+        private ObjectSet<ModelTag> _ModelTag;
 
         #endregion
 
@@ -327,6 +345,14 @@ namespace OOC.ORM
         public void AddToTaskFileMapping(TaskFileMapping taskFileMapping)
         {
             base.AddObject("TaskFileMapping", taskFileMapping);
+        }
+    
+        /// <summary>
+        /// 用于向 ModelTag EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddToModelTag(ModelTag modelTag)
+        {
+            base.AddObject("ModelTag", modelTag);
         }
 
         #endregion
@@ -1764,17 +1790,21 @@ namespace OOC.ORM
         /// <param name="name">name 属性的初始值。</param>
         /// <param name="version">version 属性的初始值。</param>
         /// <param name="authorUserId">authorUserId 属性的初始值。</param>
-        /// <param name="isGranted">isGranted 属性的初始值。</param>
         /// <param name="creation">creation 属性的初始值。</param>
-        public static Model CreateModel(global::System.String guid, global::System.String name, global::System.String version, global::System.Int64 authorUserId, global::System.Boolean isGranted, global::System.DateTime creation)
+        /// <param name="abstract">abstract 属性的初始值。</param>
+        /// <param name="isPublic">isPublic 属性的初始值。</param>
+        /// <param name="isApproved">isApproved 属性的初始值。</param>
+        public static Model CreateModel(global::System.String guid, global::System.String name, global::System.String version, global::System.Int64 authorUserId, global::System.DateTime creation, global::System.String @abstract, global::System.Boolean isPublic, global::System.Boolean isApproved)
         {
             Model model = new Model();
             model.guid = guid;
             model.name = name;
             model.version = version;
             model.authorUserId = authorUserId;
-            model.isGranted = isGranted;
             model.creation = creation;
+            model.@abstract = @abstract;
+            model.isPublic = isPublic;
+            model.isApproved = isApproved;
             return model;
         }
 
@@ -1884,30 +1914,6 @@ namespace OOC.ORM
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean isGranted
-        {
-            get
-            {
-                return _isGranted;
-            }
-            set
-            {
-                OnisGrantedChanging(value);
-                ReportPropertyChanging("isGranted");
-                _isGranted = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("isGranted");
-                OnisGrantedChanged();
-            }
-        }
-        private global::System.Boolean _isGranted;
-        partial void OnisGrantedChanging(global::System.Boolean value);
-        partial void OnisGrantedChanged();
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String className
@@ -1976,6 +1982,78 @@ namespace OOC.ORM
         private Nullable<global::System.DateTime> _modification;
         partial void OnmodificationChanging(Nullable<global::System.DateTime> value);
         partial void OnmodificationChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String @abstract
+        {
+            get
+            {
+                return _abstract;
+            }
+            set
+            {
+                OnabstractChanging(value);
+                ReportPropertyChanging("abstract");
+                _abstract = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("abstract");
+                OnabstractChanged();
+            }
+        }
+        private global::System.String _abstract;
+        partial void OnabstractChanging(global::System.String value);
+        partial void OnabstractChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean isPublic
+        {
+            get
+            {
+                return _isPublic;
+            }
+            set
+            {
+                OnisPublicChanging(value);
+                ReportPropertyChanging("isPublic");
+                _isPublic = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("isPublic");
+                OnisPublicChanged();
+            }
+        }
+        private global::System.Boolean _isPublic;
+        partial void OnisPublicChanging(global::System.Boolean value);
+        partial void OnisPublicChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean isApproved
+        {
+            get
+            {
+                return _isApproved;
+            }
+            set
+            {
+                OnisApprovedChanging(value);
+                ReportPropertyChanging("isApproved");
+                _isApproved = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("isApproved");
+                OnisApprovedChanged();
+            }
+        }
+        private global::System.Boolean _isApproved;
+        partial void OnisApprovedChanging(global::System.Boolean value);
+        partial void OnisApprovedChanged();
 
         #endregion
 
@@ -2030,7 +2108,7 @@ namespace OOC.ORM
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("oocModel", "fk_model_author", "User")]
-        public User User
+        public User AuthorUser
         {
             get
             {
@@ -2045,7 +2123,7 @@ namespace OOC.ORM
         /// 没有元数据文档可用。
         /// </summary>
         [BrowsableAttribute(false)]
-        public EntityReference<User> UserReference
+        public EntityReference<User> AuthorUserReference
         {
             get
             {
@@ -2080,6 +2158,27 @@ namespace OOC.ORM
                 }
             }
         }
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("oocModel", "ModelTagMapping", "ModelTag")]
+        public EntityCollection<ModelTag> ModelTag
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ModelTag>("oocModel.ModelTagMapping", "ModelTag");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ModelTag>("oocModel.ModelTagMapping", "ModelTag", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -2102,13 +2201,17 @@ namespace OOC.ORM
         /// <param name="fileName">fileName 属性的初始值。</param>
         /// <param name="isMainLibrary">isMainLibrary 属性的初始值。</param>
         /// <param name="creation">creation 属性的初始值。</param>
-        public static ModelFileMapping CreateModelFileMapping(global::System.String modelGuid, global::System.String fileName, global::System.Boolean isMainLibrary, global::System.DateTime creation)
+        /// <param name="isDocument">isDocument 属性的初始值。</param>
+        /// <param name="signature">signature 属性的初始值。</param>
+        public static ModelFileMapping CreateModelFileMapping(global::System.String modelGuid, global::System.String fileName, global::System.Boolean isMainLibrary, global::System.DateTime creation, global::System.Boolean isDocument, global::System.String signature)
         {
             ModelFileMapping modelFileMapping = new ModelFileMapping();
             modelFileMapping.modelGuid = modelGuid;
             modelFileMapping.fileName = fileName;
             modelFileMapping.isMainLibrary = isMainLibrary;
             modelFileMapping.creation = creation;
+            modelFileMapping.isDocument = isDocument;
+            modelFileMapping.signature = signature;
             return modelFileMapping;
         }
 
@@ -2241,6 +2344,54 @@ namespace OOC.ORM
         private Nullable<global::System.DateTime> _modification;
         partial void OnmodificationChanging(Nullable<global::System.DateTime> value);
         partial void OnmodificationChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean isDocument
+        {
+            get
+            {
+                return _isDocument;
+            }
+            set
+            {
+                OnisDocumentChanging(value);
+                ReportPropertyChanging("isDocument");
+                _isDocument = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("isDocument");
+                OnisDocumentChanged();
+            }
+        }
+        private global::System.Boolean _isDocument;
+        partial void OnisDocumentChanging(global::System.Boolean value);
+        partial void OnisDocumentChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String signature
+        {
+            get
+            {
+                return _signature;
+            }
+            set
+            {
+                OnsignatureChanging(value);
+                ReportPropertyChanging("signature");
+                _signature = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("signature");
+                OnsignatureChanged();
+            }
+        }
+        private global::System.String _signature;
+        partial void OnsignatureChanging(global::System.String value);
+        partial void OnsignatureChanged();
 
         #endregion
 
@@ -2303,12 +2454,14 @@ namespace OOC.ORM
         /// <param name="modelGuid">modelGuid 属性的初始值。</param>
         /// <param name="key">key 属性的初始值。</param>
         /// <param name="type">type 属性的初始值。</param>
-        public static ModelProperty CreateModelProperty(global::System.String modelGuid, global::System.String key, global::System.Boolean type)
+        /// <param name="creation">creation 属性的初始值。</param>
+        public static ModelProperty CreateModelProperty(global::System.String modelGuid, global::System.String key, global::System.Boolean type, global::System.DateTime creation)
         {
             ModelProperty modelProperty = new ModelProperty();
             modelProperty.modelGuid = modelGuid;
             modelProperty.key = key;
             modelProperty.type = type;
+            modelProperty.creation = creation;
             return modelProperty;
         }
 
@@ -2465,6 +2618,54 @@ namespace OOC.ORM
         private global::System.String _additional;
         partial void OnadditionalChanging(global::System.String value);
         partial void OnadditionalChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime creation
+        {
+            get
+            {
+                return _creation;
+            }
+            set
+            {
+                OncreationChanging(value);
+                ReportPropertyChanging("creation");
+                _creation = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("creation");
+                OncreationChanged();
+            }
+        }
+        private global::System.DateTime _creation;
+        partial void OncreationChanging(global::System.DateTime value);
+        partial void OncreationChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> modification
+        {
+            get
+            {
+                return _modification;
+            }
+            set
+            {
+                OnmodificationChanging(value);
+                ReportPropertyChanging("modification");
+                _modification = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("modification");
+                OnmodificationChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _modification;
+        partial void OnmodificationChanging(Nullable<global::System.DateTime> value);
+        partial void OnmodificationChanged();
 
         #endregion
 
@@ -2503,6 +2704,271 @@ namespace OOC.ORM
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Model>("oocModel.fk_property_model", "Model", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// 没有元数据文档可用。
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="oocModel", Name="ModelTag")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ModelTag : EntityObject
+    {
+        #region 工厂方法
+    
+        /// <summary>
+        /// 创建新的 ModelTag 对象。
+        /// </summary>
+        /// <param name="guid">guid 属性的初始值。</param>
+        /// <param name="name">name 属性的初始值。</param>
+        /// <param name="description">description 属性的初始值。</param>
+        /// <param name="creation">creation 属性的初始值。</param>
+        public static ModelTag CreateModelTag(global::System.String guid, global::System.String name, global::System.String description, global::System.DateTime creation)
+        {
+            ModelTag modelTag = new ModelTag();
+            modelTag.guid = guid;
+            modelTag.name = name;
+            modelTag.description = description;
+            modelTag.creation = creation;
+            return modelTag;
+        }
+
+        #endregion
+
+        #region 基元属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String guid
+        {
+            get
+            {
+                return _guid;
+            }
+            set
+            {
+                if (_guid != value)
+                {
+                    OnguidChanging(value);
+                    ReportPropertyChanging("guid");
+                    _guid = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("guid");
+                    OnguidChanged();
+                }
+            }
+        }
+        private global::System.String _guid;
+        partial void OnguidChanging(global::System.String value);
+        partial void OnguidChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                OnnameChanging(value);
+                ReportPropertyChanging("name");
+                _name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("name");
+                OnnameChanged();
+            }
+        }
+        private global::System.String _name;
+        partial void OnnameChanging(global::System.String value);
+        partial void OnnameChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                OndescriptionChanging(value);
+                ReportPropertyChanging("description");
+                _description = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("description");
+                OndescriptionChanged();
+            }
+        }
+        private global::System.String _description;
+        partial void OndescriptionChanging(global::System.String value);
+        partial void OndescriptionChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String parentTagGuid
+        {
+            get
+            {
+                return _parentTagGuid;
+            }
+            set
+            {
+                OnparentTagGuidChanging(value);
+                ReportPropertyChanging("parentTagGuid");
+                _parentTagGuid = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("parentTagGuid");
+                OnparentTagGuidChanged();
+            }
+        }
+        private global::System.String _parentTagGuid;
+        partial void OnparentTagGuidChanging(global::System.String value);
+        partial void OnparentTagGuidChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime creation
+        {
+            get
+            {
+                return _creation;
+            }
+            set
+            {
+                OncreationChanging(value);
+                ReportPropertyChanging("creation");
+                _creation = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("creation");
+                OncreationChanged();
+            }
+        }
+        private global::System.DateTime _creation;
+        partial void OncreationChanging(global::System.DateTime value);
+        partial void OncreationChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> modification
+        {
+            get
+            {
+                return _modification;
+            }
+            set
+            {
+                OnmodificationChanging(value);
+                ReportPropertyChanging("modification");
+                _modification = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("modification");
+                OnmodificationChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _modification;
+        partial void OnmodificationChanging(Nullable<global::System.DateTime> value);
+        partial void OnmodificationChanged();
+
+        #endregion
+
+    
+        #region 导航属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("oocModel", "fk_tag_parent", "ModelTag1")]
+        public EntityCollection<ModelTag> ChildModelTags
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ModelTag>("oocModel.fk_tag_parent", "ModelTag1");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ModelTag>("oocModel.fk_tag_parent", "ModelTag1", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("oocModel", "fk_tag_parent", "ModelTag")]
+        public ModelTag ParentModelTag
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ModelTag>("oocModel.fk_tag_parent", "ModelTag").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ModelTag>("oocModel.fk_tag_parent", "ModelTag").Value = value;
+            }
+        }
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [BrowsableAttribute(false)]
+        public EntityReference<ModelTag> ParentModelTagReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ModelTag>("oocModel.fk_tag_parent", "ModelTag");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ModelTag>("oocModel.fk_tag_parent", "ModelTag", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("oocModel", "ModelTagMapping", "Model")]
+        public EntityCollection<Model> Model
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Model>("oocModel.ModelTagMapping", "Model");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Model>("oocModel.ModelTagMapping", "Model", value);
                 }
             }
         }

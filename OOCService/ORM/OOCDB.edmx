@@ -13,6 +13,8 @@
           <EntitySet Name="Model" EntityType="oocModel.Store.Model" store:Type="Tables" Schema="ooc" />
           <EntitySet Name="ModelFileMapping" EntityType="oocModel.Store.ModelFileMapping" store:Type="Tables" Schema="ooc" />
           <EntitySet Name="ModelProperty" EntityType="oocModel.Store.ModelProperty" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="ModelTag" EntityType="oocModel.Store.ModelTag" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="ModelTagMapping" EntityType="oocModel.Store.ModelTagMapping" store:Type="Tables" Schema="ooc" />
           <EntitySet Name="Task" EntityType="oocModel.Store.Task" store:Type="Tables" Schema="ooc" />
           <EntitySet Name="TaskFileMapping" EntityType="oocModel.Store.TaskFileMapping" store:Type="Tables" Schema="ooc" />
           <EntitySet Name="User" EntityType="oocModel.Store.User" store:Type="Tables" Schema="ooc" />
@@ -60,6 +62,14 @@
             <End Role="CompositionModel" EntitySet="CompositionModel" />
             <End Role="CompositionLink" EntitySet="CompositionLink" />
           </AssociationSet>
+          <AssociationSet Name="fk_mapping_model" Association="oocModel.Store.fk_mapping_model">
+            <End Role="Model" EntitySet="Model" />
+            <End Role="ModelTagMapping" EntitySet="ModelTagMapping" />
+          </AssociationSet>
+          <AssociationSet Name="fk_mapping_tag" Association="oocModel.Store.fk_mapping_tag">
+            <End Role="ModelTag" EntitySet="ModelTag" />
+            <End Role="ModelTagMapping" EntitySet="ModelTagMapping" />
+          </AssociationSet>
           <AssociationSet Name="fk_model_author" Association="oocModel.Store.fk_model_author">
             <End Role="User" EntitySet="User" />
             <End Role="Model" EntitySet="Model" />
@@ -67,6 +77,10 @@
           <AssociationSet Name="fk_property_model" Association="oocModel.Store.fk_property_model">
             <End Role="Model" EntitySet="Model" />
             <End Role="ModelProperty" EntitySet="ModelProperty" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tag_parent" Association="oocModel.Store.fk_tag_parent">
+            <End Role="ModelTag" EntitySet="ModelTag" />
+            <End Role="ModelTag1" EntitySet="ModelTag" />
           </AssociationSet>
           <AssociationSet Name="fk_task_comp" Association="oocModel.Store.fk_task_comp">
             <End Role="Composition" EntitySet="Composition" />
@@ -136,8 +150,10 @@
           <Property Name="guid" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="name" Type="varchar" Nullable="false" MaxLength="64" />
           <Property Name="version" Type="varchar" Nullable="false" MaxLength="16" />
+          <Property Name="abstract" Type="varchar" Nullable="false" MaxLength="500" />
           <Property Name="authorUserId" Type="uint" Nullable="false" />
-          <Property Name="isGranted" Type="bool" Nullable="false" />
+          <Property Name="isPublic" Type="bool" Nullable="false" />
+          <Property Name="isApproved" Type="bool" Nullable="false" />
           <Property Name="className" Type="varchar" MaxLength="256" />
           <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="modification" Type="timestamp" />
@@ -150,6 +166,8 @@
           <Property Name="modelGuid" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="fileName" Type="varchar" Nullable="false" MaxLength="200" />
           <Property Name="isMainLibrary" Type="bool" Nullable="false" />
+          <Property Name="isDocument" Type="bool" Nullable="false" />
+          <Property Name="signature" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="modification" Type="timestamp" />
         </EntityType>
@@ -164,6 +182,27 @@
           <Property Name="description" Type="varchar" MaxLength="256" />
           <Property Name="default" Type="varchar" MaxLength="64" />
           <Property Name="additional" Type="text" />
+          <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="modification" Type="timestamp" />
+        </EntityType>
+        <EntityType Name="ModelTag">
+          <Key>
+            <PropertyRef Name="guid" />
+          </Key>
+          <Property Name="guid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="64" />
+          <Property Name="description" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="parentTagGuid" Type="varchar" MaxLength="40" />
+          <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="modification" Type="timestamp" />
+        </EntityType>
+        <EntityType Name="ModelTagMapping">
+          <Key>
+            <PropertyRef Name="modelGuid" />
+            <PropertyRef Name="tagGuid" />
+          </Key>
+          <Property Name="modelGuid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="tagGuid" Type="varchar" Nullable="false" MaxLength="40" />
         </EntityType>
         <EntityType Name="Task">
           <Key>
@@ -336,6 +375,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_mapping_model">
+          <End Role="Model" Type="oocModel.Store.Model" Multiplicity="1" />
+          <End Role="ModelTagMapping" Type="oocModel.Store.ModelTagMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="guid" />
+            </Principal>
+            <Dependent Role="ModelTagMapping">
+              <PropertyRef Name="modelGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_mapping_tag">
+          <End Role="ModelTag" Type="oocModel.Store.ModelTag" Multiplicity="1" />
+          <End Role="ModelTagMapping" Type="oocModel.Store.ModelTagMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModelTag">
+              <PropertyRef Name="guid" />
+            </Principal>
+            <Dependent Role="ModelTagMapping">
+              <PropertyRef Name="tagGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_model_author">
           <End Role="User" Type="oocModel.Store.User" Multiplicity="1" />
           <End Role="Model" Type="oocModel.Store.Model" Multiplicity="*" />
@@ -357,6 +420,18 @@
             </Principal>
             <Dependent Role="ModelProperty">
               <PropertyRef Name="modelGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tag_parent">
+          <End Role="ModelTag" Type="oocModel.Store.ModelTag" Multiplicity="0..1" />
+          <End Role="ModelTag1" Type="oocModel.Store.ModelTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModelTag">
+              <PropertyRef Name="guid" />
+            </Principal>
+            <Dependent Role="ModelTag1">
+              <PropertyRef Name="parentTagGuid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -459,6 +534,15 @@
             <End Role="User" EntitySet="User" />
             <End Role="Task" EntitySet="Task" />
           </AssociationSet>
+          <EntitySet Name="ModelTag" EntityType="oocModel.ModelTag" />
+          <AssociationSet Name="fk_tag_parent" Association="oocModel.fk_tag_parent">
+            <End Role="ModelTag" EntitySet="ModelTag" />
+            <End Role="ModelTag1" EntitySet="ModelTag" />
+          </AssociationSet>
+          <AssociationSet Name="ModelTagMapping" Association="oocModel.ModelTagMapping">
+            <End Role="Model" EntitySet="Model" />
+            <End Role="ModelTag" EntitySet="ModelTag" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -470,8 +554,8 @@
           <Property Type="String" Name="mobile" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Type="Double" Name="balance" Nullable="false" />
           <Property Type="String" Name="acl" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="DateTime" Name="modification" />
+          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" Precision="0" />
+          <Property Type="DateTime" Name="modification" Precision="0" />
           <NavigationProperty Name="Bill" Relationship="oocModel.fk_bill_user" FromRole="User" ToRole="Bill" />
           <NavigationProperty Name="Composition" Relationship="oocModel.fk_comp_author" FromRole="User" ToRole="Composition" />
           <NavigationProperty Name="Model" Relationship="oocModel.fk_model_author" FromRole="User" ToRole="Model" />
@@ -487,8 +571,8 @@
           <Property Type="String" Name="cmGuid" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="isRefunded" Nullable="false" />
           <Property Type="Double" Name="amount" Nullable="false" />
-          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="DateTime" Name="modification" />
+          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" Precision="0" />
+          <Property Type="DateTime" Name="modification" Precision="0" />
           <NavigationProperty Name="CompositionModel" Relationship="oocModel.fk_bill_cm" FromRole="Bill" ToRole="CompositionModel" />
           <NavigationProperty Name="Task" Relationship="oocModel.fk_bill_task" FromRole="Bill" ToRole="Task" />
           <NavigationProperty Name="User" Relationship="oocModel.fk_bill_user" FromRole="Bill" ToRole="User" />
@@ -502,8 +586,8 @@
           <Property Type="String" Name="title" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="isShared" Nullable="false" />
           <Property Type="Boolean" Name="isFinished" Nullable="false" />
-          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="DateTime" Name="modification" />
+          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" Precision="0" />
+          <Property Type="DateTime" Name="modification" Precision="0" />
           <NavigationProperty Name="CompositionModel" Relationship="oocModel.fk_cm_comp" FromRole="Composition" ToRole="CompositionModel" />
           <NavigationProperty Name="User" Relationship="oocModel.fk_comp_author" FromRole="Composition" ToRole="User" />
           <NavigationProperty Name="CompositionLink" Relationship="oocModel.fk_link_comp" FromRole="Composition" ToRole="CompositionLink" />
@@ -522,8 +606,8 @@
           <Property Type="String" Name="sourceElementSet" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="targetElementSet" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="dataOperation" MaxLength="65535" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="DateTime" Name="modification" />
+          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" Precision="0" />
+          <Property Type="DateTime" Name="modification" Precision="0" />
           <NavigationProperty Name="Composition" Relationship="oocModel.fk_link_comp" FromRole="CompositionLink" ToRole="Composition" />
           <NavigationProperty Name="CompositionModelSource" Relationship="oocModel.fk_link_source_cm" FromRole="CompositionLink" ToRole="CompositionModel" />
           <NavigationProperty Name="CompositionModelTarget" Relationship="oocModel.fk_link_target_cm" FromRole="CompositionLink" ToRole="CompositionModel" />
@@ -536,8 +620,8 @@
           <Property Type="String" Name="compositionGuid" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="modelGuid" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="properties" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="DateTime" Name="modification" />
+          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" Precision="0" />
+          <Property Type="DateTime" Name="modification" Precision="0" />
           <NavigationProperty Name="Bill" Relationship="oocModel.fk_bill_cm" FromRole="CompositionModel" ToRole="Bill" />
           <NavigationProperty Name="Composition" Relationship="oocModel.fk_cm_comp" FromRole="CompositionModel" ToRole="Composition" />
           <NavigationProperty Name="CompositionLinkSource" Relationship="oocModel.fk_link_source_cm" FromRole="CompositionModel" ToRole="CompositionLink" />
@@ -552,14 +636,17 @@
           <Property Type="String" Name="name" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="version" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Type="Int64" Name="authorUserId" Nullable="false" />
-          <Property Type="Boolean" Name="isGranted" Nullable="false" />
           <Property Type="String" Name="className" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="DateTime" Name="modification" />
+          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" Precision="0" />
+          <Property Type="DateTime" Name="modification" Precision="0" />
           <NavigationProperty Name="CompositionModel" Relationship="oocModel.fk_cm_model" FromRole="Model" ToRole="CompositionModel" />
           <NavigationProperty Name="ModelFileMapping" Relationship="oocModel.fk_file_model" FromRole="Model" ToRole="ModelFileMapping" />
-          <NavigationProperty Name="User" Relationship="oocModel.fk_model_author" FromRole="Model" ToRole="User" />
+          <NavigationProperty Name="AuthorUser" Relationship="oocModel.fk_model_author" FromRole="Model" ToRole="User" />
           <NavigationProperty Name="ModelProperty" Relationship="oocModel.fk_property_model" FromRole="Model" ToRole="ModelProperty" />
+          <Property Type="String" Name="abstract" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="isPublic" Nullable="false" />
+          <Property Type="Boolean" Name="isApproved" Nullable="false" />
+          <NavigationProperty Name="ModelTag" Relationship="oocModel.ModelTagMapping" FromRole="Model" ToRole="ModelTag" />
         </EntityType>
         <EntityType Name="ModelFileMapping">
           <Key>
@@ -569,9 +656,11 @@
           <Property Type="String" Name="modelGuid" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="fileName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="isMainLibrary" Nullable="false" />
-          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="DateTime" Name="modification" />
+          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" Precision="0" />
+          <Property Type="DateTime" Name="modification" Precision="0" />
           <NavigationProperty Name="Model" Relationship="oocModel.fk_file_model" FromRole="ModelFileMapping" ToRole="Model" />
+          <Property Type="Boolean" Name="isDocument" Nullable="false" />
+          <Property Type="String" Name="signature" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ModelProperty">
           <Key>
@@ -585,6 +674,8 @@
           <Property Type="String" Name="default" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="additional" MaxLength="65535" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Model" Relationship="oocModel.fk_property_model" FromRole="ModelProperty" ToRole="Model" />
+          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" Precision="0" />
+          <Property Type="DateTime" Name="modification" Precision="0" />
         </EntityType>
         <EntityType Name="Task">
           <Key>
@@ -597,10 +688,10 @@
           <Property Type="SByte" Name="state" Nullable="false" />
           <Property Type="String" Name="modelProgress" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Type="Int64" Name="userId" Nullable="false" />
-          <Property Type="DateTime" Name="timeStarted" />
-          <Property Type="DateTime" Name="timeFinished" />
-          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="DateTime" Name="modification" />
+          <Property Type="DateTime" Name="timeStarted" Precision="0" />
+          <Property Type="DateTime" Name="timeFinished" Precision="0" />
+          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" Precision="0" />
+          <Property Type="DateTime" Name="modification" Precision="0" />
           <NavigationProperty Name="Bill" Relationship="oocModel.fk_bill_task" FromRole="Task" ToRole="Bill" />
           <NavigationProperty Name="Composition" Relationship="oocModel.fk_task_comp" FromRole="Task" ToRole="Composition" />
           <NavigationProperty Name="TaskFileMapping" Relationship="oocModel.fk_file_task" FromRole="Task" ToRole="TaskFileMapping" />
@@ -797,6 +888,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ModelTag">
+          <Key>
+            <PropertyRef Name="guid" />
+          </Key>
+          <Property Type="String" Name="guid" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="description" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="parentTagGuid" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" Precision="0" />
+          <Property Type="DateTime" Name="modification" Precision="0" />
+          <NavigationProperty Name="ChildModelTags" Relationship="oocModel.fk_tag_parent" FromRole="ModelTag" ToRole="ModelTag1" />
+          <NavigationProperty Name="ParentModelTag" Relationship="oocModel.fk_tag_parent" FromRole="ModelTag1" ToRole="ModelTag" />
+          <NavigationProperty Name="Model" Relationship="oocModel.ModelTagMapping" FromRole="ModelTag" ToRole="Model" />
+        </EntityType>
+        <Association Name="fk_tag_parent">
+          <End Type="oocModel.ModelTag" Role="ModelTag" Multiplicity="0..1" />
+          <End Type="oocModel.ModelTag" Role="ModelTag1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModelTag">
+              <PropertyRef Name="guid" />
+            </Principal>
+            <Dependent Role="ModelTag1">
+              <PropertyRef Name="parentTagGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ModelTagMapping">
+          <End Type="oocModel.Model" Role="Model" Multiplicity="*" />
+          <End Type="oocModel.ModelTag" Role="ModelTag" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -872,10 +993,12 @@
           <EntitySetMapping Name="Model">
             <EntityTypeMapping TypeName="oocModel.Model">
               <MappingFragment StoreEntitySet="Model">
+                <ScalarProperty Name="isApproved" ColumnName="isApproved" />
+                <ScalarProperty Name="isPublic" ColumnName="isPublic" />
+                <ScalarProperty Name="abstract" ColumnName="abstract" />
                 <ScalarProperty Name="modification" ColumnName="modification" />
                 <ScalarProperty Name="creation" ColumnName="creation" />
                 <ScalarProperty Name="className" ColumnName="className" />
-                <ScalarProperty Name="isGranted" ColumnName="isGranted" />
                 <ScalarProperty Name="authorUserId" ColumnName="authorUserId" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -886,6 +1009,8 @@
           <EntitySetMapping Name="ModelFileMapping">
             <EntityTypeMapping TypeName="oocModel.ModelFileMapping">
               <MappingFragment StoreEntitySet="ModelFileMapping">
+                <ScalarProperty Name="signature" ColumnName="signature" />
+                <ScalarProperty Name="isDocument" ColumnName="isDocument" />
                 <ScalarProperty Name="modification" ColumnName="modification" />
                 <ScalarProperty Name="creation" ColumnName="creation" />
                 <ScalarProperty Name="isMainLibrary" ColumnName="isMainLibrary" />
@@ -897,6 +1022,8 @@
           <EntitySetMapping Name="ModelProperty">
             <EntityTypeMapping TypeName="oocModel.ModelProperty">
               <MappingFragment StoreEntitySet="ModelProperty">
+                <ScalarProperty Name="modification" ColumnName="modification" />
+                <ScalarProperty Name="creation" ColumnName="creation" />
                 <ScalarProperty Name="additional" ColumnName="additional" />
                 <ScalarProperty Name="default" ColumnName="default" />
                 <ScalarProperty Name="description" ColumnName="description" />
@@ -933,6 +1060,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ModelTag">
+            <EntityTypeMapping TypeName="oocModel.ModelTag">
+              <MappingFragment StoreEntitySet="ModelTag">
+                <ScalarProperty Name="modification" ColumnName="modification" />
+                <ScalarProperty Name="creation" ColumnName="creation" />
+                <ScalarProperty Name="parentTagGuid" ColumnName="parentTagGuid" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ModelTagMapping" TypeName="oocModel.ModelTagMapping" StoreEntitySet="ModelTagMapping">
+            <EndProperty Name="ModelTag">
+              <ScalarProperty Name="guid" ColumnName="tagGuid" />
+            </EndProperty>
+            <EndProperty Name="Model">
+              <ScalarProperty Name="guid" ColumnName="modelGuid" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -955,30 +1102,26 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="OOCDB" ZoomLevel="80">
-        <EntityTypeShape EntityType="oocModel.User" Width="1.625" PointX="0.75" PointY="9.125" Height="3.3071704101562496" IsExpanded="true" />
-        <EntityTypeShape EntityType="oocModel.Bill" Width="2" PointX="3.125" PointY="5.875" Height="3.1161507161458353" />
-        <EntityTypeShape EntityType="oocModel.Composition" Width="1.875" PointX="3.5" PointY="10.125" Height="3.1161507161458317" />
-        <EntityTypeShape EntityType="oocModel.CompositionLink" Width="2.25" PointX="11.5" PointY="13.125" Height="3.6892097981770817" />
-        <EntityTypeShape EntityType="oocModel.CompositionModel" Width="2" PointX="6.125" PointY="14.75" Height="3.1161507161458317" />
-        <EntityTypeShape EntityType="oocModel.Model" Width="1.875" PointX="0.5" PointY="15.125" Height="3.307170410156246" />
-        <EntityTypeShape EntityType="oocModel.ModelFileMapping" Width="1.625" PointX="3.125" PointY="14.125" Height="2.161052246093746" />
-        <EntityTypeShape EntityType="oocModel.ModelProperty" Width="1.75" PointX="3.125" PointY="17" Height="2.3520719401041674" IsExpanded="true" />
-        <EntityTypeShape EntityType="oocModel.Task" Width="1.875" PointX="6.75" PointY="9.25" Height="3.8802294921874996" />
-        <EntityTypeShape EntityType="oocModel.TaskFileMapping" Width="1.625" PointX="9.375" PointY="10.25" Height="1.9700325520833317" />
+      <Diagram Name="OOCDB" ZoomLevel="94">
+        <EntityTypeShape EntityType="oocModel.User" Width="1.625" PointX="0.75" PointY="11.5" Height="3.3071704101562496" IsExpanded="true" />
+        <EntityTypeShape EntityType="oocModel.Bill" Width="2" PointX="6.125" PointY="9.625" Height="3.1161507161458353" />
+        <EntityTypeShape EntityType="oocModel.Composition" Width="1.875" PointX="3.125" PointY="10.375" Height="3.1161507161458317" />
+        <EntityTypeShape EntityType="oocModel.CompositionLink" Width="2.25" PointX="11.5" PointY="17.375" Height="3.6892097981770817" />
+        <EntityTypeShape EntityType="oocModel.CompositionModel" Width="2" PointX="8.75" PointY="19.125" Height="3.1161507161458317" />
+        <EntityTypeShape EntityType="oocModel.Model" Width="1.875" PointX="3.125" PointY="17" Height="3.307170410156246" />
+        <EntityTypeShape EntityType="oocModel.ModelFileMapping" Width="1.875" PointX="5.75" PointY="14.25" Height="2.161052246093746" />
+        <EntityTypeShape EntityType="oocModel.ModelProperty" Width="1.75" PointX="5.75" PointY="21" Height="2.3520719401041674" />
+        <EntityTypeShape EntityType="oocModel.Task" Width="1.875" PointX="8.75" PointY="13.625" Height="3.8802294921874996" />
+        <EntityTypeShape EntityType="oocModel.TaskFileMapping" Width="1.625" PointX="11.375" PointY="14.625" Height="1.9700325520833317" />
         <AssociationConnector Association="oocModel.fk_bill_cm" >
           <ConnectorPoint PointX="9.03125" PointY="14.625" />
           <ConnectorPoint PointX="9.03125" PointY="7.71875" />
           <ConnectorPoint PointX="5.125" PointY="7.71875" />
         </AssociationConnector>
-        <AssociationConnector Association="oocModel.fk_bill_task" ManuallyRouted="true" >
-          <ConnectorPoint PointX="6.75" PointY="10.780512695312499" />
-          <ConnectorPoint PointX="6.489583333333333" PointY="10.780512695312499" />
-          <ConnectorPoint PointX="6.322916666666667" PointY="10.780512695312499" />
-          <ConnectorPoint PointX="5.625" PointY="10.780512695312499" />
-          <ConnectorPoint PointX="5.625" PointY="9.500879987051519" />
-          <ConnectorPoint PointX="4.3260613119540281" PointY="9.500879987051519" />
-          <ConnectorPoint PointX="4.3260613119540281" PointY="9.0090950520833335" />
+        <AssociationConnector Association="oocModel.fk_bill_task" >
+          <ConnectorPoint PointX="6.75" PointY="9.7143258580729182" />
+          <ConnectorPoint PointX="5.09375" PointY="9.7143258580729182" />
+          <ConnectorPoint PointX="5.09375" PointY="9.3661507161458353" />
         </AssociationConnector>
         <AssociationConnector Association="oocModel.fk_bill_user" >
           <ConnectorPoint PointX="2.375" PointY="9.8884129290364591" />
@@ -1046,6 +1189,9 @@
           <ConnectorPoint PointX="5.177083333333333" PointY="9.5089882871093767" />
           <ConnectorPoint PointX="6.75" PointY="9.5089882871093767" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="oocModel.ModelTag" Width="1.75" PointX="5.75" PointY="17.5" />
+        <AssociationConnector Association="oocModel.fk_tag_parent" />
+        <AssociationConnector Association="oocModel.ModelTagMapping" />
       </Diagram>
     </Diagrams>
   </Designer>

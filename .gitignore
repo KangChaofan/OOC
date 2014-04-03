@@ -1,5 +1,8 @@
 OOCService/obj/*
 OpenMIWrapper/obj/*
+OOCHost/obj/*
+OOCHost/bin/Debug/OOCHost.*
+OOCHost/bin/Release/OOCHost.*
 *.pdb
 *.suo
 .DS_Store

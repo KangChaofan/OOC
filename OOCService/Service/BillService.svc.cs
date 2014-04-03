@@ -1,9 +1,11 @@
 ﻿using System.Linq;
 using OOC.ORM;
 using OOC.Response;
+using OOC.Candy;
 
 namespace OOC.Service
 {
+    [ExposedService("BillService")]
     public class BillService : IBillService
     {
         private static readonly object billingLock = new object();

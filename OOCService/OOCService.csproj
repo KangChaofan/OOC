@@ -97,38 +97,39 @@
     <Content Include="Service\FileService.svc" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Candy\ExposedService.cs" />
     <Compile Include="ORM\OOCModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OOCModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Response\BillResponse.cs" />
-    <Compile Include="Response\BillServiceResponse.cs" />
-    <Compile Include="Response\FileEntityResponse.cs" />
-    <Compile Include="Response\FileListResponse.cs" />
-    <Compile Include="Response\HashResponse.cs" />
+    <Compile Include="DataContract\BillResponse.cs" />
+    <Compile Include="DataContract\BillServiceResponse.cs" />
+    <Compile Include="DataContract\FileEntityResponse.cs" />
+    <Compile Include="DataContract\FileListResponse.cs" />
+    <Compile Include="DataContract\HashResponse.cs" />
     <Compile Include="Service\BillService.svc.cs">
       <DependentUpon>BillService.svc</DependentUpon>
     </Compile>
-    <Compile Include="Service\IBillService.cs" />
+    <Compile Include="ServiceContract\IBillService.cs" />
     <Compile Include="Service\LocalOPRService.svc.cs">
       <DependentUpon>LocalOPRService.svc</DependentUpon>
     </Compile>
-    <Compile Include="Service\ILocalOPRService.cs" />
+    <Compile Include="ServiceContract\ILocalOPRService.cs" />
     <Compile Include="ORM\OOCDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OOCDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Response\GenericResponse.cs" />
-    <Compile Include="Service\IUserService.cs" />
+    <Compile Include="DataContract\GenericResponse.cs" />
+    <Compile Include="ServiceContract\IUserService.cs" />
     <Compile Include="Service\UserService.svc.cs">
       <DependentUpon>UserService.svc</DependentUpon>
     </Compile>
-    <Compile Include="Response\UserServiceResponse.cs" />
-    <Compile Include="Response\FileDescription.cs" />
-    <Compile Include="Service\IFileService.cs" />
+    <Compile Include="DataContract\UserServiceResponse.cs" />
+    <Compile Include="DataContract\FileDescription.cs" />
+    <Compile Include="ServiceContract\IFileService.cs" />
     <Compile Include="Service\FileService.svc.cs">
       <DependentUpon>FileService.svc</DependentUpon>
     </Compile>

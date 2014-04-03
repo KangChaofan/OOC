@@ -9,9 +9,11 @@ using System.IO;
 using System.Collections;
 using OOC.OpenMIWrapper;
 using OOC.Response;
+using OOC.Candy;
 
 namespace OOC.Service
 {
+    [ExposedService("LocalOPRService")]
     public class LocalOPRService : ILocalOPRService
     {
         public SimulationRuntimeResult RunOpr(string oprFilename, bool verboseOff)

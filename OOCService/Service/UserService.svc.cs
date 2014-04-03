@@ -2,9 +2,11 @@
 using OOC.ORM;
 using OOC.Response;
 using OOC.Util;
+using OOC.Candy;
 
 namespace OOC.Service
 {
+    [ExposedService("UserService")]
     public class UserService : IUserService
     {
         private readonly oocEntities db = new oocEntities();

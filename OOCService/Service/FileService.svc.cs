@@ -10,9 +10,11 @@ using System.Collections;
 using OOC.Response;
 using OOC.ORM;
 using System.Configuration;
+using OOC.Candy;
 
 namespace OOC.Service
 {
+    [ExposedService("FileService")]
     public class FileService : IFileService
     {
         private oocEntities db = new oocEntities();

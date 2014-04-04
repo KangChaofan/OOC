@@ -1,14 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOCService", "OOCService\OOCService.csproj", "{BA5A6217-8692-4C5C-9152-8BA129B08360}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOC", "OOC\OOC.csproj", "{BA5A6217-8692-4C5C-9152-8BA129B08360}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMIWrapper", "OpenMIWrapper\OpenMIWrapper.csproj", "{EAD62B60-BF9F-463B-B817-AE55C3655C7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOC.OpenMIWrapper", "OOC.OpenMIWrapper\OOC.OpenMIWrapper.csproj", "{EAD62B60-BF9F-463B-B817-AE55C3655C7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOCInstance", "OOCInstance\OOCInstance.csproj", "{30143D3C-A1E8-4AC2-85D8-44B1010E4D08}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOC.Instance", "OOC.Instance\OOC.Instance.csproj", "{30143D3C-A1E8-4AC2-85D8-44B1010E4D08}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BA5A6217-8692-4C5C-9152-8BA129B08360} = {BA5A6217-8692-4C5C-9152-8BA129B08360}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOC.Util", "OOC.Util\OOC.Util.csproj", "{5ACDB1C5-29E3-4F1F-9696-E8ABAAB67F0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +30,10 @@ Global
 		{30143D3C-A1E8-4AC2-85D8-44B1010E4D08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30143D3C-A1E8-4AC2-85D8-44B1010E4D08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30143D3C-A1E8-4AC2-85D8-44B1010E4D08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ACDB1C5-29E3-4F1F-9696-E8ABAAB67F0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ACDB1C5-29E3-4F1F-9696-E8ABAAB67F0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ACDB1C5-29E3-4F1F-9696-E8ABAAB67F0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ACDB1C5-29E3-4F1F-9696-E8ABAAB67F0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

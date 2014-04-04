@@ -104,7 +104,7 @@ namespace OOC.Instance.InstanceService {
         private long AvailableRamSizeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double LoadAverageField;
+        private decimal LoadAverageField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int ProcessCountField;
@@ -136,7 +136,7 @@ namespace OOC.Instance.InstanceService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double LoadAverage {
+        public decimal LoadAverage {
             get {
                 return this.LoadAverageField;
             }

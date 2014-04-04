@@ -18,22 +18,22 @@ namespace OOC.Instance.TaskService {
     public enum TaskState : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        PENDING = 0,
+        Created = 0,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        WAITING = 1,
+        Ready = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        ASSIGNED = 2,
+        Assigned = 2,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        RUNNING = 3,
+        Running = 3,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        KILLED = 4,
+        Aborted = 4,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        FINISHED = 5,
+        Completed = 5,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

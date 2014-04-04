@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace OOC.Util
 {
-    class SysUtil
+    public class SysUtil
     {
         [StructLayout(LayoutKind.Sequential)]
         internal struct MEMORYSTATUSEX

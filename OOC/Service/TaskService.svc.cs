@@ -34,7 +34,7 @@ namespace OOC.Service
                     guid = GuidUtil.newGuid(),
                     compositionGuid = compositionGuid,
                     compositionData = new CompositionData(composition).Serialized,
-                    state = (sbyte)TaskState.PENDING,
+                    state = (sbyte)TaskState.Created,
                     userId = userId,
                     modelProgress = new ModelProgress().Serialized
                 };
@@ -74,14 +74,14 @@ namespace OOC.Service
                 using (oocEntities db = new oocEntities())
                 {
                     IQueryable<Task> result = from o in db.Task
-                                              where o.state == (sbyte)TaskState.WAITING
+                                              where o.state == (sbyte)TaskState.Ready
                                               select o;
                     if (!result.Any())
                     {
                         throw new FaultException("NO_TASK_AVAILABLE");
                     }
                     Task task = result.First();
-                    task.state = (sbyte)TaskState.RUNNING;
+                    task.state = (sbyte)TaskState.Running;
                     task.instanceName = instanceName;
                     db.SaveChanges();
                     return new TaskInfoResponse(result.First());

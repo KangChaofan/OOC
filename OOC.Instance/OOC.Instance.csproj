@@ -47,6 +47,11 @@
     <Compile Include="InstanceKeeper.cs" />
     <Compile Include="InstanceMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\BillService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\FileService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -66,6 +71,25 @@
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BillService\BillService.wsdl" />
+    <None Include="Service References\BillService\BillService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BillService\BillService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BillService\BillService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BillService\BillService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BillService\BillService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BillService\OOC.Instance.BillService.Bill.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FileService\FileService.wsdl" />
     <None Include="Service References\FileService\FileService.xsd">
@@ -147,6 +171,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\BillService\" />
     <WCFMetadataStorage Include="Service References\FileService\" />
     <WCFMetadataStorage Include="Service References\InstanceService\" />
     <WCFMetadataStorage Include="Service References\TaskService\" />
@@ -192,6 +217,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\InstanceService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BillService\BillService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BillService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BillService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BillService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

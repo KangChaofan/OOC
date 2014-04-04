@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Instance\InstanceKeeper.cs" />
+    <Compile Include="InstanceKeeper.cs" />
     <Compile Include="InstanceMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\FileService\Reference.cs">
@@ -62,7 +62,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Util\SysUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

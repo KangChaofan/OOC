@@ -45,10 +45,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\GuidUtil.cs" />
-    <Compile Include="Util\HashUtil.cs" />
-    <Compile Include="Util\Logger.cs" />
-    <Compile Include="Util\SerializeUtil.cs" />
+    <Compile Include="GuidUtil.cs" />
+    <Compile Include="HashUtil.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="SerializeUtil.cs" />
+    <Compile Include="SysUtil.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

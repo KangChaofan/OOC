@@ -15,6 +15,6 @@ namespace OOC.Contract.Data.Common
         public int ProcessCount { get; set; }
 
         [DataMember]
-        public double LoadAverage { get; set; }
+        public decimal LoadAverage { get; set; }
     }
 }

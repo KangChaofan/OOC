@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BillService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:6736/Service/BillService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/BillService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/BillService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OOC.Entity" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/BillService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/BillService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IBillService_Create_InputMessage">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="IBillService_Create_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBillService_GetById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetById" />
+  </wsdl:message>
+  <wsdl:message name="IBillService_GetById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBillService_GetByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetByUserId" />
+  </wsdl:message>
+  <wsdl:message name="IBillService_GetByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBillService_GetByTaskGuid_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetByTaskGuid" />
+  </wsdl:message>
+  <wsdl:message name="IBillService_GetByTaskGuid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetByTaskGuidResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBillService_GetByCmGuid_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetByCmGuid" />
+  </wsdl:message>
+  <wsdl:message name="IBillService_GetByCmGuid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetByCmGuidResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBillService_Refund_InputMessage">
+    <wsdl:part name="parameters" element="tns:Refund" />
+  </wsdl:message>
+  <wsdl:message name="IBillService_Refund_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RefundResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IBillService">
+    <wsdl:operation name="Create">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBillService/Create" message="tns:IBillService_Create_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBillService/CreateResponse" message="tns:IBillService_Create_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBillService/GetById" message="tns:IBillService_GetById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBillService/GetByIdResponse" message="tns:IBillService_GetById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBillService/GetByUserId" message="tns:IBillService_GetByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBillService/GetByUserIdResponse" message="tns:IBillService_GetByUserId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetByTaskGuid">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBillService/GetByTaskGuid" message="tns:IBillService_GetByTaskGuid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBillService/GetByTaskGuidResponse" message="tns:IBillService_GetByTaskGuid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetByCmGuid">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBillService/GetByCmGuid" message="tns:IBillService_GetByCmGuid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBillService/GetByCmGuidResponse" message="tns:IBillService_GetByCmGuid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Refund">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBillService/Refund" message="tns:IBillService_Refund_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBillService/RefundResponse" message="tns:IBillService_Refund_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IBillService" type="tns:IBillService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/IBillService/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetById">
+      <soap:operation soapAction="http://tempuri.org/IBillService/GetById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByUserId">
+      <soap:operation soapAction="http://tempuri.org/IBillService/GetByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByTaskGuid">
+      <soap:operation soapAction="http://tempuri.org/IBillService/GetByTaskGuid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByCmGuid">
+      <soap:operation soapAction="http://tempuri.org/IBillService/GetByCmGuid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Refund">
+      <soap:operation soapAction="http://tempuri.org/IBillService/Refund" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BillService">
+    <wsdl:port name="BasicHttpBinding_IBillService" binding="tns:BasicHttpBinding_IBillService">
+      <soap:address location="http://localhost:6736/Service/BillService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

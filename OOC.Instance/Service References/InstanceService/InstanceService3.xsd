@@ -4,7 +4,7 @@
   <xs:complexType name="NodeSystemStatus">
     <xs:sequence>
       <xs:element minOccurs="0" name="AvailableRamSize" type="xs:long" />
-      <xs:element minOccurs="0" name="LoadAverage" type="xs:double" />
+      <xs:element minOccurs="0" name="LoadAverage" type="xs:decimal" />
       <xs:element minOccurs="0" name="ProcessCount" type="xs:int" />
       <xs:element minOccurs="0" name="TotalRamSize" type="xs:long" />
     </xs:sequence>

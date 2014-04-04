@@ -2,19 +2,29 @@
 
 namespace OOC.Instance
 {
-    class InstanceMain
+    public class InstanceMain
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(System.Guid.NewGuid().ToString());
-            Console.WriteLine(System.Guid.NewGuid().ToString());
-            Console.WriteLine(System.Guid.NewGuid().ToString());
-            Console.WriteLine(System.Guid.NewGuid().ToString());
-            Console.WriteLine(System.Guid.NewGuid().ToString());
-            Console.WriteLine(System.Guid.NewGuid().ToString());
-            Console.WriteLine(System.Guid.NewGuid().ToString());
-            Console.WriteLine(System.Guid.NewGuid().ToString());
-            Console.ReadLine();
+            string instanceName = "default";
+            string logLocation = null;
+            for (int i = 0; i < args.Length; i++)
+            {
+                switch (args[i])
+                {
+                    case "-n":
+                    case "--name":
+                        instanceName = args[++i];
+                        break;
+                    case "-l":
+                    case "--log":
+                        logLocation = args[++i];
+                        break;
+                }
+            }
+            InstanceKeeper instanceKeeper = new InstanceKeeper(instanceName);
+            instanceKeeper.LogLocation = logLocation;
+            instanceKeeper.Run();
         }
     }
 }

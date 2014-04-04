@@ -81,10 +81,10 @@ namespace OOC.Service
                         throw new FaultException("NO_TASK_AVAILABLE");
                     }
                     Task task = result.First();
-                    task.state = (sbyte)TaskState.Running;
+                    task.state = (sbyte)TaskState.Assigned;
                     task.instanceName = instanceName;
                     db.SaveChanges();
-                    return new TaskInfoResponse(result.First());
+                    return new TaskInfoResponse(task);
                 }
             }
         }

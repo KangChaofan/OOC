@@ -4,12 +4,12 @@
   <xs:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract" />
   <xs:simpleType name="TaskState">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="PENDING" />
-      <xs:enumeration value="WAITING" />
-      <xs:enumeration value="ASSIGNED" />
-      <xs:enumeration value="RUNNING" />
-      <xs:enumeration value="KILLED" />
-      <xs:enumeration value="FINISHED" />
+      <xs:enumeration value="Created" />
+      <xs:enumeration value="Ready" />
+      <xs:enumeration value="Assigned" />
+      <xs:enumeration value="Running" />
+      <xs:enumeration value="Aborted" />
+      <xs:enumeration value="Completed" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="TaskState" nillable="true" type="tns:TaskState" />

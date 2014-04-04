@@ -17,13 +17,19 @@ namespace OOC.Contract.Data.Abstract
         {
             get
             {
-                return SerializeUtil.Serialize(this);
+                return SerializeUtil.Serialize(Kvs);
+            }
+            set
+            {
+                Kvs = SerializeUtil.Deserialize<Dictionary<string, string>>(value);
             }
         }
 
-        public static Dict Deserialize(string jsonString)
+        public Dict(string jsonString)
         {
-            return SerializeUtil.Deserialize<Dict>(jsonString);
+            Serialized = jsonString;
         }
+
+        public Dict() { }
     }
 }

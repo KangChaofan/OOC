@@ -6,7 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using OOC.Contract.Data.Response;
-using OOC.ORM;
+using OOC.Entity;
 
 namespace OOC.Contract.Service
 {
@@ -14,19 +14,19 @@ namespace OOC.Contract.Service
     public interface IUserService
     {
         [OperationContract]
-        HashResponse Hash(string password);
+        string Hash(string password);
 
         [OperationContract]
-        GenericResponse Auth(string username, string password);
+        bool Auth(string username, string password);
 
         [OperationContract]
-        GenericResponse Create(User user);
+        void Create(User user);
 
         [OperationContract]
-        UserInfoResponse GetByUsername(string Username);
+        User GetByUsername(string Username);
 
         [OperationContract]
-        UserInfoResponse GetById(int id);
+        User GetById(int id);
     }
 
 }

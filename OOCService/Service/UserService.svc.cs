@@ -1,5 +1,6 @@
 ﻿using System.Linq;
-using OOC.ORM;
+using System.ServiceModel;
+using OOC.Entity;
 using OOC.Contract.Data.Response;
 using OOC.Contract.Service;
 using OOC.Util;
@@ -10,70 +11,66 @@ namespace OOC.Service
     [ExposedService("UserService")]
     public class UserService : IUserService
     {
-        private readonly oocEntities db = new oocEntities();
-
-        public HashResponse Hash(string password)
+        public string Hash(string password)
         {
-            return new HashResponse(HashUtil.MD5Hash(password));
+            return HashUtil.MD5Hash(password);
         }
 
-        public GenericResponse Auth(string username, string password)
+        public bool Auth(string username, string password)
         {
-            IQueryable<User> result = from o in db.User
-                                      where o.username == username && o.passhash == Hash(password).Hash
-                                      select o;
-            if (result.Any())
+            using (oocEntities db = new oocEntities())
             {
-                return new GenericResponse(true);
-            }
-            else
-            {
-                return new GenericResponse(false, 1, "USER_NOT_FOUND");
+                IQueryable<User> result = from o in db.User
+                                          where o.username == username && o.passhash == Hash(password)
+                                          select o;
+                return result.Any();
             }
         }
 
-        public GenericResponse Create(User user)
+        public void Create(User user)
         {
-            try
+            using (oocEntities db = new oocEntities())
             {
-                db.User.AddObject(user);
-                db.SaveChanges();
-                return new GenericResponse(true);
-            }
-            catch
-            {
-                return new GenericResponse(false, 1, "INSERT_FAILED");
+                try
+                {
+                    db.User.AddObject(user);
+                    db.SaveChanges();
+                }
+                catch
+                {
+                    throw new FaultException("TRANSACTION_FAILED");
+                }
             }
         }
 
-        public UserInfoResponse GetByUsername(string Username)
+        public User GetByUsername(string Username)
         {
-            IQueryable<User> result = from o in db.User
-                                      where o.username == Username
-                                      select o;
-            if (result.Any())
+            using (oocEntities db = new oocEntities())
             {
-                return new UserInfoResponse(result.First());
-            }
-            else
-            {
-                return new UserInfoResponse(false, 1, "USER_NOT_FOUND");
+                IQueryable<User> result = from o in db.User
+                                          where o.username == Username
+                                          select o;
+                if (!result.Any())
+                {
+                    throw new FaultException("USER_NOT_EXISTS");
+                }
+                return result.First();
             }
         }
 
 
-        public UserInfoResponse GetById(int id)
+        public User GetById(int id)
         {
-            IQueryable<User> result = from o in db.User
-                                      where o.id == id
-                                      select o;
-            if (result.Any())
+            using (oocEntities db = new oocEntities())
             {
-                return new UserInfoResponse(result.First());
-            }
-            else
-            {
-                return new UserInfoResponse(false, 1, "USER_NOT_FOUND");
+                IQueryable<User> result = from o in db.User
+                                          where o.id == id
+                                          select o;
+                if (!result.Any())
+                {
+                    throw new FaultException("USER_NOT_EXISTS");
+                }
+                return result.First();
             }
         }
     }

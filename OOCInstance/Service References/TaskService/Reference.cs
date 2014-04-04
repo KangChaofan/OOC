@@ -13,25 +13,43 @@ namespace OOC.Instance.TaskService {
     using System;
     
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TaskState", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common")]
+    public enum TaskState : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PENDING = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        WAITING = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ASSIGNED = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RUNNING = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        KILLED = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        FINISHED = 5,
+    }
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GenericResponse", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TaskInfoResponse", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskInfoResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskCreateResponse))]
-    public partial class GenericResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class TaskInfoResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ErrorCodeField;
+        private OOC.Instance.TaskService.CompositionData CompositionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ErrorInfoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool SuccessField;
+        private OOC.Instance.TaskService.Task TaskField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -42,67 +60,6 @@ namespace OOC.Instance.TaskService {
                 this.extensionDataField = value;
             }
         }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ErrorCode {
-            get {
-                return this.ErrorCodeField;
-            }
-            set {
-                if ((this.ErrorCodeField.Equals(value) != true)) {
-                    this.ErrorCodeField = value;
-                    this.RaisePropertyChanged("ErrorCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ErrorInfo {
-            get {
-                return this.ErrorInfoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ErrorInfoField, value) != true)) {
-                    this.ErrorInfoField = value;
-                    this.RaisePropertyChanged("ErrorInfo");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Success {
-            get {
-                return this.SuccessField;
-            }
-            set {
-                if ((this.SuccessField.Equals(value) != true)) {
-                    this.SuccessField = value;
-                    this.RaisePropertyChanged("Success");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TaskInfoResponse", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response")]
-    [System.SerializableAttribute()]
-    public partial class TaskInfoResponse : OOC.Instance.TaskService.GenericResponse {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.CompositionData CompositionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Task TaskField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public OOC.Instance.TaskService.CompositionData CompositionData {
@@ -129,27 +86,13 @@ namespace OOC.Instance.TaskService {
                 }
             }
         }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TaskCreateResponse", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response")]
-    [System.SerializableAttribute()]
-    public partial class TaskCreateResponse : OOC.Instance.TaskService.GenericResponse {
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string GuidField;
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Guid {
-            get {
-                return this.GuidField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.GuidField, value) != true)) {
-                    this.GuidField = value;
-                    this.RaisePropertyChanged("Guid");
-                }
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -1349,13 +1292,11 @@ namespace OOC.Instance.TaskService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelFileMapping[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelFileMapping))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Task))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskCreateResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.GenericResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskInfoResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskState))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionData))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModelData[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModelData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskInfoResponse))]
     public partial class EntityKeyMember : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -1413,44 +1354,21 @@ namespace OOC.Instance.TaskService {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TaskState", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common")]
-    public enum TaskState : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        PENDING = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        WAITING = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ASSIGNED = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        RUNNING = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        KILLED = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        FINISHED = 5,
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="TaskService.ITaskService")]
     public interface ITaskService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/Create", ReplyAction="http://tempuri.org/ITaskService/CreateResponse")]
-        OOC.Instance.TaskService.TaskCreateResponse Create(string compositionGuid, int userId);
+        string Create(string compositionGuid, int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/Create", ReplyAction="http://tempuri.org/ITaskService/CreateResponse")]
-        System.Threading.Tasks.Task<OOC.Instance.TaskService.TaskCreateResponse> CreateAsync(string compositionGuid, int userId);
+        System.Threading.Tasks.Task<string> CreateAsync(string compositionGuid, int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/UpdateState", ReplyAction="http://tempuri.org/ITaskService/UpdateStateResponse")]
-        OOC.Instance.TaskService.GenericResponse UpdateState(string guid, OOC.Instance.TaskService.TaskState state);
+        void UpdateState(string guid, OOC.Instance.TaskService.TaskState state);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/UpdateState", ReplyAction="http://tempuri.org/ITaskService/UpdateStateResponse")]
-        System.Threading.Tasks.Task<OOC.Instance.TaskService.GenericResponse> UpdateStateAsync(string guid, OOC.Instance.TaskService.TaskState state);
+        System.Threading.Tasks.Task UpdateStateAsync(string guid, OOC.Instance.TaskService.TaskState state);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/AssignPendingTask", ReplyAction="http://tempuri.org/ITaskService/AssignPendingTaskResponse")]
         OOC.Instance.TaskService.TaskInfoResponse AssignPendingTask(string instanceName);
@@ -1492,19 +1410,19 @@ namespace OOC.Instance.TaskService {
                 base(binding, remoteAddress) {
         }
         
-        public OOC.Instance.TaskService.TaskCreateResponse Create(string compositionGuid, int userId) {
+        public string Create(string compositionGuid, int userId) {
             return base.Channel.Create(compositionGuid, userId);
         }
         
-        public System.Threading.Tasks.Task<OOC.Instance.TaskService.TaskCreateResponse> CreateAsync(string compositionGuid, int userId) {
+        public System.Threading.Tasks.Task<string> CreateAsync(string compositionGuid, int userId) {
             return base.Channel.CreateAsync(compositionGuid, userId);
         }
         
-        public OOC.Instance.TaskService.GenericResponse UpdateState(string guid, OOC.Instance.TaskService.TaskState state) {
-            return base.Channel.UpdateState(guid, state);
+        public void UpdateState(string guid, OOC.Instance.TaskService.TaskState state) {
+            base.Channel.UpdateState(guid, state);
         }
         
-        public System.Threading.Tasks.Task<OOC.Instance.TaskService.GenericResponse> UpdateStateAsync(string guid, OOC.Instance.TaskService.TaskState state) {
+        public System.Threading.Tasks.Task UpdateStateAsync(string guid, OOC.Instance.TaskService.TaskState state) {
             return base.Channel.UpdateStateAsync(guid, state);
         }
         

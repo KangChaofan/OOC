@@ -27,7 +27,6 @@
     <MetadataFile FileName="InstanceService1.xsd" MetadataType="Schema" ID="e28cd9bd-9bd3-43ff-9b52-a3963bff6fe3" SourceId="1" SourceUrl="http://localhost:6736/Service/InstanceService.svc?xsd=xsd1" />
     <MetadataFile FileName="InstanceService2.xsd" MetadataType="Schema" ID="92da3425-4915-4f84-8a85-d091d9002922" SourceId="1" SourceUrl="http://localhost:6736/Service/InstanceService.svc?xsd=xsd2" />
     <MetadataFile FileName="InstanceService3.xsd" MetadataType="Schema" ID="e92f495a-78da-4581-81e3-6b96ea8e2ef7" SourceId="1" SourceUrl="http://localhost:6736/Service/InstanceService.svc?xsd=xsd3" />
-    <MetadataFile FileName="InstanceService4.xsd" MetadataType="Schema" ID="1d2381e6-70fd-4d36-a607-7c572f734530" SourceId="1" SourceUrl="http://localhost:6736/Service/InstanceService.svc?xsd=xsd4" />
     <MetadataFile FileName="InstanceService.disco" MetadataType="Disco" ID="ff699f43-ebe5-4e5b-b1cc-e2255fcb5fd0" SourceId="1" SourceUrl="http://localhost:6736/Service/InstanceService.svc?disco" />
   </Metadata>
   <Extensions>

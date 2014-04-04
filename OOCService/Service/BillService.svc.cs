@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.ServiceModel;
-using OOC.ORM;
+using System.Collections.Generic;
+using OOC.Entity;
 using OOC.Contract.Data.Response;
 using OOC.Contract.Service;
 using OOC.ServiceAttribute;
@@ -13,97 +14,111 @@ namespace OOC.Service
     {
         private static readonly object billingLock = new object();
 
-        private readonly oocEntities db = new oocEntities();
-
-        public GenericResponse Create(int userId, string taskGuid, string cmGuid, double amount)
+        public void Create(int userId, string taskGuid, string cmGuid, double amount)
         {
             lock (billingLock)
             {
-                IQueryable<User> result = from o in db.User
-                                          where o.id == userId
-                                          select o;
-                if (!result.Any())
+                using (oocEntities db = new oocEntities())
                 {
-                    return new GenericResponse(false, 1, "USER_NOT_FOUND");
-                }
-                User user = result.First();
-                if (user.balance - amount < 0)
-                {
-                    return new GenericResponse(false, 2, "INSUFFICIENT_BALANCE");
-                }
-                var bill = new Bill
+                    IQueryable<User> result = from o in db.User
+                                              where o.id == userId
+                                              select o;
+                    if (!result.Any())
                     {
-                        userId = userId,
-                        taskGuid = taskGuid,
-                        cmGuid = cmGuid,
-                        amount = amount
-                    };
-                user.balance -= amount;
-                db.Bill.AddObject(bill);
-                db.SaveChanges();
-                return new GenericResponse(true);
+                        throw new FaultException("USER_NOT_FOUND");
+                    }
+                    User user = result.First();
+                    if (user.balance - amount < 0)
+                    {
+                        throw new FaultException("INSUFFICIENT_BALANCE");
+                    }
+                    var bill = new Bill
+                        {
+                            userId = userId,
+                            taskGuid = taskGuid,
+                            cmGuid = cmGuid,
+                            amount = amount
+                        };
+                    user.balance -= amount;
+                    db.Bill.AddObject(bill);
+                    db.SaveChanges();
+                }
             }
         }
 
-        public BillResponse GetById(int id)
+        public Bill GetById(int id)
         {
-            IQueryable<Bill> result = from o in db.Bill
-                                      where o.id == id
-                                      select o;
-            if (!result.Any())
-            {
-                return new BillResponse(false, 1, "BILL_NOT_FOUND");
-            }
-            return new BillResponse(result.First());
-        }
-
-        public BillListResponse GetByUserId(int userId)
-        {
-            IOrderedQueryable<Bill> result = from o in db.Bill
-                                             where o.userId == userId
-                                             orderby o.creation
-                                             select o;
-            return new BillListResponse(result.ToList());
-        }
-
-        public BillListResponse GetByTaskGuid(string taskGuid)
-        {
-            IOrderedQueryable<Bill> result = from o in db.Bill
-                                             where o.taskGuid == taskGuid
-                                             orderby o.creation
-                                             select o;
-            return new BillListResponse(result.ToList());
-        }
-
-        public BillListResponse GetByCmGuid(string cmGuid)
-        {
-            IOrderedQueryable<Bill> result = from o in db.Bill
-                                             where o.cmGuid == cmGuid
-                                             orderby o.creation
-                                             select o;
-            return new BillListResponse(result.ToList());
-        }
-
-        public GenericResponse Refund(int id)
-        {
-            lock (billingLock)
+            using (oocEntities db = new oocEntities())
             {
                 IQueryable<Bill> result = from o in db.Bill
                                           where o.id == id
                                           select o;
                 if (!result.Any())
                 {
-                    return new GenericResponse(false, 1, "BILL_NOT_FOUND");
+                    throw new FaultException("BILL_NOT_FOUND");
                 }
-                Bill bill = result.First();
-                if (bill.isRefunded)
+                return result.First();
+            }
+        }
+
+        public List<Bill> GetByUserId(int userId)
+        {
+            using (oocEntities db = new oocEntities())
+            {
+                IOrderedQueryable<Bill> result = from o in db.Bill
+                                                 where o.userId == userId
+                                                 orderby o.creation
+                                                 select o;
+                return result.ToList();
+            }
+        }
+
+        public List<Bill> GetByTaskGuid(string taskGuid)
+        {
+            using (oocEntities db = new oocEntities())
+            {
+                IOrderedQueryable<Bill> result = from o in db.Bill
+                                                 where o.taskGuid == taskGuid
+                                                 orderby o.creation
+                                                 select o;
+                return result.ToList();
+            }
+        }
+
+        public List<Bill> GetByCmGuid(string cmGuid)
+        {
+            using (oocEntities db = new oocEntities())
+            {
+                IOrderedQueryable<Bill> result = from o in db.Bill
+                                                 where o.cmGuid == cmGuid
+                                                 orderby o.creation
+                                                 select o;
+                return result.ToList();
+            }
+        }
+
+        public void Refund(int id)
+        {
+            lock (billingLock)
+            {
+                using (oocEntities db = new oocEntities())
                 {
-                    return new GenericResponse(false, 2, "BILL_ALREADY_REFUNDED");
+                    IQueryable<Bill> result = from o in db.Bill
+                                              where o.id == id
+                                              select o;
+                    if (!result.Any())
+                    {
+                        throw new FaultException("BILL_NOT_FOUND");
+                    }
+                    Bill bill = result.First();
+                    if (bill.isRefunded)
+                    {
+                        throw new FaultException("BILL_ALREADY_REFUNDED");
+                    }
+                    bill.isRefunded = true;
+                    bill.User.balance += bill.amount;
+                    db.SaveChanges();
                 }
-                bill.isRefunded = true;
-                bill.User.balance += bill.amount;
-                db.SaveChanges();
-                return new GenericResponse(true);
             }
         }
     }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:6736/Service/FileService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" />
+  <xs:import schemaLocation="http://localhost:6736/Service/FileService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" />
   <xs:element name="Stat">
     <xs:complexType>
       <xs:sequence>
@@ -32,15 +33,13 @@
   <xs:element name="Delete">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="path" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" minOccurs="0" name="DeleteResult" nillable="true" type="q3:GenericResponse" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="Put">
@@ -53,9 +52,7 @@
   </xs:element>
   <xs:element name="PutResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" minOccurs="0" name="PutResult" nillable="true" type="q4:GenericResponse" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="Copy">
@@ -68,9 +65,7 @@
   </xs:element>
   <xs:element name="CopyResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" minOccurs="0" name="CopyResult" nillable="true" type="q5:GenericResponse" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="List">
@@ -83,7 +78,7 @@
   <xs:element name="ListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" minOccurs="0" name="ListResult" nillable="true" type="q6:FileListResponse" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="ListResult" nillable="true" type="q3:ArrayOfFileDescription" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -96,9 +91,7 @@
   </xs:element>
   <xs:element name="CreateDirectoryResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" minOccurs="0" name="CreateDirectoryResult" nillable="true" type="q7:GenericResponse" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

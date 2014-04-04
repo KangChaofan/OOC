@@ -107,21 +107,15 @@
     <Compile Include="Contract\Data\Common\ModelProgress.cs" />
     <Compile Include="Contract\Data\Response\FileStatResponse.cs" />
     <Compile Include="Contract\Data\Request\InstanceHeartbeatStatus.cs" />
-    <Compile Include="Contract\Data\Response\InstanceStatusResponse.cs" />
-    <Compile Include="Contract\Data\Response\TaskCreateResponse.cs" />
     <Compile Include="Contract\Data\Response\TaskInfoResponse.cs" />
     <Compile Include="Contract\Service\ITaskService.cs" />
     <Compile Include="ServiceAttribute\ExposedService.cs" />
-    <Compile Include="ORM\OOCModel.cs">
+    <Compile Include="Entity\OOCModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OOCModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Contract\Data\Response\BillResponse.cs" />
-    <Compile Include="Contract\Data\Response\BillServiceResponse.cs" />
     <Compile Include="Contract\Data\Response\FileEntityResponse.cs" />
-    <Compile Include="Contract\Data\Response\FileListResponse.cs" />
-    <Compile Include="Contract\Data\Response\HashResponse.cs" />
     <Compile Include="Contract\Service\IInstanceService.cs" />
     <Compile Include="Service\BillService.svc.cs">
       <DependentUpon>BillService.svc</DependentUpon>
@@ -131,18 +125,16 @@
       <DependentUpon>LocalOPRService.svc</DependentUpon>
     </Compile>
     <Compile Include="Contract\Service\ILocalOPRService.cs" />
-    <Compile Include="ORM\OOCDB.Designer.cs">
+    <Compile Include="Entity\OOCDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OOCDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Contract\Data\Response\GenericResponse.cs" />
     <Compile Include="Contract\Service\IUserService.cs" />
     <Compile Include="Service\UserService.svc.cs">
       <DependentUpon>UserService.svc</DependentUpon>
     </Compile>
-    <Compile Include="Contract\Data\Response\UserServiceResponse.cs" />
     <Compile Include="Contract\Data\Common\FileDescription.cs" />
     <Compile Include="Contract\Service\IFileService.cs" />
     <Compile Include="Service\FileService.svc.cs">
@@ -167,7 +159,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="ORM\OOCDB.edmx">
+    <EntityDeploy Include="Entity\OOCDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>OOCDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
@@ -179,7 +171,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ORM\OOCModel.tt">
+    <None Include="Entity\OOCModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>OOCModel.cs</LastGenOutput>
     </None>

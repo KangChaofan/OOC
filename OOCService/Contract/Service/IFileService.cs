@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using OOC.Contract.Data.Response;
+using OOC.Contract.Data.Common;
 
 namespace OOC.Contract.Service
 {
@@ -19,19 +20,19 @@ namespace OOC.Contract.Service
         FileEntityResponse Get(string fileName);
 
         [OperationContract]
-        GenericResponse Delete(string fileName);
+        void Delete(string path);
 
         [OperationContract]
-        GenericResponse Put(string fileName, byte[] content);
+        void Put(string fileName, byte[] content);
 
         [OperationContract]
-        GenericResponse Copy(string sourceFileName, string destFileName);
+        void Copy(string sourceFileName, string destFileName);
 
         [OperationContract]
-        FileListResponse List(string path);
+        List<FileDescription> List(string path);
 
         [OperationContract]
-        GenericResponse CreateDirectory(string path);
+        void CreateDirectory(string path);
 
     }
 

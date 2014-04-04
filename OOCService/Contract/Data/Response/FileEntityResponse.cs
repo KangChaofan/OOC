@@ -3,7 +3,7 @@
 namespace OOC.Contract.Data.Response
 {
     [DataContract]
-    public class FileEntityResponse : GenericResponse
+    public class FileEntityResponse
     {
         [DataMember]
         public string FileName { get; set; }
@@ -12,15 +12,9 @@ namespace OOC.Contract.Data.Response
         public byte[] Content { get; set; }
 
         public FileEntityResponse(string fileName, byte[] content)
-            : base(true)
         {
             FileName = fileName;
             Content = content;
-        }
-
-        public FileEntityResponse(bool success, int errorCode, string errorInfo)
-            : base(success, errorCode, errorInfo)
-        {
         }
     }
 }

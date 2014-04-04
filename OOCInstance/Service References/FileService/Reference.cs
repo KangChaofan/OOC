@@ -15,24 +15,18 @@ namespace OOC.Instance.FileService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GenericResponse", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FileStatResponse", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.FileService.FileEntityResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.FileService.FileListResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.FileService.FileStatResponse))]
-    public partial class GenericResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class FileStatResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ErrorCodeField;
+        private string FileNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ErrorInfoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool SuccessField;
+        private long SizeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -45,40 +39,27 @@ namespace OOC.Instance.FileService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ErrorCode {
+        public string FileName {
             get {
-                return this.ErrorCodeField;
+                return this.FileNameField;
             }
             set {
-                if ((this.ErrorCodeField.Equals(value) != true)) {
-                    this.ErrorCodeField = value;
-                    this.RaisePropertyChanged("ErrorCode");
+                if ((object.ReferenceEquals(this.FileNameField, value) != true)) {
+                    this.FileNameField = value;
+                    this.RaisePropertyChanged("FileName");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ErrorInfo {
+        public long Size {
             get {
-                return this.ErrorInfoField;
+                return this.SizeField;
             }
             set {
-                if ((object.ReferenceEquals(this.ErrorInfoField, value) != true)) {
-                    this.ErrorInfoField = value;
-                    this.RaisePropertyChanged("ErrorInfo");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Success {
-            get {
-                return this.SuccessField;
-            }
-            set {
-                if ((this.SuccessField.Equals(value) != true)) {
-                    this.SuccessField = value;
-                    this.RaisePropertyChanged("Success");
+                if ((this.SizeField.Equals(value) != true)) {
+                    this.SizeField = value;
+                    this.RaisePropertyChanged("Size");
                 }
             }
         }
@@ -97,13 +78,26 @@ namespace OOC.Instance.FileService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="FileEntityResponse", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response")]
     [System.SerializableAttribute()]
-    public partial class FileEntityResponse : OOC.Instance.FileService.GenericResponse {
+    public partial class FileEntityResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private byte[] ContentField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FileNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public byte[] Content {
@@ -130,66 +124,13 @@ namespace OOC.Instance.FileService {
                 }
             }
         }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FileListResponse", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response")]
-    [System.SerializableAttribute()]
-    public partial class FileListResponse : OOC.Instance.FileService.GenericResponse {
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.FileService.FileDescription[] FilesField;
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.FileService.FileDescription[] Files {
-            get {
-                return this.FilesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FilesField, value) != true)) {
-                    this.FilesField = value;
-                    this.RaisePropertyChanged("Files");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FileStatResponse", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response")]
-    [System.SerializableAttribute()]
-    public partial class FileStatResponse : OOC.Instance.FileService.GenericResponse {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string FileNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long SizeField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FileName {
-            get {
-                return this.FileNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FileNameField, value) != true)) {
-                    this.FileNameField = value;
-                    this.RaisePropertyChanged("FileName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Size {
-            get {
-                return this.SizeField;
-            }
-            set {
-                if ((this.SizeField.Equals(value) != true)) {
-                    this.SizeField = value;
-                    this.RaisePropertyChanged("Size");
-                }
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -272,34 +213,34 @@ namespace OOC.Instance.FileService {
         System.Threading.Tasks.Task<OOC.Instance.FileService.FileEntityResponse> GetAsync(string fileName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/Delete", ReplyAction="http://tempuri.org/IFileService/DeleteResponse")]
-        OOC.Instance.FileService.GenericResponse Delete(string fileName);
+        void Delete(string path);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/Delete", ReplyAction="http://tempuri.org/IFileService/DeleteResponse")]
-        System.Threading.Tasks.Task<OOC.Instance.FileService.GenericResponse> DeleteAsync(string fileName);
+        System.Threading.Tasks.Task DeleteAsync(string path);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/Put", ReplyAction="http://tempuri.org/IFileService/PutResponse")]
-        OOC.Instance.FileService.GenericResponse Put(string fileName, byte[] content);
+        void Put(string fileName, byte[] content);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/Put", ReplyAction="http://tempuri.org/IFileService/PutResponse")]
-        System.Threading.Tasks.Task<OOC.Instance.FileService.GenericResponse> PutAsync(string fileName, byte[] content);
+        System.Threading.Tasks.Task PutAsync(string fileName, byte[] content);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/Copy", ReplyAction="http://tempuri.org/IFileService/CopyResponse")]
-        OOC.Instance.FileService.GenericResponse Copy(string sourceFileName, string destFileName);
+        void Copy(string sourceFileName, string destFileName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/Copy", ReplyAction="http://tempuri.org/IFileService/CopyResponse")]
-        System.Threading.Tasks.Task<OOC.Instance.FileService.GenericResponse> CopyAsync(string sourceFileName, string destFileName);
+        System.Threading.Tasks.Task CopyAsync(string sourceFileName, string destFileName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/List", ReplyAction="http://tempuri.org/IFileService/ListResponse")]
-        OOC.Instance.FileService.FileListResponse List(string path);
+        OOC.Instance.FileService.FileDescription[] List(string path);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/List", ReplyAction="http://tempuri.org/IFileService/ListResponse")]
-        System.Threading.Tasks.Task<OOC.Instance.FileService.FileListResponse> ListAsync(string path);
+        System.Threading.Tasks.Task<OOC.Instance.FileService.FileDescription[]> ListAsync(string path);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/CreateDirectory", ReplyAction="http://tempuri.org/IFileService/CreateDirectoryResponse")]
-        OOC.Instance.FileService.GenericResponse CreateDirectory(string path);
+        void CreateDirectory(string path);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/CreateDirectory", ReplyAction="http://tempuri.org/IFileService/CreateDirectoryResponse")]
-        System.Threading.Tasks.Task<OOC.Instance.FileService.GenericResponse> CreateDirectoryAsync(string path);
+        System.Threading.Tasks.Task CreateDirectoryAsync(string path);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -345,43 +286,43 @@ namespace OOC.Instance.FileService {
             return base.Channel.GetAsync(fileName);
         }
         
-        public OOC.Instance.FileService.GenericResponse Delete(string fileName) {
-            return base.Channel.Delete(fileName);
+        public void Delete(string path) {
+            base.Channel.Delete(path);
         }
         
-        public System.Threading.Tasks.Task<OOC.Instance.FileService.GenericResponse> DeleteAsync(string fileName) {
-            return base.Channel.DeleteAsync(fileName);
+        public System.Threading.Tasks.Task DeleteAsync(string path) {
+            return base.Channel.DeleteAsync(path);
         }
         
-        public OOC.Instance.FileService.GenericResponse Put(string fileName, byte[] content) {
-            return base.Channel.Put(fileName, content);
+        public void Put(string fileName, byte[] content) {
+            base.Channel.Put(fileName, content);
         }
         
-        public System.Threading.Tasks.Task<OOC.Instance.FileService.GenericResponse> PutAsync(string fileName, byte[] content) {
+        public System.Threading.Tasks.Task PutAsync(string fileName, byte[] content) {
             return base.Channel.PutAsync(fileName, content);
         }
         
-        public OOC.Instance.FileService.GenericResponse Copy(string sourceFileName, string destFileName) {
-            return base.Channel.Copy(sourceFileName, destFileName);
+        public void Copy(string sourceFileName, string destFileName) {
+            base.Channel.Copy(sourceFileName, destFileName);
         }
         
-        public System.Threading.Tasks.Task<OOC.Instance.FileService.GenericResponse> CopyAsync(string sourceFileName, string destFileName) {
+        public System.Threading.Tasks.Task CopyAsync(string sourceFileName, string destFileName) {
             return base.Channel.CopyAsync(sourceFileName, destFileName);
         }
         
-        public OOC.Instance.FileService.FileListResponse List(string path) {
+        public OOC.Instance.FileService.FileDescription[] List(string path) {
             return base.Channel.List(path);
         }
         
-        public System.Threading.Tasks.Task<OOC.Instance.FileService.FileListResponse> ListAsync(string path) {
+        public System.Threading.Tasks.Task<OOC.Instance.FileService.FileDescription[]> ListAsync(string path) {
             return base.Channel.ListAsync(path);
         }
         
-        public OOC.Instance.FileService.GenericResponse CreateDirectory(string path) {
-            return base.Channel.CreateDirectory(path);
+        public void CreateDirectory(string path) {
+            base.Channel.CreateDirectory(path);
         }
         
-        public System.Threading.Tasks.Task<OOC.Instance.FileService.GenericResponse> CreateDirectoryAsync(string path) {
+        public System.Threading.Tasks.Task CreateDirectoryAsync(string path) {
             return base.Channel.CreateDirectoryAsync(path);
         }
     }

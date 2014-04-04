@@ -18,28 +18,28 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM 关系源元数据
 
-[assembly: EdmRelationshipAttribute("oocModel", "fk_bill_cm", "CompositionModel", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(OOC.ORM.CompositionModel), "Bill", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.Bill), true)]
-[assembly: EdmRelationshipAttribute("oocModel", "fk_bill_task", "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(OOC.ORM.Task), "Bill", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.Bill), true)]
-[assembly: EdmRelationshipAttribute("oocModel", "fk_bill_user", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.ORM.User), "Bill", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.Bill), true)]
-[assembly: EdmRelationshipAttribute("oocModel", "fk_cm_comp", "Composition", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.ORM.Composition), "CompositionModel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.CompositionModel), true)]
-[assembly: EdmRelationshipAttribute("oocModel", "fk_comp_author", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.ORM.User), "Composition", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.Composition), true)]
-[assembly: EdmRelationshipAttribute("oocModel", "fk_link_comp", "Composition", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.ORM.Composition), "CompositionLink", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.CompositionLink), true)]
-[assembly: EdmRelationshipAttribute("oocModel", "fk_task_comp", "Composition", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.ORM.Composition), "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.Task), true)]
-[assembly: EdmRelationshipAttribute("oocModel", "fk_link_source_cm", "CompositionModel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.ORM.CompositionModel), "CompositionLink", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.CompositionLink), true)]
-[assembly: EdmRelationshipAttribute("oocModel", "fk_link_target_cm", "CompositionModel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.ORM.CompositionModel), "CompositionLink", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.CompositionLink), true)]
-[assembly: EdmRelationshipAttribute("oocModel", "fk_cm_model", "Model", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.ORM.Model), "CompositionModel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.CompositionModel), true)]
-[assembly: EdmRelationshipAttribute("oocModel", "fk_file_model", "Model", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.ORM.Model), "ModelFileMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.ModelFileMapping), true)]
-[assembly: EdmRelationshipAttribute("oocModel", "fk_model_author", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.ORM.User), "Model", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.Model), true)]
-[assembly: EdmRelationshipAttribute("oocModel", "fk_property_model", "Model", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.ORM.Model), "ModelProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.ModelProperty), true)]
-[assembly: EdmRelationshipAttribute("oocModel", "fk_file_task", "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.ORM.Task), "TaskFileMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.TaskFileMapping), true)]
-[assembly: EdmRelationshipAttribute("oocModel", "fk_task_user", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.ORM.User), "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.Task), true)]
-[assembly: EdmRelationshipAttribute("oocModel", "fk_tag_parent", "ModelTag", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(OOC.ORM.ModelTag), "ModelTag1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.ModelTag), true)]
-[assembly: EdmRelationshipAttribute("oocModel", "ModelTagMapping", "Model", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.Model), "ModelTag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.ORM.ModelTag))]
+[assembly: EdmRelationshipAttribute("oocModel", "fk_bill_cm", "CompositionModel", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(OOC.Entity.CompositionModel), "Bill", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.Entity.Bill), true)]
+[assembly: EdmRelationshipAttribute("oocModel", "fk_bill_task", "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(OOC.Entity.Task), "Bill", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.Entity.Bill), true)]
+[assembly: EdmRelationshipAttribute("oocModel", "fk_bill_user", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.Entity.User), "Bill", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.Entity.Bill), true)]
+[assembly: EdmRelationshipAttribute("oocModel", "fk_cm_comp", "Composition", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.Entity.Composition), "CompositionModel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.Entity.CompositionModel), true)]
+[assembly: EdmRelationshipAttribute("oocModel", "fk_comp_author", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.Entity.User), "Composition", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.Entity.Composition), true)]
+[assembly: EdmRelationshipAttribute("oocModel", "fk_link_comp", "Composition", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.Entity.Composition), "CompositionLink", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.Entity.CompositionLink), true)]
+[assembly: EdmRelationshipAttribute("oocModel", "fk_task_comp", "Composition", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.Entity.Composition), "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.Entity.Task), true)]
+[assembly: EdmRelationshipAttribute("oocModel", "fk_link_source_cm", "CompositionModel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.Entity.CompositionModel), "CompositionLink", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.Entity.CompositionLink), true)]
+[assembly: EdmRelationshipAttribute("oocModel", "fk_link_target_cm", "CompositionModel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.Entity.CompositionModel), "CompositionLink", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.Entity.CompositionLink), true)]
+[assembly: EdmRelationshipAttribute("oocModel", "fk_cm_model", "Model", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.Entity.Model), "CompositionModel", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.Entity.CompositionModel), true)]
+[assembly: EdmRelationshipAttribute("oocModel", "fk_file_model", "Model", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.Entity.Model), "ModelFileMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.Entity.ModelFileMapping), true)]
+[assembly: EdmRelationshipAttribute("oocModel", "fk_model_author", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.Entity.User), "Model", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.Entity.Model), true)]
+[assembly: EdmRelationshipAttribute("oocModel", "fk_property_model", "Model", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.Entity.Model), "ModelProperty", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.Entity.ModelProperty), true)]
+[assembly: EdmRelationshipAttribute("oocModel", "fk_file_task", "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.Entity.Task), "TaskFileMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.Entity.TaskFileMapping), true)]
+[assembly: EdmRelationshipAttribute("oocModel", "fk_task_user", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OOC.Entity.User), "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.Entity.Task), true)]
+[assembly: EdmRelationshipAttribute("oocModel", "fk_tag_parent", "ModelTag", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(OOC.Entity.ModelTag), "ModelTag1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.Entity.ModelTag), true)]
+[assembly: EdmRelationshipAttribute("oocModel", "ModelTagMapping", "Model", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.Entity.Model), "ModelTag", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OOC.Entity.ModelTag))]
 
 #endregion
 
 
-namespace OOC.ORM
+namespace OOC.Entity
 {
     #region 上下文
     

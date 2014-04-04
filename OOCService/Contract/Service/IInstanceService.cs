@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.Text;
 using OOC.Contract.Data.Request;
 using OOC.Contract.Data.Response;
+using OOC.Contract.Data.Common;
 
 namespace OOC.Contract.Service
 {
@@ -13,10 +14,10 @@ namespace OOC.Contract.Service
     public interface IInstanceService
     {
         [OperationContract]
-        GenericResponse Heartbeat(InstanceHeartbeatStatus status);
+        void Heartbeat(InstanceHeartbeatStatus status);
 
         [OperationContract]
-        InstanceStatusResponse QueryStatusByInstanceName(string instanceName);
+        InstanceStatus QueryStatusByInstanceName(string instanceName);
 
     }
 }

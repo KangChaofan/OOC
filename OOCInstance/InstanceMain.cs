@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OOC.Instance.TaskService;
 
 namespace OOC.Instance
 {
@@ -10,6 +11,9 @@ namespace OOC.Instance
     {
         static void Main(string[] args)
         {
+            TaskServiceClient cli = new TaskServiceClient();
+            TaskInfoResponse resp = cli.QueryTaskByGuid("111");
+            Console.ReadLine();
         }
     }
 }

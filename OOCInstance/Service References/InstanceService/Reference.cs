@@ -207,122 +207,21 @@ namespace OOC.Instance.InstanceService {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GenericResponse", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response")]
-    [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.InstanceService.InstanceStatusResponse))]
-    public partial class GenericResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ErrorCodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ErrorInfoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool SuccessField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ErrorCode {
-            get {
-                return this.ErrorCodeField;
-            }
-            set {
-                if ((this.ErrorCodeField.Equals(value) != true)) {
-                    this.ErrorCodeField = value;
-                    this.RaisePropertyChanged("ErrorCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ErrorInfo {
-            get {
-                return this.ErrorInfoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ErrorInfoField, value) != true)) {
-                    this.ErrorInfoField = value;
-                    this.RaisePropertyChanged("ErrorInfo");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Success {
-            get {
-                return this.SuccessField;
-            }
-            set {
-                if ((this.SuccessField.Equals(value) != true)) {
-                    this.SuccessField = value;
-                    this.RaisePropertyChanged("Success");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="InstanceStatusResponse", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response")]
-    [System.SerializableAttribute()]
-    public partial class InstanceStatusResponse : OOC.Instance.InstanceService.GenericResponse {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.InstanceService.InstanceStatus InstanceStatusField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.InstanceService.InstanceStatus InstanceStatus {
-            get {
-                return this.InstanceStatusField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.InstanceStatusField, value) != true)) {
-                    this.InstanceStatusField = value;
-                    this.RaisePropertyChanged("InstanceStatus");
-                }
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="InstanceService.IInstanceService")]
     public interface IInstanceService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInstanceService/Heartbeat", ReplyAction="http://tempuri.org/IInstanceService/HeartbeatResponse")]
-        OOC.Instance.InstanceService.GenericResponse Heartbeat(OOC.Instance.InstanceService.InstanceHeartbeatStatus status);
+        void Heartbeat(OOC.Instance.InstanceService.InstanceHeartbeatStatus status);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInstanceService/Heartbeat", ReplyAction="http://tempuri.org/IInstanceService/HeartbeatResponse")]
-        System.Threading.Tasks.Task<OOC.Instance.InstanceService.GenericResponse> HeartbeatAsync(OOC.Instance.InstanceService.InstanceHeartbeatStatus status);
+        System.Threading.Tasks.Task HeartbeatAsync(OOC.Instance.InstanceService.InstanceHeartbeatStatus status);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInstanceService/QueryStatusByInstanceName", ReplyAction="http://tempuri.org/IInstanceService/QueryStatusByInstanceNameResponse")]
-        OOC.Instance.InstanceService.InstanceStatusResponse QueryStatusByInstanceName(string instanceName);
+        OOC.Instance.InstanceService.InstanceStatus QueryStatusByInstanceName(string instanceName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInstanceService/QueryStatusByInstanceName", ReplyAction="http://tempuri.org/IInstanceService/QueryStatusByInstanceNameResponse")]
-        System.Threading.Tasks.Task<OOC.Instance.InstanceService.InstanceStatusResponse> QueryStatusByInstanceNameAsync(string instanceName);
+        System.Threading.Tasks.Task<OOC.Instance.InstanceService.InstanceStatus> QueryStatusByInstanceNameAsync(string instanceName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -352,19 +251,19 @@ namespace OOC.Instance.InstanceService {
                 base(binding, remoteAddress) {
         }
         
-        public OOC.Instance.InstanceService.GenericResponse Heartbeat(OOC.Instance.InstanceService.InstanceHeartbeatStatus status) {
-            return base.Channel.Heartbeat(status);
+        public void Heartbeat(OOC.Instance.InstanceService.InstanceHeartbeatStatus status) {
+            base.Channel.Heartbeat(status);
         }
         
-        public System.Threading.Tasks.Task<OOC.Instance.InstanceService.GenericResponse> HeartbeatAsync(OOC.Instance.InstanceService.InstanceHeartbeatStatus status) {
+        public System.Threading.Tasks.Task HeartbeatAsync(OOC.Instance.InstanceService.InstanceHeartbeatStatus status) {
             return base.Channel.HeartbeatAsync(status);
         }
         
-        public OOC.Instance.InstanceService.InstanceStatusResponse QueryStatusByInstanceName(string instanceName) {
+        public OOC.Instance.InstanceService.InstanceStatus QueryStatusByInstanceName(string instanceName) {
             return base.Channel.QueryStatusByInstanceName(instanceName);
         }
         
-        public System.Threading.Tasks.Task<OOC.Instance.InstanceService.InstanceStatusResponse> QueryStatusByInstanceNameAsync(string instanceName) {
+        public System.Threading.Tasks.Task<OOC.Instance.InstanceService.InstanceStatus> QueryStatusByInstanceNameAsync(string instanceName) {
             return base.Channel.QueryStatusByInstanceNameAsync(instanceName);
         }
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Runtime.Serialization;
 using System.Collections;
-using OOC.ORM;
+using OOC.Entity;
 using OOC.Util;
 using OOC.Contract.Data.Abstract;
 

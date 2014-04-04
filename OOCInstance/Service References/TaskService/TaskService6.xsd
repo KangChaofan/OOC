@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" />
-  <xs:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" />
+  <xs:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" />
+  <xs:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" />
   <xs:element name="Create">
     <xs:complexType>
       <xs:sequence>
@@ -13,7 +13,7 @@
   <xs:element name="CreateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" minOccurs="0" name="CreateResult" nillable="true" type="q1:TaskCreateResponse" />
+        <xs:element minOccurs="0" name="CreateResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -21,15 +21,13 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="state" type="q2:TaskState" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="state" type="q1:TaskState" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateStateResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" minOccurs="0" name="UpdateStateResult" nillable="true" type="q3:GenericResponse" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="AssignPendingTask">
@@ -42,7 +40,7 @@
   <xs:element name="AssignPendingTaskResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" minOccurs="0" name="AssignPendingTaskResult" nillable="true" type="q4:TaskInfoResponse" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" minOccurs="0" name="AssignPendingTaskResult" nillable="true" type="q2:TaskInfoResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -56,7 +54,7 @@
   <xs:element name="QueryTaskByGuidResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" minOccurs="0" name="QueryTaskByGuidResult" nillable="true" type="q5:TaskInfoResponse" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" minOccurs="0" name="QueryTaskByGuidResult" nillable="true" type="q3:TaskInfoResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

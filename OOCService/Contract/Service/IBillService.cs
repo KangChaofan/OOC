@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using OOC.Contract.Data.Response;
+using OOC.Entity;
 
 namespace OOC.Contract.Service
 {
@@ -12,21 +13,21 @@ namespace OOC.Contract.Service
     public interface IBillService
     {
         [OperationContract]
-        GenericResponse Create(int userId, string taskGuid, string cmGuid, double amount);
+        void Create(int userId, string taskGuid, string cmGuid, double amount);
 
         [OperationContract]
-        BillResponse GetById(int id);
+        Bill GetById(int id);
 
         [OperationContract]
-        BillListResponse GetByUserId(int userId);
+        List<Bill> GetByUserId(int userId);
 
         [OperationContract]
-        BillListResponse GetByTaskGuid(string taskGuid);
+        List<Bill> GetByTaskGuid(string taskGuid);
 
         [OperationContract]
-        BillListResponse GetByCmGuid(string cmGuid);
+        List<Bill> GetByCmGuid(string cmGuid);
 
         [OperationContract]
-        GenericResponse Refund(int id);
+        void Refund(int id);
     }
 }

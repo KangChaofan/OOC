@@ -62,7 +62,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\FileService\FileService.wsdl" />
     <None Include="Service References\FileService\FileService.xsd">
       <SubType>Designer</SubType>
@@ -76,16 +78,13 @@
     <None Include="Service References\FileService\FileService3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\FileService\OOC.Instance.FileService.FileDescription.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FileService\OOC.Instance.FileService.FileEntityResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\FileService\OOC.Instance.FileService.FileListResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\FileService\OOC.Instance.FileService.FileStatResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\FileService\OOC.Instance.FileService.GenericResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\InstanceService\InstanceService.wsdl" />
@@ -101,19 +100,7 @@
     <None Include="Service References\InstanceService\InstanceService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\InstanceService\InstanceService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\InstanceService\OOC.Instance.InstanceService.GenericResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\InstanceService\OOC.Instance.InstanceService.InstanceStatusResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TaskService\OOC.Instance.TaskService.GenericResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TaskService\OOC.Instance.TaskService.TaskCreateResponse.datasource">
+    <None Include="Service References\InstanceService\OOC.Instance.InstanceService.InstanceStatus.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\TaskService\OOC.Instance.TaskService.TaskInfoResponse.datasource">

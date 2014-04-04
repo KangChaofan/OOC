@@ -10,7 +10,7 @@ using System.Collections;
 using OOC.Contract.Data.Response;
 using OOC.Contract.Data.Common;
 using OOC.Contract.Service;
-using OOC.ORM;
+using OOC.Entity;
 using OOC.ServiceAttribute;
 using System.Configuration;
 
@@ -26,28 +26,27 @@ namespace OOC.Service
             string realPath = Path.Combine(new string[] { fileRoot, fileName }).ToString();
             if (!File.Exists(realPath) || !realPath.StartsWith(fileRoot))
             {
-                return new FileEntityResponse(false, 1, "FILE_NOT_FOUND");
+                throw new FaultException("FILE_NOT_EXISTS");
             }
             return new FileEntityResponse(fileName, File.ReadAllBytes(realPath));
         }
 
-        public GenericResponse Put(string fileName, byte[] content)
+        public void Put(string fileName, byte[] content)
         {
             string realPath = Path.Combine(new string[] { fileRoot, fileName }).ToString();
             if (!File.Exists(realPath) || !realPath.StartsWith(fileRoot))
             {
-                return new FileEntityResponse(false, 1, "FILE_ALREADY_EXISTED");
+                throw new FaultException("FILE_ALREADY_EXISTED");
             }
             File.WriteAllBytes(realPath, content);
-            return new GenericResponse(true);
         }
 
-        public FileListResponse List(string path)
+        public List<FileDescription> List(string path)
         {
             string realPath = Path.Combine(new string[] { fileRoot, path }).ToString();
             if (!Directory.Exists(realPath) || !realPath.StartsWith(fileRoot))
             {
-                return new FileListResponse(false, 1, "PATH_NOT_FOUND");
+                throw new FaultException("PATH_NOT_EXISTS");
             }
             string[] files = Directory.GetFiles(realPath);
             List<FileDescription> descs = new List<FileDescription>();
@@ -58,23 +57,22 @@ namespace OOC.Service
                 desc.Size = (int)new FileInfo(file).Length;
                 descs.Add(desc);
             }
-            return new FileListResponse(descs.ToArray());
+            return descs;
         }
 
-        public GenericResponse Copy(string sourceFileName, string destFileName)
+        public void Copy(string sourceFileName, string destFileName)
         {
             string srcRealPath = Path.Combine(new string[] { fileRoot, sourceFileName }).ToString();
             string dstRealPath = Path.Combine(new string[] { fileRoot, destFileName }).ToString();
             if (!File.Exists(srcRealPath) || !srcRealPath.StartsWith(fileRoot))
             {
-                return new GenericResponse(false, 1, "SRC_FILE_NOT_FOUND");
+                throw new FaultException("SRC_FILE_NOT_EXISTS");
             }
             if (File.Exists(dstRealPath) || !dstRealPath.StartsWith(fileRoot))
             {
-                return new GenericResponse(false, 1, "DST_FILE_ALREADY_EXISTED");
+                throw new FaultException("DST_FILE_ALREADY_EXISTED");
             }
             File.Copy(srcRealPath, dstRealPath);
-            return new GenericResponse(true);
         }
 
         public FileStatResponse Stat(string fileName)
@@ -82,41 +80,40 @@ namespace OOC.Service
             string realPath = Path.Combine(new string[] { fileRoot, fileName }).ToString();
             if (!File.Exists(realPath) || !realPath.StartsWith(fileRoot))
             {
-                return new FileStatResponse(false, 1, "FILE_NOT_FOUND");
+                throw new FaultException("FILE_NOT_EXISTS");
             }
             FileInfo info = new FileInfo(realPath);
             return new FileStatResponse(fileName, info.Length);
         }
 
-        public GenericResponse Delete(string fileName)
-        {
-            string realPath = Path.Combine(new string[] { fileRoot, fileName }).ToString();
-            if (!realPath.StartsWith(fileRoot))
-            {
-                return new GenericResponse(false, 1, "ACCESS_DENIED");
-            }
-            if (Directory.Exists(realPath))
-            {
-                Directory.Delete(realPath, true);
-                return new GenericResponse(true);
-            }
-            if (File.Exists(realPath))
-            {
-                File.Delete(realPath);
-                return new GenericResponse(true);
-            }
-            return new GenericResponse(false, 1, "FILE_NOT_EXIST");
-        }
-
-        public GenericResponse CreateDirectory(string path)
+        public void Delete(string path)
         {
             string realPath = Path.Combine(new string[] { fileRoot, path }).ToString();
             if (!realPath.StartsWith(fileRoot))
             {
-                return new GenericResponse(false, 1, "ACCESS_DENIED");
+                throw new FaultException("ACCESS_DENIED");
+            }
+            if (Directory.Exists(realPath))
+            {
+                Directory.Delete(realPath, true);
+                return;
+            }
+            if (File.Exists(realPath))
+            {
+                File.Delete(realPath);
+                return;
+            }
+            throw new FaultException("PATH_NOT_EXISTS");
+        }
+
+        public void CreateDirectory(string path)
+        {
+            string realPath = Path.Combine(new string[] { fileRoot, path }).ToString();
+            if (!realPath.StartsWith(fileRoot))
+            {
+                throw new FaultException("ACCESS_DENIED");
             }
             Directory.CreateDirectory(realPath);
-            return new GenericResponse(true);
         }
     }
 }

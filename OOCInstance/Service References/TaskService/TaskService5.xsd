@@ -1,42 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" />
   <xs:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/OOC.ORM" />
-  <xs:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract" />
-  <xs:simpleType name="TaskState">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="PENDING" />
-      <xs:enumeration value="WAITING" />
-      <xs:enumeration value="ASSIGNED" />
-      <xs:enumeration value="RUNNING" />
-      <xs:enumeration value="KILLED" />
-      <xs:enumeration value="FINISHED" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="TaskState" nillable="true" type="tns:TaskState" />
-  <xs:complexType name="CompositionData">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract" base="q1:SerializableData">
-        <xs:sequence>
-          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/OOC.ORM" minOccurs="0" name="Composition" nillable="true" type="q2:Composition" />
-          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OOC.ORM" minOccurs="0" name="Links" nillable="true" type="q3:ArrayOfCompositionLink" />
-          <xs:element minOccurs="0" name="Models" nillable="true" type="tns:ArrayOfCompositionModelData" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="CompositionData" nillable="true" type="tns:CompositionData" />
-  <xs:complexType name="ArrayOfCompositionModelData">
+  <xs:complexType name="TaskInfoResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="CompositionModelData" nillable="true" type="tns:CompositionModelData" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="CompositionData" nillable="true" type="q1:CompositionData" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/OOC.ORM" minOccurs="0" name="Task" nillable="true" type="q2:Task" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfCompositionModelData" nillable="true" type="tns:ArrayOfCompositionModelData" />
-  <xs:complexType name="CompositionModelData">
-    <xs:sequence>
-      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/OOC.ORM" minOccurs="0" name="CompositionModel" nillable="true" type="q4:CompositionModel" />
-      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/OOC.ORM" minOccurs="0" name="Model" nillable="true" type="q5:Model" />
-      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/OOC.ORM" minOccurs="0" name="ModelFiles" nillable="true" type="q6:ArrayOfModelFileMapping" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="CompositionModelData" nillable="true" type="tns:CompositionModelData" />
+  <xs:element name="TaskInfoResponse" nillable="true" type="tns:TaskInfoResponse" />
 </xs:schema>

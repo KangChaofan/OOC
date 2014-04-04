@@ -1,11 +1,14 @@
 ﻿using System.Linq;
+using System.ServiceModel;
 using OOC.ORM;
-using OOC.Response;
-using OOC.Candy;
+using OOC.Contract.Data.Response;
+using OOC.Contract.Service;
+using OOC.ServiceAttribute;
 
 namespace OOC.Service
 {
     [ExposedService("BillService")]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class BillService : IBillService
     {
         private static readonly object billingLock = new object();

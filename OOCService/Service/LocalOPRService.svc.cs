@@ -8,8 +8,9 @@ using System.Text;
 using System.IO;
 using System.Collections;
 using OOC.OpenMIWrapper;
-using OOC.Response;
-using OOC.Candy;
+using OOC.Contract.Data.Response;
+using OOC.Contract.Service;
+using OOC.ServiceAttribute;
 
 namespace OOC.Service
 {

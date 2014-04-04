@@ -84,6 +84,8 @@
   <ItemGroup>
     <Content Include="Service\BillService.svc" />
     <Content Include="Service\LocalOPRService.svc" />
+    <Content Include="Service\InstanceService.svc" />
+    <Content Include="Service\TaskService.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -97,43 +99,65 @@
     <Content Include="Service\FileService.svc" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Candy\ExposedService.cs" />
+    <Compile Include="Contract\Data\Abstract\SerializableData.cs" />
+    <Compile Include="Contract\Data\Common\CompositionData.cs" />
+    <Compile Include="Contract\Data\Common\NodeSystemStatus.cs" />
+    <Compile Include="Contract\Data\Common\InstanceStatus.cs" />
+    <Compile Include="Contract\Data\Common\TaskState.cs" />
+    <Compile Include="Contract\Data\Common\ModelProgress.cs" />
+    <Compile Include="Contract\Data\Response\FileStatResponse.cs" />
+    <Compile Include="Contract\Data\Request\InstanceHeartbeatStatus.cs" />
+    <Compile Include="Contract\Data\Response\InstanceStatusResponse.cs" />
+    <Compile Include="Contract\Data\Response\TaskCreateResponse.cs" />
+    <Compile Include="Contract\Data\Response\TaskInfoResponse.cs" />
+    <Compile Include="Contract\Service\ITaskService.cs" />
+    <Compile Include="ServiceAttribute\ExposedService.cs" />
     <Compile Include="ORM\OOCModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OOCModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataContract\BillResponse.cs" />
-    <Compile Include="DataContract\BillServiceResponse.cs" />
-    <Compile Include="DataContract\FileEntityResponse.cs" />
-    <Compile Include="DataContract\FileListResponse.cs" />
-    <Compile Include="DataContract\HashResponse.cs" />
+    <Compile Include="Contract\Data\Response\BillResponse.cs" />
+    <Compile Include="Contract\Data\Response\BillServiceResponse.cs" />
+    <Compile Include="Contract\Data\Response\FileEntityResponse.cs" />
+    <Compile Include="Contract\Data\Response\FileListResponse.cs" />
+    <Compile Include="Contract\Data\Response\HashResponse.cs" />
+    <Compile Include="Contract\Service\IInstanceService.cs" />
     <Compile Include="Service\BillService.svc.cs">
       <DependentUpon>BillService.svc</DependentUpon>
     </Compile>
-    <Compile Include="ServiceContract\IBillService.cs" />
+    <Compile Include="Contract\Service\IBillService.cs" />
     <Compile Include="Service\LocalOPRService.svc.cs">
       <DependentUpon>LocalOPRService.svc</DependentUpon>
     </Compile>
-    <Compile Include="ServiceContract\ILocalOPRService.cs" />
+    <Compile Include="Contract\Service\ILocalOPRService.cs" />
     <Compile Include="ORM\OOCDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OOCDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataContract\GenericResponse.cs" />
-    <Compile Include="ServiceContract\IUserService.cs" />
+    <Compile Include="Contract\Data\Response\GenericResponse.cs" />
+    <Compile Include="Contract\Service\IUserService.cs" />
     <Compile Include="Service\UserService.svc.cs">
       <DependentUpon>UserService.svc</DependentUpon>
     </Compile>
-    <Compile Include="DataContract\UserServiceResponse.cs" />
-    <Compile Include="DataContract\FileDescription.cs" />
-    <Compile Include="ServiceContract\IFileService.cs" />
+    <Compile Include="Contract\Data\Response\UserServiceResponse.cs" />
+    <Compile Include="Contract\Data\Common\FileDescription.cs" />
+    <Compile Include="Contract\Service\IFileService.cs" />
     <Compile Include="Service\FileService.svc.cs">
       <DependentUpon>FileService.svc</DependentUpon>
     </Compile>
+    <Compile Include="Service\InstanceService.svc.cs">
+      <DependentUpon>InstanceService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Service\TaskService.svc.cs">
+      <DependentUpon>TaskService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Util\GuidUtil.cs" />
     <Compile Include="Util\HashUtil.cs" />
+    <Compile Include="Util\RemoteUtil.cs" />
+    <Compile Include="Util\SerializeUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -172,8 +196,8 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>23153</DevelopmentServerPort>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>6736</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

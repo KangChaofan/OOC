@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:6736/Service/InstanceService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" />
+  <xs:complexType name="GenericResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorCode" type="xs:int" />
+      <xs:element minOccurs="0" name="ErrorInfo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GenericResponse" nillable="true" type="tns:GenericResponse" />
+  <xs:complexType name="InstanceStatusResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GenericResponse">
+        <xs:sequence>
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="InstanceStatus" nillable="true" type="q1:InstanceStatus" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="InstanceStatusResponse" nillable="true" type="tns:InstanceStatusResponse" />
+</xs:schema>

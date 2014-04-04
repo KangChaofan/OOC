@@ -8,7 +8,7 @@
     <ProjectGuid>{EAD62B60-BF9F-463B-B817-AE55C3655C7C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenMIWrapper</RootNamespace>
+    <RootNamespace>OOC.OpenMIWrapper</RootNamespace>
     <AssemblyName>OpenMIWrapper</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

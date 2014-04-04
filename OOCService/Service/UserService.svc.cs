@@ -1,8 +1,9 @@
 ﻿using System.Linq;
 using OOC.ORM;
-using OOC.Response;
+using OOC.Contract.Data.Response;
+using OOC.Contract.Service;
 using OOC.Util;
-using OOC.Candy;
+using OOC.ServiceAttribute;
 
 namespace OOC.Service
 {

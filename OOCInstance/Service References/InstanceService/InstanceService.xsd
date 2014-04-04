@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:6736/Service/InstanceService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Request" />
+  <xs:import schemaLocation="http://localhost:6736/Service/InstanceService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" />
+  <xs:element name="Heartbeat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Request" minOccurs="0" name="status" nillable="true" type="q1:InstanceHeartbeatStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HeartbeatResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" minOccurs="0" name="HeartbeatResult" nillable="true" type="q2:GenericResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QueryStatusByInstanceName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="instanceName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QueryStatusByInstanceNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" minOccurs="0" name="QueryStatusByInstanceNameResult" nillable="true" type="q3:InstanceStatusResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

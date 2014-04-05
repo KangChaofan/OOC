@@ -9,7 +9,7 @@ namespace OOC.Util
 {
     public class HashUtil
     {
-        private static MD5 md5 = MD5.Create();
+        private static readonly MD5 md5 = MD5.Create();
 
         public static string MD5Hash(string text)
         {

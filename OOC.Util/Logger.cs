@@ -24,7 +24,7 @@ namespace OOC.Util
 
         public LogLevel MinimumLevel { get; set; }
 
-        private object mutex = new object();
+        private readonly object mutex = new object();
 
         private string path;
 

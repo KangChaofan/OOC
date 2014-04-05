@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOC", "OOC\OOC.csproj", "{BA5A6217-8692-4C5C-9152-8BA129B08360}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOC", "OOC\OOC.Server.csproj", "{BA5A6217-8692-4C5C-9152-8BA129B08360}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOC.OpenMIWrapper", "OOC.OpenMIWrapper\OOC.OpenMIWrapper.csproj", "{EAD62B60-BF9F-463B-B817-AE55C3655C7C}"
 EndProject

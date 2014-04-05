@@ -18,7 +18,7 @@ namespace OOC.Service
         {
             lock (billingLock)
             {
-                using (oocEntities db = new oocEntities())
+                using (OOCEntities db = new OOCEntities())
                 {
                     IQueryable<User> result = from o in db.User
                                               where o.id == userId
@@ -48,7 +48,7 @@ namespace OOC.Service
 
         public Bill GetById(int id)
         {
-            using (oocEntities db = new oocEntities())
+            using (OOCEntities db = new OOCEntities())
             {
                 IQueryable<Bill> result = from o in db.Bill
                                           where o.id == id
@@ -63,7 +63,7 @@ namespace OOC.Service
 
         public List<Bill> GetByUserId(int userId)
         {
-            using (oocEntities db = new oocEntities())
+            using (OOCEntities db = new OOCEntities())
             {
                 IOrderedQueryable<Bill> result = from o in db.Bill
                                                  where o.userId == userId
@@ -75,7 +75,7 @@ namespace OOC.Service
 
         public List<Bill> GetByTaskGuid(string taskGuid)
         {
-            using (oocEntities db = new oocEntities())
+            using (OOCEntities db = new OOCEntities())
             {
                 IOrderedQueryable<Bill> result = from o in db.Bill
                                                  where o.taskGuid == taskGuid
@@ -87,7 +87,7 @@ namespace OOC.Service
 
         public List<Bill> GetByCmGuid(string cmGuid)
         {
-            using (oocEntities db = new oocEntities())
+            using (OOCEntities db = new OOCEntities())
             {
                 IOrderedQueryable<Bill> result = from o in db.Bill
                                                  where o.cmGuid == cmGuid
@@ -101,7 +101,7 @@ namespace OOC.Service
         {
             lock (billingLock)
             {
-                using (oocEntities db = new oocEntities())
+                using (OOCEntities db = new OOCEntities())
                 {
                     IQueryable<Bill> result = from o in db.Bill
                                               where o.id == id

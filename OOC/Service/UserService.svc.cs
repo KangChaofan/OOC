@@ -18,7 +18,7 @@ namespace OOC.Service
 
         public bool Auth(string username, string password)
         {
-            using (oocEntities db = new oocEntities())
+            using (OOCEntities db = new OOCEntities())
             {
                 IQueryable<User> result = from o in db.User
                                           where o.username == username && o.passhash == Hash(password)
@@ -29,7 +29,7 @@ namespace OOC.Service
 
         public void Create(User user)
         {
-            using (oocEntities db = new oocEntities())
+            using (OOCEntities db = new OOCEntities())
             {
                 try
                 {
@@ -45,7 +45,7 @@ namespace OOC.Service
 
         public User GetByUsername(string Username)
         {
-            using (oocEntities db = new oocEntities())
+            using (OOCEntities db = new OOCEntities())
             {
                 IQueryable<User> result = from o in db.User
                                           where o.username == Username
@@ -61,7 +61,7 @@ namespace OOC.Service
 
         public User GetById(int id)
         {
-            using (oocEntities db = new oocEntities())
+            using (OOCEntities db = new OOCEntities())
             {
                 IQueryable<User> result = from o in db.User
                                           where o.id == id

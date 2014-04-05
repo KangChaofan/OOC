@@ -46,32 +46,32 @@ namespace OOC.Entity
     /// <summary>
     /// 没有元数据文档可用。
     /// </summary>
-    public partial class oocEntities : ObjectContext
+    public partial class OOCEntities : ObjectContext
     {
         #region 构造函数
     
         /// <summary>
-        /// 请使用应用程序配置文件的“oocEntities”部分中的连接字符串初始化新 oocEntities 对象。
+        /// 请使用应用程序配置文件的“OOCEntities”部分中的连接字符串初始化新 OOCEntities 对象。
         /// </summary>
-        public oocEntities() : base("name=oocEntities", "oocEntities")
+        public OOCEntities() : base("name=OOCEntities", "OOCEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// 初始化新的 oocEntities 对象。
+        /// 初始化新的 OOCEntities 对象。
         /// </summary>
-        public oocEntities(string connectionString) : base(connectionString, "oocEntities")
+        public OOCEntities(string connectionString) : base(connectionString, "OOCEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// 初始化新的 oocEntities 对象。
+        /// 初始化新的 OOCEntities 对象。
         /// </summary>
-        public oocEntities(EntityConnection connection) : base(connection, "oocEntities")
+        public OOCEntities(EntityConnection connection) : base(connection, "OOCEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();

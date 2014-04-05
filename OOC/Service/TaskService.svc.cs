@@ -19,7 +19,7 @@ namespace OOC.Service
 
         public string Create(string compositionGuid, int userId)
         {
-            using (oocEntities db = new oocEntities())
+            using (OOCEntities db = new OOCEntities())
             {
                 IQueryable<Composition> result = from o in db.Composition
                                                  where o.guid == compositionGuid
@@ -53,7 +53,7 @@ namespace OOC.Service
 
         public void UpdateState(string guid, TaskState state)
         {
-            using (oocEntities db = new oocEntities())
+            using (OOCEntities db = new OOCEntities())
             {
                 IQueryable<Task> result = from o in db.Task
                                           where o.guid == guid
@@ -71,7 +71,7 @@ namespace OOC.Service
         {
             lock (assigningLock)
             {
-                using (oocEntities db = new oocEntities())
+                using (OOCEntities db = new OOCEntities())
                 {
                     IQueryable<Task> result = from o in db.Task
                                               where o.state == (sbyte)TaskState.Ready
@@ -91,7 +91,7 @@ namespace OOC.Service
 
         public TaskInfoResponse QueryTaskByGuid(string guid)
         {
-            using (oocEntities db = new oocEntities())
+            using (OOCEntities db = new OOCEntities())
             {
                 IQueryable<Task> result = from o in db.Task
                                           where o.guid == guid

@@ -1,4 +1,5 @@
 ﻿using System;
+using OOC.Util;
 
 namespace OOC.Instance
 {
@@ -6,7 +7,7 @@ namespace OOC.Instance
     {
         static void Main(string[] args)
         {
-            string instanceName = "default";
+            string instanceName = GuidUtil.newGuid();
             string logLocation = null;
             for (int i = 0; i < args.Length; i++)
             {

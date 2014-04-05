@@ -10,6 +10,20 @@ namespace OOC.TaskRunner
     {
         static void Main(string[] args)
         {
+            string pipeName = null;
+            for (int i = 0; i < args.Length; i++)
+            {
+                switch (args[i])
+                {
+                    case "-p":
+                    case "--pipeName":
+                        pipeName = args[++i];
+                        break;
+                }
+            }
+            if (pipeName == null) return;
+            TaskRunner taskRunner = new TaskRunner(pipeName);
+            taskRunner.Run();
         }
     }
 }

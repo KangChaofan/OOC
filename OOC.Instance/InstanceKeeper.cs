@@ -23,6 +23,7 @@ namespace OOC.Instance
                 logger = new Logger(value);
             }
         }
+
         public int HeartbeatInterval { get; set; }
         public string InstanceName { get; set; }
         public int RunningTask { get; set; }
@@ -50,12 +51,10 @@ namespace OOC.Instance
                 string guid = sender.TaskInfo.Task.guid;
                 logger.Info("State of task " + guid + " changed to " + state);
                 taskService.UpdateState(guid, state);
-
-                if (state == TaskState.Completed || state == TaskState.Aborted)
-                {
-                    RunningTask--;
-                }
-
+            });
+            manager.TaskStoppedHandler += new TaskStopped(delegate(TaskRunnerManager sender)
+            {
+                RunningTask--;
             });
             manager.Run();
         }
@@ -94,7 +93,14 @@ namespace OOC.Instance
                         if (RunningTask == 0)
                         {
                             TaskInfoResponse taskInfo = taskService.AssignPendingTask(InstanceName);
-                            startManager(taskInfo);
+                            try
+                            {
+                                startManager(taskInfo);
+                            }
+                            catch (Exception e)
+                            {
+                                logger.Crit("Failed to start task manager: " + e.ToString());
+                            }
                         }
                     }
                     catch

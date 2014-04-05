@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -142,6 +143,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OOC.TaskRunner\OOC.TaskRunner.csproj">
+      <Project>{a4d6d8a5-c720-4d01-b1f0-0649dddb9feb}</Project>
+      <Name>OOC.TaskRunner</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OOC.Util\OOC.Util.csproj">
       <Project>{5acdb1c5-29e3-4f1f-9696-e8abaab67f0a}</Project>
       <Name>OOC.Util</Name>

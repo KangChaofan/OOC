@@ -38,15 +38,18 @@ namespace OOC.Instance.TaskService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TaskInfoResponse", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TaskAssignResponse", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response")]
     [System.SerializableAttribute()]
-    public partial class TaskInfoResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class TaskAssignResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OOC.Instance.TaskService.CompositionData CompositionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private OOC.Instance.TaskService.TaskFileMapping[] InputFilesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OOC.Instance.TaskService.Task TaskField;
@@ -70,6 +73,19 @@ namespace OOC.Instance.TaskService {
                 if ((object.ReferenceEquals(this.CompositionDataField, value) != true)) {
                     this.CompositionDataField = value;
                     this.RaisePropertyChanged("CompositionData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public OOC.Instance.TaskService.TaskFileMapping[] InputFiles {
+            get {
+                return this.InputFilesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.InputFilesField, value) != true)) {
+                    this.InputFilesField = value;
+                    this.RaisePropertyChanged("InputFiles");
                 }
             }
         }
@@ -330,6 +346,93 @@ namespace OOC.Instance.TaskService {
                 if ((this.userIdField.Equals(value) != true)) {
                     this.userIdField = value;
                     this.RaisePropertyChanged("userId");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TaskFileMapping", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class TaskFileMapping : OOC.Instance.TaskService.OOCEntityObject {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string fileNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isDownloadableField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string relativePathField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string taskGuidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private sbyte typeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string fileName {
+            get {
+                return this.fileNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.fileNameField, value) != true)) {
+                    this.fileNameField = value;
+                    this.RaisePropertyChanged("fileName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isDownloadable {
+            get {
+                return this.isDownloadableField;
+            }
+            set {
+                if ((this.isDownloadableField.Equals(value) != true)) {
+                    this.isDownloadableField = value;
+                    this.RaisePropertyChanged("isDownloadable");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string relativePath {
+            get {
+                return this.relativePathField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.relativePathField, value) != true)) {
+                    this.relativePathField = value;
+                    this.RaisePropertyChanged("relativePath");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string taskGuid {
+            get {
+                return this.taskGuidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.taskGuidField, value) != true)) {
+                    this.taskGuidField = value;
+                    this.RaisePropertyChanged("taskGuid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public sbyte type {
+            get {
+                return this.typeField;
+            }
+            set {
+                if ((this.typeField.Equals(value) != true)) {
+                    this.typeField = value;
+                    this.RaisePropertyChanged("type");
                 }
             }
         }
@@ -686,7 +789,10 @@ namespace OOC.Instance.TaskService {
         private OOC.Instance.TaskService.ModelFileMapping[] ModelFilesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.CompositionModelProperties PropertiesField;
+        private OOC.Instance.TaskService.ModelProperty[] ModelPropertiesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private OOC.Instance.TaskService.CompositionModelProperties PropertyValuesField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -738,14 +844,27 @@ namespace OOC.Instance.TaskService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.CompositionModelProperties Properties {
+        public OOC.Instance.TaskService.ModelProperty[] ModelProperties {
             get {
-                return this.PropertiesField;
+                return this.ModelPropertiesField;
             }
             set {
-                if ((object.ReferenceEquals(this.PropertiesField, value) != true)) {
-                    this.PropertiesField = value;
-                    this.RaisePropertyChanged("Properties");
+                if ((object.ReferenceEquals(this.ModelPropertiesField, value) != true)) {
+                    this.ModelPropertiesField = value;
+                    this.RaisePropertyChanged("ModelProperties");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public OOC.Instance.TaskService.CompositionModelProperties PropertyValues {
+            get {
+                return this.PropertyValuesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PropertyValuesField, value) != true)) {
+                    this.PropertyValuesField = value;
+                    this.RaisePropertyChanged("PropertyValues");
                 }
             }
         }
@@ -770,6 +889,8 @@ namespace OOC.Instance.TaskService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModel))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Model))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelFileMapping))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelProperty))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileMapping))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Task))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Composition))]
     public partial class StructuralObject : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -806,6 +927,8 @@ namespace OOC.Instance.TaskService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModel))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Model))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelFileMapping))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelProperty))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileMapping))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Task))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Composition))]
     public partial class EntityObject : OOC.Instance.TaskService.StructuralObject {
@@ -835,6 +958,8 @@ namespace OOC.Instance.TaskService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModel))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Model))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelFileMapping))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelProperty))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileMapping))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Task))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Composition))]
     public partial class OOCEntityObject : OOC.Instance.TaskService.EntityObject {
@@ -1135,6 +1260,9 @@ namespace OOC.Instance.TaskService {
         private System.Nullable<System.DateTime> modificationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string relativePathField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string signatureField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -1216,6 +1344,19 @@ namespace OOC.Instance.TaskService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string relativePath {
+            get {
+                return this.relativePathField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.relativePathField, value) != true)) {
+                    this.relativePathField = value;
+                    this.RaisePropertyChanged("relativePath");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string signature {
             get {
                 return this.signatureField;
@@ -1224,6 +1365,141 @@ namespace OOC.Instance.TaskService {
                 if ((object.ReferenceEquals(this.signatureField, value) != true)) {
                     this.signatureField = value;
                     this.RaisePropertyChanged("signature");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ModelProperty", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class ModelProperty : OOC.Instance.TaskService.OOCEntityObject {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string additionalField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime creationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string defaultField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string descriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string keyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string modelGuidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> modificationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private sbyte typeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string additional {
+            get {
+                return this.additionalField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.additionalField, value) != true)) {
+                    this.additionalField = value;
+                    this.RaisePropertyChanged("additional");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime creation {
+            get {
+                return this.creationField;
+            }
+            set {
+                if ((this.creationField.Equals(value) != true)) {
+                    this.creationField = value;
+                    this.RaisePropertyChanged("creation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string @default {
+            get {
+                return this.defaultField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.defaultField, value) != true)) {
+                    this.defaultField = value;
+                    this.RaisePropertyChanged("default");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.descriptionField, value) != true)) {
+                    this.descriptionField = value;
+                    this.RaisePropertyChanged("description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string key {
+            get {
+                return this.keyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.keyField, value) != true)) {
+                    this.keyField = value;
+                    this.RaisePropertyChanged("key");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string modelGuid {
+            get {
+                return this.modelGuidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.modelGuidField, value) != true)) {
+                    this.modelGuidField = value;
+                    this.RaisePropertyChanged("modelGuid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> modification {
+            get {
+                return this.modificationField;
+            }
+            set {
+                if ((this.modificationField.Equals(value) != true)) {
+                    this.modificationField = value;
+                    this.RaisePropertyChanged("modification");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public sbyte type {
+            get {
+                return this.typeField;
+            }
+            set {
+                if ((this.typeField.Equals(value) != true)) {
+                    this.typeField = value;
+                    this.RaisePropertyChanged("type");
                 }
             }
         }
@@ -1324,12 +1600,18 @@ namespace OOC.Instance.TaskService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Model))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelFileMapping[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelFileMapping))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelProperty[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelProperty))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileMapping[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileMapping))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Task))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskState))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionData))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModelData[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModelData))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModelProperties))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileType))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskAssignResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskInfoResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, string>))]
     public partial class EntityKeyMember : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -1442,6 +1724,81 @@ namespace OOC.Instance.TaskService {
     public partial class CompositionModelProperties : OOC.Instance.TaskService.Dict {
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TaskFileType", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common")]
+    public enum TaskFileType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Input = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Output = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Log = 3,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TaskInfoResponse", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response")]
+    [System.SerializableAttribute()]
+    public partial class TaskInfoResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private OOC.Instance.TaskService.CompositionData CompositionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private OOC.Instance.TaskService.Task TaskField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public OOC.Instance.TaskService.CompositionData CompositionData {
+            get {
+                return this.CompositionDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CompositionDataField, value) != true)) {
+                    this.CompositionDataField = value;
+                    this.RaisePropertyChanged("CompositionData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public OOC.Instance.TaskService.Task Task {
+            get {
+                return this.TaskField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TaskField, value) != true)) {
+                    this.TaskField = value;
+                    this.RaisePropertyChanged("Task");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="TaskService.ITaskService")]
     public interface ITaskService {
@@ -1453,10 +1810,19 @@ namespace OOC.Instance.TaskService {
         void UpdateState(string guid, OOC.Instance.TaskService.TaskState state);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/AssignPendingTask", ReplyAction="http://tempuri.org/ITaskService/AssignPendingTaskResponse")]
-        OOC.Instance.TaskService.TaskInfoResponse AssignPendingTask(string instanceName);
+        OOC.Instance.TaskService.TaskAssignResponse AssignPendingTask(string instanceName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/QueryTaskByGuid", ReplyAction="http://tempuri.org/ITaskService/QueryTaskByGuidResponse")]
         OOC.Instance.TaskService.TaskInfoResponse QueryTaskByGuid(string guid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/AddTaskFileMapping", ReplyAction="http://tempuri.org/ITaskService/AddTaskFileMappingResponse")]
+        void AddTaskFileMapping(string guid, string fileName, string relativePath, OOC.Instance.TaskService.TaskFileType type, bool isDownloadable);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/GenerateTaskFileName", ReplyAction="http://tempuri.org/ITaskService/GenerateTaskFileNameResponse")]
+        string GenerateTaskFileName(string guid, OOC.Instance.TaskService.TaskFileType type, string relativePath);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/QueryTaskFileMapping", ReplyAction="http://tempuri.org/ITaskService/QueryTaskFileMappingResponse")]
+        OOC.Instance.TaskService.TaskFileMapping[] QueryTaskFileMapping(string guid, OOC.Instance.TaskService.TaskFileType type);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1494,12 +1860,24 @@ namespace OOC.Instance.TaskService {
             base.Channel.UpdateState(guid, state);
         }
         
-        public OOC.Instance.TaskService.TaskInfoResponse AssignPendingTask(string instanceName) {
+        public OOC.Instance.TaskService.TaskAssignResponse AssignPendingTask(string instanceName) {
             return base.Channel.AssignPendingTask(instanceName);
         }
         
         public OOC.Instance.TaskService.TaskInfoResponse QueryTaskByGuid(string guid) {
             return base.Channel.QueryTaskByGuid(guid);
+        }
+        
+        public void AddTaskFileMapping(string guid, string fileName, string relativePath, OOC.Instance.TaskService.TaskFileType type, bool isDownloadable) {
+            base.Channel.AddTaskFileMapping(guid, fileName, relativePath, type, isDownloadable);
+        }
+        
+        public string GenerateTaskFileName(string guid, OOC.Instance.TaskService.TaskFileType type, string relativePath) {
+            return base.Channel.GenerateTaskFileName(guid, type, relativePath);
+        }
+        
+        public OOC.Instance.TaskService.TaskFileMapping[] QueryTaskFileMapping(string guid, OOC.Instance.TaskService.TaskFileType type) {
+            return base.Channel.QueryTaskFileMapping(guid, type);
         }
     }
 }

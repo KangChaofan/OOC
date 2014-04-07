@@ -84,7 +84,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Service\BillService.svc" />
-    <Content Include="Service\LocalOPRService.svc" />
     <Content Include="Service\InstanceService.svc" />
     <Content Include="Service\ModelService.svc" />
     <Content Include="Service\TaskService.svc" />
@@ -106,6 +105,7 @@
     <Compile Include="Contract\Data\Common\CompositionData.cs" />
     <Compile Include="Contract\Data\Common\NodeSystemStatus.cs" />
     <Compile Include="Contract\Data\Common\InstanceStatus.cs" />
+    <Compile Include="Contract\Data\Common\TaskFileType.cs" />
     <Compile Include="Contract\Data\Common\TaskState.cs" />
     <Compile Include="Contract\Data\Common\ModelProgress.cs" />
     <Compile Include="Contract\Data\Common\ModelPropertyType.cs" />
@@ -114,6 +114,7 @@
     <Compile Include="Contract\Data\Response\FileStatResponse.cs" />
     <Compile Include="Contract\Data\Request\InstanceHeartbeatStatus.cs" />
     <Compile Include="Contract\Data\Response\TaskInfoResponse.cs" />
+    <Compile Include="Contract\Data\Response\TaskAssignResponse.cs" />
     <Compile Include="Contract\Service\IModelService.cs" />
     <Compile Include="Contract\Service\ITaskService.cs" />
     <Compile Include="Entity\OOCEntityObject.cs" />
@@ -129,10 +130,6 @@
       <DependentUpon>BillService.svc</DependentUpon>
     </Compile>
     <Compile Include="Contract\Service\IBillService.cs" />
-    <Compile Include="Service\LocalOPRService.svc.cs">
-      <DependentUpon>LocalOPRService.svc</DependentUpon>
-    </Compile>
-    <Compile Include="Contract\Service\ILocalOPRService.cs" />
     <Compile Include="Entity\OOCDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

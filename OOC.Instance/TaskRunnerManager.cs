@@ -9,6 +9,7 @@ using System.Security;
 using System.Security.AccessControl;
 using System.IO;
 using System.IO.Pipes;
+using System.ServiceModel;
 using OOC.Instance.TaskService;
 using OOC.Util;
 
@@ -25,11 +26,12 @@ namespace OOC.Instance
         private static string taskUsername = ConfigurationManager.AppSettings["taskUsername"];
         private static string taskPassword = ConfigurationManager.AppSettings["taskPassword"];
 
-        public TaskInfoResponse TaskInfo { get; set; }
+        public TaskAssignResponse TaskAssign { get; set; }
         public TaskStateChanged TaskStateChangedHandler;
         public TaskStopped TaskStoppedHandler;
-        public string WorkingDirectory { get; set; }
+        public string WorkingDirectory { get { return WorkspaceManager.WorkingDirectory; } }
         public string PipeName { get; set; }
+        public WorkspaceManager WorkspaceManager { get; set; }
 
         public TaskState TaskState
         {
@@ -50,7 +52,11 @@ namespace OOC.Instance
                 if (isDied == false && value == true)
                 {
                     if (runnerProcess != null)
-                        runnerProcess.Kill();
+                        try
+                        {
+                            runnerProcess.Kill();
+                        }
+                        catch { }
                     TaskStoppedHandler(this);
                 }
                 isDied = value;
@@ -63,10 +69,95 @@ namespace OOC.Instance
         private NamedPipeServerStream pipeServer;
         private Thread pipeKeeper;
         private Process runnerProcess;
+        private bool isReleased = false;
 
-        public TaskRunnerManager(TaskInfoResponse taskInfo)
+        public TaskRunnerManager(TaskAssignResponse taskAssign)
         {
-            TaskInfo = taskInfo;
+            TaskAssign = taskAssign;
+        }
+
+        private void transmitComposition(BinaryWriter bw)
+        {
+            foreach (CompositionModelData cmData in TaskAssign.CompositionData.Models)
+            {
+                string mainLibrary = WorkspaceManager.GetCompositionModelMainLibrary(cmData.CompositionModel);
+                Dictionary<string, string> properties = new Dictionary<string, string>();
+                properties["modelId"] = cmData.CompositionModel.guid;
+                properties["linkableComponent"] = cmData.Model.className;
+                properties["assemblyPath"] = mainLibrary;
+                properties["workingDirectory"] = WorkspaceManager.GetCompositionModelDirectory(cmData.CompositionModel);
+                PipeUtil.WriteCommand(bw, new PipeCommand("AddModel", properties));
+
+                properties = new Dictionary<string, string>();
+                properties["modelId"] = cmData.CompositionModel.guid;
+                if (cmData.PropertyValues != null)
+                {
+                    Dictionary<string, string> propertyValues = cmData.PropertyValues.Kvs;
+                    foreach (ModelProperty property in cmData.ModelProperties)
+                    {
+                        if (property.type == 4)
+                        {
+                            properties[property.key] = WorkspaceManager.GetLocalPath(propertyValues[property.key]);
+                        }
+                        else
+                        {
+                            properties[property.key] = propertyValues[property.key];
+                        }
+                    }
+                }
+                PipeUtil.WriteCommand(bw, new PipeCommand("SetModelProperties", properties));
+            }
+
+            foreach (CompositionLink link in TaskAssign.CompositionData.Links)
+            {
+                Dictionary<string, string> properties = new Dictionary<string, string>();
+                properties["sourceModel"] = link.sourceCmGuid;
+                properties["targetModel"] = link.targetCmGuid;
+                properties["sourceQuantity"] = link.sourceQuantity;
+                properties["targetQuantity"] = link.targetQuantity;
+                properties["sourceElementSet"] = link.sourceElementSet;
+                properties["targetElementSet"] = link.targetElementSet;
+                PipeUtil.WriteCommand(bw, new PipeCommand("AddLink", properties));
+            }
+        }
+
+        private bool runnerLifetime()
+        {
+            bool succeed = false;
+            using (BinaryReader br = new BinaryReader(pipeServer))
+            using (BinaryWriter bw = new BinaryWriter(pipeServer))
+            {
+                /* handshake */
+                PipeCommand helloCommand = PipeUtil.ReadCommand(br);
+                if (helloCommand.Command != "Hello") throw new Exception("Handshake failed.");
+                logger.Info("Pipe: Handshake signal received.");
+                PipeUtil.WriteCommand(bw, new PipeCommand("Hello"));
+                logger.Info("Pipe: Handshake signal sent.");
+
+                /* transmit composition */
+                transmitComposition(bw);
+                PipeUtil.WriteCommand(bw, new PipeCommand("RunSimulation"));
+
+                /* waiting for simulation finish */
+                do
+                {
+                    PipeCommand command = PipeUtil.ReadCommand(br);
+                    logger.Info("Pipe: Received command: " + command.Command);
+                    switch (command.Command)
+                    {
+                        case "Progress":
+                            break;
+                        case "Completed":
+                        case "Failed":
+                            PipeUtil.WriteCommand(bw, new PipeCommand("Halt"));
+                            succeed = (command.Command == "Completed");
+                            isReleased = true;
+                            break;
+                    }
+                } while (!isReleased);
+            }
+            runnerProcess.WaitForExit();
+            return succeed;
         }
 
         private void startPipeKeeper()
@@ -76,20 +167,28 @@ namespace OOC.Instance
                 logger.Info("Pipe keeper thread started.");
                 try
                 {
-                    // Read user input and send that to the client process.
-                    using (StreamWriter sw = new StreamWriter(pipeServer))
+                    if (runnerLifetime() == true)
                     {
-                        sw.AutoFlush = true;
-                        while (true)
-                        {
-                            Thread.Sleep(100);
-                        }
+                        WorkspaceManager.CollectOutput();
+                        TaskState = TaskState.Completed;
+                    }
+                    else
+                    {
+                        TaskState = TaskState.Aborted;
                     }
                 }
                 catch (Exception e)
                 {
-                    logger.Info("Exception occured during pipe communication: " + e.ToString());
-                    TaskState = TaskState.Aborted;
+                    if (!isReleased)
+                    {
+                        logger.Crit("Exception occured during task lifetime: " + e.ToString());
+                        TaskState = TaskState.Aborted;
+                    }
+                }
+                finally
+                {
+                    pipeServer.Close();
+                    pipeServer.Dispose();
                 }
                 IsDied = true;
             }));
@@ -106,8 +205,9 @@ namespace OOC.Instance
             return password;
         }
 
-        private void createWorkspace()
+        private void initWorkspace()
         {
+            WorkspaceManager.DeployComposition(TaskAssign.CompositionData, TaskAssign.InputFiles);
         }
 
         private void prepareRunner()
@@ -115,11 +215,11 @@ namespace OOC.Instance
             PipeSecurity pipeSecurity = new PipeSecurity();
             pipeSecurity.SetAccessRule(new PipeAccessRule("Everyone",
                 PipeAccessRights.ReadWrite, AccessControlType.Allow));
-            pipeServer = new NamedPipeServerStream(PipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Message, PipeOptions.None, 4096, 4096, pipeSecurity, HandleInheritability.None);
+            pipeServer = new NamedPipeServerStream(PipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.WriteThrough, 4096, 4096, pipeSecurity, HandleInheritability.None);
             logger.Info("Pipe created: " + PipeName + ".");
 
-            ProcessStartInfo psi = new ProcessStartInfo(taskRunnerExecutable, "--pipeName " + PipeName);
-            psi.WorkingDirectory = WorkingDirectory;
+            ProcessStartInfo psi = new ProcessStartInfo(taskRunnerExecutable, "--pipeName \"" + PipeName + "\" --log \"" + WorkspaceManager.LogDirectory + @"\runner.log" + "\"");
+            psi.WorkingDirectory = WorkspaceManager.OutputDirectory;
             psi.UserName = taskUsername;
             psi.Password = getPassword();
             psi.UseShellExecute = false;
@@ -134,16 +234,16 @@ namespace OOC.Instance
 
         public void Run()
         {
+            string taskGuid = TaskAssign.Task.guid;
             IsDied = false;
             TaskState = TaskState.Assigned;
-            WorkingDirectory = taskWorkingDirectory + TaskInfo.Task.guid;
-            if (!Directory.Exists(WorkingDirectory)) Directory.CreateDirectory(WorkingDirectory);
-            PipeName = "OOCTaskPipe-" + TaskInfo.Task.guid;
-            logger = new Logger(WorkingDirectory + @"\taskManager.log");
+            WorkspaceManager = new WorkspaceManager(taskGuid, taskWorkingDirectory + taskGuid);
+            PipeName = "OOCTaskPipe-" + taskGuid;
+            logger = new Logger(WorkspaceManager.LogDirectory + @"\taskManager.log");
             logger.Info("TaskManager initializing...");
             try
             {
-                createWorkspace();
+                initWorkspace();
                 prepareRunner();
                 startPipeKeeper();
                 TaskState = TaskState.Running;

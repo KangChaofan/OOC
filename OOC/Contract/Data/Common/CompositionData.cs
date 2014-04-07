@@ -17,10 +17,13 @@ namespace OOC.Contract.Data.Common
         public CompositionModel CompositionModel { get; set; }
 
         [DataMember]
-        public CompositionModelProperties Properties { get; set; }
+        public Model Model { get; set; }
 
         [DataMember]
-        public Model Model { get; set; }
+        public List<ModelProperty> ModelProperties { get; set; }
+
+        [DataMember]
+        public CompositionModelProperties PropertyValues { get; set; }
 
         [DataMember]
         public List<ModelFileMapping> ModelFiles { get; set; }
@@ -30,8 +33,9 @@ namespace OOC.Contract.Data.Common
         public CompositionModelData(CompositionModel compositionModel)
         {
             CompositionModel = compositionModel;
-            Properties = SerializeUtil.Deserialize<CompositionModelProperties>(compositionModel.properties);
             Model = compositionModel.Model;
+            ModelProperties = Model.ModelProperty.ToList();
+            PropertyValues = new CompositionModelProperties() { Serialized = compositionModel.properties };
             ModelFiles = compositionModel.Model.ModelFileMapping.ToList();
         }
     }

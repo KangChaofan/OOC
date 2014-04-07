@@ -37,6 +37,24 @@
   <wsdl:message name="ITaskService_QueryTaskByGuid_OutputMessage">
     <wsdl:part name="parameters" element="tns:QueryTaskByGuidResponse" />
   </wsdl:message>
+  <wsdl:message name="ITaskService_AddTaskFileMapping_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddTaskFileMapping" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_AddTaskFileMapping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddTaskFileMappingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_GenerateTaskFileName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateTaskFileName" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_GenerateTaskFileName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateTaskFileNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_QueryTaskFileMapping_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryTaskFileMapping" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_QueryTaskFileMapping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryTaskFileMappingResponse" />
+  </wsdl:message>
   <wsdl:portType name="ITaskService">
     <wsdl:operation name="Create">
       <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/Create" message="tns:ITaskService_Create_InputMessage" />
@@ -53,6 +71,18 @@
     <wsdl:operation name="QueryTaskByGuid">
       <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/QueryTaskByGuid" message="tns:ITaskService_QueryTaskByGuid_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/QueryTaskByGuidResponse" message="tns:ITaskService_QueryTaskByGuid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddTaskFileMapping">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/AddTaskFileMapping" message="tns:ITaskService_AddTaskFileMapping_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/AddTaskFileMappingResponse" message="tns:ITaskService_AddTaskFileMapping_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateTaskFileName">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/GenerateTaskFileName" message="tns:ITaskService_GenerateTaskFileName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/GenerateTaskFileNameResponse" message="tns:ITaskService_GenerateTaskFileName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryTaskFileMapping">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/QueryTaskFileMapping" message="tns:ITaskService_QueryTaskFileMapping_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/QueryTaskFileMappingResponse" message="tns:ITaskService_QueryTaskFileMapping_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ITaskService" type="tns:ITaskService">
@@ -86,6 +116,33 @@
     </wsdl:operation>
     <wsdl:operation name="QueryTaskByGuid">
       <soap:operation soapAction="http://tempuri.org/ITaskService/QueryTaskByGuid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddTaskFileMapping">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/AddTaskFileMapping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateTaskFileName">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/GenerateTaskFileName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryTaskFileMapping">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/QueryTaskFileMapping" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

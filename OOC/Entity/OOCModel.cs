@@ -2203,7 +2203,8 @@ namespace OOC.Entity
         /// <param name="creation">creation 属性的初始值。</param>
         /// <param name="isDocument">isDocument 属性的初始值。</param>
         /// <param name="signature">signature 属性的初始值。</param>
-        public static ModelFileMapping CreateModelFileMapping(global::System.String modelGuid, global::System.String fileName, global::System.Boolean isMainLibrary, global::System.DateTime creation, global::System.Boolean isDocument, global::System.String signature)
+        /// <param name="relativePath">relativePath 属性的初始值。</param>
+        public static ModelFileMapping CreateModelFileMapping(global::System.String modelGuid, global::System.String fileName, global::System.Boolean isMainLibrary, global::System.DateTime creation, global::System.Boolean isDocument, global::System.String signature, global::System.String relativePath)
         {
             ModelFileMapping modelFileMapping = new ModelFileMapping();
             modelFileMapping.modelGuid = modelGuid;
@@ -2212,6 +2213,7 @@ namespace OOC.Entity
             modelFileMapping.creation = creation;
             modelFileMapping.isDocument = isDocument;
             modelFileMapping.signature = signature;
+            modelFileMapping.relativePath = relativePath;
             return modelFileMapping;
         }
 
@@ -2392,6 +2394,30 @@ namespace OOC.Entity
         private global::System.String _signature;
         partial void OnsignatureChanging(global::System.String value);
         partial void OnsignatureChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String relativePath
+        {
+            get
+            {
+                return _relativePath;
+            }
+            set
+            {
+                OnrelativePathChanging(value);
+                ReportPropertyChanging("relativePath");
+                _relativePath = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("relativePath");
+                OnrelativePathChanged();
+            }
+        }
+        private global::System.String _relativePath;
+        partial void OnrelativePathChanging(global::System.String value);
+        partial void OnrelativePathChanged();
 
         #endregion
 
@@ -2455,7 +2481,7 @@ namespace OOC.Entity
         /// <param name="key">key 属性的初始值。</param>
         /// <param name="type">type 属性的初始值。</param>
         /// <param name="creation">creation 属性的初始值。</param>
-        public static ModelProperty CreateModelProperty(global::System.String modelGuid, global::System.String key, global::System.Boolean type, global::System.DateTime creation)
+        public static ModelProperty CreateModelProperty(global::System.String modelGuid, global::System.String key, global::System.SByte type, global::System.DateTime creation)
         {
             ModelProperty modelProperty = new ModelProperty();
             modelProperty.modelGuid = modelGuid;
@@ -2528,7 +2554,7 @@ namespace OOC.Entity
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean type
+        public global::System.SByte type
         {
             get
             {
@@ -2543,8 +2569,8 @@ namespace OOC.Entity
                 OntypeChanged();
             }
         }
-        private global::System.Boolean _type;
-        partial void OntypeChanging(global::System.Boolean value);
+        private global::System.SByte _type;
+        partial void OntypeChanging(global::System.SByte value);
         partial void OntypeChanged();
     
         /// <summary>
@@ -3419,13 +3445,15 @@ namespace OOC.Entity
         /// <param name="fileName">fileName 属性的初始值。</param>
         /// <param name="type">type 属性的初始值。</param>
         /// <param name="isDownloadable">isDownloadable 属性的初始值。</param>
-        public static TaskFileMapping CreateTaskFileMapping(global::System.String taskGuid, global::System.String fileName, global::System.Boolean type, global::System.Boolean isDownloadable)
+        /// <param name="relativePath">relativePath 属性的初始值。</param>
+        public static TaskFileMapping CreateTaskFileMapping(global::System.String taskGuid, global::System.String fileName, global::System.SByte type, global::System.Boolean isDownloadable, global::System.String relativePath)
         {
             TaskFileMapping taskFileMapping = new TaskFileMapping();
             taskFileMapping.taskGuid = taskGuid;
             taskFileMapping.fileName = fileName;
             taskFileMapping.type = type;
             taskFileMapping.isDownloadable = isDownloadable;
+            taskFileMapping.relativePath = relativePath;
             return taskFileMapping;
         }
 
@@ -3492,7 +3520,7 @@ namespace OOC.Entity
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean type
+        public global::System.SByte type
         {
             get
             {
@@ -3507,8 +3535,8 @@ namespace OOC.Entity
                 OntypeChanged();
             }
         }
-        private global::System.Boolean _type;
-        partial void OntypeChanging(global::System.Boolean value);
+        private global::System.SByte _type;
+        partial void OntypeChanging(global::System.SByte value);
         partial void OntypeChanged();
     
         /// <summary>
@@ -3534,6 +3562,30 @@ namespace OOC.Entity
         private global::System.Boolean _isDownloadable;
         partial void OnisDownloadableChanging(global::System.Boolean value);
         partial void OnisDownloadableChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String relativePath
+        {
+            get
+            {
+                return _relativePath;
+            }
+            set
+            {
+                OnrelativePathChanging(value);
+                ReportPropertyChanging("relativePath");
+                _relativePath = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("relativePath");
+                OnrelativePathChanged();
+            }
+        }
+        private global::System.String _relativePath;
+        partial void OnrelativePathChanging(global::System.String value);
+        partial void OnrelativePathChanged();
 
         #endregion
 

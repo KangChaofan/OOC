@@ -9,7 +9,7 @@ namespace OOC.Util
         DEBUG = 0, INFO = 1, WARN = 2, ERROR = 3, CRIT = 4
     }
 
-    public class Logger
+    public class Logger : IDisposable
     {
         public string Path
         {
@@ -63,5 +63,14 @@ namespace OOC.Util
         public void Error(string message) { Write(LogLevel.ERROR, message); }
 
         public void Crit(string message) { Write(LogLevel.CRIT, message); }
+
+        public void Dispose()
+        {
+            if (writer != null)
+            {
+                writer.Close();
+                writer.Dispose();
+            }
+        }
     }
 }

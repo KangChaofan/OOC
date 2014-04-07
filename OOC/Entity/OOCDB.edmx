@@ -165,6 +165,7 @@
           </Key>
           <Property Name="modelGuid" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="fileName" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="relativePath" Type="varchar" Nullable="false" MaxLength="512" />
           <Property Name="isMainLibrary" Type="bool" Nullable="false" />
           <Property Name="isDocument" Type="bool" Nullable="false" />
           <Property Name="signature" Type="varchar" Nullable="false" MaxLength="40" />
@@ -178,7 +179,7 @@
           </Key>
           <Property Name="modelGuid" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="key" Type="varchar" Nullable="false" MaxLength="64" />
-          <Property Name="type" Type="bool" Nullable="false" />
+          <Property Name="type" Type="tinyint" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="256" />
           <Property Name="default" Type="varchar" MaxLength="64" />
           <Property Name="additional" Type="text" />
@@ -211,7 +212,7 @@
           <Property Name="guid" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="instanceName" Type="varchar" MaxLength="64" />
           <Property Name="compositionGuid" Type="varchar" Nullable="false" MaxLength="40" />
-          <Property Name="compositionData" Type="text" Nullable="false" />
+          <Property Name="compositionData" Type="longtext" Nullable="false" />
           <Property Name="state" Type="tinyint" Nullable="false" />
           <Property Name="modelProgress" Type="text" />
           <Property Name="userId" Type="uint" Nullable="false" />
@@ -227,7 +228,8 @@
           </Key>
           <Property Name="taskGuid" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="fileName" Type="varchar" Nullable="false" MaxLength="200" />
-          <Property Name="type" Type="bool" Nullable="false" />
+          <Property Name="relativePath" Type="varchar" Nullable="false" MaxLength="512" />
+          <Property Name="type" Type="tinyint" Nullable="false" />
           <Property Name="isDownloadable" Type="bool" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
@@ -661,6 +663,7 @@
           <NavigationProperty Name="Model" Relationship="oocModel.fk_file_model" FromRole="ModelFileMapping" ToRole="Model" />
           <Property Type="Boolean" Name="isDocument" Nullable="false" />
           <Property Type="String" Name="signature" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="relativePath" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ModelProperty">
           <Key>
@@ -669,7 +672,7 @@
           </Key>
           <Property Type="String" Name="modelGuid" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="key" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Type="Boolean" Name="type" Nullable="false" />
+          <Property Type="SByte" Name="type" Nullable="false" />
           <Property Type="String" Name="description" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="default" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="additional" MaxLength="65535" FixedLength="false" Unicode="false" />
@@ -684,7 +687,7 @@
           <Property Type="String" Name="guid" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="instanceName" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="compositionGuid" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="compositionData" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="compositionData" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Type="SByte" Name="state" Nullable="false" />
           <Property Type="String" Name="modelProgress" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Type="Int64" Name="userId" Nullable="false" />
@@ -704,9 +707,10 @@
           </Key>
           <Property Type="String" Name="taskGuid" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="fileName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Type="Boolean" Name="type" Nullable="false" />
+          <Property Type="SByte" Name="type" Nullable="false" />
           <Property Type="Boolean" Name="isDownloadable" Nullable="false" />
           <NavigationProperty Name="Task" Relationship="oocModel.fk_file_task" FromRole="TaskFileMapping" ToRole="Task" />
+          <Property Type="String" Name="relativePath" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="fk_bill_cm">
           <End Type="oocModel.CompositionModel" Role="CompositionModel" Multiplicity="0..1" />
@@ -1009,6 +1013,7 @@
           <EntitySetMapping Name="ModelFileMapping">
             <EntityTypeMapping TypeName="oocModel.ModelFileMapping">
               <MappingFragment StoreEntitySet="ModelFileMapping">
+                <ScalarProperty Name="relativePath" ColumnName="relativePath" />
                 <ScalarProperty Name="signature" ColumnName="signature" />
                 <ScalarProperty Name="isDocument" ColumnName="isDocument" />
                 <ScalarProperty Name="modification" ColumnName="modification" />
@@ -1053,6 +1058,7 @@
           <EntitySetMapping Name="TaskFileMapping">
             <EntityTypeMapping TypeName="oocModel.TaskFileMapping">
               <MappingFragment StoreEntitySet="TaskFileMapping">
+                <ScalarProperty Name="relativePath" ColumnName="relativePath" />
                 <ScalarProperty Name="isDownloadable" ColumnName="isDownloadable" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="fileName" ColumnName="fileName" />

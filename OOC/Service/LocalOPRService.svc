@@ -1,1 +1,0 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="OOC.Service.LocalOPRService" CodeBehind="LocalOPRService.svc.cs" %>

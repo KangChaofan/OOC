@@ -5,12 +5,10 @@ using System.Web;
 
 namespace OOC.Contract.Data.Common
 {
-    public enum ModelPropertyType
+    public enum TaskFileType
     {
-        String = 0,
-        Integer = 1,
-        Float = 2,
-        Enum = 3,
-        InputFile = 4
+        Input = 1,
+        Output = 2,
+        Log = 3
     }
 }

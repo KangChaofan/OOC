@@ -21,10 +21,18 @@ namespace OOC.Contract.Service
         void UpdateState(string guid, TaskState state);
 
         [OperationContract]
-        TaskInfoResponse AssignPendingTask(string instanceName);
+        TaskAssignResponse AssignPendingTask(string instanceName);
 
         [OperationContract]
         TaskInfoResponse QueryTaskByGuid(string guid);
 
+        [OperationContract]
+        void AddTaskFileMapping(string guid, string fileName, string relativePath, TaskFileType type, bool isDownloadable);
+
+        [OperationContract]
+        string GenerateTaskFileName(string guid, TaskFileType type, string relativePath);
+
+        [OperationContract]
+        List<TaskFileMapping> QueryTaskFileMapping(string guid, TaskFileType type);
     }
 }

@@ -9,10 +9,11 @@ namespace OOC.Contract.Data.Response
     [DataContract]
     public class TaskAssignResponse
     {
-        public TaskAssignResponse(Task task, List<TaskFileMapping> inputFiles)
+        public TaskAssignResponse(Task task, List<TaskFileMapping> inputFiles, string triggerInvokeTime)
         {
             Task = task;
             InputFiles = inputFiles;
+            TriggerInvokeTime = triggerInvokeTime;
             CompositionData = SerializeUtil.Deserialize<CompositionData>(task.compositionData);
         }
 
@@ -24,5 +25,8 @@ namespace OOC.Contract.Data.Response
 
         [DataMember]
         public CompositionData CompositionData { get; set; }
+
+        [DataMember]
+        public string TriggerInvokeTime { get; set; }
     }
 }

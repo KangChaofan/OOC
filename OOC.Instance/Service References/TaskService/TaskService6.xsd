@@ -8,6 +8,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="compositionGuid" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="userId" type="xs:int" />
+        <xs:element minOccurs="0" name="triggerInvokeTime" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

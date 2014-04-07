@@ -101,11 +101,9 @@ namespace OOC.TaskRunner
                             case "AddLink":
                                 // TODO
                                 break;
-                            case "SetLinkProperties":
-                                // TODO
-                                break;
                             case "SetSimulationProperties":
-                                // TODO
+                                DateTime triggerInvokeTime = DateTime.Parse(command.Parameters["triggerInvokeTime"]);
+                                composition.TriggerInvokeTime = triggerInvokeTime;
                                 break;
                             case "RunSimulation":
                                 RunSimulation(delegate(object sender, bool succeed)

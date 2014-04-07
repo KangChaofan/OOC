@@ -165,6 +165,7 @@
           <xs:element minOccurs="0" name="state" type="xs:byte" />
           <xs:element minOccurs="0" name="timeFinished" nillable="true" type="xs:dateTime" />
           <xs:element minOccurs="0" name="timeStarted" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="triggerInvokeTime" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="userId" type="xs:long" />
         </xs:sequence>
       </xs:extension>

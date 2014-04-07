@@ -3022,7 +3022,8 @@ namespace OOC.Entity
         /// <param name="state">state 属性的初始值。</param>
         /// <param name="userId">userId 属性的初始值。</param>
         /// <param name="creation">creation 属性的初始值。</param>
-        public static Task CreateTask(global::System.String guid, global::System.String compositionGuid, global::System.String compositionData, global::System.SByte state, global::System.Int64 userId, global::System.DateTime creation)
+        /// <param name="triggerInvokeTime">triggerInvokeTime 属性的初始值。</param>
+        public static Task CreateTask(global::System.String guid, global::System.String compositionGuid, global::System.String compositionData, global::System.SByte state, global::System.Int64 userId, global::System.DateTime creation, global::System.String triggerInvokeTime)
         {
             Task task = new Task();
             task.guid = guid;
@@ -3031,6 +3032,7 @@ namespace OOC.Entity
             task.state = state;
             task.userId = userId;
             task.creation = creation;
+            task.triggerInvokeTime = triggerInvokeTime;
             return task;
         }
 
@@ -3304,6 +3306,30 @@ namespace OOC.Entity
         private Nullable<global::System.DateTime> _modification;
         partial void OnmodificationChanging(Nullable<global::System.DateTime> value);
         partial void OnmodificationChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String triggerInvokeTime
+        {
+            get
+            {
+                return _triggerInvokeTime;
+            }
+            set
+            {
+                OntriggerInvokeTimeChanging(value);
+                ReportPropertyChanging("triggerInvokeTime");
+                _triggerInvokeTime = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("triggerInvokeTime");
+                OntriggerInvokeTimeChanged();
+            }
+        }
+        private global::System.String _triggerInvokeTime;
+        partial void OntriggerInvokeTimeChanging(global::System.String value);
+        partial void OntriggerInvokeTimeChanged();
 
         #endregion
 

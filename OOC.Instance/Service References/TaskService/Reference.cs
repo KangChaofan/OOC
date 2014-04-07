@@ -54,6 +54,9 @@ namespace OOC.Instance.TaskService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OOC.Instance.TaskService.Task TaskField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TriggerInvokeTimeField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -99,6 +102,19 @@ namespace OOC.Instance.TaskService {
                 if ((object.ReferenceEquals(this.TaskField, value) != true)) {
                     this.TaskField = value;
                     this.RaisePropertyChanged("Task");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TriggerInvokeTime {
+            get {
+                return this.TriggerInvokeTimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TriggerInvokeTimeField, value) != true)) {
+                    this.TriggerInvokeTimeField = value;
+                    this.RaisePropertyChanged("TriggerInvokeTime");
                 }
             }
         }
@@ -203,6 +219,9 @@ namespace OOC.Instance.TaskService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.DateTime> timeStartedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string triggerInvokeTimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long userIdField;
@@ -333,6 +352,19 @@ namespace OOC.Instance.TaskService {
                 if ((this.timeStartedField.Equals(value) != true)) {
                     this.timeStartedField = value;
                     this.RaisePropertyChanged("timeStarted");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string triggerInvokeTime {
+            get {
+                return this.triggerInvokeTimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.triggerInvokeTimeField, value) != true)) {
+                    this.triggerInvokeTimeField = value;
+                    this.RaisePropertyChanged("triggerInvokeTime");
                 }
             }
         }
@@ -1804,7 +1836,7 @@ namespace OOC.Instance.TaskService {
     public interface ITaskService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/Create", ReplyAction="http://tempuri.org/ITaskService/CreateResponse")]
-        string Create(string compositionGuid, int userId);
+        string Create(string compositionGuid, int userId, string triggerInvokeTime);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/UpdateState", ReplyAction="http://tempuri.org/ITaskService/UpdateStateResponse")]
         void UpdateState(string guid, OOC.Instance.TaskService.TaskState state);
@@ -1852,8 +1884,8 @@ namespace OOC.Instance.TaskService {
                 base(binding, remoteAddress) {
         }
         
-        public string Create(string compositionGuid, int userId) {
-            return base.Channel.Create(compositionGuid, userId);
+        public string Create(string compositionGuid, int userId, string triggerInvokeTime) {
+            return base.Channel.Create(compositionGuid, userId, triggerInvokeTime);
         }
         
         public void UpdateState(string guid, OOC.Instance.TaskService.TaskState state) {

@@ -46,6 +46,8 @@ namespace OOC.OpenMIWrapper
 
         private string _modelID;
 
+        private string _workingDirectory;
+
         /// <summary>
         /// Creates a new instance of <see cref="Model">UIModel</see> class.
         /// </summary>
@@ -87,16 +89,26 @@ namespace OOC.OpenMIWrapper
             {
                 linkableComponentArguments.Add(new Argument(entry.Key, entry.Value, true, "No description"));
             }
-            _linkableComponent.Initialize((IArgument[])linkableComponentArguments.ToArray(typeof(IArgument)));
+            string oldDirectory = Directory.GetCurrentDirectory();
+            try
+            {
+                Directory.SetCurrentDirectory(_workingDirectory);
+                _linkableComponent.Initialize((IArgument[])linkableComponentArguments.ToArray(typeof(IArgument)));
+            }
+            finally
+            {
+                Directory.SetCurrentDirectory(oldDirectory);
+            }
         }
 
         public void Create(string modelId, string workingDirectory, string assemblyPath, string linkableComponent)
         {
+            _workingDirectory = workingDirectory;
             string oldDirectory = Directory.GetCurrentDirectory();
             try
             {
-                Directory.SetCurrentDirectory(workingDirectory);
-                AssemblySupport.LoadAssembly(workingDirectory, assemblyPath);
+                Directory.SetCurrentDirectory(_workingDirectory);
+                AssemblySupport.LoadAssembly(_workingDirectory, assemblyPath);
 
                 object obj = AssemblySupport.GetNewInstance(linkableComponent);
                 if (!(obj is ILinkableComponent))

@@ -17,7 +17,7 @@ namespace OOC.Service
     {
         private static readonly object assigningLock = new object();
 
-        public string Create(string compositionGuid, int userId)
+        public string Create(string compositionGuid, int userId, string triggerInvokeTime)
         {
             using (OOCEntities db = new OOCEntities())
             {
@@ -37,6 +37,7 @@ namespace OOC.Service
                     compositionData = compositionData.Serialized,
                     state = (sbyte)TaskState.Created,
                     userId = userId,
+                    triggerInvokeTime = triggerInvokeTime,
                     modelProgress = new ModelProgress().Serialized
                 };
                 try
@@ -63,7 +64,16 @@ namespace OOC.Service
                 {
                     throw new FaultException("TASK_NOT_EXISTS");
                 }
-                result.First().state = (sbyte)state;
+                Task task = result.First();
+                task.state = (sbyte)state;
+                if (state == TaskState.Running)
+                {
+                    task.timeStarted = System.DateTime.Now;
+                }
+                if (state == TaskState.Completed)
+                {
+                    task.timeFinished = System.DateTime.Now;
+                }
                 db.SaveChanges();
             }
         }
@@ -85,7 +95,7 @@ namespace OOC.Service
                     task.state = (sbyte)TaskState.Assigned;
                     task.instanceName = instanceName;
                     db.SaveChanges();
-                    return new TaskAssignResponse(task, QueryTaskFileMapping(task.guid, TaskFileType.Input));
+                    return new TaskAssignResponse(task, QueryTaskFileMapping(task.guid, TaskFileType.Input), task.triggerInvokeTime);
                 }
             }
         }

@@ -21,11 +21,11 @@ namespace OOC.Util
             }
         }
 
-        public static T Deserialize<T>(string jsonString)
+        public static T Deserialize<T>(string xmlString)
         {
             try
             {
-                using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonString)))
+                using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(xmlString)))
                 {
                     DataContractSerializer serializer = new DataContractSerializer(typeof(T));
                     return (T)serializer.ReadObject(ms);

@@ -25,7 +25,7 @@
 * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-#endregion 
+#endregion
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,10 +41,12 @@ using OpenMI.Standard;
 using Oatc.OpenMI.Sdk.Backbone;
 using Oatc.OpenMI.Sdk.DevelopmentSupport;
 using Oatc.OpenMI.Sdk.Wrapper;
+using OOC.Util;
 
 
 namespace OOC.OpenMIWrapper
 {
+    public delegate void AfterSimulationDelegate(object sender, bool succeed);
 
     /// <summary>
     /// Summary description for CompositionManager.
@@ -53,6 +55,7 @@ namespace OOC.OpenMIWrapper
     /// </summary>
     public class CompositionManager
     {
+        public AfterSimulationDelegate AfterSimulationHandler;
         private DateTime startTime, endTime;
 
         #region Static members
@@ -312,27 +315,22 @@ namespace OOC.OpenMIWrapper
             Initialize();
         }
 
-
-        /// <summary>
-        /// Adds new model to this composition.
-        /// </summary>
-        /// <param name="omiFilename">Relative or absolute path to OMI file describing the model.</param>
-        /// <param name="directory">Directory <c>omiFilename</c> is relative to, or <c>null</c> if <c>omiFilename</c> is absolute or relative to current directory.</param>
-        /// <returns>Returns newly added model.</returns>
-        /// <remarks>See <see cref="Utils.GetFileInfo">Utils.GetFileInfo</see> for more info about how
-        /// specified file is searched.</remarks>
-        public Model AddModel(string directory, string omiFilename)
+        public Model GetModel(string modelId)
         {
-            Model newUiModel = new Model();
-            newUiModel.ReadOMIFile(directory, omiFilename);
-
-            _models.Add(newUiModel);
-
-            _shouldBeSaved = true;
-
-            return (newUiModel);
+            foreach (Model model in _models)
+            {
+                if (model.ModelID == modelId)
+                {
+                    return model;
+                }
+            }
+            return null;
         }
 
+        public void AddModel(Model model)
+        {
+            _models.Add(model);
+        }
 
         /// <summary>
         /// Removes specified model from composition.
@@ -369,7 +367,7 @@ namespace OOC.OpenMIWrapper
         /// <remarks>See <see cref="RemoveModel">RemoveModel</see> for more detail.</remarks>
         public void RemoveAllModels()
         {
-            while(Models.Count > 0)
+            while (Models.Count > 0)
             {
                 RemoveModel(Models[0]);
             }
@@ -453,7 +451,7 @@ namespace OOC.OpenMIWrapper
 
             _shouldBeSaved = true;
         }
-        
+
         /// <summary>
         /// Saves composition to OmiEd Project XML file (OPR).
         /// </summary>
@@ -461,10 +459,10 @@ namespace OOC.OpenMIWrapper
         public void SaveToFile(string filePath)
         {
             _filePath = filePath;
-            
+
             XmlDocument xmlDocument = new XmlDocument();
             SaveToXmlDocument(xmlDocument);
-            
+
             xmlDocument.Save(filePath);
 
             _shouldBeSaved = false;
@@ -478,7 +476,7 @@ namespace OOC.OpenMIWrapper
         public void LoadFromFile(string filePath)
         {
             _filePath = filePath;
-            
+
             XmlDocument xmlDocument = new XmlDocument();
             FileInfo fileInfo = new FileInfo(filePath);
 
@@ -564,8 +562,9 @@ namespace OOC.OpenMIWrapper
         /// If you need to use more than one listener you can use <see cref="ProxyListener">ProxyListener</see>
         /// class or <see cref="ProxyMultiThreadListener">ProxyMultiThreadListener</see> if <c>runInSameThread</c> is <c>false</c>.
         /// </remarks>
-        public void Run(IListener runListener, bool runInSameThread)
+        public void Run(Logger logger, bool runInSameThread)
         {
+            LoggerListener runListener = new LoggerListener(logger);
             startTime = DateTime.Now;
 
             if (_running)
@@ -609,7 +608,7 @@ namespace OOC.OpenMIWrapper
                     theEvent.Description = "Preparing for computation....";
                     _runListener.OnEvent(theEvent);
                 }
-                
+
                 // subscribing event listener to all models
                 if (_runListener != null)
                 {
@@ -643,7 +642,7 @@ namespace OOC.OpenMIWrapper
                         _runListener.OnEvent(theEvent);
                     }
 
-                    _runThread = new Thread(RunThreadFunction) {Priority = ThreadPriority.Normal};
+                    _runThread = new Thread(RunThreadFunction) { Priority = ThreadPriority.Normal };
 
                     // starting thread...
                     if (_runListener != null)
@@ -726,17 +725,6 @@ namespace OOC.OpenMIWrapper
             {
                 XmlElement xmlUiModel = xmlDocument.CreateElement("model");
 
-                string oprDirectory = Path.GetDirectoryName(_filePath);
-
-                if (model.ModelID == CompositionManager.TriggerModelID)
-                {
-                    xmlUiModel.SetAttribute("omi", model.OmiFilename);
-                }
-                else
-                {
-                    xmlUiModel.SetAttribute("omi", FileSupport.GetRelativePath(oprDirectory, model.OmiFilename));
-                }
-
                 models.AppendChild(xmlUiModel);
             }
             xmlRoot.AppendChild(models);
@@ -788,7 +776,7 @@ namespace OOC.OpenMIWrapper
 
             CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
             Thread.CurrentThread.CurrentCulture = new CultureInfo("");
-            
+
             StringBuilder str = new StringBuilder((int)EventType.NUM_OF_EVENT_TYPES);
             for (int i = 0; i < _listenedEventTypes.Length; i++)
                 str.Append(_listenedEventTypes[i] ? "1" : "0");
@@ -832,7 +820,7 @@ namespace OOC.OpenMIWrapper
 
             CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
             Thread.CurrentThread.CurrentCulture = new CultureInfo("");
-            
+
 
             XmlElement xmlRoot = (XmlElement)xmlDocument.ChildNodes[0];
             XmlElement xmlModels = (XmlElement)xmlRoot.ChildNodes[0];
@@ -852,22 +840,6 @@ namespace OOC.OpenMIWrapper
             if (xmlRunProperties != null)
                 if (xmlRunProperties.Name != "runproperties")
                     throw (new FormatException("Unknown file format ('runproperties' tag not present where expected)."));
-
-            // read UIModels
-            foreach (XmlElement xmlUiModel in xmlModels.ChildNodes)
-            {
-                try
-                {
-                    Model uiModel = AddModel(omiRelativeDirectory, xmlUiModel.GetAttribute("omi"));
-                }
-                catch (Exception e)
-                {
-                    throw (new Exception(
-                        "Model cannot be added to composition due to exception.\n" +
-                        "OMI filename: " + xmlUiModel.GetAttribute("omi") + "\n" +
-                        "Exception: " + e.ToString()));
-                }
-            }
 
             // read UILinks
             foreach (XmlElement xmlUiLink in xmlLinks.ChildNodes)
@@ -1008,9 +980,9 @@ namespace OOC.OpenMIWrapper
                 if (str == "1")
                     _runInSameThread = true;
             }
-            
+
             var elements = xmlRoot.GetElementsByTagName("sdk");
-            if(elements.Count == 1)
+            if (elements.Count == 1)
             {
                 var smartBufferElement = elements[0].ChildNodes[0] as XmlElement; // smartBuffer
 
@@ -1021,7 +993,7 @@ namespace OOC.OpenMIWrapper
                         var maxNumberOfTimeInBuffer = int.Parse(smartBufferElement.GetAttribute("maxnumberoftimes"));
                         SmartBuffer.MaxNumberOfTimes = maxNumberOfTimeInBuffer;
                     }
-                        
+
                 }
             }
 
@@ -1034,6 +1006,7 @@ namespace OOC.OpenMIWrapper
         /// </summary>
         private void RunThreadFunction()
         {
+            bool succeed = false;
             foreach (Model uimodel in _models)
             {
                 if (_runListener != null)
@@ -1092,6 +1065,7 @@ namespace OOC.OpenMIWrapper
                     _simulationFinishedEvent.Description = "Simulation finished successfuly at " + DateTime.Now.ToString() + "...";
                     _runListener.OnEvent(SimulationFinishedEvent);
                 }
+                succeed = true;
             }
             catch (Exception e)
             {
@@ -1118,6 +1092,11 @@ namespace OOC.OpenMIWrapper
 
                 _running = false;
                 _runListener = null; // release listener
+
+                if (AfterSimulationHandler != null)
+                {
+                    AfterSimulationHandler(this, succeed);
+                }
             }
         }
 

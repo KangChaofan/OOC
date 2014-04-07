@@ -2,6 +2,7 @@
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/OOC.Entity" />
   <xs:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract" />
+  <xs:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:simpleType name="TaskState">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Created" />
@@ -36,16 +37,36 @@
       <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="CompositionModel" nillable="true" type="q4:CompositionModel" />
       <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="Model" nillable="true" type="q5:Model" />
       <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="ModelFiles" nillable="true" type="q6:ArrayOfModelFileMapping" />
-      <xs:element minOccurs="0" name="Properties" nillable="true" type="tns:CompositionModelProperties" />
+      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="ModelProperties" nillable="true" type="q7:ArrayOfModelProperty" />
+      <xs:element minOccurs="0" name="PropertyValues" nillable="true" type="tns:CompositionModelProperties" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CompositionModelData" nillable="true" type="tns:CompositionModelData" />
   <xs:complexType name="CompositionModelProperties">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q7="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract" base="q7:Dict">
+      <xs:extension xmlns:q8="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract" base="q8:Dict">
         <xs:sequence />
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="CompositionModelProperties" nillable="true" type="tns:CompositionModelProperties" />
+  <xs:simpleType name="TaskFileType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Input">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Output">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TaskFileType" nillable="true" type="tns:TaskFileType" />
 </xs:schema>

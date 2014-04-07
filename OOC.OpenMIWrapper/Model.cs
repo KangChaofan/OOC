@@ -37,156 +37,94 @@ using OpenMI.Standard;
 
 namespace OOC.OpenMIWrapper
 {
-	/// <summary>
-	/// Summary description for Model.
-	/// </summary>
-	public class Model
-	{
-		private string _omiFilename;
-	
-		private ILinkableComponent _linkableComponent;
+    /// <summary>
+    /// Summary description for Model.
+    /// </summary>
+    public class Model
+    {
+        private ILinkableComponent _linkableComponent;
 
-		private string _modelID;
-		
-		/// <summary>
-		/// Creates a new instance of <see cref="Model">UIModel</see> class.
-		/// </summary>
-		public Model()
-		{
-		}
+        private string _modelID;
 
-		/// <summary>
-		/// Gets or sets path to OMI file representing this model.
-		/// </summary>
-		/// <remarks>Setting of this property has only sense in case this model is trigger, see
-		/// <see cref="NewTrigger">NewTrigger</see> method.</remarks>
-		public string OmiFilename
-		{
-			get { return(_omiFilename); }
-			set { _omiFilename = value; }
-		}
+        /// <summary>
+        /// Creates a new instance of <see cref="Model">UIModel</see> class.
+        /// </summary>
+        public Model()
+        {
+        }
 
-		/// <summary>
-		/// Gets ID of this model.
-		/// </summary>
-		/// <remarks>ID is equivalent to <see cref="ILinkableComponent.ModelID">ILinkableComponent.ModelID</see>.
-		/// It must be unique in the composition.
-		/// </remarks>
-		public string ModelID
-		{
-			get { return(_modelID); }
-		}
+        /// <summary>
+        /// Gets ID of this model.
+        /// </summary>
+        /// <remarks>ID is equivalent to <see cref="ILinkableComponent.ModelID">ILinkableComponent.ModelID</see>.
+        /// It must be unique in the composition.
+        /// </remarks>
+        public string ModelID
+        {
+            get { return (_modelID); }
+        }
 
-		/// <summary>
-		/// Linkable component corresponding to this model.
-		/// </summary>
-		public ILinkableComponent LinkableComponent
-		{
-			get
-			{
-				return _linkableComponent;
-			}
-			set
-			{
-				_linkableComponent = value;
+        /// <summary>
+        /// Linkable component corresponding to this model.
+        /// </summary>
+        public ILinkableComponent LinkableComponent
+        {
+            get
+            {
+                return _linkableComponent;
+            }
+            set
+            {
+                _linkableComponent = value;
                 _modelID = _linkableComponent.ModelID;
             }
-		}
+        }
 
+        public void Init(Dictionary<string, string> properties)
+        {
+            ArrayList linkableComponentArguments = new ArrayList();
+            foreach (KeyValuePair<string, string> entry in properties)
+            {
+                linkableComponentArguments.Add(new Argument(entry.Key, entry.Value, true, "No description"));
+            }
+            _linkableComponent.Initialize((IArgument[])linkableComponentArguments.ToArray(typeof(IArgument)));
+        }
 
-		/// <summary>
-		/// Sets this model according to OMI file.
-		/// </summary>
-		/// <param name="filename">Relative or absolute path to OMI file describing the model.</param>
-		/// <param name="relativeDirectory">Directory <c>filename</c> is relative to, or <c>null</c> if <c>filename</c> is absolute or relative to current directory.</param>
-		/// <remarks>See <see cref="Utils.GetFileInfo">Utils.GetFileInfo</see> for more info about how
-		/// specified file is searched.</remarks>	
-		public void ReadOMIFile( string relativeDirectory, string filename )
-		{
-		    // Open OMI file as xmlDocument
-		    FileInfo omiFileInfo = Utils.GetFileInfo(relativeDirectory, filename);
-		    if (!omiFileInfo.Exists)
-		        throw (new Exception("Omi file not found (CurrentDirectory='" + Directory.GetCurrentDirectory() + "', File='" +
-		                             filename + "')"));
+        public void Create(string modelId, string workingDirectory, string assemblyPath, string linkableComponent)
+        {
+            string oldDirectory = Directory.GetCurrentDirectory();
+            try
+            {
+                Directory.SetCurrentDirectory(workingDirectory);
+                AssemblySupport.LoadAssembly(workingDirectory, assemblyPath);
 
-		    XmlDocument xmlDocument = new XmlDocument();
-		    xmlDocument.Load(omiFileInfo.FullName);
+                object obj = AssemblySupport.GetNewInstance(linkableComponent);
+                if (!(obj is ILinkableComponent))
+                {
+                    throw new Exception("\n\nThe class type " + linkableComponent + " in\n" +
+                        assemblyPath +
+                        "\nis not an OpenMI.Standard.ILinkableComponent (OpenMI.Standard.dll version 1.4)." +
+                        "\nYou may have specified a wrong class name, " +
+                        "\nor the class implements the ILinkableComponent interface of a previous version of the OpenMI Standard.\n");
+                }
+                _linkableComponent = (ILinkableComponent)obj;
+            }
+            finally
+            {
+                Directory.SetCurrentDirectory(oldDirectory);
+            }
 
-		    // get 1st LinkableComponent element
-		    XmlElement xmlLinkableComponent = null;
-		    foreach (XmlNode node in xmlDocument.ChildNodes)
-		        if (node.Name == "LinkableComponent")
-		        {
-		            xmlLinkableComponent = (XmlElement) node;
-		            break;
-		        }
+            _modelID = modelId;
 
-		    // load assembly if present (from relative location of the OMI file)
-		    if (xmlLinkableComponent == null)
-		    {
-		        throw new Exception("No linkable components found in composition file " + omiFileInfo);
-		    }
-		    else
-		    {
-		        string assemblyFilename = xmlLinkableComponent.GetAttribute("Assembly");
-		        if (assemblyFilename != null)
-		            AssemblySupport.LoadAssembly(omiFileInfo.DirectoryName, assemblyFilename);
-		    }
-
-		    // read arguments
-		    ArrayList linkableComponentArguments = new ArrayList();
-
-		    foreach (XmlElement xmlArguments in xmlLinkableComponent.ChildNodes)
-		        if (xmlArguments.Name == "Arguments")
-		            foreach (var xmlArgument in xmlArguments.ChildNodes)
-		            {
-		                if (xmlArgument is XmlElement)
-		                {
-		                    var element = xmlArgument as XmlElement;
-		                    linkableComponentArguments.Add(new Argument(element.GetAttribute("Key"),
-		                                                                element.GetAttribute("Value"), true,
-		                                                                "No description"));
-		                }
-		            }
-
-		    // get new instance of ILinkableComponent type
-			// for this moment set current directory to omi file's directory
-			string oldDirectory = Directory.GetCurrentDirectory(); 
-			try 
-			{
-				Directory.SetCurrentDirectory( omiFileInfo.DirectoryName );
-
-				string classTypeName = xmlLinkableComponent.GetAttribute("Type");
-				object obj = AssemblySupport.GetNewInstance( classTypeName );
-				if ( ! ( obj is ILinkableComponent ) )
-				{
-					throw new Exception("\n\nThe class type " + classTypeName + " in\n" +
-						filename +
-						"\nis not an OpenMI.Standard.ILinkableComponent (OpenMI.Standard.dll version 1.4)." +
-						"\nYou may have specified a wrong class name, " +
-						"\nor the class implements the ILinkableComponent interface of a previous version of the OpenMI Standard.\n");
-				}
-				_linkableComponent = (ILinkableComponent)obj;
-				_linkableComponent.Initialize( (IArgument[])linkableComponentArguments.ToArray(typeof(IArgument)) );
-			}
-			finally
-			{
-				Directory.SetCurrentDirectory( oldDirectory );
-			}
-
-			_omiFilename = omiFileInfo.FullName;
-			
-			_modelID = _linkableComponent.ModelID;
-
-		}
+        }
 
         private IDictionary<StringPair, IInputExchangeItem> inputExchangeItems;
 
         private IDictionary<StringPair, IOutputExchangeItem> outputExchangeItems;
 
-	    public IInputExchangeItem GetInputExchangeItem(string elementSetId, string quantityId)
-	    {
-            if(inputExchangeItems == null)
+        public IInputExchangeItem GetInputExchangeItem(string elementSetId, string quantityId)
+        {
+            if (inputExchangeItems == null)
             {
                 inputExchangeItems = new Dictionary<StringPair, IInputExchangeItem>();
 
@@ -199,11 +137,11 @@ namespace OOC.OpenMIWrapper
             }
 
             return inputExchangeItems[new StringPair(elementSetId, quantityId)];
-	    }
+        }
 
-	    public IOutputExchangeItem GetOutputExchangeItem(string elementSetId, string quantityId)
-	    {
-            if(outputExchangeItems == null)
+        public IOutputExchangeItem GetOutputExchangeItem(string elementSetId, string quantityId)
+        {
+            if (outputExchangeItems == null)
             {
                 outputExchangeItems = new Dictionary<StringPair, IOutputExchangeItem>();
 
@@ -216,7 +154,7 @@ namespace OOC.OpenMIWrapper
             }
 
             return outputExchangeItems[new StringPair(elementSetId, quantityId)];
-	    }
+        }
 
         private struct StringPair
         {
@@ -227,8 +165,8 @@ namespace OOC.OpenMIWrapper
             }
 
             public string First;
-            
+
             public string Second;
         }
-	}
+    }
 }

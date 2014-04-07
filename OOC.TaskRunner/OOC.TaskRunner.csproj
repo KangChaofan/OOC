@@ -53,6 +53,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OOC.OpenMIWrapper\OOC.OpenMIWrapper.csproj">
+      <Project>{ead62b60-bf9f-463b-b817-ae55c3655c7c}</Project>
+      <Name>OOC.OpenMIWrapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OOC.Util\OOC.Util.csproj">
       <Project>{5acdb1c5-29e3-4f1f-9696-e8abaab67f0a}</Project>
       <Name>OOC.Util</Name>

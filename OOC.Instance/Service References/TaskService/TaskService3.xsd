@@ -101,12 +101,56 @@
           <xs:element minOccurs="0" name="isMainLibrary" type="xs:boolean" />
           <xs:element minOccurs="0" name="modelGuid" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="modification" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="relativePath" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="signature" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="ModelFileMapping" nillable="true" type="tns:ModelFileMapping" />
+  <xs:complexType name="ArrayOfModelProperty">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ModelProperty" nillable="true" type="tns:ModelProperty" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfModelProperty" nillable="true" type="tns:ArrayOfModelProperty" />
+  <xs:complexType name="ModelProperty">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OOCEntityObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="additional" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="creation" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="default" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="key" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="modelGuid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="modification" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="type" type="xs:byte" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ModelProperty" nillable="true" type="tns:ModelProperty" />
+  <xs:complexType name="ArrayOfTaskFileMapping">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskFileMapping" nillable="true" type="tns:TaskFileMapping" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskFileMapping" nillable="true" type="tns:ArrayOfTaskFileMapping" />
+  <xs:complexType name="TaskFileMapping">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OOCEntityObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isDownloadable" type="xs:boolean" />
+          <xs:element minOccurs="0" name="relativePath" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="taskGuid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="type" type="xs:byte" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TaskFileMapping" nillable="true" type="tns:TaskFileMapping" />
   <xs:complexType name="Task">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:OOCEntityObject">

@@ -64,6 +64,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="TaskRunnerManager.cs" />
+    <Compile Include="WorkspaceManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -105,6 +106,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\InstanceService\OOC.Instance.InstanceService.InstanceStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TaskService\OOC.Instance.TaskService.TaskAssignResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TaskService\OOC.Instance.TaskService.TaskFileMapping.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\TaskService\OOC.Instance.TaskService.TaskInfoResponse.datasource">

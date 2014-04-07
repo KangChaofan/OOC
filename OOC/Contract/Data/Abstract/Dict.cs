@@ -25,11 +25,11 @@ namespace OOC.Contract.Data.Abstract
             }
         }
 
-        public Dict(string jsonString)
+        public Dict(string xmlString)
         {
-            Serialized = jsonString;
+            Serialized = xmlString;
         }
 
-        public Dict() { }
+        public Dict() { Kvs = new Dictionary<string, string>(); }
     }
 }

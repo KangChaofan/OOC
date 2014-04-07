@@ -41,14 +41,14 @@ namespace OOC.Instance
             RunningTask = 0;
         }
 
-        private void startManager(TaskInfoResponse taskInfo)
+        private void startManager(TaskAssignResponse taskAssign)
         {
             RunningTask++;
-            logger.Info("Starting task manager for task " + taskInfo.Task.guid + "...");
-            TaskRunnerManager manager = new TaskRunnerManager(taskInfo);
+            logger.Info("Starting task manager for task " + taskAssign.Task.guid + "...");
+            TaskRunnerManager manager = new TaskRunnerManager(taskAssign);
             manager.TaskStateChangedHandler += new TaskStateChanged(delegate(TaskRunnerManager sender, TaskState state)
             {
-                string guid = sender.TaskInfo.Task.guid;
+                string guid = sender.TaskAssign.Task.guid;
                 logger.Info("State of task " + guid + " changed to " + state);
                 taskService.UpdateState(guid, state);
             });
@@ -92,15 +92,18 @@ namespace OOC.Instance
                     {
                         if (RunningTask == 0)
                         {
-                            TaskInfoResponse taskInfo = taskService.AssignPendingTask(InstanceName);
-                            try
+                            TaskAssignResponse taskAssign = taskService.AssignPendingTask(InstanceName);
+                            new Thread(new ThreadStart(delegate()
                             {
-                                startManager(taskInfo);
-                            }
-                            catch (Exception e)
-                            {
-                                logger.Crit("Failed to start task manager: " + e.ToString());
-                            }
+                                try
+                                {
+                                    startManager(taskAssign);
+                                }
+                                catch (Exception e)
+                                {
+                                    logger.Crit("Failed to start task manager: " + e.ToString());
+                                }
+                            })).Start();
                         }
                     }
                     catch

@@ -121,18 +121,18 @@ namespace OOC.Instance
             }
         }
 
-        private void runnerLifetime()
+        private bool runnerLifetime()
         {
-            // Read user input and send that to the client process.
+            bool succeed = false;
             using (BinaryReader br = new BinaryReader(pipeServer))
             using (BinaryWriter bw = new BinaryWriter(pipeServer))
             {
                 /* handshake */
                 PipeCommand helloCommand = PipeUtil.ReadCommand(br);
                 if (helloCommand.Command != "Hello") throw new Exception("Handshake failed.");
-                logger.Info("Handshake signal received.");
+                logger.Info("Pipe: Handshake signal received.");
                 PipeUtil.WriteCommand(bw, new PipeCommand("Hello"));
-                logger.Info("Handshake signal sent.");
+                logger.Info("Pipe: Handshake signal sent.");
 
                 /* transmit composition */
                 transmitComposition(bw);
@@ -142,25 +142,22 @@ namespace OOC.Instance
                 do
                 {
                     PipeCommand command = PipeUtil.ReadCommand(br);
-                    logger.Info("Received command: " + command.Command);
+                    logger.Info("Pipe: Received command: " + command.Command);
                     switch (command.Command)
                     {
                         case "Progress":
                             break;
                         case "Completed":
-                            WorkspaceManager.CollectOutput();
-                            TaskState = TaskState.Completed;
-                            isReleased = true;
-                            PipeUtil.WriteCommand(bw, new PipeCommand("Halt"));
-                            break;
                         case "Failed":
-                            TaskState = TaskState.Aborted;
-                            isReleased = true;
                             PipeUtil.WriteCommand(bw, new PipeCommand("Halt"));
+                            succeed = (command.Command == "Completed");
+                            isReleased = true;
                             break;
                     }
                 } while (!isReleased);
             }
+            runnerProcess.WaitForExit();
+            return succeed;
         }
 
         private void startPipeKeeper()
@@ -170,7 +167,15 @@ namespace OOC.Instance
                 logger.Info("Pipe keeper thread started.");
                 try
                 {
-                    runnerLifetime();
+                    if (runnerLifetime() == true)
+                    {
+                        WorkspaceManager.CollectOutput();
+                        TaskState = TaskState.Completed;
+                    }
+                    else
+                    {
+                        TaskState = TaskState.Aborted;
+                    }
                 }
                 catch (Exception e)
                 {
@@ -210,11 +215,11 @@ namespace OOC.Instance
             PipeSecurity pipeSecurity = new PipeSecurity();
             pipeSecurity.SetAccessRule(new PipeAccessRule("Everyone",
                 PipeAccessRights.ReadWrite, AccessControlType.Allow));
-            pipeServer = new NamedPipeServerStream(PipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Message, PipeOptions.None, 4096, 4096, pipeSecurity, HandleInheritability.None);
+            pipeServer = new NamedPipeServerStream(PipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.WriteThrough, 4096, 4096, pipeSecurity, HandleInheritability.None);
             logger.Info("Pipe created: " + PipeName + ".");
 
             ProcessStartInfo psi = new ProcessStartInfo(taskRunnerExecutable, "--pipeName \"" + PipeName + "\" --log \"" + WorkspaceManager.LogDirectory + @"\runner.log" + "\"");
-            psi.WorkingDirectory = WorkingDirectory;
+            psi.WorkingDirectory = WorkspaceManager.OutputDirectory;
             psi.UserName = taskUsername;
             psi.Password = getPassword();
             psi.UseShellExecute = false;

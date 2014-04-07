@@ -1733,6 +1733,9 @@ namespace OOC.Instance.TaskService {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Output = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Log = 3,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

@@ -44,18 +44,19 @@ namespace OOC.TaskRunner
             {
                 logger.Info("Closing composition...");
                 composition.Release();
+
+                callback(sender, succeed);
             });
-            composition.AfterSimulationHandler += callback;
 
             logger.Info("Starting composition run...");
-            composition.Run(logger, false);
+            composition.Run(logger, true);
         }
 
         public void Run()
         {
             logger.Info("TaskRunner is initializing...");
             pipeClient = new NamedPipeClientStream(".", PipeName,
-                           PipeDirection.InOut, PipeOptions.None,
+                           PipeDirection.InOut, PipeOptions.WriteThrough,
                            TokenImpersonationLevel.Impersonation);
             pipeClient.Connect();
             logger.Info("Pipe connected.");
@@ -67,16 +68,16 @@ namespace OOC.TaskRunner
                 {
                     /* handshake */
                     PipeUtil.WriteCommand(bw, new PipeCommand("Hello"));
-                    logger.Info("Handshake signal sent.");
+                    logger.Info("Pipe: Handshake signal sent.");
                     PipeCommand helloCommand = PipeUtil.ReadCommand(br);
                     if (helloCommand.Command != "Hello") throw new Exception("Handshake failed.");
-                    logger.Info("Handshake signal received.");
+                    logger.Info("Pipe: Handshake signal received.");
                     composition = new CompositionManager();
                     do
                     {
                         string modelId;
                         PipeCommand command = PipeUtil.ReadCommand(br);
-                        logger.Info("Received command: " + command.Command);
+                        logger.Info("Pipe: Received command: " + command.Command);
                         switch (command.Command)
                         {
                             case "AddModel":
@@ -109,6 +110,7 @@ namespace OOC.TaskRunner
                             case "RunSimulation":
                                 RunSimulation(delegate(object sender, bool succeed)
                                 {
+                                    logger.Info("Simulation finished, succeed=" + succeed);
                                     PipeUtil.WriteCommand(bw, new PipeCommand(succeed ? "Completed" : "Failed"));
                                 });
                                 break;

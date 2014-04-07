@@ -34,10 +34,11 @@ namespace OOC.Service
         public void Put(string fileName, byte[] content)
         {
             string realPath = Path.Combine(new string[] { fileRoot, fileName }).ToString();
-            if (!File.Exists(realPath) || !realPath.StartsWith(fileRoot))
+            if (!realPath.StartsWith(fileRoot))
             {
-                throw new FaultException("FILE_ALREADY_EXISTED");
+                throw new FaultException("ACCESS_DENIED");
             }
+            Directory.CreateDirectory(Path.GetDirectoryName(realPath));
             File.WriteAllBytes(realPath, content);
         }
 

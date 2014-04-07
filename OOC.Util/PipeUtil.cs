@@ -38,7 +38,8 @@ namespace OOC.Util
         public static void WriteCommand(BinaryWriter bw, PipeCommand command)
         {
             string serialized = SerializeUtil.Serialize(command);
-            bw.Write(serialized.Length);
+            byte[] bytes = Encoding.UTF8.GetBytes(serialized);
+            bw.Write((int)bytes.Length);
             bw.Write(Encoding.UTF8.GetBytes(serialized));
         }
     }

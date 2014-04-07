@@ -8,6 +8,7 @@ namespace OOC.Contract.Data.Common
     public enum TaskFileType
     {
         Input = 1,
-        Output = 2
+        Output = 2,
+        Log = 3
     }
 }

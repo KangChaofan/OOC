@@ -23,7 +23,7 @@ namespace OOC.Instance
 
         public string OutputDirectory { get { return WorkingDirectory + @"\Output"; } }
 
-        public string LogDirectory { get { return WorkingDirectory; } }
+        public string LogDirectory { get { return WorkingDirectory + @"\Log"; } }
 
         private FileServiceClient fileService = new FileServiceClient();
         private TaskServiceClient taskService = new TaskServiceClient();
@@ -69,27 +69,38 @@ namespace OOC.Instance
             return remotePathMapping[remotePath];
         }
 
-        private void collectOutputInDirectory(string currentDirectory)
+        private void collectOutputInDirectory(string baseDirectory, string currentDirectory, TaskFileType type)
         {
             foreach (string directoryPath in Directory.GetDirectories(currentDirectory))
             {
-                if (!directoryPath.StartsWith(OutputDirectory)) continue;
-                collectOutputInDirectory(directoryPath);
+                if (!directoryPath.StartsWith(baseDirectory)) continue;
+                collectOutputInDirectory(baseDirectory, directoryPath, type);
             }
             foreach (string filePath in Directory.GetFiles(currentDirectory))
             {
-                if (!filePath.StartsWith(OutputDirectory)) continue;
-                string relativePath = filePath.Substring(OutputDirectory.Length + 1);
-                string fileServicePath = taskService.GenerateTaskFileName(TaskGuid, TaskFileType.Output, relativePath);
+                if (!filePath.StartsWith(baseDirectory)) continue;
+                string relativePath = filePath.Substring(baseDirectory.Length + 1);
+                string fileServicePath = taskService.GenerateTaskFileName(TaskGuid, type, relativePath);
                 logger.Info("Uploading " + filePath + " to " + fileServicePath + "...");
-                fileService.Put(fileServicePath, File.ReadAllBytes(filePath));
-                taskService.AddTaskFileMapping(TaskGuid, fileServicePath, relativePath, TaskFileType.Output, true);
+                try
+                {
+                    fileService.Put(fileServicePath, File.ReadAllBytes(filePath));
+                    taskService.AddTaskFileMapping(TaskGuid, fileServicePath, relativePath, type, true);
+                }
+                catch (Exception e)
+                {
+                    logger.Warn("Upload failed: " + fileServicePath);
+                }
             }
         }
 
         public void CollectOutput()
         {
-            collectOutputInDirectory(OutputDirectory);
+            logger.Info("Collecting output...");
+            collectOutputInDirectory(OutputDirectory, OutputDirectory, TaskFileType.Output);
+            logger.Info("Collecting log...");
+            collectOutputInDirectory(LogDirectory, LogDirectory, TaskFileType.Log);
+            logger.Info("Output collected.");
         }
 
         public void DeployComposition(CompositionData compositionData, TaskFileMapping[] inputFiles)

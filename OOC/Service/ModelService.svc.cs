@@ -72,19 +72,19 @@ namespace OOC.Service
 
         public List<Model> ListByName(string name)
         {
-            using (OOCEntities db = new OOCEntities())
+            using (var db = new OOCEntities())
             {
                 IOrderedQueryable<Model> result = from o in db.Model
-                                                 where o.name == name
-                                                 orderby o.creation descending 
-                                                 select o;
+                                                  where o.name == name
+                                                  orderby o.creation descending
+                                                  select o;
                 return result.ToList();
             }
         }
 
         public List<Model> ListByAuthorUserId(int authorUserId)
         {
-            using (OOCEntities db = new OOCEntities())
+            using (var db = new OOCEntities())
             {
                 IOrderedQueryable<Model> result = from o in db.Model
                                                   where o.authorUserId == authorUserId
@@ -96,7 +96,7 @@ namespace OOC.Service
 
         public List<Model> ListByClassName(string className)
         {
-            using (OOCEntities db = new OOCEntities())
+            using (var db = new OOCEntities())
             {
                 IOrderedQueryable<Model> result = from o in db.Model
                                                   where o.className == className
@@ -108,19 +108,45 @@ namespace OOC.Service
 
         public List<Model> ListByModelTags(List<ModelTag> modelTags)
         {
-            List<Model> result = new List<Model>(modelTags.Count);
-            //todo
-            return null;
+            //TODO complete me.
+            throw new NotImplementedException();
         }
 
-        public void UpdateModification(DateTime modification)
+        public void UpdateModification(string guid, DateTime modification)
         {
-            throw new NotImplementedException();
+            using (var db = new OOCEntities())
+            {
+                IQueryable<Model> result = from o in db.Model
+                                           where o.guid == guid
+                                           select o;
+                if (!result.Any())
+                {
+                    throw new FaultException("MODEL_NOT_FOUND");
+                }
+                Model model = result.First();
+                model.modification = modification;
+                db.SaveChanges();
+            }
         }
 
         public bool Audit(string guid)
         {
-            throw new NotImplementedException();
+            bool auditResult;
+            using (var db = new OOCEntities())
+            {
+                IQueryable<Model> result = from o in db.Model
+                                           where o.guid == guid
+                                           select o;
+                if (!result.Any())
+                {
+                    throw new FaultException("MODEL_NOT_FOUND");
+                }
+                Model model = result.First();
+                model.isApproved = true; //TODO change this corresponding to pratical logics.
+                db.SaveChanges();
+                auditResult = model.isApproved;
+            }
+            return auditResult;
         }
     }
 }

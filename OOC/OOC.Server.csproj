@@ -24,6 +24,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -85,6 +86,7 @@
     <Content Include="Service\BillService.svc" />
     <Content Include="Service\LocalOPRService.svc" />
     <Content Include="Service\InstanceService.svc" />
+    <Content Include="Service\ModelService.svc" />
     <Content Include="Service\TaskService.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -138,6 +140,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Contract\Service\IUserService.cs" />
+    <Compile Include="Service\ModelService.svc.cs">
+      <DependentUpon>ModelService.svc</DependentUpon>
+    </Compile>
     <Compile Include="Service\UserService.svc.cs">
       <DependentUpon>UserService.svc</DependentUpon>
     </Compile>

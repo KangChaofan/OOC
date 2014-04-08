@@ -14,6 +14,8 @@ namespace OOC.TaskRunner
 {
     public class TaskRunner
     {
+        public const int PROGRESS_UPDATE_INTERVAL = 10;
+
         public string LogLocation
         {
             get
@@ -32,6 +34,7 @@ namespace OOC.TaskRunner
         private Logger logger;
 
         private CompositionManager composition;
+        private Dictionary<string, string> modelProgress;
 
         public TaskRunner(string pipeName)
         {
@@ -54,6 +57,7 @@ namespace OOC.TaskRunner
 
         public void Run()
         {
+            DateTime lastReport;
             logger.Info("TaskRunner is initializing...");
             pipeClient = new NamedPipeClientStream(".", PipeName,
                            PipeDirection.InOut, PipeOptions.WriteThrough,
@@ -99,15 +103,32 @@ namespace OOC.TaskRunner
                                 composition.GetModel(modelId).Init(command.Parameters);
                                 break;
                             case "AddLink":
-                                // TODO
-                                break;
-                            case "SetLinkProperties":
-                                // TODO
+                                string linkId = command.Parameters["linkId"];
+                                string sourceModelId = command.Parameters["sourceModelId"];
+                                string targetModelId = command.Parameters["targetModelId"];
+                                string sourceQuantity = command.Parameters["sourceQuantity"];
+                                string targetQuantity = command.Parameters["targetQuantity"];
+                                string sourceElementSet = command.Parameters["sourceElementSet"];
+                                string targetElementSet = command.Parameters["targetElementSet"];
+                                logger.Info("Link " + linkId + " Property: [sourceModelId=" + sourceModelId + ", targetModelId=" + targetModelId + ", sourceQuantity=" + sourceQuantity + ", targetQuantity=" + targetQuantity + ", sourceElementSet=" + sourceElementSet + ", targetElementSet=" + targetElementSet + "]");
+                                composition.AddLink(linkId, sourceModelId, targetModelId, sourceQuantity, targetQuantity, sourceElementSet, targetElementSet);
                                 break;
                             case "SetSimulationProperties":
-                                // TODO
+                                DateTime triggerInvokeTime = DateTime.Parse(command.Parameters["triggerInvokeTime"]);
+                                composition.TriggerInvokeTime = triggerInvokeTime;
                                 break;
                             case "RunSimulation":
+                                lastReport = DateTime.Now;
+                                modelProgress = new Dictionary<string, string>();
+                                composition.CompositionModelProgressChangedHandler += new CompositionModelProgressChangedDelegate(delegate(object sender, string cmGuid, string progress)
+                                {
+                                    modelProgress[cmGuid] = progress;
+                                    if ((DateTime.Now - lastReport).TotalSeconds > PROGRESS_UPDATE_INTERVAL)
+                                    {
+                                        lastReport = DateTime.Now;
+                                        PipeUtil.WriteCommand(bw, new PipeCommand("Progress", modelProgress));
+                                    }
+                                });
                                 RunSimulation(delegate(object sender, bool succeed)
                                 {
                                     logger.Info("Simulation finished, succeed=" + succeed);

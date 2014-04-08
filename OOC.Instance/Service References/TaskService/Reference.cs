@@ -54,6 +54,9 @@ namespace OOC.Instance.TaskService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OOC.Instance.TaskService.Task TaskField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TriggerInvokeTimeField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -99,6 +102,19 @@ namespace OOC.Instance.TaskService {
                 if ((object.ReferenceEquals(this.TaskField, value) != true)) {
                     this.TaskField = value;
                     this.RaisePropertyChanged("Task");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TriggerInvokeTime {
+            get {
+                return this.TriggerInvokeTimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TriggerInvokeTimeField, value) != true)) {
+                    this.TriggerInvokeTimeField = value;
+                    this.RaisePropertyChanged("TriggerInvokeTime");
                 }
             }
         }
@@ -203,6 +219,9 @@ namespace OOC.Instance.TaskService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.DateTime> timeStartedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string triggerInvokeTimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long userIdField;
@@ -333,6 +352,19 @@ namespace OOC.Instance.TaskService {
                 if ((this.timeStartedField.Equals(value) != true)) {
                     this.timeStartedField = value;
                     this.RaisePropertyChanged("timeStarted");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string triggerInvokeTime {
+            get {
+                return this.triggerInvokeTimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.triggerInvokeTimeField, value) != true)) {
+                    this.triggerInvokeTimeField = value;
+                    this.RaisePropertyChanged("triggerInvokeTime");
                 }
             }
         }
@@ -1611,6 +1643,7 @@ namespace OOC.Instance.TaskService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModelData))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModelProperties))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileType))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelProgress))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskAssignResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskInfoResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, string>))]
@@ -1675,6 +1708,7 @@ namespace OOC.Instance.TaskService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Dict", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelProgress))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModelProperties))]
     public partial class Dict : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -1736,6 +1770,13 @@ namespace OOC.Instance.TaskService {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Log = 3,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ModelProgress", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common")]
+    [System.SerializableAttribute()]
+    public partial class ModelProgress : OOC.Instance.TaskService.Dict {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1804,7 +1845,7 @@ namespace OOC.Instance.TaskService {
     public interface ITaskService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/Create", ReplyAction="http://tempuri.org/ITaskService/CreateResponse")]
-        string Create(string compositionGuid, int userId);
+        string Create(string compositionGuid, int userId, string triggerInvokeTime);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/UpdateState", ReplyAction="http://tempuri.org/ITaskService/UpdateStateResponse")]
         void UpdateState(string guid, OOC.Instance.TaskService.TaskState state);
@@ -1823,6 +1864,9 @@ namespace OOC.Instance.TaskService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/QueryTaskFileMapping", ReplyAction="http://tempuri.org/ITaskService/QueryTaskFileMappingResponse")]
         OOC.Instance.TaskService.TaskFileMapping[] QueryTaskFileMapping(string guid, OOC.Instance.TaskService.TaskFileType type);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/UpdateModelProgress", ReplyAction="http://tempuri.org/ITaskService/UpdateModelProgressResponse")]
+        void UpdateModelProgress(string guid, OOC.Instance.TaskService.ModelProgress modelProgress);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1852,8 +1896,8 @@ namespace OOC.Instance.TaskService {
                 base(binding, remoteAddress) {
         }
         
-        public string Create(string compositionGuid, int userId) {
-            return base.Channel.Create(compositionGuid, userId);
+        public string Create(string compositionGuid, int userId, string triggerInvokeTime) {
+            return base.Channel.Create(compositionGuid, userId, triggerInvokeTime);
         }
         
         public void UpdateState(string guid, OOC.Instance.TaskService.TaskState state) {
@@ -1878,6 +1922,10 @@ namespace OOC.Instance.TaskService {
         
         public OOC.Instance.TaskService.TaskFileMapping[] QueryTaskFileMapping(string guid, OOC.Instance.TaskService.TaskFileType type) {
             return base.Channel.QueryTaskFileMapping(guid, type);
+        }
+        
+        public void UpdateModelProgress(string guid, OOC.Instance.TaskService.ModelProgress modelProgress) {
+            base.Channel.UpdateModelProgress(guid, modelProgress);
         }
     }
 }

@@ -8,6 +8,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="compositionGuid" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="userId" type="xs:int" />
+        <xs:element minOccurs="0" name="triggerInvokeTime" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -104,6 +105,19 @@
       <xs:sequence>
         <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="QueryTaskFileMappingResult" nillable="true" type="q7:ArrayOfTaskFileMapping" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateModelProgress">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="modelProgress" nillable="true" type="q8:ModelProgress" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateModelProgressResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

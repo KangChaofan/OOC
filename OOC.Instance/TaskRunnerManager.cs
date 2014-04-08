@@ -17,6 +17,8 @@ namespace OOC.Instance
 {
     public delegate void TaskStateChanged(TaskRunnerManager sender, TaskState taskState);
 
+    public delegate void TaskProgressChanged(TaskRunnerManager sender, Dictionary<string, string> modelProgress);
+
     public delegate void TaskStopped(TaskRunnerManager sender);
 
     public class TaskRunnerManager
@@ -29,6 +31,7 @@ namespace OOC.Instance
         public TaskAssignResponse TaskAssign { get; set; }
         public TaskStateChanged TaskStateChangedHandler;
         public TaskStopped TaskStoppedHandler;
+        public TaskProgressChanged TaskProgressChangedHandler;
         public string WorkingDirectory { get { return WorkspaceManager.WorkingDirectory; } }
         public string PipeName { get; set; }
         public WorkspaceManager WorkspaceManager { get; set; }
@@ -78,10 +81,12 @@ namespace OOC.Instance
 
         private void transmitComposition(BinaryWriter bw)
         {
+            Dictionary<string, string> properties;
+
             foreach (CompositionModelData cmData in TaskAssign.CompositionData.Models)
             {
                 string mainLibrary = WorkspaceManager.GetCompositionModelMainLibrary(cmData.CompositionModel);
-                Dictionary<string, string> properties = new Dictionary<string, string>();
+                properties = new Dictionary<string, string>();
                 properties["modelId"] = cmData.CompositionModel.guid;
                 properties["linkableComponent"] = cmData.Model.className;
                 properties["assemblyPath"] = mainLibrary;
@@ -95,13 +100,17 @@ namespace OOC.Instance
                     Dictionary<string, string> propertyValues = cmData.PropertyValues.Kvs;
                     foreach (ModelProperty property in cmData.ModelProperties)
                     {
-                        if (property.type == 4)
+                        switch (property.type)
                         {
-                            properties[property.key] = WorkspaceManager.GetLocalPath(propertyValues[property.key]);
-                        }
-                        else
-                        {
-                            properties[property.key] = propertyValues[property.key];
+                            case 4:
+                                properties[property.key] = WorkspaceManager.GetLocalPath(propertyValues[property.key]);
+                                break;
+                            case 5:
+                                properties[property.key] = WorkspaceManager.HomeDirectory + @"\" + propertyValues[property.key];
+                                break;
+                            default:
+                                properties[property.key] = propertyValues[property.key];
+                                break;
                         }
                     }
                 }
@@ -110,15 +119,20 @@ namespace OOC.Instance
 
             foreach (CompositionLink link in TaskAssign.CompositionData.Links)
             {
-                Dictionary<string, string> properties = new Dictionary<string, string>();
-                properties["sourceModel"] = link.sourceCmGuid;
-                properties["targetModel"] = link.targetCmGuid;
+                properties = new Dictionary<string, string>();
+                properties["linkId"] = link.guid;
+                properties["sourceModelId"] = link.sourceCmGuid;
+                properties["targetModelId"] = link.targetCmGuid;
                 properties["sourceQuantity"] = link.sourceQuantity;
                 properties["targetQuantity"] = link.targetQuantity;
                 properties["sourceElementSet"] = link.sourceElementSet;
                 properties["targetElementSet"] = link.targetElementSet;
                 PipeUtil.WriteCommand(bw, new PipeCommand("AddLink", properties));
             }
+
+            properties = new Dictionary<string, string>();
+            properties["triggerInvokeTime"] = TaskAssign.TriggerInvokeTime;
+            PipeUtil.WriteCommand(bw, new PipeCommand("SetSimulationProperties", properties));
         }
 
         private bool runnerLifetime()
@@ -146,6 +160,7 @@ namespace OOC.Instance
                     switch (command.Command)
                     {
                         case "Progress":
+                            TaskProgressChangedHandler(this, command.Parameters);
                             break;
                         case "Completed":
                         case "Failed":
@@ -219,7 +234,7 @@ namespace OOC.Instance
             logger.Info("Pipe created: " + PipeName + ".");
 
             ProcessStartInfo psi = new ProcessStartInfo(taskRunnerExecutable, "--pipeName \"" + PipeName + "\" --log \"" + WorkspaceManager.LogDirectory + @"\runner.log" + "\"");
-            psi.WorkingDirectory = WorkspaceManager.OutputDirectory;
+            psi.WorkingDirectory = WorkspaceManager.HomeDirectory;
             psi.UserName = taskUsername;
             psi.Password = getPassword();
             psi.UseShellExecute = false;

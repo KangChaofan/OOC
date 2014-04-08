@@ -55,6 +55,12 @@
   <wsdl:message name="ITaskService_QueryTaskFileMapping_OutputMessage">
     <wsdl:part name="parameters" element="tns:QueryTaskFileMappingResponse" />
   </wsdl:message>
+  <wsdl:message name="ITaskService_UpdateModelProgress_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateModelProgress" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_UpdateModelProgress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateModelProgressResponse" />
+  </wsdl:message>
   <wsdl:portType name="ITaskService">
     <wsdl:operation name="Create">
       <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/Create" message="tns:ITaskService_Create_InputMessage" />
@@ -83,6 +89,10 @@
     <wsdl:operation name="QueryTaskFileMapping">
       <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/QueryTaskFileMapping" message="tns:ITaskService_QueryTaskFileMapping_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/QueryTaskFileMappingResponse" message="tns:ITaskService_QueryTaskFileMapping_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateModelProgress">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/UpdateModelProgress" message="tns:ITaskService_UpdateModelProgress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/UpdateModelProgressResponse" message="tns:ITaskService_UpdateModelProgress_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ITaskService" type="tns:ITaskService">
@@ -143,6 +153,15 @@
     </wsdl:operation>
     <wsdl:operation name="QueryTaskFileMapping">
       <soap:operation soapAction="http://tempuri.org/ITaskService/QueryTaskFileMapping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateModelProgress">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/UpdateModelProgress" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

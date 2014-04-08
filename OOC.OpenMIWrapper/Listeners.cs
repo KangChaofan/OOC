@@ -41,9 +41,8 @@ using OOC.Util;
 
 namespace OOC.OpenMIWrapper
 {
-    /// <summary>
-    /// Listener used to log simulation progress to text file.
-    /// </summary>
+    public delegate void ModelProgressChangedDelegate(ILinkableComponent linkableComponent, ITimeStamp simTime);
+
     public class LoggerListener : IListener
     {
         EventType[] _acceptedEventTypes;
@@ -89,5 +88,109 @@ namespace OOC.OpenMIWrapper
         }
     }
 
+    public class ProgressListener : IListener
+    {
+        public ModelProgressChangedDelegate ModelProgressChangedHandler;
+
+        EventType[] _acceptedEventTypes;
+
+        public ProgressListener()
+        {
+            ArrayList acceptedEventTypes = new ArrayList();
+            acceptedEventTypes.Add(EventType.DataChanged);
+            _acceptedEventTypes = (EventType[])acceptedEventTypes.ToArray(typeof(EventType));
+        }
+
+        public EventType GetAcceptedEventType(int acceptedEventTypeIndex)
+        {
+            return (_acceptedEventTypes[acceptedEventTypeIndex]);
+        }
+
+        public int GetAcceptedEventTypeCount()
+        {
+            return (_acceptedEventTypes.Length);
+        }
+
+        public void OnEvent(IEvent e)
+        {
+            if (e == null)
+            {
+                return;
+            }
+            if (e.Type != EventType.DataChanged)
+            {
+                return;
+            }
+            if (ModelProgressChangedHandler != null)
+            {
+                ModelProgressChangedHandler(e.Sender, e.SimulationTime);
+            }
+        }
+    }
+    public class ProxyListener : IListener
+    {
+        InternalListenerRecord[] _internalListeners;
+        EventType[] _acceptedEventTypes;
+
+        private struct InternalListenerRecord
+        {
+            public bool[] listenedEventTypes;
+            public IListener listener;
+        }
+
+        public void Initialize(ArrayList listeners)
+        {
+            _internalListeners = new InternalListenerRecord[listeners.Count];
+
+            bool[] listenedEventTypes = new bool[(int)EventType.NUM_OF_EVENT_TYPES];
+            for (int i = 0; i < listenedEventTypes.Length; i++)
+                listenedEventTypes[i] = false;
+
+            // create internal table of listeners and set their listened events
+            for (int i = 0; i < listeners.Count; i++)
+            {
+                IListener listener = (IListener)listeners[i];
+                _internalListeners[i].listener = listener;
+                _internalListeners[i].listenedEventTypes = new bool[(int)EventType.NUM_OF_EVENT_TYPES];
+
+                for (int j = 0; j < (int)EventType.NUM_OF_EVENT_TYPES; j++)
+                    _internalListeners[i].listenedEventTypes[j] = false;
+
+                for (int j = 0; j < listener.GetAcceptedEventTypeCount(); j++)
+                {
+                    _internalListeners[i].listenedEventTypes[(int)listener.GetAcceptedEventType(j)] = true;
+                    listenedEventTypes[(int)listener.GetAcceptedEventType(j)] = true;
+                }
+            }
+
+            // set this listener's accepted event types
+            ArrayList acceptedEventTypes = new ArrayList();
+            for (int i = 0; i < listenedEventTypes.Length; i++)
+                if (listenedEventTypes[i])
+                    acceptedEventTypes.Add((EventType)i);
+            _acceptedEventTypes = (EventType[])acceptedEventTypes.ToArray(typeof(EventType));
+
+        }
+
+        public EventType GetAcceptedEventType(int acceptedEventTypeIndex)
+        {
+            return (_acceptedEventTypes[acceptedEventTypeIndex]);
+        }
+
+        public int GetAcceptedEventTypeCount()
+        {
+            return (_acceptedEventTypes.Length);
+        }
+
+        public void OnEvent(IEvent e)
+        {
+            foreach (InternalListenerRecord record in _internalListeners)
+                if (record.listenedEventTypes[(int)e.Type]
+                    || e == CompositionManager.SimulationFinishedEvent
+                    || e == CompositionManager.SimulationFailedEvent)
+                    record.listener.OnEvent(e);
+        }
+
+    }
 
 }

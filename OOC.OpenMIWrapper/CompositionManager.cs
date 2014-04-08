@@ -47,6 +47,7 @@ using OOC.Util;
 namespace OOC.OpenMIWrapper
 {
     public delegate void AfterSimulationDelegate(object sender, bool succeed);
+    public delegate void CompositionModelProgressChangedDelegate(object sender, string modelId, string progress);
 
     /// <summary>
     /// Summary description for CompositionManager.
@@ -56,6 +57,7 @@ namespace OOC.OpenMIWrapper
     public class CompositionManager
     {
         public AfterSimulationDelegate AfterSimulationHandler;
+        public CompositionModelProgressChangedDelegate CompositionModelProgressChangedHandler;
         private DateTime startTime, endTime;
 
         #region Static members
@@ -100,8 +102,6 @@ namespace OOC.OpenMIWrapper
 
         #region Internal members
 
-        bool _shouldBeSaved;
-
         Thread _runThread;
         bool _running;
         bool _runPrepareForComputationStarted;
@@ -112,26 +112,9 @@ namespace OOC.OpenMIWrapper
         ArrayList _connections;
         bool[] _listenedEventTypes;
         DateTime _triggerInvokeTime;
-        string _logFileName;
-        bool _showEventsInListbox;
-
-        private string _filePath;
-
-        public enum EEditorMode
-        {
-            Unspecified = 0,
-            RunButNotReloaded = 1
-        }
-
-        EEditorMode _editorMode = EEditorMode.Unspecified;
+        Dictionary<ILinkableComponent, string> cmGuidMapping;
 
         #endregion
-
-        public EEditorMode EditorMode
-        {
-            get { return _editorMode; }
-            set { _editorMode = value; }
-        }
 
         /// <summary>
         /// Creates a new empty instance of <c>CompositionManager</c> class.
@@ -194,28 +177,9 @@ namespace OOC.OpenMIWrapper
                 if (_triggerInvokeTime != value)
                 {
                     _triggerInvokeTime = value;
-                    _shouldBeSaved = true;
                 }
             }
         }
-
-
-        /// <summary>
-        /// Relative or absolute path to text file for logging simulation run.
-        /// </summary>
-        public string LogToFile
-        {
-            get { return (_logFileName); }
-            set
-            {
-                if (_logFileName != value)
-                {
-                    _logFileName = value;
-                    _shouldBeSaved = true;
-                }
-            }
-        }
-
 
         /// <summary>
         /// Gets or sets whether simulation should be run in same thread. By default it's <c>false</c>.
@@ -232,40 +196,10 @@ namespace OOC.OpenMIWrapper
             {
                 if (_runInSameThread != value)
                 {
-                    _shouldBeSaved = true;
                     _runInSameThread = value;
                 }
             }
         }
-
-
-        /// <summary>
-        /// Gets or sets whether events should be showed in list-box during simulation in UI.
-        /// </summary>
-        public bool ShowEventsInListbox
-        {
-            get { return (_showEventsInListbox); }
-            set
-            {
-                if (_showEventsInListbox != value)
-                {
-                    _showEventsInListbox = value;
-                    _shouldBeSaved = true;
-                }
-            }
-        }
-
-
-        /// <summary>
-        /// Gets or sets wheather composition was changed and should be saved to OPR file.
-        /// </summary>
-        /// <remarks>See <see cref="SaveToFile">SaveToFile</see>.</remarks>
-        public bool ShouldBeSaved
-        {
-            get { return (_shouldBeSaved); }
-            set { _shouldBeSaved = value; }
-        }
-
 
         #endregion
 
@@ -283,18 +217,12 @@ namespace OOC.OpenMIWrapper
                 _listenedEventTypes[i] = false;
 
             _triggerInvokeTime = new DateTime(1900, 1, 1);
-
-            _showEventsInListbox = true;
-
-            _logFileName = "CompositionRun.log";
-
-            _shouldBeSaved = false;
-
             _runPrepareForComputationStarted = false;
             _runThread = null;
             _running = false;
             _runListener = null;
             _runInSameThread = false;
+            cmGuidMapping = new Dictionary<ILinkableComponent, string>();
 
             OnInitialized();
         }
@@ -329,6 +257,7 @@ namespace OOC.OpenMIWrapper
 
         public void AddModel(Model model)
         {
+            cmGuidMapping[model.LinkableComponent] = model.ModelID;
             _models.Add(model);
         }
 
@@ -356,7 +285,6 @@ namespace OOC.OpenMIWrapper
                 // we don't care about just disposed model, so do nothing...
             }
 
-            _shouldBeSaved = true;
             _models.Remove(model); // remove model itself
         }
 
@@ -373,7 +301,6 @@ namespace OOC.OpenMIWrapper
             }
         }
 
-
         /// <summary>
         /// Creates new connection between two models in composition.
         /// </summary>
@@ -381,19 +308,28 @@ namespace OOC.OpenMIWrapper
         /// <param name="acceptingModel">Target model</param>
         /// <remarks>Connection between two models is just abstraction which can hold links between models.
         /// The direction of connection and its links is same. There can be only one connection between two models.</remarks>
-        public void AddConnection(Model providingModel, Model acceptingModel)
+        public Connection GetConnection(string providingModelId, string acceptingModelId)
         {
-            if (providingModel == acceptingModel)
+            if (providingModelId == acceptingModelId)
                 throw (new Exception("Cannot connect model with itself."));
+
+            Model providingModel = null;
+            Model acceptingModel = null;
 
             // Check whether both models exist
             bool providingFound = false, acceptingFound = false;
             foreach (Model model in _models)
             {
-                if (model == providingModel)
+                if (model.ModelID == providingModelId)
+                {
+                    providingModel = model;
                     providingFound = true;
-                if (model == acceptingModel)
+                }
+                if (model.ModelID == acceptingModelId)
+                {
+                    acceptingModel = model;
                     acceptingFound = true;
+                }
             }
             if (!providingFound || !acceptingFound)
                 throw (new Exception("Cannot find providing or accepting."));
@@ -401,32 +337,38 @@ namespace OOC.OpenMIWrapper
             // check whether this link isn't already here (if yes, do nothing)
             foreach (Connection link in _connections)
                 if (link.ProvidingModel == providingModel && link.AcceptingModel == acceptingModel)
-                    return;
+                    return link;
 
-            // if providing model is trigger, do nothing
-            if (providingModel.ModelID == TriggerModelID)
-                return;
-
-            // if accepting model is trigger, remove all other trigger connections
-            if (acceptingModel.ModelID == TriggerModelID)
-            {
-                ArrayList connectionsToRemove = new ArrayList();
-                foreach (Connection uiLink in _connections)
-                {
-                    if (uiLink.AcceptingModel.ModelID == TriggerModelID
-                        || uiLink.ProvidingModel.ModelID == TriggerModelID)
-                        connectionsToRemove.Add(uiLink);
-                }
-                foreach (Connection uiLink in connectionsToRemove)
-                    RemoveConnection(uiLink);
-            }
-
-            _connections.Add(new Connection(providingModel, acceptingModel));
-
-            _shouldBeSaved = true;
+            Connection connection = new Connection(providingModel, acceptingModel);
+            _connections.Add(connection);
+            return connection;
         }
 
-
+        public void AddLink(string linkId, string sourceModelId, string targetModelId, string sourceQuantity, string targetQuantity, string sourceElementSet, string targetElementSet)
+        {
+            var dataOperationsToAdd = new ArrayList();
+            Connection connection = GetConnection(sourceModelId, targetModelId);
+            Model sourceModel = GetModel(sourceModelId);
+            Model targetModel = GetModel(targetModelId);
+            var outputExchangeItem = sourceModel.GetOutputExchangeItem(sourceElementSet, sourceQuantity);
+            var inputExchangeItem = targetModel.GetInputExchangeItem(targetElementSet, targetQuantity);
+            if (outputExchangeItem == null || inputExchangeItem == null)
+                throw (new Exception(
+                    "Cannot find exchange item"));
+            Link link = new Link(
+                sourceModel.LinkableComponent,
+                outputExchangeItem.ElementSet,
+                outputExchangeItem.Quantity,
+                targetModel.LinkableComponent,
+                inputExchangeItem.ElementSet,
+                inputExchangeItem.Quantity,
+                "No description available.",
+                linkId,
+                dataOperationsToAdd);
+            connection.Links.Add(link);
+            sourceModel.LinkableComponent.AddLink(link);
+            targetModel.LinkableComponent.AddLink(link);
+        }
         /// <summary>
         /// Removes connection between two models.
         /// </summary>
@@ -448,75 +390,7 @@ namespace OOC.OpenMIWrapper
                 }
 
             _connections.Remove(connection);
-
-            _shouldBeSaved = true;
         }
-
-        /// <summary>
-        /// Saves composition to OmiEd Project XML file (OPR).
-        /// </summary>
-        /// <param name="filePath">Path to OPR file.</param>
-        public void SaveToFile(string filePath)
-        {
-            _filePath = filePath;
-
-            XmlDocument xmlDocument = new XmlDocument();
-            SaveToXmlDocument(xmlDocument);
-
-            xmlDocument.Save(filePath);
-
-            _shouldBeSaved = false;
-        }
-
-
-        /// <summary>
-        /// Loads composition from OmiEd Project XML file (OPR).
-        /// </summary>
-        /// <param name="filePath">Path to OPR file.</param>
-        public void LoadFromFile(string filePath)
-        {
-            _filePath = filePath;
-
-            XmlDocument xmlDocument = new XmlDocument();
-            FileInfo fileInfo = new FileInfo(filePath);
-
-            xmlDocument.Load(fileInfo.FullName);
-
-            // omi files will be searched relatively from filePath's path
-            LoadFromXmlDocument(fileInfo.DirectoryName, xmlDocument);
-
-            _shouldBeSaved = false;
-        }
-
-
-        /// <summary>
-        /// Reloads the composition.
-        /// </summary>
-        /// <remarks>Reloading is useful if you want to run simulation multiple times in one execution time.
-        /// Some models aren't able to run simulation after it was already run, and may crash in such case.
-        /// That's because they need to create new instance of them, on which the <c>Initialize</c> method
-        /// is called. 
-        /// Reloading is done same way like when you save the composition to OPR file, restarts the application,
-        /// and open this OPR file again. Of course, it is done only internally in the memory.</remarks>
-        public void Reload()
-        {
-            _editorMode = EEditorMode.Unspecified;
-
-            XmlDocument xmlDocument = new XmlDocument();
-
-            SaveToXmlDocument(xmlDocument);
-
-            // preserve members that aren't saved to XML
-            bool oldShouldBeSaved = _shouldBeSaved;
-
-            Release();
-            AssemblySupport.ReleaseAll();
-
-            LoadFromXmlDocument(Path.GetDirectoryName(_filePath), xmlDocument);
-
-            _shouldBeSaved = oldShouldBeSaved;
-        }
-
 
         /// <summary>
         /// Calculates time horizon of the simulation,
@@ -564,14 +438,28 @@ namespace OOC.OpenMIWrapper
         /// </remarks>
         public void Run(Logger logger, bool runInSameThread)
         {
-            LoggerListener runListener = new LoggerListener(logger);
+            LoggerListener loggerListener = new LoggerListener(logger);
+            ProgressListener progressListener = new ProgressListener();
+            progressListener.ModelProgressChangedHandler += new ModelProgressChangedDelegate(delegate(ILinkableComponent linkableComponent, ITimeStamp simTime)
+            {
+                string guid = cmGuidMapping[linkableComponent];
+                string progress = CalendarConverter.ModifiedJulian2Gregorian(simTime.ModifiedJulianDay).ToString();
+                CompositionModelProgressChangedHandler(this, guid, progress);
+            });
+
+            ArrayList listeners = new ArrayList();
+            listeners.Add(loggerListener);
+            listeners.Add(progressListener);
+            ProxyListener proxyListener = new ProxyListener();
+            proxyListener.Initialize(listeners);
+
             startTime = DateTime.Now;
 
             if (_running)
                 throw (new Exception("Simulation is already running."));
 
             _running = true;
-            _runListener = runListener;
+            _runListener = proxyListener;
 
             try
             {
@@ -708,298 +596,6 @@ namespace OOC.OpenMIWrapper
         #endregion
 
         #region Private methods
-
-        /// <summary>
-        /// Saves composition to XML document.
-        /// </summary>
-        /// <param name="xmlDocument">XML document</param>
-        private void SaveToXmlDocument(XmlDocument xmlDocument)
-        {
-            XmlElement xmlRoot = xmlDocument.CreateElement("guiComposition");
-
-            xmlRoot.SetAttribute("version", "1.0");
-
-            // save UIModels
-            XmlElement models = xmlDocument.CreateElement("models");
-            foreach (Model model in _models)
-            {
-                XmlElement xmlUiModel = xmlDocument.CreateElement("model");
-
-                models.AppendChild(xmlUiModel);
-            }
-            xmlRoot.AppendChild(models);
-
-            // save UILinks
-            XmlElement links = xmlDocument.CreateElement("links");
-            foreach (Connection uiLink in _connections)
-            {
-                XmlElement xmlUiLink = xmlDocument.CreateElement("uilink");
-
-                xmlUiLink.SetAttribute("model_providing", uiLink.ProvidingModel.ModelID);
-                xmlUiLink.SetAttribute("model_accepting", uiLink.AcceptingModel.ModelID);
-
-                // save OpenMI Links
-                foreach (Link link in uiLink.Links)
-                {
-                    XmlElement xmlLink = xmlDocument.CreateElement("link");
-                    xmlLink.SetAttribute("id", link.ID);
-                    xmlLink.SetAttribute("source_elementset", link.SourceElementSet.ID);
-                    xmlLink.SetAttribute("source_quantity", link.SourceQuantity.ID);
-                    xmlLink.SetAttribute("target_elementset", link.TargetElementSet.ID);
-                    xmlLink.SetAttribute("target_quantity", link.TargetQuantity.ID);
-
-                    // save selected DataOperations
-                    for (int i = 0; i < link.DataOperationsCount; i++)
-                    {
-                        XmlElement xmlDataOperation = xmlDocument.CreateElement("dataoperation");
-                        xmlDataOperation.SetAttribute("id", link.GetDataOperation(i).ID);
-
-                        // save DataOperation's writeable arguments
-                        for (int j = 0; j < link.GetDataOperation(i).ArgumentCount; j++)
-                            if (!link.GetDataOperation(i).GetArgument(j).ReadOnly)
-                            {
-                                XmlElement xmlArgument = xmlDocument.CreateElement("argument");
-                                xmlArgument.SetAttribute("key", link.GetDataOperation(i).GetArgument(j).Key);
-                                xmlArgument.SetAttribute("value", link.GetDataOperation(i).GetArgument(j).Value);
-                                xmlDataOperation.AppendChild(xmlArgument);
-                            }
-                        xmlLink.AppendChild(xmlDataOperation);
-                    }
-                    xmlUiLink.AppendChild(xmlLink);
-                }
-                links.AppendChild(xmlUiLink);
-            }
-            xmlRoot.AppendChild(links);
-
-            // save run properties
-            XmlElement runProperties = xmlDocument.CreateElement("runproperties");
-
-            CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("");
-
-            StringBuilder str = new StringBuilder((int)EventType.NUM_OF_EVENT_TYPES);
-            for (int i = 0; i < _listenedEventTypes.Length; i++)
-                str.Append(_listenedEventTypes[i] ? "1" : "0");
-
-            runProperties.SetAttribute("listenedeventtypes", str.ToString());
-            runProperties.SetAttribute("triggerinvoke", _triggerInvokeTime.ToString());
-
-            runProperties.SetAttribute("runinsamethread", _runInSameThread ? "1" : "0");
-
-            runProperties.SetAttribute("showeventsinlistbox", _showEventsInListbox ? "1" : "0");
-
-            runProperties.SetAttribute("logfilename", _logFileName == null ? "" : _logFileName);
-
-            xmlRoot.AppendChild(runProperties);
-
-            // save SDK options
-            var sdkOptions = xmlDocument.CreateElement("sdk");
-
-            var smartBufferOptions = xmlDocument.CreateElement("smartbuffer");
-            smartBufferOptions.SetAttribute("maxnumberoftimes", SmartBuffer.MaxNumberOfTimes.ToString());
-
-            sdkOptions.AppendChild(smartBufferOptions);
-
-            xmlRoot.AppendChild(sdkOptions);
-
-            xmlDocument.AppendChild(xmlRoot);
-
-            Thread.CurrentThread.CurrentCulture = currentCulture;
-        }
-
-
-        /// <summary>
-        /// Loads composition from XML document.
-        /// </summary>
-        /// <param name="omiRelativeDirectory">Directory the OMI files are relative to.</param>
-        /// <param name="xmlDocument">XML document</param>
-        private void LoadFromXmlDocument(string omiRelativeDirectory, XmlDocument xmlDocument)
-        {
-            // once you choose to load new file, all previously opened models are closed
-            Release();
-
-            CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("");
-
-
-            XmlElement xmlRoot = (XmlElement)xmlDocument.ChildNodes[0];
-            XmlElement xmlModels = (XmlElement)xmlRoot.ChildNodes[0];
-            XmlElement xmlLinks = (XmlElement)xmlRoot.ChildNodes[1];
-
-            // run properties aren't mandatory
-            XmlElement xmlRunProperties = null;
-            if (xmlRoot.ChildNodes.Count > 2)
-                xmlRunProperties = (XmlElement)xmlRoot.ChildNodes[2];
-
-            // check
-            if (xmlRoot.GetAttribute("version") != "1.0")
-                throw (new FormatException("Version of file not supported. Currently supported only version '1.0'"));
-            if (xmlModels.Name != "models"
-                || xmlLinks.Name != "links")
-                throw (new FormatException("Unknown file format ('models' or 'links' tag not present where expected)."));
-            if (xmlRunProperties != null)
-                if (xmlRunProperties.Name != "runproperties")
-                    throw (new FormatException("Unknown file format ('runproperties' tag not present where expected)."));
-
-            // read UILinks
-            foreach (XmlElement xmlUiLink in xmlLinks.ChildNodes)
-            {
-                // find models corresponding to this UIConnection
-                Model providingModel = null, acceptingModel = null;
-                foreach (Model uiModel in _models)
-                    if (uiModel.ModelID == xmlUiLink.GetAttribute("model_providing"))
-                    {
-                        providingModel = uiModel;
-                        break;
-                    }
-                foreach (Model uiModel in _models)
-                    if (uiModel.ModelID == xmlUiLink.GetAttribute("model_accepting"))
-                    {
-                        acceptingModel = uiModel;
-                        break;
-                    }
-
-                if (providingModel == null || acceptingModel == null)
-                {
-                    throw (new Exception(
-                        "One model (or both) corresponding to this link cannot be found...\n" +
-                        "Providing model: " + xmlUiLink.GetAttribute("model_providing") + "\n" +
-                        "Accepting model: " + xmlUiLink.GetAttribute("model_accepting")));
-                }
-
-                // construct UIConnection
-                var uiLink = new Connection(providingModel, acceptingModel);
-
-                // read OpenMI Links
-                foreach (XmlElement xmlLink in xmlUiLink.ChildNodes)
-                {
-                    // find corresponding exchange items
-                    var sourceElementSetId = xmlLink.GetAttribute("source_elementset");
-                    var sourceQuantityId = xmlLink.GetAttribute("source_quantity");
-
-                    var outputExchangeItem = providingModel.GetOutputExchangeItem(sourceElementSetId, sourceQuantityId);
-
-                    var targetElementSetId = xmlLink.GetAttribute("target_elementset");
-                    var targetQuantityId = xmlLink.GetAttribute("target_quantity");
-                    var inputExchangeItem = acceptingModel.GetInputExchangeItem(targetElementSetId, targetQuantityId);
-
-                    if (outputExchangeItem == null || inputExchangeItem == null)
-                        throw (new Exception(
-                            "Cannot find exchange item\n" +
-                            "Providing model: " + providingModel.ModelID + "\n" +
-                            "Accepting model: " + acceptingModel.ModelID + "\n" +
-                            "Source ElementSet: " + xmlLink.GetAttribute("source_elementset") + "\n" +
-                            "Source Quantity: " + xmlLink.GetAttribute("source_quantity") + "\n" +
-                            "Target ElementSet: " + targetElementSetId + "\n" +
-                            "Target Quantity: " + targetQuantityId));
-
-
-                    // read selected DataOperation's IDs, find their equivalents
-                    // in outputExchangeItem, and add these to link
-                    var dataOperationsToAdd = new ArrayList();
-
-                    foreach (XmlElement xmlDataOperation in xmlLink.ChildNodes)
-                        for (int i = 0; i < outputExchangeItem.DataOperationCount; i++)
-                        {
-                            IDataOperation dataOperation = outputExchangeItem.GetDataOperation(i);
-                            if (dataOperation.ID == xmlDataOperation.GetAttribute("id"))
-                            {
-                                // set data operation's arguments if any
-                                foreach (XmlElement xmlArgument in xmlDataOperation.ChildNodes)
-                                {
-                                    string argumentKey = xmlArgument.GetAttribute("key");
-                                    for (int j = 0; j < dataOperation.ArgumentCount; j++)
-                                    {
-                                        IArgument argument = dataOperation.GetArgument(j);
-                                        if (argument.Key == argumentKey && !argument.ReadOnly)
-                                            argument.Value = xmlArgument.GetAttribute("value");
-                                    }
-                                }
-
-                                dataOperationsToAdd.Add(dataOperation);
-                                break;
-                            }
-                        }
-
-                    // now construct the Link...
-                    Link link = new Link(
-                        providingModel.LinkableComponent,
-                        outputExchangeItem.ElementSet,
-                        outputExchangeItem.Quantity,
-                        acceptingModel.LinkableComponent,
-                        inputExchangeItem.ElementSet,
-                        inputExchangeItem.Quantity,
-                        "No description available.",
-                        xmlLink.GetAttribute("id"),
-                        dataOperationsToAdd);
-
-
-                    // ...add the link to the list
-                    uiLink.Links.Add(link);
-
-                    // and add it to both LinkableComponents
-                    uiLink.AcceptingModel.LinkableComponent.AddLink(link);
-                    uiLink.ProvidingModel.LinkableComponent.AddLink(link);
-                }
-
-                // add new UIConnection to list of connections
-                _connections.Add(uiLink);
-            }
-
-            // read run properties (if present)
-            if (xmlRunProperties != null)
-            {
-                string str = xmlRunProperties.GetAttribute("listenedeventtypes");
-                if (str.Length != (int)EventType.NUM_OF_EVENT_TYPES)
-                    throw (new FormatException("Invalid number of event types in 'runproperties' tag, expected " + EventType.NUM_OF_EVENT_TYPES + ", but only " + str.Length + " found."));
-                for (int i = 0; i < (int)EventType.NUM_OF_EVENT_TYPES; i++)
-                    switch (str[i])
-                    {
-                        case '1': _listenedEventTypes[i] = true; break;
-                        case '0': _listenedEventTypes[i] = false; break;
-                        default: throw (new FormatException("Unknown format of 'listenedeventtypes' attribute in 'runproperties' tag."));
-                    }
-                _triggerInvokeTime = DateTime.Parse(xmlRunProperties.GetAttribute("triggerinvoke"));
-
-                _logFileName = xmlRunProperties.GetAttribute("logfilename");
-                if (_logFileName != null)
-                {
-                    _logFileName = _logFileName.Trim();
-                    if (_logFileName == "")
-                        _logFileName = null; // if not set, logfile isn't used
-                }
-
-
-                str = xmlRunProperties.GetAttribute("showeventsinlistbox");
-                if (str == null || str == "" || str == "1")
-                    _showEventsInListbox = true; // if not set, value is true
-                else
-                    _showEventsInListbox = false;
-
-                str = xmlRunProperties.GetAttribute("runinsamethread");
-                if (str == "1")
-                    _runInSameThread = true;
-            }
-
-            var elements = xmlRoot.GetElementsByTagName("sdk");
-            if (elements.Count == 1)
-            {
-                var smartBufferElement = elements[0].ChildNodes[0] as XmlElement; // smartBuffer
-
-                if (smartBufferElement != null)
-                {
-                    if (smartBufferElement.HasAttribute("maxnumberoftimes"))
-                    {
-                        var maxNumberOfTimeInBuffer = int.Parse(smartBufferElement.GetAttribute("maxnumberoftimes"));
-                        SmartBuffer.MaxNumberOfTimes = maxNumberOfTimeInBuffer;
-                    }
-
-                }
-            }
-
-            Thread.CurrentThread.CurrentCulture = currentCulture;
-        }
-
 
         /// <summary>
         /// This method is called in <see cref="Run">Run</see> method.

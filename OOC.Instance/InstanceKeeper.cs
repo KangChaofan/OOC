@@ -56,6 +56,13 @@ namespace OOC.Instance
             {
                 RunningTask--;
             });
+            manager.TaskProgressChangedHandler += new TaskProgressChanged(delegate(TaskRunnerManager sender, Dictionary<string, string> modelProgress)
+            {
+                taskService.UpdateModelProgress(taskAssign.Task.guid, new ModelProgress()
+                {
+                    Kvs = modelProgress
+                });
+            });
             manager.Run();
         }
 

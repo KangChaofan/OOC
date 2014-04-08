@@ -11,6 +11,8 @@ namespace OOC.Contract.Data.Common
         Integer = 1,
         Float = 2,
         Enum = 3,
-        InputFile = 4
+        InputFile = 4,
+        OutputFile = 5,
+        Constant = 255
     }
 }

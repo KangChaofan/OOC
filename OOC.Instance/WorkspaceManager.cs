@@ -15,13 +15,9 @@ namespace OOC.Instance
 
         public string WorkingDirectory { get; set; }
 
-        public string TempDirectory { get { return WorkingDirectory + @"\Temp"; } }
-
         public string CompositionDirectory { get { return WorkingDirectory + @"\Composition"; } }
 
-        public string InputDirectory { get { return WorkingDirectory + @"\Input"; } }
-
-        public string OutputDirectory { get { return WorkingDirectory + @"\Output"; } }
+        public string HomeDirectory { get { return WorkingDirectory + @"\Home"; } }
 
         public string LogDirectory { get { return WorkingDirectory + @"\Log"; } }
 
@@ -30,16 +26,15 @@ namespace OOC.Instance
         private Logger logger;
         private Dictionary<CompositionModel, string> mainLibraryMapping = new Dictionary<CompositionModel, string>();
         private Dictionary<string, string> remotePathMapping = new Dictionary<string, string>();
+        private HashSet<string> presetedFiles = new HashSet<string>();
 
         public WorkspaceManager(string taskGuid, string workingDirectory)
         {
             TaskGuid = taskGuid;
             WorkingDirectory = workingDirectory;
             if (!Directory.Exists(WorkingDirectory)) Directory.CreateDirectory(WorkingDirectory);
-            if (!Directory.Exists(TempDirectory)) Directory.CreateDirectory(TempDirectory);
             if (!Directory.Exists(CompositionDirectory)) Directory.CreateDirectory(CompositionDirectory);
-            if (!Directory.Exists(InputDirectory)) Directory.CreateDirectory(InputDirectory);
-            if (!Directory.Exists(OutputDirectory)) Directory.CreateDirectory(OutputDirectory);
+            if (!Directory.Exists(HomeDirectory)) Directory.CreateDirectory(HomeDirectory);
             if (!Directory.Exists(LogDirectory)) Directory.CreateDirectory(LogDirectory);
 
             logger = new Logger(LogDirectory + @"\workspace.log");
@@ -79,6 +74,7 @@ namespace OOC.Instance
             foreach (string filePath in Directory.GetFiles(currentDirectory))
             {
                 if (!filePath.StartsWith(baseDirectory)) continue;
+                if (presetedFiles.Contains(filePath)) continue;
                 string relativePath = filePath.Substring(baseDirectory.Length + 1);
                 string fileServicePath = taskService.GenerateTaskFileName(TaskGuid, type, relativePath);
                 logger.Info("Uploading " + filePath + " to " + fileServicePath + "...");
@@ -87,7 +83,7 @@ namespace OOC.Instance
                     fileService.Put(fileServicePath, File.ReadAllBytes(filePath));
                     taskService.AddTaskFileMapping(TaskGuid, fileServicePath, relativePath, type, true);
                 }
-                catch (Exception e)
+                catch
                 {
                     logger.Warn("Upload failed: " + fileServicePath);
                 }
@@ -96,8 +92,10 @@ namespace OOC.Instance
 
         public void CollectOutput()
         {
+            logger.Info("Collecting model output...");
+            collectOutputInDirectory(CompositionDirectory, CompositionDirectory, TaskFileType.Output);
             logger.Info("Collecting output...");
-            collectOutputInDirectory(OutputDirectory, OutputDirectory, TaskFileType.Output);
+            collectOutputInDirectory(HomeDirectory, HomeDirectory, TaskFileType.Output);
             logger.Info("Collecting log...");
             collectOutputInDirectory(LogDirectory, LogDirectory, TaskFileType.Log);
             logger.Info("Output collected.");
@@ -114,7 +112,7 @@ namespace OOC.Instance
                 foreach (ModelFileMapping fileMapping in modelData.ModelFiles)
                 {
                     if (fileMapping.isDocument) continue;
-                    string realPath = modelDirectory + @"\" + fileMapping.relativePath;
+                    string realPath = Path.Combine(modelDirectory, fileMapping.relativePath);
                     string baseDir = Path.GetDirectoryName(realPath);
                     if (!Directory.Exists(baseDir)) Directory.CreateDirectory(baseDir);
 
@@ -122,6 +120,7 @@ namespace OOC.Instance
                     FileEntityResponse fileEntity = fileService.Get(fileMapping.fileName);
                     File.WriteAllBytes(realPath, fileEntity.Content);
                     remotePathMapping[fileMapping.fileName] = realPath;
+                    presetedFiles.Add(realPath);
 
                     if (fileMapping.isMainLibrary)
                     {
@@ -133,7 +132,7 @@ namespace OOC.Instance
             logger.Info("Deploying task input files...");
             foreach (TaskFileMapping fileMapping in inputFiles)
             {
-                string realPath = InputDirectory + @"\" + fileMapping.relativePath;
+                string realPath = Path.Combine(HomeDirectory, fileMapping.relativePath);
                 string baseDir = Path.GetDirectoryName(realPath);
                 if (!Directory.Exists(baseDir)) Directory.CreateDirectory(baseDir);
 
@@ -141,6 +140,7 @@ namespace OOC.Instance
                 FileEntityResponse fileEntity = fileService.Get(fileMapping.fileName);
                 File.WriteAllBytes(realPath, fileEntity.Content);
                 remotePathMapping[fileMapping.fileName] = realPath;
+                presetedFiles.Add(realPath);
             }
             logger.Info("Composition successfully deployed.");
         }

@@ -15,7 +15,7 @@ namespace OOC.Contract.Service
     public interface ITaskService
     {
         [OperationContract]
-        string Create(string compositionGuid, int userId);
+        string Create(string compositionGuid, int userId, string triggerInvokeTime);
 
         [OperationContract]
         void UpdateState(string guid, TaskState state);
@@ -34,5 +34,8 @@ namespace OOC.Contract.Service
 
         [OperationContract]
         List<TaskFileMapping> QueryTaskFileMapping(string guid, TaskFileType type);
+
+        [OperationContract]
+        void UpdateModelProgress(string guid, ModelProgress modelProgress);
     }
 }

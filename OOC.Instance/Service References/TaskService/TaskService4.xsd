@@ -76,4 +76,12 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="TaskFileType" nillable="true" type="tns:TaskFileType" />
+  <xs:complexType name="ModelProgress">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q9="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract" base="q9:Dict">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ModelProgress" nillable="true" type="tns:ModelProgress" />
 </xs:schema>

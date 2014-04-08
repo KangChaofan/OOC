@@ -147,5 +147,23 @@ namespace OOC.Service
         {
             return @"Tasks\" + guid + @"\" + type + @"\" + relativePath;
         }
+
+
+        public void UpdateModelProgress(string guid, ModelProgress modelProgress)
+        {
+            using (OOCEntities db = new OOCEntities())
+            {
+                IQueryable<Task> result = from o in db.Task
+                                          where o.guid == guid
+                                          select o;
+                if (!result.Any())
+                {
+                    throw new FaultException("TASK_NOT_EXISTS");
+                }
+                Task task = result.First();
+                task.modelProgress = modelProgress.Serialized;
+                db.SaveChanges();
+            }
+        }
     }
 }

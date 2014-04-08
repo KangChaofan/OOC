@@ -34,5 +34,8 @@ namespace OOC.Contract.Service
 
         [OperationContract]
         List<TaskFileMapping> QueryTaskFileMapping(string guid, TaskFileType type);
+
+        [OperationContract]
+        void UpdateModelProgress(string guid, ModelProgress modelProgress);
     }
 }

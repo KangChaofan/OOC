@@ -1643,6 +1643,7 @@ namespace OOC.Instance.TaskService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModelData))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModelProperties))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileType))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelProgress))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskAssignResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskInfoResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, string>))]
@@ -1707,6 +1708,7 @@ namespace OOC.Instance.TaskService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Dict", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelProgress))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModelProperties))]
     public partial class Dict : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -1768,6 +1770,13 @@ namespace OOC.Instance.TaskService {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Log = 3,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ModelProgress", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common")]
+    [System.SerializableAttribute()]
+    public partial class ModelProgress : OOC.Instance.TaskService.Dict {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1855,6 +1864,9 @@ namespace OOC.Instance.TaskService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/QueryTaskFileMapping", ReplyAction="http://tempuri.org/ITaskService/QueryTaskFileMappingResponse")]
         OOC.Instance.TaskService.TaskFileMapping[] QueryTaskFileMapping(string guid, OOC.Instance.TaskService.TaskFileType type);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/UpdateModelProgress", ReplyAction="http://tempuri.org/ITaskService/UpdateModelProgressResponse")]
+        void UpdateModelProgress(string guid, OOC.Instance.TaskService.ModelProgress modelProgress);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1910,6 +1922,10 @@ namespace OOC.Instance.TaskService {
         
         public OOC.Instance.TaskService.TaskFileMapping[] QueryTaskFileMapping(string guid, OOC.Instance.TaskService.TaskFileType type) {
             return base.Channel.QueryTaskFileMapping(guid, type);
+        }
+        
+        public void UpdateModelProgress(string guid, OOC.Instance.TaskService.ModelProgress modelProgress) {
+            base.Channel.UpdateModelProgress(guid, modelProgress);
         }
     }
 }

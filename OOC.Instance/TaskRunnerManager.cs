@@ -17,6 +17,8 @@ namespace OOC.Instance
 {
     public delegate void TaskStateChanged(TaskRunnerManager sender, TaskState taskState);
 
+    public delegate void TaskProgressChanged(TaskRunnerManager sender, Dictionary<string, string> modelProgress);
+
     public delegate void TaskStopped(TaskRunnerManager sender);
 
     public class TaskRunnerManager
@@ -29,6 +31,7 @@ namespace OOC.Instance
         public TaskAssignResponse TaskAssign { get; set; }
         public TaskStateChanged TaskStateChangedHandler;
         public TaskStopped TaskStoppedHandler;
+        public TaskProgressChanged TaskProgressChangedHandler;
         public string WorkingDirectory { get { return WorkspaceManager.WorkingDirectory; } }
         public string PipeName { get; set; }
         public WorkspaceManager WorkspaceManager { get; set; }
@@ -117,8 +120,9 @@ namespace OOC.Instance
             foreach (CompositionLink link in TaskAssign.CompositionData.Links)
             {
                 properties = new Dictionary<string, string>();
-                properties["sourceModel"] = link.sourceCmGuid;
-                properties["targetModel"] = link.targetCmGuid;
+                properties["linkId"] = link.guid;
+                properties["sourceModelId"] = link.sourceCmGuid;
+                properties["targetModelId"] = link.targetCmGuid;
                 properties["sourceQuantity"] = link.sourceQuantity;
                 properties["targetQuantity"] = link.targetQuantity;
                 properties["sourceElementSet"] = link.sourceElementSet;
@@ -156,6 +160,7 @@ namespace OOC.Instance
                     switch (command.Command)
                     {
                         case "Progress":
+                            TaskProgressChangedHandler(this, command.Parameters);
                             break;
                         case "Completed":
                         case "Failed":

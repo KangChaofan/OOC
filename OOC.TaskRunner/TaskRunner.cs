@@ -14,8 +14,6 @@ namespace OOC.TaskRunner
 {
     public class TaskRunner
     {
-        public const int PROGRESS_UPDATE_INTERVAL = 10;
-
         public string LogLocation
         {
             get
@@ -35,6 +33,8 @@ namespace OOC.TaskRunner
 
         private CompositionManager composition;
         private Dictionary<string, string> modelProgress;
+
+        private int progressReportInterval = 10;
 
         public TaskRunner(string pipeName)
         {
@@ -115,6 +115,7 @@ namespace OOC.TaskRunner
                                 break;
                             case "SetSimulationProperties":
                                 DateTime triggerInvokeTime = DateTime.Parse(command.Parameters["triggerInvokeTime"]);
+                                progressReportInterval = Int32.Parse(command.Parameters["progressReportInterval"]);
                                 composition.TriggerInvokeTime = triggerInvokeTime;
                                 break;
                             case "RunSimulation":
@@ -123,7 +124,7 @@ namespace OOC.TaskRunner
                                 composition.CompositionModelProgressChangedHandler += new CompositionModelProgressChangedDelegate(delegate(object sender, string cmGuid, string progress)
                                 {
                                     modelProgress[cmGuid] = progress;
-                                    if ((DateTime.Now - lastReport).TotalSeconds > PROGRESS_UPDATE_INTERVAL)
+                                    if ((DateTime.Now - lastReport).TotalSeconds > progressReportInterval)
                                     {
                                         lastReport = DateTime.Now;
                                         PipeUtil.WriteCommand(bw, new PipeCommand("Progress", modelProgress));

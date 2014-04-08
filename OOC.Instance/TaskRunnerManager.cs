@@ -27,6 +27,7 @@ namespace OOC.Instance
         private static string taskWorkingDirectory = ConfigurationManager.AppSettings["taskWorkingDirectory"];
         private static string taskUsername = ConfigurationManager.AppSettings["taskUsername"];
         private static string taskPassword = ConfigurationManager.AppSettings["taskPassword"];
+        private static int progressReportInterval = Int32.Parse(ConfigurationManager.AppSettings["progressReportInterval"]);
 
         public TaskAssignResponse TaskAssign { get; set; }
         public TaskStateChanged TaskStateChangedHandler;
@@ -132,6 +133,7 @@ namespace OOC.Instance
 
             properties = new Dictionary<string, string>();
             properties["triggerInvokeTime"] = TaskAssign.TriggerInvokeTime;
+            properties["progressReportInterval"] = progressReportInterval.ToString();
             PipeUtil.WriteCommand(bw, new PipeCommand("SetSimulationProperties", properties));
         }
 

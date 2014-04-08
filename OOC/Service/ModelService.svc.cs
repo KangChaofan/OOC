@@ -9,24 +9,19 @@ namespace OOC.Service
 {
     public class ModelService : IModelService
     {
-        private static readonly object ModelLock = new object();
-
         public void Create(string name, string version, int authorUserId, string className)
         {
-            lock (ModelLock)
+            using (var db = new OOCEntities())
             {
-                using (var db = new OOCEntities())
-                {
-                    var model = new Model
-                        {
-                            name = name,
-                            version = version,
-                            authorUserId = authorUserId,
-                            className = className,
-                        };
-                    db.Model.AddObject(model);
-                    db.SaveChanges();
-                }
+                var model = new Model
+                    {
+                        name = name,
+                        version = version,
+                        authorUserId = authorUserId,
+                        className = className,
+                    };
+                db.Model.AddObject(model);
+                db.SaveChanges();
             }
         }
 
@@ -34,24 +29,21 @@ namespace OOC.Service
                            DateTime modification,
                            bool isPublic, bool isApproved)
         {
-            lock (ModelLock)
+            using (var db = new OOCEntities())
             {
-                using (var db = new OOCEntities())
-                {
-                    var model = new Model
-                        {
-                            name = name,
-                            version = version,
-                            authorUserId = authorUserId,
-                            className = className,
-                            creation = creation,
-                            modification = modification,
-                            isPublic = isPublic,
-                            isApproved = isApproved,
-                        };
-                    db.Model.AddObject(model);
-                    db.SaveChanges();
-                }
+                var model = new Model
+                    {
+                        name = name,
+                        version = version,
+                        authorUserId = authorUserId,
+                        className = className,
+                        creation = creation,
+                        modification = modification,
+                        isPublic = isPublic,
+                        isApproved = isApproved,
+                    };
+                db.Model.AddObject(model);
+                db.SaveChanges();
             }
         }
 
@@ -130,6 +122,65 @@ namespace OOC.Service
                 auditResult = model.isApproved;
             }
             return auditResult;
+        }
+
+        public List<ModelProperty> GetModelProperties(string guid)
+        {
+            using (var db = new OOCEntities())
+            {
+                IQueryable<ModelProperty> result = from o in db.ModelProperty
+                                                   where o.modelGuid == guid
+                                                   select o;
+                if (!result.Any())
+                {
+                    throw new FaultException("MODEL_NOT_FOUND");
+                }
+                return result.ToList();
+            }
+        }
+
+        public void AddModelProperty(string guid, ModelProperty modelProperty)
+        {
+            using (var db = new OOCEntities())
+            {
+                db.ModelProperty.AddObject(modelProperty);
+                db.SaveChanges();
+            }
+        }
+
+        public void RemoveModelProperty(string guid, string key)
+        {
+            using (var db = new OOCEntities())
+            {
+                IQueryable<ModelProperty> result = from o in db.ModelProperty
+                                                   where o.modelGuid == guid && o.key == key
+                                                   select o;
+                if (!result.Any())
+                {
+                    throw new FaultException("MODEL_NOT_FOUND");
+                }
+                db.ModelProperty.DeleteObject(result.First());
+                db.SaveChanges();
+            }
+        }
+
+        public void UpdateModelProperty(string guid, string key, ModelProperty modelProperty)
+        {
+            using (var db = new OOCEntities())
+            {
+                IQueryable<ModelProperty> result = from o in db.ModelProperty
+                                                   where o.modelGuid == guid && o.key == key
+                                                   select o;
+                if (!result.Any())
+                {
+                    throw new FaultException("MODEL_MOT_FOUND");
+                }
+
+                //todo complete me!
+                var old = result.First();
+
+                //todo complete me!
+            }
         }
     }
 }

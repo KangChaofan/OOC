@@ -32,5 +32,17 @@ namespace OOC.Contract.Service
 
         [OperationContract]
         bool Audit(string guid);
+
+        [OperationContract]
+        List<ModelProperty> GetModelProperties(string guid);
+
+        [OperationContract]
+        void AddModelProperty(string guid, ModelProperty modelProperty);
+
+        [OperationContract]
+        void RemoveModelProperty(string guid, string key);
+
+        [OperationContract]
+        void UpdateModelProperty(string guid, string key, ModelProperty modelProperty);
     }
 }

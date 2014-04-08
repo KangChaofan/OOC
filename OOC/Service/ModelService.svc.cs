@@ -112,23 +112,6 @@ namespace OOC.Service
             throw new NotImplementedException();
         }
 
-        public void UpdateModification(string guid, DateTime modification)
-        {
-            using (var db = new OOCEntities())
-            {
-                IQueryable<Model> result = from o in db.Model
-                                           where o.guid == guid
-                                           select o;
-                if (!result.Any())
-                {
-                    throw new FaultException("MODEL_NOT_FOUND");
-                }
-                Model model = result.First();
-                model.modification = modification;
-                db.SaveChanges();
-            }
-        }
-
         public bool Audit(string guid)
         {
             bool auditResult;

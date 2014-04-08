@@ -31,9 +31,6 @@ namespace OOC.Contract.Service
         List<Model> ListByModelTags(List<ModelTag> modelTags);
 
         [OperationContract]
-        void UpdateModification(string guid, DateTime modification);
-
-        [OperationContract]
         bool Audit(string guid);
     }
 }

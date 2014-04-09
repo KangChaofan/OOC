@@ -17,11 +17,11 @@ namespace OOC.Contract.Data.Abstract
         {
             get
             {
-                return SerializeUtil.Serialize(Kvs);
+                return SerializationUtil.Serialize(Kvs);
             }
             set
             {
-                Kvs = SerializeUtil.Deserialize<Dictionary<string, string>>(value);
+                Kvs = SerializationUtil.Deserialize<Dictionary<string, string>>(value);
             }
         }
 

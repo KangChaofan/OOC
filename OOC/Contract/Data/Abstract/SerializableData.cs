@@ -14,7 +14,7 @@ namespace OOC.Contract.Data.Abstract
         {
             get
             {
-                return SerializeUtil.Serialize(this);
+                return SerializationUtil.Serialize(this);
             }
         }
     }

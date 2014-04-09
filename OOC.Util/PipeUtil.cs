@@ -32,12 +32,12 @@ namespace OOC.Util
         {
             int len = br.ReadInt32();
             string serialized = Encoding.UTF8.GetString(br.ReadBytes(len));
-            return SerializeUtil.Deserialize<PipeCommand>(serialized);
+            return SerializationUtil.Deserialize<PipeCommand>(serialized);
         }
 
         public static void WriteCommand(BinaryWriter bw, PipeCommand command)
         {
-            string serialized = SerializeUtil.Serialize(command);
+            string serialized = SerializationUtil.Serialize(command);
             byte[] bytes = Encoding.UTF8.GetBytes(serialized);
             bw.Write((int)bytes.Length);
             bw.Write(Encoding.UTF8.GetBytes(serialized));

@@ -1,0 +1,7 @@
+D:\DEV\CSharp\Project\ooc\ooc\OOC.UnitTest\bin\Debug\OOC.UnitTest.dll
+D:\DEV\CSharp\Project\ooc\ooc\OOC.UnitTest\bin\Debug\OOC.UnitTest.pdb
+D:\DEV\CSharp\Project\ooc\ooc\OOC.UnitTest\obj\Debug\OOC.UnitTest.csprojResolveAssemblyReference.cache
+D:\DEV\CSharp\Project\ooc\ooc\OOC.UnitTest\obj\Debug\OOC.UnitTest.dll
+D:\DEV\CSharp\Project\ooc\ooc\OOC.UnitTest\obj\Debug\OOC.UnitTest.pdb
+D:\DEV\CSharp\Project\ooc\ooc\OOC.UnitTest\bin\Debug\OOC.Util.dll
+D:\DEV\CSharp\Project\ooc\ooc\OOC.UnitTest\bin\Debug\OOC.Util.pdb

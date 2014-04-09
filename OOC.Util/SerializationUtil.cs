@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OOC.Util
 {
-    public class SerializeUtil
+    public class SerializationUtil
     {
         public static string Serialize(object objectToSerialize)
         {

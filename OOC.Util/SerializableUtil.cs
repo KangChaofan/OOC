@@ -1,15 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace OOC.Util
 {
     public static class SerializableUtil
     {
-        public static void DeepClone(ref object source, ref object target)
+        public static void DeepCopy(object source, out object target)
         {
-            //todo complete me!
+            var ms = new MemoryStream();
+            var bf = new BinaryFormatter();
+            bf.Serialize(ms, source);
+            ms.Seek(0, SeekOrigin.Begin);
+            target = bf.Deserialize(ms);
+            ms.Close();
+        }
+
+        public static void ShallowCopy(object source, out object target)
+        {
+            //TODO fix me.
+            target = source;
         }
     }
 }

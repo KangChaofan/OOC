@@ -175,11 +175,7 @@ namespace OOC.Service
                 {
                     throw new FaultException("MODEL_MOT_FOUND");
                 }
-
-                //todo complete me!
-                var old = result.First();
-
-                //todo complete me!
+                db.ModelProperty.ApplyCurrentValues(modelProperty);
             }
         }
     }

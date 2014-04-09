@@ -49,7 +49,7 @@
     <Compile Include="HashUtil.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="SerializableUtil.cs" />
-    <Compile Include="SerializeUtil.cs" />
+    <Compile Include="SerializationUtil.cs" />
     <Compile Include="SysUtil.cs" />
     <Compile Include="PipeUtil.cs" />
   </ItemGroup>

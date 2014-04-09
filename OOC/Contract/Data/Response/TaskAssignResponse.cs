@@ -14,7 +14,7 @@ namespace OOC.Contract.Data.Response
             Task = task;
             InputFiles = inputFiles;
             TriggerInvokeTime = triggerInvokeTime;
-            CompositionData = SerializeUtil.Deserialize<CompositionData>(task.compositionData);
+            CompositionData = SerializationUtil.Deserialize<CompositionData>(task.compositionData);
         }
 
         [DataMember]

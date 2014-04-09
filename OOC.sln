@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOC", "OOC\OOC.Server.csproj", "{BA5A6217-8692-4C5C-9152-8BA129B08360}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOC.Server", "OOC\OOC.Server.csproj", "{BA5A6217-8692-4C5C-9152-8BA129B08360}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOC.OpenMIWrapper", "OOC.OpenMIWrapper\OOC.OpenMIWrapper.csproj", "{EAD62B60-BF9F-463B-B817-AE55C3655C7C}"
 EndProject
@@ -13,6 +13,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOC.Util", "OOC.Util\OOC.Util.csproj", "{5ACDB1C5-29E3-4F1F-9696-E8ABAAB67F0A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOC.TaskRunner", "OOC.TaskRunner\OOC.TaskRunner.csproj", "{A4D6D8A5-C720-4D01-B1F0-0649DDDB9FEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOC.UnitTest", "OOC.UnitTest\OOC.UnitTest.csproj", "{166F60E1-3B8E-40D5-999D-61C3A03921C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,10 @@ Global
 		{A4D6D8A5-C720-4D01-B1F0-0649DDDB9FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4D6D8A5-C720-4D01-B1F0-0649DDDB9FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4D6D8A5-C720-4D01-B1F0-0649DDDB9FEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{166F60E1-3B8E-40D5-999D-61C3A03921C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{166F60E1-3B8E-40D5-999D-61C3A03921C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{166F60E1-3B8E-40D5-999D-61C3A03921C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{166F60E1-3B8E-40D5-999D-61C3A03921C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

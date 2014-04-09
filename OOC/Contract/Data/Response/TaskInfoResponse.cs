@@ -11,7 +11,7 @@ namespace OOC.Contract.Data.Response
         public TaskInfoResponse(Task task)
         {
             Task = task;
-            CompositionData = SerializeUtil.Deserialize<CompositionData>(task.compositionData);
+            CompositionData = SerializationUtil.Deserialize<CompositionData>(task.compositionData);
         }
         [DataMember]
         public Task Task { get; set; }

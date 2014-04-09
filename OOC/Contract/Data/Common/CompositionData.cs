@@ -41,6 +41,24 @@ namespace OOC.Contract.Data.Common
     }
 
     [DataContract]
+    public class CompositionLinkData
+    {
+        [DataMember]
+        public CompositionLink CompositionLink { get; set; }
+
+        [DataMember]
+        public LinkDataOperation DataOperation { get; set; }
+
+        public CompositionLinkData() { }
+
+        public CompositionLinkData(CompositionLink compositionLink)
+        {
+            CompositionLink = compositionLink;
+            DataOperation = new LinkDataOperation() { Serialized = CompositionLink.dataOperation };
+        }
+    }
+
+    [DataContract]
     public class CompositionData : SerializableData
     {
         [DataMember]
@@ -50,7 +68,7 @@ namespace OOC.Contract.Data.Common
         public List<CompositionModelData> Models { get; set; }
 
         [DataMember]
-        public List<CompositionLink> Links { get; set; }
+        public List<CompositionLinkData> Links { get; set; }
 
         public CompositionData() { }
 
@@ -58,14 +76,14 @@ namespace OOC.Contract.Data.Common
         {
             Composition = composition;
             Models = new List<CompositionModelData>();
-            Links = new List<CompositionLink>();
+            Links = new List<CompositionLinkData>();
             foreach (CompositionModel model in composition.CompositionModel)
             {
                 Models.Add(new CompositionModelData(model));
             }
             foreach (CompositionLink link in composition.CompositionLink)
             {
-                Links.Add(link);
+                Links.Add(new CompositionLinkData(link));
             }
         }
 

@@ -113,9 +113,9 @@ namespace OOC.Instance
                             })).Start();
                         }
                     }
-                    catch (Exception e)
+                    catch
                     {
-                        logger.Debug("No task available. " + e.ToString());
+                        logger.Debug("No task available. ");
                     }
                     Thread.Sleep(HeartbeatInterval);
                 }

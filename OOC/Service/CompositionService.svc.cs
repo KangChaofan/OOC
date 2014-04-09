@@ -61,7 +61,19 @@ namespace OOC.Service
 
         public string CreateCompositionModel(string compositionGuid, string modelGuid, CompositionModelProperties properties)
         {
-            throw new System.NotImplementedException();
+            using (OOCEntities db = new OOCEntities())
+            {
+                CompositionModel compositionModel = new CompositionModel()
+                {
+                    guid = GuidUtil.newGuid(),
+                    compositionGuid = compositionGuid,
+                    modelGuid = modelGuid,
+                    properties = properties.Serialized
+                };
+                db.CompositionModel.AddObject(compositionModel);
+                db.SaveChanges();
+                return compositionModel.guid;
+            }
         }
 
         public void UpdateCompositionModelProperties(string cmGuid, CompositionModelProperties properties)
@@ -138,9 +150,26 @@ namespace OOC.Service
             }
         }
 
-        public string CreateCompositionLink(string compositionGuid, string sourceCmGuid, string targetGuid, string sourceQuantity, string targetQuantity, string sourceElementSet, string targetElementSet, LinkDataOperation dataOperation)
+        public string CreateCompositionLink(string compositionGuid, string sourceCmGuid, string targetCmGuid, string sourceQuantity, string targetQuantity, string sourceElementSet, string targetElementSet, LinkDataOperation dataOperation)
         {
-            throw new System.NotImplementedException();
+            using (OOCEntities db = new OOCEntities())
+            {
+                CompositionLink compositionLink = new CompositionLink()
+                {
+                    guid = GuidUtil.newGuid(),
+                    compositionGuid = compositionGuid,
+                    sourceCmGuid = sourceCmGuid,
+                    targetCmGuid = targetCmGuid,
+                    sourceQuantity = sourceQuantity,
+                    targetQuantity = targetQuantity,
+                    sourceElementSet = sourceElementSet,
+                    targetElementSet = targetElementSet,
+                    dataOperation = dataOperation.Serialized
+                };
+                db.CompositionLink.AddObject(compositionLink);
+                db.SaveChanges();
+                return compositionLink.guid;
+            }
         }
 
         public CompositionLink GetCompositionLink(string linkGuid)

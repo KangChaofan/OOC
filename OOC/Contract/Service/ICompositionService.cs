@@ -45,7 +45,7 @@ namespace OOC.Contract.Service
         List<CompositionLinkData> GetCompositionLinksData(string compositionGuid);
 
         [OperationContract]
-        string CreateCompositionLink(string compositionGuid, string sourceCmGuid, string targetGuid, string sourceQuantity, string targetQuantity, string sourceElementSet, string targetElementSet, LinkDataOperation dataOperation);
+        string CreateCompositionLink(string compositionGuid, string sourceCmGuid, string targetCmGuid, string sourceQuantity, string targetQuantity, string sourceElementSet, string targetElementSet, LinkDataOperation dataOperation);
 
         [OperationContract]
         CompositionLink GetCompositionLink(string linkGuid);

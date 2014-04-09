@@ -20,6 +20,12 @@ namespace OOC.Contract.Service
         bool Auth(string username, string password);
 
         [OperationContract]
+        void UpdatePassword(int id, string password);
+
+        [OperationContract]
+        void UpdateMobile(int id, string mobile);
+
+        [OperationContract]
         void Create(User user);
 
         [OperationContract]
@@ -27,6 +33,19 @@ namespace OOC.Contract.Service
 
         [OperationContract]
         User GetById(int id);
+
+        [OperationContract]
+        List<string> QueryAcl(int id);
+
+        [OperationContract]
+        bool HasAclEntry(int id, string entry);
+
+        [OperationContract]
+        void AddAclEntry(int id, string entry);
+
+        [OperationContract]
+        void RemoveAclEntry(int id, string entry);
+
     }
 
 }

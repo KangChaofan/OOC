@@ -40,15 +40,8 @@ namespace OOC.Service
                     triggerInvokeTime = triggerInvokeTime,
                     modelProgress = new ModelProgress().Serialized
                 };
-                try
-                {
-                    db.Task.AddObject(task);
-                    db.SaveChanges();
-                }
-                catch
-                {
-                    throw new FaultException("TRANSACTION_FAILED");
-                }
+                db.Task.AddObject(task);
+                db.SaveChanges();
                 return task.guid;
             }
         }
@@ -162,6 +155,25 @@ namespace OOC.Service
                 }
                 Task task = result.First();
                 task.modelProgress = modelProgress.Serialized;
+                db.SaveChanges();
+            }
+        }
+
+
+        public void SyncComposition(string guid)
+        {
+            using (OOCEntities db = new OOCEntities())
+            {
+                IQueryable<Task> result = from o in db.Task
+                                          where o.guid == guid
+                                          select o;
+                if (!result.Any())
+                {
+                    throw new FaultException("TASK_NOT_EXISTS");
+                }
+                Task task = result.First();
+                CompositionData compositionData = new CompositionData(task.Composition);
+                task.compositionData = compositionData.Serialized;
                 db.SaveChanges();
             }
         }

@@ -18,6 +18,9 @@ namespace OOC.Contract.Service
         string Create(string compositionGuid, int userId, string triggerInvokeTime);
 
         [OperationContract]
+        void SyncComposition(string guid);
+
+        [OperationContract]
         void UpdateState(string guid, TaskState state);
 
         [OperationContract]

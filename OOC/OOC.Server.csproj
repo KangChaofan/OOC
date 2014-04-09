@@ -87,6 +87,7 @@
     <Content Include="Service\InstanceService.svc" />
     <Content Include="Service\ModelService.svc" />
     <Content Include="Service\TaskService.svc" />
+    <Content Include="Service\CompositionService.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -111,12 +112,14 @@
     <Compile Include="Contract\Data\Common\ModelPropertyType.cs" />
     <Compile Include="Contract\Data\Common\ModelPropertyAdditional.cs" />
     <Compile Include="Contract\Data\Common\CompositionModelProperties.cs" />
+    <Compile Include="Contract\Data\Common\LinkDataOperation.cs" />
     <Compile Include="Contract\Data\Response\FileStatResponse.cs" />
     <Compile Include="Contract\Data\Request\InstanceHeartbeatStatus.cs" />
     <Compile Include="Contract\Data\Response\TaskInfoResponse.cs" />
     <Compile Include="Contract\Data\Response\TaskAssignResponse.cs" />
     <Compile Include="Contract\Service\IModelService.cs" />
     <Compile Include="Contract\Service\ITaskService.cs" />
+    <Compile Include="Contract\Service\ICompositionService.cs" />
     <Compile Include="Entity\OOCEntityObject.cs" />
     <Compile Include="ServiceAttribute\ExposedService.cs" />
     <Compile Include="Entity\OOCModel.cs">
@@ -153,6 +156,9 @@
     </Compile>
     <Compile Include="Service\TaskService.svc.cs">
       <DependentUpon>TaskService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Service\CompositionService.svc.cs">
+      <DependentUpon>CompositionService.svc</DependentUpon>
     </Compile>
     <Compile Include="Util\RemoteUtil.cs" />
   </ItemGroup>

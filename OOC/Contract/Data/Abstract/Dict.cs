@@ -8,12 +8,12 @@ using OOC.Util;
 namespace OOC.Contract.Data.Abstract
 {
     [DataContract]
-    public class Dict
+    public class Dict: SerializableData
     {
         [DataMember]
         public Dictionary<string, string> Kvs { get; set; }
 
-        public string Serialized
+        public new string Serialized
         {
             get
             {

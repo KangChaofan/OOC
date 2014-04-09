@@ -12,6 +12,9 @@ OOC.Util/bin/Release/OOC.*
 OOC.TaskRunner/obj/*
 OOC.TaskRunner/bin/Debug/OOC.*
 OOC.TaskRunner/bin/Release/OOC.*
+OOC.UnitTest/obj/*
+OOC.UnitTest/bin/Debug/OOC.*
+OOC.UnitTest/bin/Release/OOC.*
 *.pdb
 *.suo
 .DS_Store

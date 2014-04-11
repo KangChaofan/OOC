@@ -597,6 +597,11 @@ namespace OOC.OpenMIWrapper
 
         #region Private methods
 
+        private bool isModelEngineComponent(ILinkableComponent component)
+        {
+            return typeof(LinkableRunEngine).IsAssignableFrom(component.GetType());
+        }
+
         /// <summary>
         /// This method is called in <see cref="Run">Run</see> method.
         /// </summary>
@@ -628,9 +633,20 @@ namespace OOC.OpenMIWrapper
                 ITime triggerTime = new TimeStamp(CalendarConverter.Gregorian2ModifiedJulian(TriggerInvokeTime));
                 foreach (Model uimodel in _models)
                 {
+                    if (!isModelEngineComponent(uimodel.LinkableComponent)) continue;
                     LinkableRunEngine runEngine = (LinkableRunEngine)uimodel.LinkableComponent;
+                    // Calculating out-degree
+                    int outDegree = 0;
+                    foreach (ILink link in runEngine.GetProvidingLinks())
+                    {
+                        if (!isModelEngineComponent(link.TargetComponent)) continue;
+                        outDegree++;
+                    }
                     // Find edge in graph
-                    if (runEngine.GetProvidingLinks().Length > 0) continue;
+                    if (outDegree > 0) continue;
+                    Event theEvent = new Event(EventType.Informative);
+                    theEvent.Description = "Found edge model: " + uimodel.ModelID;
+                    _runListener.OnEvent(theEvent);
                     // Trigger it
                     runEngine.RunToTime(triggerTime, -1);
                 }

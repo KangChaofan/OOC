@@ -19,6 +19,12 @@
   <wsdl:message name="ITaskService_Create_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateResponse" />
   </wsdl:message>
+  <wsdl:message name="ITaskService_SyncComposition_InputMessage">
+    <wsdl:part name="parameters" element="tns:SyncComposition" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_SyncComposition_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SyncCompositionResponse" />
+  </wsdl:message>
   <wsdl:message name="ITaskService_UpdateState_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateState" />
   </wsdl:message>
@@ -66,6 +72,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/Create" message="tns:ITaskService_Create_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/CreateResponse" message="tns:ITaskService_Create_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="SyncComposition">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/SyncComposition" message="tns:ITaskService_SyncComposition_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/SyncCompositionResponse" message="tns:ITaskService_SyncComposition_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="UpdateState">
       <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/UpdateState" message="tns:ITaskService_UpdateState_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/UpdateStateResponse" message="tns:ITaskService_UpdateState_OutputMessage" />
@@ -99,6 +109,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="Create">
       <soap:operation soapAction="http://tempuri.org/ITaskService/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncComposition">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/SyncComposition" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

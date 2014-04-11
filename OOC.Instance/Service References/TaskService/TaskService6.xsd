@@ -19,6 +19,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SyncComposition">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SyncCompositionResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="UpdateState">
     <xs:complexType>
       <xs:sequence>

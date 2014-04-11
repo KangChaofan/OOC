@@ -6,9 +6,13 @@
   </xs:complexType>
   <xs:element name="SerializableData" nillable="true" type="tns:SerializableData" />
   <xs:complexType name="Dict">
-    <xs:sequence>
-      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Kvs" nillable="true" type="q1:ArrayOfKeyValueOfstringstring" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:SerializableData">
+        <xs:sequence>
+          <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Kvs" nillable="true" type="q1:ArrayOfKeyValueOfstringstring" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="Dict" nillable="true" type="tns:Dict" />
 </xs:schema>

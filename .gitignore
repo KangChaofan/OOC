@@ -15,6 +15,9 @@ OOC.TaskRunner/bin/Release/OOC.*
 OOC.UnitTest/obj/*
 OOC.UnitTest/bin/Debug/OOC.*
 OOC.UnitTest/bin/Release/OOC.*
+OOC.OpenMIComponent.DataMonitor/obj/*
+OOC.OpenMIComponent.DataMonitor/bin/Debug/OOC.*
+OOC.OpenMIComponent.DataMonitor/bin/Release/OOC.*
 *.pdb
 *.suo
 .DS_Store

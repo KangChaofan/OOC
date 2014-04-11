@@ -25,12 +25,6 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="OOCEntityObject" nillable="true" type="tns:OOCEntityObject" />
-  <xs:complexType name="ArrayOfCompositionLink">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="CompositionLink" nillable="true" type="tns:CompositionLink" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfCompositionLink" nillable="true" type="tns:ArrayOfCompositionLink" />
   <xs:complexType name="CompositionLink">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:OOCEntityObject">

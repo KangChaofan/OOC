@@ -118,16 +118,16 @@ namespace OOC.Instance
                 PipeUtil.WriteCommand(bw, new PipeCommand("SetModelProperties", properties));
             }
 
-            foreach (CompositionLink link in TaskAssign.CompositionData.Links)
+            foreach (CompositionLinkData link in TaskAssign.CompositionData.Links)
             {
                 properties = new Dictionary<string, string>();
-                properties["linkId"] = link.guid;
-                properties["sourceModelId"] = link.sourceCmGuid;
-                properties["targetModelId"] = link.targetCmGuid;
-                properties["sourceQuantity"] = link.sourceQuantity;
-                properties["targetQuantity"] = link.targetQuantity;
-                properties["sourceElementSet"] = link.sourceElementSet;
-                properties["targetElementSet"] = link.targetElementSet;
+                properties["linkId"] = link.CompositionLink.guid;
+                properties["sourceModelId"] = link.CompositionLink.sourceCmGuid;
+                properties["targetModelId"] = link.CompositionLink.targetCmGuid;
+                properties["sourceQuantity"] = link.CompositionLink.sourceQuantity;
+                properties["targetQuantity"] = link.CompositionLink.targetQuantity;
+                properties["sourceElementSet"] = link.CompositionLink.sourceElementSet;
+                properties["targetElementSet"] = link.CompositionLink.targetElementSet;
                 PipeUtil.WriteCommand(bw, new PipeCommand("AddLink", properties));
             }
 

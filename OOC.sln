@@ -16,6 +16,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOC.TaskRunner", "OOC.TaskR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOC.UnitTest", "OOC.UnitTest\OOC.UnitTest.csproj", "{166F60E1-3B8E-40D5-999D-61C3A03921C2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OOC.OpenMIComponent", "OOC.OpenMIComponent", "{9FAFF80F-7F30-4176-B89F-23F0D2B03EB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOC.OpenMIComponent.DataMonitor", "OOC.OpenMIComponent.DataMonitor\OOC.OpenMIComponent.DataMonitor.csproj", "{54CD65FF-3D4D-4EAA-A2FC-3D458B5B403D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,8 +50,15 @@ Global
 		{166F60E1-3B8E-40D5-999D-61C3A03921C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{166F60E1-3B8E-40D5-999D-61C3A03921C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{166F60E1-3B8E-40D5-999D-61C3A03921C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54CD65FF-3D4D-4EAA-A2FC-3D458B5B403D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54CD65FF-3D4D-4EAA-A2FC-3D458B5B403D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54CD65FF-3D4D-4EAA-A2FC-3D458B5B403D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54CD65FF-3D4D-4EAA-A2FC-3D458B5B403D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{54CD65FF-3D4D-4EAA-A2FC-3D458B5B403D} = {9FAFF80F-7F30-4176-B89F-23F0D2B03EB7}
 	EndGlobalSection
 EndGlobal

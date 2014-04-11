@@ -80,7 +80,7 @@ namespace OOC.Instance
                 logger.Info("Uploading " + filePath + " to " + fileServicePath + "...");
                 try
                 {
-                    fileService.Put(fileServicePath, File.ReadAllBytes(filePath));
+                    fileService.Put(fileServicePath, IOUtil.ReadAllBytes(filePath));
                     taskService.AddTaskFileMapping(TaskGuid, fileServicePath, relativePath, type, true);
                 }
                 catch

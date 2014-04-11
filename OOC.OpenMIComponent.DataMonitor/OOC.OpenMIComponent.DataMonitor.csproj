@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5ACDB1C5-29E3-4F1F-9696-E8ABAAB67F0A}</ProjectGuid>
+    <ProjectGuid>{54CD65FF-3D4D-4EAA-A2FC-3D458B5B403D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OOC.Util</RootNamespace>
-    <AssemblyName>OOC.Util</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>OOC.OpenMIComponent.DataMonitor</RootNamespace>
+    <AssemblyName>OOC.OpenMIComponent.DataMonitor</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,12 +30,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Oatc.OpenMI.Sdk.Backbone">
+      <HintPath>..\OOC.OpenMIWrapper\bin\Debug\Oatc.OpenMI.Sdk.Backbone.dll</HintPath>
+    </Reference>
+    <Reference Include="Oatc.OpenMI.Sdk.Buffer">
+      <HintPath>..\OOC.OpenMIWrapper\bin\Debug\Oatc.OpenMI.Sdk.Buffer.dll</HintPath>
+    </Reference>
+    <Reference Include="Oatc.OpenMI.Sdk.DevelopmentSupport">
+      <HintPath>..\OOC.OpenMIWrapper\bin\Debug\Oatc.OpenMI.Sdk.DevelopmentSupport.dll</HintPath>
+    </Reference>
+    <Reference Include="Oatc.OpenMI.Sdk.Spatial">
+      <HintPath>..\OOC.OpenMIWrapper\bin\Debug\Oatc.OpenMI.Sdk.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="Oatc.OpenMI.Sdk.Wrapper">
+      <HintPath>..\OOC.OpenMIWrapper\bin\Debug\Oatc.OpenMI.Sdk.Wrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenMI.Standard">
+      <HintPath>..\OOC.OpenMIWrapper\bin\Debug\OpenMI.Standard.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,15 +57,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IOUtil.cs" />
+    <Compile Include="DataLogger.cs" />
+    <Compile Include="DataMonitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GuidUtil.cs" />
-    <Compile Include="HashUtil.cs" />
-    <Compile Include="Logger.cs" />
-    <Compile Include="SerializableUtil.cs" />
-    <Compile Include="SerializationUtil.cs" />
-    <Compile Include="SysUtil.cs" />
-    <Compile Include="PipeUtil.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

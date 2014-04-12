@@ -50,15 +50,14 @@ namespace OOC.Service
                 throw new FaultException("PATH_NOT_EXISTS");
             }
             string[] files = Directory.GetFiles(realPath);
-            List<FileDescription> descs = new List<FileDescription>();
+            List<FileDescription> fileDescriptions = new List<FileDescription>();
             foreach (string file in files)
             {
-                FileDescription desc = new FileDescription();
-                desc.FileName = file.Substring(file.LastIndexOf("\\") + 1);
-                desc.Size = (int)new FileInfo(file).Length;
-                descs.Add(desc);
+                string fileName = file.Substring(file.LastIndexOf("\\") + 1);
+                FileDescription desc = new FileDescription(fileName, new FileInfo(file));
+                fileDescriptions.Add(desc);
             }
-            return descs;
+            return fileDescriptions;
         }
 
         public void Copy(string sourceFileName, string destFileName)
@@ -76,7 +75,7 @@ namespace OOC.Service
             File.Copy(srcRealPath, dstRealPath);
         }
 
-        public FileStatResponse Stat(string fileName)
+        public FileDescription Stat(string fileName)
         {
             string realPath = Path.Combine(new string[] { fileRoot, fileName }).ToString();
             if (!File.Exists(realPath) || !realPath.StartsWith(fileRoot))
@@ -84,7 +83,7 @@ namespace OOC.Service
                 throw new FaultException("FILE_NOT_EXISTS");
             }
             FileInfo info = new FileInfo(realPath);
-            return new FileStatResponse(fileName, info.Length);
+            return new FileDescription(fileName, info);
         }
 
         public void Delete(string path)

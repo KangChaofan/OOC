@@ -15,6 +15,15 @@ namespace OOC.Contract.Service
     public interface ICompositionService
     {
         [OperationContract]
+        List<Composition> QueryCompositionByAuthorUserId(int authorUserId);
+
+        [OperationContract]
+        List<Composition> QueryCompositionByKeyword(string keyword);
+
+        [OperationContract]
+        List<Composition> QueryCompositionByModel(string modelGuid);
+
+        [OperationContract]
         string Create(int authorUserId, string title, bool isShared, bool isFinished);
 
         [OperationContract]

@@ -89,9 +89,6 @@
     <None Include="Service References\FileService\OOC.Instance.FileService.FileEntityResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\FileService\OOC.Instance.FileService.FileStatResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\InstanceService\InstanceService.wsdl" />
     <None Include="Service References\InstanceService\InstanceService.xsd">
       <SubType>Designer</SubType>

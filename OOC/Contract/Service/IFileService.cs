@@ -14,7 +14,7 @@ namespace OOC.Contract.Service
     public interface IFileService
     {
         [OperationContract]
-        FileStatResponse Stat(string fileName);
+        FileDescription Stat(string fileName);
 
         [OperationContract]
         FileEntityResponse Get(string fileName);

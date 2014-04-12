@@ -113,7 +113,6 @@
     <Compile Include="Contract\Data\Common\ModelPropertyAdditional.cs" />
     <Compile Include="Contract\Data\Common\CompositionModelProperties.cs" />
     <Compile Include="Contract\Data\Common\LinkDataOperation.cs" />
-    <Compile Include="Contract\Data\Response\FileStatResponse.cs" />
     <Compile Include="Contract\Data\Request\InstanceHeartbeatStatus.cs" />
     <Compile Include="Contract\Data\Response\TaskInfoResponse.cs" />
     <Compile Include="Contract\Data\Response\TaskAssignResponse.cs" />

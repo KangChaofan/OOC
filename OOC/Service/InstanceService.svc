@@ -1,1 +1,0 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="OOC.Service.InstanceService" CodeBehind="InstanceService.svc.cs" %>

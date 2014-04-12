@@ -1,5 +1,5 @@
-OOC/obj/*
-OOC/bin/OOC.*
+OOC.Server/obj/*
+OOC.Server/bin/OOC.*
 OOC.Instance/obj/*
 OOC.Instance/bin/Debug/OOC.*
 OOC.Instance/bin/Release/OOC.*

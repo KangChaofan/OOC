@@ -5,40 +5,41 @@
         Loaded="Window_Loaded">
     <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="1" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="1" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="5"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="5"/>
-            <RowDefinition Height="65"/>
-            <RowDefinition/>
-            <RowDefinition Height="1"/>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="65" />
+            <RowDefinition />
+            <RowDefinition Height="1" />
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Column="1" Grid.Row="0" Margin="0,0,0,4" Grid.RowSpan="2">
-            <Border Name="addressBorder" DockPanel.Dock="Top" >
+            <Border Name="addressBorder" DockPanel.Dock="Top">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition MinWidth="100"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition MinWidth="100" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0" MinWidth="100" Margin="0,0,0,5">Path</TextBox>
-                    <GridSplitter  Grid.Column="1" Width="5" Margin="0,0,0,5"/>
+                    <GridSplitter Grid.Column="1" Width="5" Margin="0,0,0,5" />
                     <TextBox Grid.Column="2" MinWidth="75" Margin="0,0,0,5">Search</TextBox>
                 </Grid>
             </Border>
         </DockPanel>
 
         <DockPanel Name="menuDock" Grid.Row="2" LastChildFill="True" Grid.Column="1" Margin="0,2,0,0">
-            <Menu x:Name="menu"
-                                      GotKeyboardFocus="menu_GotKeyboardFocus"
-                                      LostKeyboardFocus="menu_LostKeyboardFocus"
-                                      ContextMenuOpening="menu_ContextMenuOpening" Visibility="Visible" Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}">
+            <Menu
+                GotKeyboardFocus="menu_GotKeyboardFocus"
+                LostKeyboardFocus="menu_LostKeyboardFocus"
+                ContextMenuOpening="menu_ContextMenuOpening" Visibility="Visible"
+                Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}">
                 <MenuItem Header="文件(_F)">
                     <MenuItem Header="打开(_O)..." />
                     <MenuItem Header="保存(_S)" />

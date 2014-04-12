@@ -39,6 +39,8 @@ namespace FileClient
             //init here
             Height = 675;
             Width = 1200;
+
+            menuDock.Visibility = Visibility.Collapsed;
         }
 
         public void NavigateTo(string path)
@@ -56,34 +58,30 @@ namespace FileClient
 
         private void menu_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            menu.Visibility = Visibility.Visible;
-            //statusDock.Visibility = Visibility.Visible;
+            menuDock.Visibility = Visibility.Visible;
         }
 
         private void menu_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            menu.Visibility = Visibility.Collapsed;
-            //statusDock.Visibility = Visibility.Collapsed;
+            menuDock.Visibility = Visibility.Collapsed;
         }
 
         private void menu_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
-            menu.Visibility = Visibility.Visible;
-            //statusDock.Visibility = Visibility.Visible;
+            menuDock.Visibility = Visibility.Visible;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ApplyGlassEffect(addressBorder);
         }
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.SystemKey == Key.LeftAlt || e.SystemKey == Key.RightAlt)
             {
-                menu.Visibility = Visibility.Visible;
-                //statusDock.Visibility = Visibility.Visible;
+                    menuDock.Visibility = Visibility.Visible;
             }
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            ApplyGlassEffect(addressBorder);
         }
 
         private void ApplyGlassEffect(Border border)
@@ -130,7 +128,7 @@ namespace FileClient
                     }
                 }
             }
-            // If not Vista, paint background white.
+            // If not Vista or up, paint background white.
             catch (DllNotFoundException)
             {
                 Application.Current.MainWindow.Background = Brushes.White;

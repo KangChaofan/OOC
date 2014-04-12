@@ -47,8 +47,8 @@ namespace OOC.UnitTest.Util
             SerializableUtil.ShallowCopy(_yongquan, out clone);
             _nobody = (Person)clone;
 
-            //TODO complete me.
-            Assert.IsNotNull(_nobody);
+            Assert.AreEqual(_yongquan, _nobody);
+            Assert.AreSame(_yongquan, _nobody);
         }
 
         [Serializable]

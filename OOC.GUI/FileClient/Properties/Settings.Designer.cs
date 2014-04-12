@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FileServiceClient.Properties
+namespace FileClient.Properties
 {
 
 

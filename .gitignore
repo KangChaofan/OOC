@@ -22,3 +22,5 @@ OOC.OpenMIComponent.DataMonitor/bin/Release/OOC.*
 *.suo
 .DS_Store
 *.csproj.user
+/OOC.Clients/FileServiceClient/obj
+/OOC.Clients/FileServiceClient/bin

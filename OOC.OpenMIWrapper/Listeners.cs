@@ -56,7 +56,7 @@ namespace OOC.OpenMIWrapper
         public void Initialize(Logger logger)
         {
             ArrayList acceptedEventTypes = new ArrayList();
-            for (int i = 0; i < (int)EventType.NUM_OF_EVENT_TYPES; i++)
+            for (int i = 0; i < 6; i++)
                 acceptedEventTypes.Add((EventType)i);
             _acceptedEventTypes = (EventType[])acceptedEventTypes.ToArray(typeof(EventType));
             _logger = logger;

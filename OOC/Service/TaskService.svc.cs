@@ -120,8 +120,12 @@ namespace OOC.Service
                     type = (sbyte)type,
                     isDownloadable = isDownloadable
                 };
-                db.TaskFileMapping.AddObject(taskFileMapping);
-                db.SaveChanges();
+                try
+                {
+                    db.TaskFileMapping.AddObject(taskFileMapping);
+                    db.SaveChanges();
+                }
+                catch { }
             }
         }
 

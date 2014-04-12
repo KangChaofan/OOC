@@ -216,5 +216,39 @@ namespace OOC.Service
                 return new CompositionData(result.First());
             }
         }
+
+        public List<Composition> QueryCompositionByAuthorUserId(int authorUserId)
+        {
+            using (OOCEntities db = new OOCEntities())
+            {
+                IQueryable<Composition> result = from o in db.Composition
+                                                 where o.authorUserId == authorUserId
+                                                 select o;
+                return result.ToList();
+            }
+        }
+
+        public List<Composition> QueryCompositionByKeyword(string keyword)
+        {
+            using (OOCEntities db = new OOCEntities())
+            {
+                IQueryable<Composition> result = from o in db.Composition
+                                                 where o.title.Contains(keyword)
+                                                 select o;
+                return result.ToList();
+            }
+        }
+
+        public List<Composition> QueryCompositionByModel(string modelGuid)
+        {
+            using (OOCEntities db = new OOCEntities())
+            {
+                IQueryable<Composition> result = from cm in db.CompositionModel
+                                                 join c in db.Composition on cm.compositionGuid equals c.guid
+                                                 where cm.modelGuid == modelGuid
+                                                 select c;
+                return result.Distinct().ToList();
+            }
+        }
     }
 }

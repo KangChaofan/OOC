@@ -1,8 +1,12 @@
 ﻿<Window x:Class="FileClient.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         Title="MainWindow" Height="370" Width="480" PreviewKeyDown="Window_PreviewKeyDown"
         Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style x:Key="SampleContent" TargetType="{x:Type ContentControl}" />
+    </Window.Resources>
     <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1" />
@@ -55,6 +59,9 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
+        <xctk:BusyIndicator Grid.Row="4" Grid.Column="1" IsBusy="True" BusyContent="loading file...">
+
+        </xctk:BusyIndicator>
     </Grid>
     <!--
     <DockPanel Name="mainDock" Grid.RowSpan="2">

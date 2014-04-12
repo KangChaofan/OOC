@@ -1,38 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Drawing;
 using System.ServiceModel;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FileClient.FileService;
 using FileClient.WindowEffect;
 using OOC.Util;
+using Brushes = System.Windows.Media.Brushes;
+using Color = System.Windows.Media.Color;
 
 namespace FileClient
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    ///     MainWindow.xaml 的交互逻辑
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly Logger _logger = new Logger("OOC.GUI.FileClient.log");
         private readonly FileServiceClient Client = new FileServiceClient();
-        public string CurrentPath { get; set; }
+        private readonly Logger _logger = new Logger("OOC.GUI.FileClient.log");
 
         public MainWindow()
         {
             InitializeComponent();
             Init();
         }
+
+        public string CurrentPath { get; set; }
 
         public void Init()
         {
@@ -52,7 +47,6 @@ namespace FileClient
             catch (FaultException e)
             {
                 _logger.Warn(e.Message);
-
             }
         }
 
@@ -80,7 +74,7 @@ namespace FileClient
         {
             if (e.SystemKey == Key.LeftAlt || e.SystemKey == Key.RightAlt)
             {
-                    menuDock.Visibility = Visibility.Visible;
+                menuDock.Visibility = Visibility.Visible;
             }
         }
 
@@ -101,17 +95,17 @@ namespace FileClient
                         mainWindowSrc.CompositionTarget.BackgroundColor = Color.FromArgb(0, 0, 0, 0);
 
                 // Get System Dpi
-                System.Drawing.Graphics desktop = System.Drawing.Graphics.FromHwnd(mainWindowPtr);
+                Graphics desktop = Graphics.FromHwnd(mainWindowPtr);
                 float DesktopDpiX = desktop.DpiX;
                 float DesktopDpiY = desktop.DpiY;
 
                 // Set Margins
-                NonClientRegionAPI.MARGINS margins = new NonClientRegionAPI.MARGINS
+                var margins = new NonClientRegionAPI.MARGINS
                     {
-                        cxLeftWidth = Convert.ToInt32(borderWidth * (DesktopDpiX / dpi)),
-                        cxRightWidth = Convert.ToInt32(borderWidth * (DesktopDpiX / dpi)),
-                        cyTopHeight = Convert.ToInt32(((int)border.ActualHeight + borderWidth + 5) * (DesktopDpiY / dpi)),
-                        cyBottomHeight = Convert.ToInt32(borderWidth * (DesktopDpiY / dpi))
+                        cxLeftWidth = Convert.ToInt32(borderWidth*(DesktopDpiX/dpi)),
+                        cxRightWidth = Convert.ToInt32(borderWidth*(DesktopDpiX/dpi)),
+                        cyTopHeight = Convert.ToInt32(((int) border.ActualHeight + borderWidth + 5)*(DesktopDpiY/dpi)),
+                        cyBottomHeight = Convert.ToInt32(borderWidth*(DesktopDpiY/dpi))
                     };
 
                 // Extend glass frame into client area
@@ -128,7 +122,7 @@ namespace FileClient
                     }
                 }
             }
-            // If not Vista or up, paint background white.
+                // If not Vista or up, paint background white.
             catch (DllNotFoundException)
             {
                 Application.Current.MainWindow.Background = Brushes.White;

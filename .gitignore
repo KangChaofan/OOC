@@ -25,3 +25,4 @@ OOC.OpenMIComponent.DataMonitor/bin/Release/OOC.*
 /OOC.GUI/FileClient/obj
 /OOC.GUI/FileClient/bin
 /OOC.sln.bak
+*.pyc

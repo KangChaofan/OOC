@@ -14,7 +14,7 @@ namespace OOC.Contract.Service
     public interface IFileService
     {
         [OperationContract]
-        FileDescription Stat(string fileName);
+        FileSystemDescription Stat(string fileName);
 
         [OperationContract]
         FileEntityResponse Get(string fileName);
@@ -29,7 +29,7 @@ namespace OOC.Contract.Service
         void Copy(string sourceFileName, string destFileName);
 
         [OperationContract]
-        List<FileDescription> List(string path);
+        List<FileSystemDescription> List(string path);
 
         [OperationContract]
         void CreateDirectory(string path);

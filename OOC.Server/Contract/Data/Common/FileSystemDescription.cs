@@ -1,32 +1,30 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization;
+using OOC.Util;
 
 namespace OOC.Contract.Data.Common
 {
     [DataContract]
-    public class FileDescription
+    public class FileSystemDescription
     {
-        public FileDescription()
+
+        public FileSystemDescription()
         {
         }
 
-        public FileDescription(string fileName, FileInfo info)
-            : this(fileName, info, false)
+        public FileSystemDescription(string fileName, FileSystemInfo info)
         {
-        }
-
-        public FileDescription(string fileName, FileInfo info, bool isDirecotry)
-        {
-            FileName = fileName;
-            IsDirectory = isDirecotry;
-            if (isDirecotry)
+            Name = fileName;
+            if (info is DirectoryInfo)
             {
+                IsDirectory = true;
                 Size = -1;
             }
-            else
+            else if (info is FileInfo)
             {
-                Size = info.Length;
+                IsDirectory = false;
+                Size = info.CastTo<FileInfo>().Length;
             }
             CreateTime = info.CreationTime;
             AccessTime = info.LastAccessTime;
@@ -37,7 +35,7 @@ namespace OOC.Contract.Data.Common
         public bool IsDirectory { get; set; }
 
         [DataMember]
-        public string FileName { get; set; }
+        public string Name { get; set; }
 
         [DataMember]
         public long Size { get; set; }

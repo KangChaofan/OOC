@@ -32,31 +32,33 @@ namespace OOC.Service
             {
                 throw new FaultException("ACCESS_DENIED");
             }
-            Directory.CreateDirectory(Path.GetDirectoryName(realPath));
+            string dirName = Path.GetDirectoryName(realPath);
+            if (dirName != null) Directory.CreateDirectory(dirName);
             File.WriteAllBytes(realPath, content);
         }
 
-        public List<FileDescription> List(string path)
+        public List<FileSystemDescription> List(string path)
         {
             string realPath = Path.Combine(new[] {fileRoot, path});
             if (!Directory.Exists(realPath) || !realPath.StartsWith(fileRoot))
             {
                 throw new FaultException("PATH_NOT_EXISTS");
             }
-            var fileDescriptions = new List<FileDescription>();
 
             string[] files = Directory.GetFiles(realPath);
-            foreach (string file in files)
-            {
-                string fileName = Path.GetFileName(file);
-                var desc = new FileDescription(fileName, new FileInfo(file), false);
-                fileDescriptions.Add(desc);
-            }
 
+            //add files in the path.
+            List<FileSystemDescription> fileDescriptions =
+                (from file in files
+                 let fileName = Path.GetFileName(file)
+                 select new FileSystemDescription(fileName, new FileInfo(file))).ToList();
+
+            //add directories in the path.
             string[] directories = Directory.GetDirectories(realPath);
             fileDescriptions.AddRange(
                 directories.Select(Path.GetFileNameWithoutExtension)
-                           .Select(dirName => new FileDescription(dirName, new FileInfo(dirName), true)));
+                           .Select(
+                               dirName => new FileSystemDescription(dirName, new DirectoryInfo(dirName))));
 
             return fileDescriptions;
         }
@@ -76,16 +78,22 @@ namespace OOC.Service
             File.Copy(srcRealPath, dstRealPath);
         }
 
-        public FileDescription Stat(string fileName)
+        public FileSystemDescription Stat(string fileName)
         {
-            //TODO complete me!
             string realPath = Path.Combine(new[] {fileRoot, fileName});
-            if (!File.Exists(realPath) || !realPath.StartsWith(fileRoot))
+            if (!realPath.StartsWith(fileRoot))
             {
-                throw new FaultException("FILE_NOT_EXISTS");
+                throw new FaultException("PERMISSION_DENIED");
             }
-            var info = new FileInfo(realPath);
-            return new FileDescription(fileName, info);
+            if (File.Exists(realPath))
+            {
+                return new FileSystemDescription(fileName, new FileInfo(realPath));
+            }
+            if (Directory.Exists(realPath))
+            {
+                return new FileSystemDescription(fileName, new DirectoryInfo(realPath));
+            }
+            throw new FaultException("FILE_NOT_EXISTS");
         }
 
         public void Delete(string path)

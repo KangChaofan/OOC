@@ -129,10 +129,10 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Service References\FileService\FileClient.FileService.FileDescription.datasource">
+    <None Include="Service References\FileService\FileClient.FileService.FileEntityResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\FileService\FileClient.FileService.FileEntityResponse.datasource">
+    <None Include="Service References\FileService\FileClient.FileService.FileSystemDescription.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FileService\FileService.wsdl" />

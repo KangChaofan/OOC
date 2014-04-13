@@ -148,7 +148,7 @@ namespace OOC.OpenMIWrapper
 
             string name = new AssemblyName(args.Name).Name + ".dll";
 
-            FileInfo fi;
+            FileSystemInfo fi;
             Assembly a = null;
 
             foreach (AssemblyItem ai in _assemblies)

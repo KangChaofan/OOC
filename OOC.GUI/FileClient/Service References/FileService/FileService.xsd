@@ -12,7 +12,7 @@
   <xs:element name="StatResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="StatResult" nillable="true" type="q1:FileDescription" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="StatResult" nillable="true" type="q1:FileSystemDescription" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -78,7 +78,7 @@
   <xs:element name="ListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="ListResult" nillable="true" type="q3:ArrayOfFileDescription" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="ListResult" nillable="true" type="q3:ArrayOfFileSystemDescription" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

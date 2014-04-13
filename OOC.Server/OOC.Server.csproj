@@ -145,7 +145,7 @@
     <Compile Include="Service\UserService.svc.cs">
       <DependentUpon>UserService.svc</DependentUpon>
     </Compile>
-    <Compile Include="Contract\Data\Common\FileDescription.cs" />
+    <Compile Include="Contract\Data\Common\FileSystemDescription.cs" />
     <Compile Include="Contract\Service\IFileService.cs" />
     <Compile Include="Service\FileService.svc.cs">
       <DependentUpon>FileService.svc</DependentUpon>

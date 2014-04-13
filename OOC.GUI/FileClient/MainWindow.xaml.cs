@@ -132,21 +132,26 @@ namespace FileClient
 
         private void OnBreadcrumbConvertItem(object sender, BreadcrumbConvertItemEventArgs e)
         {
-            _logger.Debug(string.Format("[LIST]{0}", e.Path));
+            string path = e.Path;
             var item = e.Item as BreadcrumbItem;
             if (item == null) return;
             ItemCollection items = item.Items;
             items.Clear();
             try
             {
-                FileSystemDescription[] fileDescriptions = Client.List(e.Path);
-                foreach (FileSystemDescription file in fileDescriptions)
+                FileSystemDescription filedesc = Client.Stat(path);
+                if (filedesc.IsDirectory)
                 {
-                    items.Add(new BreadcrumbItem
-                        {
-                            Header = file.Name,
-                            PathEntry = file.Name,
-                        });
+                    _logger.Debug(string.Format("[LIST]{0}", path));
+                    FileSystemDescription[] fileDescriptions = Client.List(path);
+                    foreach (FileSystemDescription file in fileDescriptions)
+                    {
+                        items.Add(new BreadcrumbItem
+                            {
+                                Header = file.Name,
+                                PathEntry = file.Name,
+                            });
+                    }
                 }
             }
             catch (FaultException ex)

@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
+using ActiproSoftware.Windows.Controls.Navigation;
 using FileClient.FileService;
 using FileClient.WindowEffect;
 using OOC.Util;
@@ -127,6 +128,11 @@ namespace FileClient
             {
                 Application.Current.MainWindow.Background = Brushes.White;
             }
+        }
+
+        private void OnBreadcrumbConvertItem(object sender, BreadcrumbConvertItemEventArgs e)
+        {
+            //throw new NotImplementedException();
         }
     }
 }

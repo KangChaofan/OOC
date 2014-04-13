@@ -1,9 +1,13 @@
-﻿<Window x:Class="FileClient.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        Title="MainWindow" Height="370" Width="480" PreviewKeyDown="Window_PreviewKeyDown"
-        Loaded="Window_Loaded">
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    xmlns:navigation="http://schemas.actiprosoftware.com/winfx/xaml/navigation"
+    xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
+    xmlns:themes="clr-namespace:ActiproSoftware.Windows.Themes;assembly=ActiproSoftware.Shared.Wpf"
+    x:Class="FileClient.MainWindow"
+    Title="MainWindow" Height="370" Width="480" PreviewKeyDown="Window_PreviewKeyDown"
+    Loaded="Window_Loaded">
     <Window.Resources>
         <Style x:Key="SampleContent" TargetType="{x:Type ContentControl}" />
     </Window.Resources>
@@ -14,7 +18,7 @@
             <ColumnDefinition Width="1" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="5" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="5" />
@@ -23,22 +27,72 @@
             <RowDefinition Height="1" />
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Column="1" Grid.Row="0" Margin="0,0,0,4" Grid.RowSpan="2">
-            <Border Name="addressBorder" DockPanel.Dock="Top">
+        <DockPanel x:Name="addressDock" Grid.Column="1" Grid.Row="0" Margin="0,0,0,0">
+            <Border x:Name="addressBorder" DockPanel.Dock="Top">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition MinWidth="100" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" MinWidth="100" Margin="0,0,0,5">Path</TextBox>
+                    <StackPanel Grid.Column="0" Margin="0,0,0,5">
+                        <shared:PixelSnapper />
+                        <shared:PixelSnapper />
+                        <navigation:Breadcrumb Margin="0,0,0,0"
+                                               AutoMinimizeItemCount="0"
+                                               ConvertItem="OnBreadcrumbConvertItem">
+                            <navigation:BreadcrumbItem Header="Root"
+                                                       PathEntry="Root"
+                                                       ImageSource="/Resources/Images/Computer16.png">
+                                <navigation:BreadcrumbItem Header="Folder 1"
+                                                           PathEntry="Folder 1"
+                                                           ImageSource="/Resources/Images/FolderOpen16.png">
+                                    <navigation:BreadcrumbItem Header="Subfolder 1"
+                                                               PathEntry="Subfolder 1"
+                                                               ImageSource="/Resources/Images/FolderGreen16.png" />
+                                    <navigation:BreadcrumbItem Header="Subfolder 2"
+                                                               PathEntry="Subfolder 2"
+                                                               ImageSource="/Resources/Images/FolderGreen16.png" />
+                                    <navigation:BreadcrumbItem Header="Subfolder 3"
+                                                               PathEntry="Subfolder 3"
+                                                               ImageSource="/Resources/Images/FolderGreen16.png" />
+                                </navigation:BreadcrumbItem>
+                                <navigation:BreadcrumbItem Header="Folder 2"
+                                                           PathEntry="Folder 2"
+                                                           ImageSource="/Resources/Images/FolderOpen16.png">
+                                    <navigation:BreadcrumbItem Header="Subfolder 1"
+                                                               PathEntry="Subfolder 1"
+                                                               ImageSource="/Resources/Images/FolderGreen16.png" />
+                                    <navigation:BreadcrumbItem Header="Subfolder 2"
+                                                               PathEntry="Subfolder 2"
+                                                               ImageSource="/Resources/Images/FolderGreen16.png" />
+                                    <navigation:BreadcrumbItem Header="Subfolder 3"
+                                                               PathEntry="Subfolder 3"
+                                                               ImageSource="/Resources/Images/FolderGreen16.png" />
+                                </navigation:BreadcrumbItem>
+                                <navigation:BreadcrumbItem Header="Folder 3"
+                                                           PathEntry="Folder 3"
+                                                           ImageSource="/Resources/Images/FolderOpen16.png">
+                                    <navigation:BreadcrumbItem Header="Subfolder 1"
+                                                               PathEntry="Subfolder 1"
+                                                               ImageSource="/Resources/Images/FolderGreen16.png" />
+                                    <navigation:BreadcrumbItem Header="Subfolder 2"
+                                                               PathEntry="Subfolder 2"
+                                                               ImageSource="/Resources/Images/FolderGreen16.png" />
+                                    <navigation:BreadcrumbItem Header="Subfolder 3"
+                                                               PathEntry="Subfolder 3"
+                                                               ImageSource="/Resources/Images/FolderGreen16.png" />
+                                </navigation:BreadcrumbItem>
+                            </navigation:BreadcrumbItem>
+                        </navigation:Breadcrumb>
+                    </StackPanel>
                     <GridSplitter Grid.Column="1" Width="5" Margin="0,0,0,5" />
-                    <TextBox Grid.Column="2" MinWidth="75" Margin="0,0,0,5">Search</TextBox>
+                    <TextBox Grid.Column="2" Margin="0,0,0,5" Text="Search" />
                 </Grid>
             </Border>
         </DockPanel>
 
-        <DockPanel Name="menuDock" Grid.Row="2" LastChildFill="True" Grid.Column="1" Margin="0,2,0,0">
+        <DockPanel x:Name="menuDock" Grid.Row="2" LastChildFill="True" Grid.Column="1" Margin="0,0,0,0">
             <Menu
                 GotKeyboardFocus="menu_GotKeyboardFocus"
                 LostKeyboardFocus="menu_LostKeyboardFocus"
@@ -59,9 +113,13 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <xctk:BusyIndicator Grid.Row="4" Grid.Column="1" IsBusy="True" BusyContent="loading file...">
 
-        </xctk:BusyIndicator>
+
+        <StackPanel Grid.Row="4" Grid.Column="1">
+
+        </StackPanel>
+
+
     </Grid>
     <!--
     <DockPanel Name="mainDock" Grid.RowSpan="2">

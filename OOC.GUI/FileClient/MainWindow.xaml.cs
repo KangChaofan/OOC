@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Media;
 using ActiproSoftware.Windows.Controls.Navigation;
 using FileClient.FileService;
 using FileClient.WindowEffect;
@@ -103,10 +104,10 @@ namespace FileClient
                 // Set Margins
                 var margins = new NonClientRegionAPI.MARGINS
                     {
-                        cxLeftWidth = Convert.ToInt32(borderWidth*(DesktopDpiX/dpi)),
-                        cxRightWidth = Convert.ToInt32(borderWidth*(DesktopDpiX/dpi)),
-                        cyTopHeight = Convert.ToInt32(((int) border.ActualHeight + borderWidth + 5)*(DesktopDpiY/dpi)),
-                        cyBottomHeight = Convert.ToInt32(borderWidth*(DesktopDpiY/dpi))
+                        cxLeftWidth = Convert.ToInt32(borderWidth * (DesktopDpiX / dpi)),
+                        cxRightWidth = Convert.ToInt32(borderWidth * (DesktopDpiX / dpi)),
+                        cyTopHeight = Convert.ToInt32(((int)border.ActualHeight + borderWidth + 5) * (DesktopDpiY / dpi)),
+                        cyBottomHeight = Convert.ToInt32(borderWidth * (DesktopDpiY / dpi))
                     };
 
                 // Extend glass frame into client area
@@ -123,7 +124,7 @@ namespace FileClient
                     }
                 }
             }
-                // If not Vista or up, paint background white.
+            // If not Vista or up, paint background white.
             catch (DllNotFoundException)
             {
                 Application.Current.MainWindow.Background = Brushes.White;
@@ -132,6 +133,29 @@ namespace FileClient
 
         private void OnBreadcrumbConvertItem(object sender, BreadcrumbConvertItemEventArgs e)
         {
+            _logger.Debug(string.Format("[LIST]{0}", e.Path));
+            BreadcrumbItem item = e.Item as BreadcrumbItem;
+            if (item != null)
+            {
+                var items = item.Items;
+                items.Clear();
+                try
+                {
+                    FileDescription[] fileDescriptions = Client.List(e.Path);
+                    foreach (var file in fileDescriptions)
+                    {
+                        items.Add(new BreadcrumbItem
+                            {
+                                Header = file.FileName,
+                                PathEntry = file.FileName,
+                            });
+                    }
+                }
+                catch (FaultException ex)
+                {
+                    _logger.Warn(ex.Message);
+                }
+            }
             //throw new NotImplementedException();
         }
     }

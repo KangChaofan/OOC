@@ -31,18 +31,16 @@
             <Border x:Name="addressBorder" DockPanel.Dock="Top">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition MinWidth="100" />
+                        <ColumnDefinition MinWidth="125" Width="5*" />
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition MinWidth="75" Width="1*" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Margin="0,0,0,5">
-                        <shared:PixelSnapper />
-                        <shared:PixelSnapper />
                         <navigation:Breadcrumb Margin="0,0,0,0"
                                                AutoMinimizeItemCount="0"
                                                ConvertItem="OnBreadcrumbConvertItem">
                             <navigation:BreadcrumbItem Header="Root"
-                                                       PathEntry="Root"
+                                                       PathEntry="."
                                                        ImageSource="/Resources/Images/Computer16.png">
                                 <navigation:BreadcrumbItem Header="Folder 1"
                                                            PathEntry="Folder 1"
@@ -86,12 +84,13 @@
                             </navigation:BreadcrumbItem>
                         </navigation:Breadcrumb>
                     </StackPanel>
-                    <GridSplitter Grid.Column="1" Width="5" Margin="0,0,0,5" />
-                    <TextBox Grid.Column="2" Margin="0,0,0,5" Text="Search" />
+                    <GridSplitter Grid.Column="1" Width="5" Margin="0,0,0,5" HorizontalAlignment="Center"
+                                  Background="Transparent"/>
+                    <TextBox Grid.Column="2" Margin="0,0,0,5" Text="Search"/>
                 </Grid>
             </Border>
-        </DockPanel>
-
+        </DockPanel> 
+        
         <DockPanel x:Name="menuDock" Grid.Row="2" LastChildFill="True" Grid.Column="1" Margin="0,0,0,0">
             <Menu
                 GotKeyboardFocus="menu_GotKeyboardFocus"

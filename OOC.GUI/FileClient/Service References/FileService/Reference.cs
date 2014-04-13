@@ -15,15 +15,27 @@ namespace FileClient.FileService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FileStatResponse", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FileDescription", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common")]
     [System.SerializableAttribute()]
-    public partial class FileStatResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class FileDescription : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime AccessTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FileNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsDirectoryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime ModifyTimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long SizeField;
@@ -39,6 +51,32 @@ namespace FileClient.FileService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime AccessTime {
+            get {
+                return this.AccessTimeField;
+            }
+            set {
+                if ((this.AccessTimeField.Equals(value) != true)) {
+                    this.AccessTimeField = value;
+                    this.RaisePropertyChanged("AccessTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string FileName {
             get {
                 return this.FileNameField;
@@ -47,6 +85,32 @@ namespace FileClient.FileService {
                 if ((object.ReferenceEquals(this.FileNameField, value) != true)) {
                     this.FileNameField = value;
                     this.RaisePropertyChanged("FileName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsDirectory {
+            get {
+                return this.IsDirectoryField;
+            }
+            set {
+                if ((this.IsDirectoryField.Equals(value) != true)) {
+                    this.IsDirectoryField = value;
+                    this.RaisePropertyChanged("IsDirectory");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime ModifyTime {
+            get {
+                return this.ModifyTimeField;
+            }
+            set {
+                if ((this.ModifyTimeField.Equals(value) != true)) {
+                    this.ModifyTimeField = value;
+                    this.RaisePropertyChanged("ModifyTime");
                 }
             }
         }
@@ -135,73 +199,12 @@ namespace FileClient.FileService {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FileDescription", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common")]
-    [System.SerializableAttribute()]
-    public partial class FileDescription : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string FileNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int SizeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FileName {
-            get {
-                return this.FileNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FileNameField, value) != true)) {
-                    this.FileNameField = value;
-                    this.RaisePropertyChanged("FileName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Size {
-            get {
-                return this.SizeField;
-            }
-            set {
-                if ((this.SizeField.Equals(value) != true)) {
-                    this.SizeField = value;
-                    this.RaisePropertyChanged("Size");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="FileService.IFileService")]
     public interface IFileService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/Stat", ReplyAction="http://tempuri.org/IFileService/StatResponse")]
-        FileClient.FileService.FileStatResponse Stat(string fileName);
+        FileClient.FileService.FileDescription Stat(string fileName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/Get", ReplyAction="http://tempuri.org/IFileService/GetResponse")]
         FileClient.FileService.FileEntityResponse Get(string fileName);
@@ -249,7 +252,7 @@ namespace FileClient.FileService {
                 base(binding, remoteAddress) {
         }
         
-        public FileClient.FileService.FileStatResponse Stat(string fileName) {
+        public FileClient.FileService.FileDescription Stat(string fileName) {
             return base.Channel.Stat(fileName);
         }
         

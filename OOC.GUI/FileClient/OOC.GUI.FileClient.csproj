@@ -135,9 +135,6 @@
     <None Include="Service References\FileService\FileClient.FileService.FileEntityResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\FileService\FileClient.FileService.FileStatResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\FileService\FileService.wsdl" />
     <None Include="Service References\FileService\FileService.xsd">
       <SubType>Designer</SubType>

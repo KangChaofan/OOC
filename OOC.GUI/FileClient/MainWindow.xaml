@@ -8,26 +8,56 @@
     x:Class="FileClient.MainWindow"
     Title="MainWindow" Height="370" Width="480" PreviewKeyDown="Window_PreviewKeyDown"
     Loaded="Window_Loaded">
+
+    <Window.DataContext>
+        <XmlDataProvider Source="/Resources/Xml/Data.xml"></XmlDataProvider>
+    </Window.DataContext>
     <Window.Resources>
-        <Style x:Key="SampleContent" TargetType="{x:Type ContentControl}" />
+        <Style x:Key="TreeViewItemStyle" TargetType="{x:Type TreeViewItem}"
+            BasedOn="{StaticResource {x:Static themes:SharedResourceKeys.TreeViewItemStyleKey}}">
+            <Setter Property="ItemsSource"
+								Value="{Binding XPath=ShellItem}" />
+            <Setter Property="Margin"
+								Value="0,3,0,0" />
+        </Style>
+        <shared:UriConverter x:Key="UriConverter" UriPrefix="/Resources/Images/" />
+        <DataTemplate x:Key="ComboBoxItemTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+				   Margin="2,2,0,2"
+				   Source="{Binding XPath=@Image, Path=Value, Converter={StaticResource UriConverter}}"
+				   Stretch="None"
+				   VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1"
+					   Margin="3,0,2,0"
+					   Text="{Binding XPath=@Name}"
+					   VerticalAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
     </Window.Resources>
     <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1" />
-            <ColumnDefinition />
-            <ColumnDefinition Width="1" />
+            <ColumnDefinition Width="0" />
+            <ColumnDefinition Width="103*" />
+            <ColumnDefinition Width="367*"/>
+            <ColumnDefinition Width="0" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="5" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="5" />
-            <RowDefinition Height="65" />
-            <RowDefinition />
-            <RowDefinition Height="1" />
+            <RowDefinition Height="0" />
+            <RowDefinition/>
+            <RowDefinition Height="0" />
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="0"/>
         </Grid.RowDefinitions>
 
-        <DockPanel x:Name="addressDock" Grid.Column="1" Grid.Row="0" Margin="0,0,0,0">
+        <DockPanel x:Name="addressDock" Grid.Column="1" Grid.Row="0" Margin="0,0,0,0" Grid.ColumnSpan="2">
             <Border x:Name="addressBorder" DockPanel.Dock="Top">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -89,14 +119,14 @@
                     <TextBox Grid.Column="2" Margin="0,0,0,5" Text="Search"/>
                 </Grid>
             </Border>
-        </DockPanel> 
-        
-        <DockPanel x:Name="menuDock" Grid.Row="2" LastChildFill="True" Grid.Column="1" Margin="0,0,0,0">
+        </DockPanel>
+
+        <DockPanel x:Name="menuDock" Grid.Row="2" LastChildFill="True" Grid.Column="1" Grid.ColumnSpan="2">
             <Menu
                 GotKeyboardFocus="menu_GotKeyboardFocus"
                 LostKeyboardFocus="menu_LostKeyboardFocus"
                 ContextMenuOpening="menu_ContextMenuOpening" Visibility="Visible"
-                Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}">
+                Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" FontSize="14">
                 <MenuItem Header="文件(_F)">
                     <MenuItem Header="打开(_O)..." />
                     <MenuItem Header="保存(_S)" />
@@ -113,10 +143,34 @@
             </Menu>
         </DockPanel>
 
+        <TreeView x:Name="treeView" Grid.Column="1" Grid.Row="4"
+					  ItemContainerStyle="{StaticResource TreeViewItemStyle}"
+					  ItemsSource="{Binding XPath=*}"
+					  ItemTemplate="{StaticResource ComboBoxItemTemplate}"
+					  SelectedItemChanged="OnTreeViewSelectedItemChanged"/>
+        <ListView Grid.Column="2" Grid.Row="4">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
-        <StackPanel Grid.Row="4" Grid.Column="1">
-
-        </StackPanel>
+        <StatusBar Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem Grid.Column="1" FontSize="14">
+                <TextBlock x:Name="StatusText" Text="this is example text.  示例文本"></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
 
 
     </Grid>

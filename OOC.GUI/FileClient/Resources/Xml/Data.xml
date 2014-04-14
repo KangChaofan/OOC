@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ShellItem Name="Desktop" Image="Desktop16.png">
+  <ShellItem Name="John Doe" Image="Documents16.png">
+    <ShellItem Name="AppData" Image="FolderOpen16.png" />
+    <ShellItem Name="Contacts" Image="Folder16.png" />
+    <ShellItem Name="Desktop" Image="FolderOpen16.png" />
+    <ShellItem Name="Documents" Image="Folder16.png" />
+    <ShellItem Name="Downloads" Image="Folder16.png" />
+    <ShellItem Name="Favorites" Image="Folder16.png" />
+    <ShellItem Name="Links" Image="Folder16.png" />
+    <ShellItem Name="Music" Image="Folder16.png" />
+    <ShellItem Name="Videos" Image="Folder16.png" />
+  </ShellItem>
+
+  <ShellItem Name="Computer" Image="Computer16.png">
+    <ShellItem Name="Local Disk (C:)" Image="HardDrive16.png">
+      <ShellItem Name="Program Files" Image="FolderOpen16.png">
+        <ShellItem Name="Actipro Software" Image="FolderOpen16.png">
+          <ShellItem Name="WPFStudio" Image="FolderOpen16.png" />
+        </ShellItem>
+      </ShellItem>
+      <ShellItem Name="ProgramData" Image="FolderOpen16.png" />
+      <ShellItem Name="Temp" Image="FolderOpen16.png" />
+      <ShellItem Name="Users" Image="FolderOpen16.png">
+        <ShellItem Name="Public" Image="FolderOpen16.png" />
+        <ShellItem Name="John Doe" Image="FolderOpen16.png" />
+      </ShellItem>
+      <ShellItem Name="Windows" Image="FolderOpen16.png">
+        <ShellItem Name="assembly" Image="FolderOpen16.png" />
+        <ShellItem Name="en-US" Image="FolderOpen16.png" />
+        <ShellItem Name="Globalization" Image="FolderOpen16.png" />
+        <ShellItem Name="Help" Image="FolderOpen16.png" />
+        <ShellItem Name="Microsoft.Net" Image="FolderOpen16.png" />
+        <ShellItem Name="Performance" Image="FolderOpen16.png" />
+        <ShellItem Name="security" Image="FolderOpen16.png" />
+        <ShellItem Name="Setup" Image="FolderOpen16.png" />
+        <ShellItem Name="system" Image="FolderOpen16.png" />
+        <ShellItem Name="System32" Image="FolderOpen16.png" />
+        <ShellItem Name="Tasks" Image="FolderOpen16.png" />
+        <ShellItem Name="Temp" Image="FolderOpen16.png" />
+      </ShellItem>
+    </ShellItem>
+    <ShellItem Name="Local Disk (D:)" Image="HardDrive16.png" />
+    <ShellItem Name="Local Disk (E:)" Image="HardDrive16.png" />
+    <ShellItem Name="Local Disk (F:)" Image="HardDrive16.png" />
+    <ShellItem Name="Removable Disk (G:)" Image="EmptyDrive16.png" />
+    <ShellItem Name="Removable Disk (H:)" Image="EmptyDrive16.png" />
+  </ShellItem>
+</ShellItem>

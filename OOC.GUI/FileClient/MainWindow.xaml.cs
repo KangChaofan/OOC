@@ -105,7 +105,7 @@ namespace FileClient
                     {
                         cxLeftWidth = Convert.ToInt32(borderWidth*(DesktopDpiX/dpi)),
                         cxRightWidth = Convert.ToInt32(borderWidth*(DesktopDpiX/dpi)),
-                        cyTopHeight = Convert.ToInt32(((int) border.ActualHeight + borderWidth + 5)*(DesktopDpiY/dpi)),
+                        cyTopHeight = Convert.ToInt32(((int) border.ActualHeight + borderWidth + 25)*(DesktopDpiY/dpi)),
                         cyBottomHeight = Convert.ToInt32(borderWidth*(DesktopDpiY/dpi))
                     };
 
@@ -158,6 +158,11 @@ namespace FileClient
             {
                 _logger.Warn(ex.Message);
             }
+            //throw new NotImplementedException();
+        }
+
+        private void OnTreeViewSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
             //throw new NotImplementedException();
         }
     }

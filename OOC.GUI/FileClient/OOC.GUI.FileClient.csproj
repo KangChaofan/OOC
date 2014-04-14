@@ -186,6 +186,15 @@
     <Resource Include="Resources\Images\FolderOpen16.png" />
     <Resource Include="Resources\Images\FolderStuffed16.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Xml\Data.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Desktop16.png" />
+    <Resource Include="Resources\Images\Documents16.png" />
+    <Resource Include="Resources\Images\EmptyDrive16.png" />
+    <Resource Include="Resources\Images\HardDrive16.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

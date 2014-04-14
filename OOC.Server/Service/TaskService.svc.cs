@@ -93,7 +93,7 @@ namespace OOC.Service
             }
         }
 
-        public TaskInfoResponse QueryTaskByGuid(string guid)
+        public TaskDataResponse QueryTaskDataByGuid(string guid)
         {
             using (OOCEntities db = new OOCEntities())
             {
@@ -104,7 +104,18 @@ namespace OOC.Service
                 {
                     throw new FaultException("TASK_NOT_EXISTS");
                 }
-                return new TaskInfoResponse(result.First());
+                return new TaskDataResponse(result.First());
+            }
+        }
+
+        public List<Task> QueryTaskByUserId(int userId)
+        {
+            using (OOCEntities db = new OOCEntities())
+            {
+                IQueryable<Task> result = from o in db.Task
+                                          where o.userId == userId
+                                          select o;
+                return result.ToList();
             }
         }
 

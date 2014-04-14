@@ -6,9 +6,9 @@ using OOC.Util;
 namespace OOC.Contract.Data.Response
 {
     [DataContract]
-    public class TaskInfoResponse
+    public class TaskDataResponse
     {
-        public TaskInfoResponse(Task task)
+        public TaskDataResponse(Task task)
         {
             Task = task;
             CompositionData = SerializationUtil.Deserialize<CompositionData>(task.compositionData);

@@ -105,13 +105,16 @@
     <None Include="Service References\InstanceService\OOC.Instance.InstanceService.InstanceStatus.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\TaskService\OOC.Instance.TaskService.Task.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\TaskService\OOC.Instance.TaskService.TaskAssignResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TaskService\OOC.Instance.TaskService.TaskFileMapping.datasource">
+    <None Include="Service References\TaskService\OOC.Instance.TaskService.TaskDataResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TaskService\OOC.Instance.TaskService.TaskInfoResponse.datasource">
+    <None Include="Service References\TaskService\OOC.Instance.TaskService.TaskFileMapping.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\TaskService\TaskService.wsdl" />

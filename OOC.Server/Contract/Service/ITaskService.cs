@@ -27,7 +27,10 @@ namespace OOC.Contract.Service
         TaskAssignResponse AssignPendingTask(string instanceName);
 
         [OperationContract]
-        TaskInfoResponse QueryTaskByGuid(string guid);
+        TaskDataResponse QueryTaskDataByGuid(string guid);
+
+        [OperationContract]
+        List<Task> QueryTaskByUserId(int userId);
 
         [OperationContract]
         void AddTaskFileMapping(string guid, string fileName, string relativePath, TaskFileType type, bool isDownloadable);

@@ -1748,6 +1748,7 @@ namespace OOC.Instance.TaskService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileMapping[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileMapping))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Task))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Task[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskState))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionData))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionLinkData[]))]
@@ -1759,7 +1760,7 @@ namespace OOC.Instance.TaskService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileType))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelProgress))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskAssignResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskInfoResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskDataResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, string>))]
     public partial class EntityKeyMember : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -1834,9 +1835,9 @@ namespace OOC.Instance.TaskService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TaskInfoResponse", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TaskDataResponse", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response")]
     [System.SerializableAttribute()]
-    public partial class TaskInfoResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class TaskDataResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -1909,8 +1910,11 @@ namespace OOC.Instance.TaskService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/AssignPendingTask", ReplyAction="http://tempuri.org/ITaskService/AssignPendingTaskResponse")]
         OOC.Instance.TaskService.TaskAssignResponse AssignPendingTask(string instanceName);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/QueryTaskByGuid", ReplyAction="http://tempuri.org/ITaskService/QueryTaskByGuidResponse")]
-        OOC.Instance.TaskService.TaskInfoResponse QueryTaskByGuid(string guid);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/QueryTaskDataByGuid", ReplyAction="http://tempuri.org/ITaskService/QueryTaskDataByGuidResponse")]
+        OOC.Instance.TaskService.TaskDataResponse QueryTaskDataByGuid(string guid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/QueryTaskByUserId", ReplyAction="http://tempuri.org/ITaskService/QueryTaskByUserIdResponse")]
+        OOC.Instance.TaskService.Task[] QueryTaskByUserId(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/AddTaskFileMapping", ReplyAction="http://tempuri.org/ITaskService/AddTaskFileMappingResponse")]
         void AddTaskFileMapping(string guid, string fileName, string relativePath, OOC.Instance.TaskService.TaskFileType type, bool isDownloadable);
@@ -1968,8 +1972,12 @@ namespace OOC.Instance.TaskService {
             return base.Channel.AssignPendingTask(instanceName);
         }
         
-        public OOC.Instance.TaskService.TaskInfoResponse QueryTaskByGuid(string guid) {
-            return base.Channel.QueryTaskByGuid(guid);
+        public OOC.Instance.TaskService.TaskDataResponse QueryTaskDataByGuid(string guid) {
+            return base.Channel.QueryTaskDataByGuid(guid);
+        }
+        
+        public OOC.Instance.TaskService.Task[] QueryTaskByUserId(int userId) {
+            return base.Channel.QueryTaskByUserId(userId);
         }
         
         public void AddTaskFileMapping(string guid, string fileName, string relativePath, OOC.Instance.TaskService.TaskFileType type, bool isDownloadable) {

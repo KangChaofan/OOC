@@ -11,11 +11,11 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="TaskAssignResponse" nillable="true" type="tns:TaskAssignResponse" />
-  <xs:complexType name="TaskInfoResponse">
+  <xs:complexType name="TaskDataResponse">
     <xs:sequence>
       <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="CompositionData" nillable="true" type="q4:CompositionData" />
       <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="Task" nillable="true" type="q5:Task" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="TaskInfoResponse" nillable="true" type="tns:TaskInfoResponse" />
+  <xs:element name="TaskDataResponse" nillable="true" type="tns:TaskDataResponse" />
 </xs:schema>

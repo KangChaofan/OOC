@@ -37,11 +37,17 @@
   <wsdl:message name="ITaskService_AssignPendingTask_OutputMessage">
     <wsdl:part name="parameters" element="tns:AssignPendingTaskResponse" />
   </wsdl:message>
-  <wsdl:message name="ITaskService_QueryTaskByGuid_InputMessage">
-    <wsdl:part name="parameters" element="tns:QueryTaskByGuid" />
+  <wsdl:message name="ITaskService_QueryTaskDataByGuid_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryTaskDataByGuid" />
   </wsdl:message>
-  <wsdl:message name="ITaskService_QueryTaskByGuid_OutputMessage">
-    <wsdl:part name="parameters" element="tns:QueryTaskByGuidResponse" />
+  <wsdl:message name="ITaskService_QueryTaskDataByGuid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryTaskDataByGuidResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_QueryTaskByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryTaskByUserId" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_QueryTaskByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryTaskByUserIdResponse" />
   </wsdl:message>
   <wsdl:message name="ITaskService_AddTaskFileMapping_InputMessage">
     <wsdl:part name="parameters" element="tns:AddTaskFileMapping" />
@@ -84,9 +90,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/AssignPendingTask" message="tns:ITaskService_AssignPendingTask_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/AssignPendingTaskResponse" message="tns:ITaskService_AssignPendingTask_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="QueryTaskByGuid">
-      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/QueryTaskByGuid" message="tns:ITaskService_QueryTaskByGuid_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/QueryTaskByGuidResponse" message="tns:ITaskService_QueryTaskByGuid_OutputMessage" />
+    <wsdl:operation name="QueryTaskDataByGuid">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/QueryTaskDataByGuid" message="tns:ITaskService_QueryTaskDataByGuid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/QueryTaskDataByGuidResponse" message="tns:ITaskService_QueryTaskDataByGuid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryTaskByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/QueryTaskByUserId" message="tns:ITaskService_QueryTaskByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/QueryTaskByUserIdResponse" message="tns:ITaskService_QueryTaskByUserId_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddTaskFileMapping">
       <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/AddTaskFileMapping" message="tns:ITaskService_AddTaskFileMapping_InputMessage" />
@@ -143,8 +153,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="QueryTaskByGuid">
-      <soap:operation soapAction="http://tempuri.org/ITaskService/QueryTaskByGuid" style="document" />
+    <wsdl:operation name="QueryTaskDataByGuid">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/QueryTaskDataByGuid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryTaskByUserId">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/QueryTaskByUserId" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

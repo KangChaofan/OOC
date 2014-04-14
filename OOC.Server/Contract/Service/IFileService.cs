@@ -34,6 +34,14 @@ namespace OOC.Contract.Service
         [OperationContract]
         void CreateDirectory(string path);
 
+        [OperationContract]
+        FileChunkResponse Read(string fileName, long offset, long length);
+
+        [OperationContract]
+        void Append(string fileName, byte[] chunk);
+
+        [OperationContract]
+        string Head(string fileName, int lines);
     }
 
 }

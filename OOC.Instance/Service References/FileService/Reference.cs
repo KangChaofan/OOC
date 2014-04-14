@@ -15,9 +15,9 @@ namespace OOC.Instance.FileService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FileDescription", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FileSystemDescription", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common")]
     [System.SerializableAttribute()]
-    public partial class FileDescription : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class FileSystemDescription : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -29,10 +29,13 @@ namespace OOC.Instance.FileService {
         private System.DateTime CreateTimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string FileNameField;
+        private bool IsDirectoryField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime ModifyTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long SizeField;
@@ -74,14 +77,14 @@ namespace OOC.Instance.FileService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FileName {
+        public bool IsDirectory {
             get {
-                return this.FileNameField;
+                return this.IsDirectoryField;
             }
             set {
-                if ((object.ReferenceEquals(this.FileNameField, value) != true)) {
-                    this.FileNameField = value;
-                    this.RaisePropertyChanged("FileName");
+                if ((this.IsDirectoryField.Equals(value) != true)) {
+                    this.IsDirectoryField = value;
+                    this.RaisePropertyChanged("IsDirectory");
                 }
             }
         }
@@ -95,6 +98,19 @@ namespace OOC.Instance.FileService {
                 if ((this.ModifyTimeField.Equals(value) != true)) {
                     this.ModifyTimeField = value;
                     this.RaisePropertyChanged("ModifyTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
                 }
             }
         }
@@ -183,12 +199,105 @@ namespace OOC.Instance.FileService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FileChunkResponse", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response")]
+    [System.SerializableAttribute()]
+    public partial class FileChunkResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] ChunkField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FileNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long LengthField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long OffsetField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] Chunk {
+            get {
+                return this.ChunkField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ChunkField, value) != true)) {
+                    this.ChunkField = value;
+                    this.RaisePropertyChanged("Chunk");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FileName {
+            get {
+                return this.FileNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FileNameField, value) != true)) {
+                    this.FileNameField = value;
+                    this.RaisePropertyChanged("FileName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Length {
+            get {
+                return this.LengthField;
+            }
+            set {
+                if ((this.LengthField.Equals(value) != true)) {
+                    this.LengthField = value;
+                    this.RaisePropertyChanged("Length");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Offset {
+            get {
+                return this.OffsetField;
+            }
+            set {
+                if ((this.OffsetField.Equals(value) != true)) {
+                    this.OffsetField = value;
+                    this.RaisePropertyChanged("Offset");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="FileService.IFileService")]
     public interface IFileService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/Stat", ReplyAction="http://tempuri.org/IFileService/StatResponse")]
-        OOC.Instance.FileService.FileDescription Stat(string fileName);
+        OOC.Instance.FileService.FileSystemDescription Stat(string fileName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/Get", ReplyAction="http://tempuri.org/IFileService/GetResponse")]
         OOC.Instance.FileService.FileEntityResponse Get(string fileName);
@@ -203,10 +312,19 @@ namespace OOC.Instance.FileService {
         void Copy(string sourceFileName, string destFileName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/List", ReplyAction="http://tempuri.org/IFileService/ListResponse")]
-        OOC.Instance.FileService.FileDescription[] List(string path);
+        OOC.Instance.FileService.FileSystemDescription[] List(string path);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/CreateDirectory", ReplyAction="http://tempuri.org/IFileService/CreateDirectoryResponse")]
         void CreateDirectory(string path);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/Read", ReplyAction="http://tempuri.org/IFileService/ReadResponse")]
+        OOC.Instance.FileService.FileChunkResponse Read(string fileName, long offset, long length);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/Append", ReplyAction="http://tempuri.org/IFileService/AppendResponse")]
+        void Append(string fileName, byte[] chunk);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/Head", ReplyAction="http://tempuri.org/IFileService/HeadResponse")]
+        string Head(string fileName, int lines);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -236,7 +354,7 @@ namespace OOC.Instance.FileService {
                 base(binding, remoteAddress) {
         }
         
-        public OOC.Instance.FileService.FileDescription Stat(string fileName) {
+        public OOC.Instance.FileService.FileSystemDescription Stat(string fileName) {
             return base.Channel.Stat(fileName);
         }
         
@@ -256,12 +374,24 @@ namespace OOC.Instance.FileService {
             base.Channel.Copy(sourceFileName, destFileName);
         }
         
-        public OOC.Instance.FileService.FileDescription[] List(string path) {
+        public OOC.Instance.FileService.FileSystemDescription[] List(string path) {
             return base.Channel.List(path);
         }
         
         public void CreateDirectory(string path) {
             base.Channel.CreateDirectory(path);
+        }
+        
+        public OOC.Instance.FileService.FileChunkResponse Read(string fileName, long offset, long length) {
+            return base.Channel.Read(fileName, offset, length);
+        }
+        
+        public void Append(string fileName, byte[] chunk) {
+            base.Channel.Append(fileName, chunk);
+        }
+        
+        public string Head(string fileName, int lines) {
+            return base.Channel.Head(fileName, lines);
         }
     }
 }

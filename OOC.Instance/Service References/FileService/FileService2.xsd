@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="FileDescription">
+  <xs:complexType name="FileSystemDescription">
     <xs:sequence>
       <xs:element minOccurs="0" name="AccessTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsDirectory" type="xs:boolean" />
       <xs:element minOccurs="0" name="ModifyTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Size" type="xs:long" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="FileDescription" nillable="true" type="tns:FileDescription" />
-  <xs:complexType name="ArrayOfFileDescription">
+  <xs:element name="FileSystemDescription" nillable="true" type="tns:FileSystemDescription" />
+  <xs:complexType name="ArrayOfFileSystemDescription">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="FileDescription" nillable="true" type="tns:FileDescription" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FileSystemDescription" nillable="true" type="tns:FileSystemDescription" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfFileDescription" nillable="true" type="tns:ArrayOfFileDescription" />
+  <xs:element name="ArrayOfFileSystemDescription" nillable="true" type="tns:ArrayOfFileSystemDescription" />
 </xs:schema>

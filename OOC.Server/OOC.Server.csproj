@@ -116,6 +116,7 @@
     <Compile Include="Contract\Data\Request\InstanceHeartbeatStatus.cs" />
     <Compile Include="Contract\Data\Response\TaskDataResponse.cs" />
     <Compile Include="Contract\Data\Response\TaskAssignResponse.cs" />
+    <Compile Include="Contract\Data\Response\FileChunkResponse.cs" />
     <Compile Include="Contract\Service\IModelService.cs" />
     <Compile Include="Contract\Service\ITaskService.cs" />
     <Compile Include="Contract\Service\ICompositionService.cs" />

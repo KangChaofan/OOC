@@ -12,7 +12,7 @@
   <xs:element name="StatResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="StatResult" nillable="true" type="q1:FileDescription" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="StatResult" nillable="true" type="q1:FileSystemDescription" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -78,7 +78,7 @@
   <xs:element name="ListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="ListResult" nillable="true" type="q3:ArrayOfFileDescription" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="ListResult" nillable="true" type="q3:ArrayOfFileSystemDescription" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -92,6 +92,50 @@
   <xs:element name="CreateDirectoryResponse">
     <xs:complexType>
       <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Read">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="offset" type="xs:long" />
+        <xs:element minOccurs="0" name="length" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReadResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" minOccurs="0" name="ReadResult" nillable="true" type="q4:FileChunkResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Append">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="chunk" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AppendResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Head">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lines" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HeadResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="HeadResult" nillable="true" type="xs:string" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>

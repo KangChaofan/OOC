@@ -16,21 +16,21 @@
             <!--ObjectInstance:对象实例-->
             <ObjectDataProvider.ObjectInstance>
                 <!--FullPath:是Folder类的一个属性-->
-                <view:FileItemView Name=""/>
+                <view:FileItemView Name="" />
             </ObjectDataProvider.ObjectInstance>
         </ObjectDataProvider>
         <!--HierarchicalDataTemplate:分层数据模板-->
         <HierarchicalDataTemplate DataType="{x:Type view:FileItemView}" ItemsSource="{Binding Path=SubItems}">
             <TextBlock Text="{Binding Path=Name}"></TextBlock>
         </HierarchicalDataTemplate>
-        
-        
+
+
         <Style x:Key="TreeViewItemStyle" TargetType="{x:Type TreeViewItem}"
-            BasedOn="{StaticResource {x:Static themes:SharedResourceKeys.TreeViewItemStyleKey}}">
+               BasedOn="{StaticResource {x:Static themes:SharedResourceKeys.TreeViewItemStyleKey}}">
             <Setter Property="ItemsSource"
-								Value="{Binding XPath=ShellItem}" />
+                    Value="{Binding XPath=ShellItem}" />
             <Setter Property="Margin"
-								Value="0,3,0,0" />
+                    Value="0,3,0,0" />
         </Style>
         <shared:UriConverter x:Key="UriConverter" UriPrefix="/Resources/Images/" />
         <DataTemplate x:Key="ComboBoxItemTemplate">
@@ -40,14 +40,14 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0"
-				   Margin="2,2,0,2"
-				   Source="{Binding XPath=@Image, Path=Value, Converter={StaticResource UriConverter}}"
-				   Stretch="None"
-				   VerticalAlignment="Center" />
+                       Margin="0,0,0,0"
+                       Source="{Binding Path=Icon}"
+                       Stretch="None"
+                       VerticalAlignment="Center" />
                 <TextBlock Grid.Column="1"
-					   Margin="3,0,2,0"
-					   Text="{Binding XPath=@Name}"
-					   VerticalAlignment="Center"/>
+                           Margin="0,0,0,0"
+                           Text="{Binding Path=Name}"
+                           VerticalAlignment="Center" />
             </Grid>
         </DataTemplate>
     </Window.Resources>
@@ -55,7 +55,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0" />
             <ColumnDefinition Width="103*" />
-            <ColumnDefinition Width="367*"/>
+            <ColumnDefinition Width="367*" />
             <ColumnDefinition Width="0" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -63,10 +63,10 @@
             <RowDefinition Height="5" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="0" />
-            <RowDefinition/>
+            <RowDefinition />
             <RowDefinition Height="0" />
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="0"/>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="0" />
         </Grid.RowDefinitions>
 
         <DockPanel x:Name="addressDock" Grid.Column="1" Grid.Row="0" Margin="0,0,0,0" Grid.ColumnSpan="2">
@@ -88,8 +88,8 @@
                         </navigation:Breadcrumb>
                     </StackPanel>
                     <GridSplitter Grid.Column="1" Width="5" Margin="0,0,0,5" HorizontalAlignment="Center"
-                                  Background="Transparent"/>
-                    <TextBox Grid.Column="2" Margin="0,0,0,5" Text="Search"/>
+                                  Background="Transparent" />
+                    <TextBox Grid.Column="2" Margin="0,0,0,5" Text="Search" />
                 </Grid>
             </Border>
         </DockPanel>
@@ -116,20 +116,28 @@
             </Menu>
         </DockPanel>
 
+        <TreeView x:Name="treeView"
+                  Grid.Column="1" Grid.Row="4"
+                  ItemContainerStyle="{StaticResource TreeViewItemStyle}"
+                  ItemsSource="{Binding Path=SubItems, Source={StaticResource FileItemProvider}}"
+                  ItemTemplate="{StaticResource ComboBoxItemTemplate}"
+                  SelectedItemChanged="OnTreeViewSelectedItemChanged" />
 
-        <TreeView Grid.Column="1" Grid.Row="4" Height="auto" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="auto" Name="treeView1">
-            <TreeViewItem ItemsSource="{Binding Path=SubItems, Source={ StaticResource FileItemProvider}}" Header="Root"/>
-        </TreeView>
-        
-<!--        <TreeView x:Name="treeView" Grid.Column="1" Grid.Row="4"-->
-<!--					  ItemContainerStyle="{StaticResource TreeViewItemStyle}"-->
-<!--					  ItemsSource="{Binding XPath=*}"-->
-<!--					  ItemTemplate="{StaticResource ComboBoxItemTemplate}"-->
-<!--					  SelectedItemChanged="OnTreeViewSelectedItemChanged"/>-->
+<!--        <TreeView Height="auto" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="auto"-->
+<!--                  Name="treeView1">-->
+<!--            <TreeViewItem ItemsSource="{Binding Path=SubItems, Source={ StaticResource FileItemProvider}}"-->
+<!--                          Header="Root" />-->
+<!--        </TreeView>-->
+
+        <!--        <TreeView x:Name="treeView" Grid.Column="1" Grid.Row="4"-->
+        <!--					  ItemContainerStyle="{StaticResource TreeViewItemStyle}"-->
+        <!--					  ItemsSource="{Binding XPath=*}"-->
+        <!--					  ItemTemplate="{StaticResource ComboBoxItemTemplate}"-->
+        <!--					  SelectedItemChanged="OnTreeViewSelectedItemChanged"/>-->
         <ListView Grid.Column="2" Grid.Row="4">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -139,8 +147,8 @@
                 <ItemsPanelTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                     </Grid>
                 </ItemsPanelTemplate>

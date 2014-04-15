@@ -84,6 +84,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Util\FriendlyExceptionMessage.cs" />
     <Compile Include="WindowEffect\GlassEffect.cs" />
     <Compile Include="WindowEffect\NonClientRegionAPI.cs" />
@@ -121,7 +122,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config">
@@ -200,6 +201,9 @@
     <Resource Include="Resources\Images\Documents16.png" />
     <Resource Include="Resources\Images\EmptyDrive16.png" />
     <Resource Include="Resources\Images\HardDrive16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Find16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

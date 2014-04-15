@@ -4,7 +4,7 @@
     xmlns:navigation="http://schemas.actiprosoftware.com/winfx/xaml/navigation"
     xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
     xmlns:themes="clr-namespace:ActiproSoftware.Windows.Themes;assembly=ActiproSoftware.Shared.Wpf"
-    xmlns:fileClient="clr-namespace:FileClient"
+    xmlns:view="clr-namespace:FileClient.View"
 
     x:Class="FileClient.MainWindow"
     Title="MainWindow" Height="370" Width="480" PreviewKeyDown="Window_PreviewKeyDown"
@@ -16,11 +16,11 @@
             <!--ObjectInstance:对象实例-->
             <ObjectDataProvider.ObjectInstance>
                 <!--FullPath:是Folder类的一个属性-->
-                <fileClient:FileItemView Name=""/>
+                <view:FileItemView Name=""/>
             </ObjectDataProvider.ObjectInstance>
         </ObjectDataProvider>
         <!--HierarchicalDataTemplate:分层数据模板-->
-        <HierarchicalDataTemplate DataType="{x:Type fileClient:FileItemView}" ItemsSource="{Binding Path=SubItems}">
+        <HierarchicalDataTemplate DataType="{x:Type view:FileItemView}" ItemsSource="{Binding Path=SubItems}">
             <TextBlock Text="{Binding Path=Name}"></TextBlock>
         </HierarchicalDataTemplate>
         
@@ -118,7 +118,7 @@
 
 
         <TreeView Grid.Column="1" Grid.Row="4" Height="auto" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="auto" Name="treeView1">
-            <TreeViewItem ItemsSource="{Binding Path=SubItems, Source={ StaticResource FileItemProvider}}" Header="文件"/>
+            <TreeViewItem ItemsSource="{Binding Path=SubItems, Source={ StaticResource FileItemProvider}}" Header="Root"/>
         </TreeView>
         
 <!--        <TreeView x:Name="treeView" Grid.Column="1" Grid.Row="4"-->

@@ -1,19 +1,20 @@
 ﻿using System;
-using System.IO;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ServiceModel;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using FileClient.Annotations;
 using FileClient.FileService;
+using FileClient.Properties;
 using OOC.Util;
 
-namespace FileClient
+namespace FileClient.View
 {
-    public class FileItemView
+    public class FileItemView : INotifyPropertyChanged
     {
         private readonly FileServiceClient Client = new FileServiceClient();
-        private readonly Logger _logger = new Logger(null);
+//        private static readonly Logger _logger = new Logger("OOC.GUI.FileClient.log");
         private DateTime _accessTime;
         private DateTime _createTime;
         private ImageSource _icon;
@@ -21,11 +22,7 @@ namespace FileClient
         private DateTime _modifyTime;
         private string _name;
         private long _size;
-
-        public FileItemView()
-        {
-            Name = "";
-        }
+        private ObservableCollection<FileItemView> _subItems;
 
         public bool IsDirectory
         {
@@ -33,6 +30,7 @@ namespace FileClient
             set
             {
                 _isDirectory = value;
+                OnPropertyChanged("IsDirectory");
             }
         }
 
@@ -42,6 +40,7 @@ namespace FileClient
             set
             {
                 _name = value;
+                OnPropertyChanged("Name");
             }
         }
 
@@ -51,6 +50,7 @@ namespace FileClient
             set
             {
                 _size = value;
+                OnPropertyChanged("Size");
             }
         }
 
@@ -60,6 +60,7 @@ namespace FileClient
             set
             {
                 _createTime = value;
+                OnPropertyChanged("CreateTime");
             }
         }
 
@@ -69,6 +70,7 @@ namespace FileClient
             set
             {
                 _accessTime = value;
+                OnPropertyChanged("AccessTime");
             }
         }
 
@@ -78,6 +80,7 @@ namespace FileClient
             set
             {
                 _modifyTime = value;
+                OnPropertyChanged("ModifyTime");
             }
         }
 
@@ -96,11 +99,11 @@ namespace FileClient
                 string path = Name;
                 try
                 {
-                    _logger.Debug(string.Format("[STAT]{0}", path));
+//                    _logger.Debug(string.Format("[STAT]{0}", path));
                     FileSystemDescription fileSystemDescription = Client.Stat(path);
                     if (fileSystemDescription.IsDirectory)
                     {
-                        _logger.Debug(string.Format("[LIST]{0}", path));
+//                        _logger.Debug(string.Format("[LIST]{0}", path));
                         FileSystemDescription[] fileDescriptions = Client.List(path);
                         foreach (FileSystemDescription file in fileDescriptions)
                         {
@@ -112,16 +115,27 @@ namespace FileClient
                                 AccessTime = file.AccessTime,
                                 ModifyTime = file.ModifyTime,
                                 IsDirectory = true,
-                                //Icon = file.IsDirectory ? new BitmapImage(new Uri("/Resources/Images/Folder16.png")) : new BitmapImage(new Uri("/Resources/Images/Documents16.png")),
+                                Icon = file.IsDirectory ? 
+                                new BitmapImage(new Uri(@"Resources/Images/Folder16.png", UriKind.RelativeOrAbsolute)) :
+                                new BitmapImage(new Uri(@"Resources/Images/Documents16.png", UriKind.RelativeOrAbsolute)),
                             });
                         }
+                    }
+                    else
+                    {
+                        Console.WriteLine("haha");
                     }
                 }
                 catch (FaultException ex)
                 {
-                    _logger.Warn(ex.Message);
+//                    _logger.Warn(ex.Message);
                 }
                 return result;
+            }
+            set
+            {
+                _subItems = value;
+                OnPropertyChanged("SubItems");
             }
         }
 
@@ -131,8 +145,17 @@ namespace FileClient
             set
             {
                 _icon = value;
+                OnPropertyChanged("Icon");
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using ActiproSoftware.Windows.Controls.Navigation;
 using FileClient.FileService;
+using FileClient.View;
 using FileClient.WindowEffect;
 using OOC.Util;
 using Brushes = System.Windows.Media.Brushes;
@@ -20,7 +21,7 @@ namespace FileClient
     public partial class MainWindow : Window
     {
         private readonly FileServiceClient Client = new FileServiceClient();
-        private readonly Logger _logger = new Logger("OOC.GUI.FileClient.log");
+//        private readonly Logger _logger = new Logger("OOC.GUI.FileClient.log");
 
         public MainWindow()
         {
@@ -47,7 +48,7 @@ namespace FileClient
             }
             catch (FaultException e)
             {
-                _logger.Warn(e.Message);
+//                _logger.Warn(e.Message);
             }
         }
 
@@ -142,7 +143,7 @@ namespace FileClient
                 FileSystemDescription filedesc = Client.Stat(path);
                 if (filedesc.IsDirectory)
                 {
-                    _logger.Debug(string.Format("[LIST]{0}", path));
+//                    _logger.Debug(string.Format("[LIST]{0}", path));
                     FileSystemDescription[] fileDescriptions = Client.List(path);
                     foreach (FileSystemDescription file in fileDescriptions)
                     {
@@ -156,14 +157,14 @@ namespace FileClient
             }
             catch (FaultException ex)
             {
-                _logger.Warn(ex.Message);
+//                _logger.Warn(ex.Message);
             }
             //throw new NotImplementedException();
         }
 
         private void OnTreeViewSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            //throw new NotImplementedException();
+            CurrentPath = e.NewValue.CastTo<FileItemView>().Name;
         }
     }
 }

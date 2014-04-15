@@ -27,12 +27,9 @@
 
         <Style x:Key="TreeViewItemStyle" TargetType="{x:Type TreeViewItem}"
                BasedOn="{StaticResource {x:Static themes:SharedResourceKeys.TreeViewItemStyleKey}}">
-            <Setter Property="ItemsSource"
-                    Value="{Binding XPath=ShellItem}" />
             <Setter Property="Margin"
                     Value="0,3,0,0" />
         </Style>
-        <shared:UriConverter x:Key="UriConverter" UriPrefix="/Resources/Images/" />
         <DataTemplate x:Key="ComboBoxItemTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -124,11 +121,11 @@
                   ItemTemplate="{StaticResource ComboBoxItemTemplate}"
                   SelectedItemChanged="OnTreeViewSelectedItemChanged" />
 
-<!--        <TreeView Height="auto" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="auto"-->
-<!--                  Name="treeView1">-->
-<!--            <TreeViewItem ItemsSource="{Binding Path=SubItems, Source={ StaticResource FileItemProvider}}"-->
-<!--                          Header="Root" />-->
-<!--        </TreeView>-->
+        <!--        <TreeView Height="auto" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="auto"-->
+        <!--                  Name="treeView1">-->
+        <!--            <TreeViewItem ItemsSource="{Binding Path=SubItems, Source={ StaticResource FileItemProvider}}"-->
+        <!--                          Header="Root" />-->
+        <!--        </TreeView>-->
 
         <!--        <TreeView x:Name="treeView" Grid.Column="1" Grid.Row="4"-->
         <!--					  ItemContainerStyle="{StaticResource TreeViewItemStyle}"-->
@@ -155,7 +152,7 @@
                 </ItemsPanelTemplate>
             </StatusBar.ItemsPanel>
             <StatusBarItem Grid.Column="1" FontSize="14">
-                <TextBlock x:Name="StatusText" Text="this is example text.  示例文本"></TextBlock>
+                <TextBlock x:Name="StatusText" Text="{Binding Path=Name, Source={StaticResource FileItemProvider}}"></TextBlock>
             </StatusBarItem>
         </StatusBar>
 

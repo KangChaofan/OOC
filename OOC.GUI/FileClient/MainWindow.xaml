@@ -12,15 +12,15 @@
 
     <Window.Resources>
         <!--ObjectDataProvider:包装和创建可以用作绑定源的对象。-->
-        <ObjectDataProvider x:Key="RootFolderDataProvider">
+        <ObjectDataProvider x:Key="FileItemProvider">
             <!--ObjectInstance:对象实例-->
             <ObjectDataProvider.ObjectInstance>
                 <!--FullPath:是Folder类的一个属性-->
-                <fileClient:RemoteFolder Name=""/>
+                <fileClient:FileItemView Name=""/>
             </ObjectDataProvider.ObjectInstance>
         </ObjectDataProvider>
         <!--HierarchicalDataTemplate:分层数据模板-->
-        <HierarchicalDataTemplate DataType="{x:Type fileClient:RemoteFolder}" ItemsSource="{Binding Path=SubItems}">
+        <HierarchicalDataTemplate DataType="{x:Type fileClient:FileItemView}" ItemsSource="{Binding Path=SubItems}">
             <TextBlock Text="{Binding Path=Name}"></TextBlock>
         </HierarchicalDataTemplate>
         
@@ -84,45 +84,6 @@
                             <navigation:BreadcrumbItem Header="Root"
                                                        PathEntry="."
                                                        ImageSource="/Resources/Images/Computer16.png">
-                                <navigation:BreadcrumbItem Header="Folder 1"
-                                                           PathEntry="Folder 1"
-                                                           ImageSource="/Resources/Images/FolderOpen16.png">
-                                    <navigation:BreadcrumbItem Header="Subfolder 1"
-                                                               PathEntry="Subfolder 1"
-                                                               ImageSource="/Resources/Images/FolderGreen16.png" />
-                                    <navigation:BreadcrumbItem Header="Subfolder 2"
-                                                               PathEntry="Subfolder 2"
-                                                               ImageSource="/Resources/Images/FolderGreen16.png" />
-                                    <navigation:BreadcrumbItem Header="Subfolder 3"
-                                                               PathEntry="Subfolder 3"
-                                                               ImageSource="/Resources/Images/FolderGreen16.png" />
-                                </navigation:BreadcrumbItem>
-                                <navigation:BreadcrumbItem Header="Folder 2"
-                                                           PathEntry="Folder 2"
-                                                           ImageSource="/Resources/Images/FolderOpen16.png">
-                                    <navigation:BreadcrumbItem Header="Subfolder 1"
-                                                               PathEntry="Subfolder 1"
-                                                               ImageSource="/Resources/Images/FolderGreen16.png" />
-                                    <navigation:BreadcrumbItem Header="Subfolder 2"
-                                                               PathEntry="Subfolder 2"
-                                                               ImageSource="/Resources/Images/FolderGreen16.png" />
-                                    <navigation:BreadcrumbItem Header="Subfolder 3"
-                                                               PathEntry="Subfolder 3"
-                                                               ImageSource="/Resources/Images/FolderGreen16.png" />
-                                </navigation:BreadcrumbItem>
-                                <navigation:BreadcrumbItem Header="Folder 3"
-                                                           PathEntry="Folder 3"
-                                                           ImageSource="/Resources/Images/FolderOpen16.png">
-                                    <navigation:BreadcrumbItem Header="Subfolder 1"
-                                                               PathEntry="Subfolder 1"
-                                                               ImageSource="/Resources/Images/FolderGreen16.png" />
-                                    <navigation:BreadcrumbItem Header="Subfolder 2"
-                                                               PathEntry="Subfolder 2"
-                                                               ImageSource="/Resources/Images/FolderGreen16.png" />
-                                    <navigation:BreadcrumbItem Header="Subfolder 3"
-                                                               PathEntry="Subfolder 3"
-                                                               ImageSource="/Resources/Images/FolderGreen16.png" />
-                                </navigation:BreadcrumbItem>
                             </navigation:BreadcrumbItem>
                         </navigation:Breadcrumb>
                     </StackPanel>
@@ -157,7 +118,7 @@
 
 
         <TreeView Grid.Column="1" Grid.Row="4" Height="auto" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="auto" Name="treeView1">
-            <TreeViewItem ItemsSource="{Binding Path=SubItems, Source={ StaticResource RootFolderDataProvider}}" Header="文件"/>
+            <TreeViewItem ItemsSource="{Binding Path=SubItems, Source={ StaticResource FileItemProvider}}" Header="文件"/>
         </TreeView>
         
 <!--        <TreeView x:Name="treeView" Grid.Column="1" Grid.Row="4"-->

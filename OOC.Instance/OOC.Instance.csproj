@@ -83,10 +83,13 @@
     <None Include="Service References\FileService\FileService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\FileService\OOC.Instance.FileService.FileDescription.datasource">
+    <None Include="Service References\FileService\OOC.Instance.FileService.FileChunkResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FileService\OOC.Instance.FileService.FileEntityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FileService\OOC.Instance.FileService.FileSystemDescription.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\InstanceService\InstanceService.wsdl" />

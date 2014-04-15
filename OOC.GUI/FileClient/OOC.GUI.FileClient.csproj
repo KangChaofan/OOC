@@ -84,7 +84,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="LocalFolder.cs" />
     <Compile Include="Util\FriendlyExceptionMessage.cs" />
     <Compile Include="WindowEffect\GlassEffect.cs" />
     <Compile Include="WindowEffect\NonClientRegionAPI.cs" />

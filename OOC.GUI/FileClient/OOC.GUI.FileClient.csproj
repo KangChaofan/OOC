@@ -84,8 +84,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Folder.cs" />
     <Compile Include="Util\FriendlyExceptionMessage.cs" />
-    <Compile Include="View\FileItemView.cs" />
     <Compile Include="WindowEffect\GlassEffect.cs" />
     <Compile Include="WindowEffect\NonClientRegionAPI.cs" />
     <Compile Include="Service References\FileService\Reference.cs">
@@ -124,9 +124,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

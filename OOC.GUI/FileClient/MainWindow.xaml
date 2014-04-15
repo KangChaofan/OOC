@@ -5,6 +5,7 @@
     xmlns:navigation="http://schemas.actiprosoftware.com/winfx/xaml/navigation"
     xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
     xmlns:themes="clr-namespace:ActiproSoftware.Windows.Themes;assembly=ActiproSoftware.Shared.Wpf"
+    xmlns:view="clr-namespace:FileClient.View"
     x:Class="FileClient.MainWindow"
     Title="MainWindow" Height="370" Width="480" PreviewKeyDown="Window_PreviewKeyDown"
     Loaded="Window_Loaded">
@@ -13,6 +14,13 @@
         <XmlDataProvider Source="/Resources/Xml/Data.xml"></XmlDataProvider>
     </Window.DataContext>
     <Window.Resources>
+        <ObjectDataProvider x:Key="RootFolderDataProvider">
+            <!--ObjectInstance:对象实例-->
+            <ObjectDataProvider.ObjectInstance>
+                <!--FullPath:是Folder类的一个属性-->
+                <view:FileItemView Name="test"/>
+            </ObjectDataProvider.ObjectInstance>
+        </ObjectDataProvider>
         <Style x:Key="TreeViewItemStyle" TargetType="{x:Type TreeViewItem}"
             BasedOn="{StaticResource {x:Static themes:SharedResourceKeys.TreeViewItemStyleKey}}">
             <Setter Property="ItemsSource"

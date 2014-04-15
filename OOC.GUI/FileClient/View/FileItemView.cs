@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.ServiceModel;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using FileClient.Annotations;
 using FileClient.FileService;
 using OOC.Util;
 
@@ -144,7 +143,6 @@ namespace FileClient.View
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged(string propertyName)
         {
             var handler = PropertyChanged;

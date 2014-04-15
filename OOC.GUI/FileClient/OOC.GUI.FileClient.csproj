@@ -84,14 +84,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Util\FriendlyExceptionMessage.cs" />
-    <Compile Include="WindowEffect\GlassEffect.cs" />
-    <Compile Include="WindowEffect\NonClientRegionAPI.cs" />
+    <Compile Include="FileItemView.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Service References\FileService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Util\FriendlyExceptionMessage.cs" />
+    <Compile Include="WindowEffect\GlassEffect.cs" />
+    <Compile Include="WindowEffect\NonClientRegionAPI.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -129,6 +131,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\FileService\FileClient.FileService.FileChunkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\FileService\FileClient.FileService.FileEntityResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -151,24 +156,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\FileService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\FileService\FileService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\FileService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\FileService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\FileService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\OOC.Util\OOC.Util.csproj">
@@ -194,6 +181,24 @@
     <Resource Include="Resources\Images\Documents16.png" />
     <Resource Include="Resources\Images\EmptyDrive16.png" />
     <Resource Include="Resources\Images\HardDrive16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\FileService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\FileService\FileService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\FileService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\FileService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\FileService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

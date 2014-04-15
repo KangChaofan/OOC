@@ -6,8 +6,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using FileClient.Annotations;
 using FileClient.FileService;
-using FileClient.Properties;
-using OOC.Util;
 
 namespace FileClient.View
 {
@@ -22,7 +20,6 @@ namespace FileClient.View
         private DateTime _modifyTime;
         private string _name;
         private long _size;
-        private ObservableCollection<FileItemView> _subItems;
 
         public bool IsDirectory
         {
@@ -108,34 +105,31 @@ namespace FileClient.View
                         foreach (FileSystemDescription file in fileDescriptions)
                         {
                             result.Add(new FileItemView
-                            {
-                                Name = file.Name,
-                                Size = -1,
-                                CreateTime = file.CreateTime,
-                                AccessTime = file.AccessTime,
-                                ModifyTime = file.ModifyTime,
-                                IsDirectory = true,
-                                Icon = file.IsDirectory ? 
-                                new BitmapImage(new Uri(@"Resources/Images/Folder16.png", UriKind.RelativeOrAbsolute)) :
-                                new BitmapImage(new Uri(@"Resources/Images/Documents16.png", UriKind.RelativeOrAbsolute)),
-                            });
+                                {
+                                    Name = file.Name,
+                                    Size = -1,
+                                    CreateTime = file.CreateTime,
+                                    AccessTime = file.AccessTime,
+                                    ModifyTime = file.ModifyTime,
+                                    IsDirectory = true,
+                                    Icon = file.IsDirectory
+                                               ? new BitmapImage(new Uri(@"Resources/Images/Folder16.png",
+                                                                         UriKind.RelativeOrAbsolute))
+                                               : new BitmapImage(new Uri(@"Resources/Images/Documents16.png",
+                                                                         UriKind.RelativeOrAbsolute)),
+                                });
                         }
                     }
                     else
                     {
-                        Console.WriteLine("haha");
+                        Console.WriteLine(@"haha");
                     }
                 }
                 catch (FaultException ex)
                 {
-//                    _logger.Warn(ex.Message);
+                    Console.WriteLine(ex.Message);
                 }
                 return result;
-            }
-            set
-            {
-                _subItems = value;
-                OnPropertyChanged("SubItems");
             }
         }
 

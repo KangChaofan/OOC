@@ -15,9 +15,11 @@ namespace OOC.Contract.Data.Common
         Assigned = 2,
         /* task is running on instance */
         Running = 3,
+        /* task is finished but still collecting output data */
+        Finishing = 4,
         /* task is aborted or killed due to exception */
-        Aborted = 4,
+        Aborted = 5,
         /* task is finished successfully */
-        Completed = 5
+        Completed = 6
     }
 }

@@ -10,20 +10,17 @@
     Title="MainWindow" Height="370" Width="480" PreviewKeyDown="Window_PreviewKeyDown"
     Loaded="Window_Loaded">
 
-    <Window.DataContext>
-        <XmlDataProvider Source="/Resources/Xml/Data.xml"></XmlDataProvider>
-    </Window.DataContext>
     <Window.Resources>
         <!--ObjectDataProvider:包装和创建可以用作绑定源的对象。-->
         <ObjectDataProvider x:Key="RootFolderDataProvider">
             <!--ObjectInstance:对象实例-->
             <ObjectDataProvider.ObjectInstance>
                 <!--FullPath:是Folder类的一个属性-->
-                <fileClient:Folder FullPath="c:\Program Files\"/>
+                <fileClient:RemoteFolder Name=""/>
             </ObjectDataProvider.ObjectInstance>
         </ObjectDataProvider>
         <!--HierarchicalDataTemplate:分层数据模板-->
-        <HierarchicalDataTemplate DataType="{x:Type fileClient:Folder}" ItemsSource="{Binding Path=SubFolders}">
+        <HierarchicalDataTemplate DataType="{x:Type fileClient:RemoteFolder}" ItemsSource="{Binding Path=SubItems}">
             <TextBlock Text="{Binding Path=Name}"></TextBlock>
         </HierarchicalDataTemplate>
         
@@ -160,7 +157,7 @@
 
 
         <TreeView Grid.Column="1" Grid.Row="4" Height="auto" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="auto" Name="treeView1">
-            <TreeViewItem ItemsSource="{Binding Path=SubFolders, Source={ StaticResource RootFolderDataProvider}}" Header="文件"/>
+            <TreeViewItem ItemsSource="{Binding Path=SubItems, Source={ StaticResource RootFolderDataProvider}}" Header="文件"/>
         </TreeView>
         
 <!--        <TreeView x:Name="treeView" Grid.Column="1" Grid.Row="4"-->

@@ -120,7 +120,14 @@ namespace FileClient.View
 
         public string DisplayName
         {
-            get { return Path.GetFileName(Name); }
+            get
+            {
+                if (Name.Equals(string.Empty))
+                {
+                    return "Root";
+                }
+                return Path.GetFileName(Name);
+            }
             set
             {
                 _displayName = value;
@@ -150,10 +157,7 @@ namespace FileClient.View
                                AccessTime = file.AccessTime,
                                ModifyTime = file.ModifyTime,
                                IsDirectory = true,
-                               Icon = file.IsDirectory
-                                          ? new BitmapImage(new Uri(@"Resources/Images/Folder16.png",
-                                                                    UriKind.RelativeOrAbsolute))
-                                          : new BitmapImage(new Uri(@"Resources/Images/Documents16.png",
+                               Icon = new BitmapImage(new Uri(@"Resources/Images/Folder16.png",
                                                                     UriKind.RelativeOrAbsolute)),
                                SubItems = getSubItems(file.Name),
                            });
@@ -168,10 +172,7 @@ namespace FileClient.View
                             AccessTime = file.AccessTime,
                             ModifyTime = file.ModifyTime,
                             IsDirectory = true,
-                            Icon = file.IsDirectory
-                                       ? new BitmapImage(new Uri(@"Resources/Images/Folder16.png",
-                                                                 UriKind.RelativeOrAbsolute))
-                                       : new BitmapImage(new Uri(@"Resources/Images/Documents16.png",
+                            Icon = new BitmapImage(new Uri(@"Resources/Images/File16.png",
                                                                  UriKind.RelativeOrAbsolute)),
                         });
                     }

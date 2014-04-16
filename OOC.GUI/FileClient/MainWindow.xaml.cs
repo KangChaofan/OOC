@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.ServiceModel;
 using System.Windows;
@@ -6,11 +7,11 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Media.Imaging;
 using ActiproSoftware.Windows.Controls.Navigation;
 using FileClient.FileService;
 using FileClient.View;
 using FileClient.WindowEffect;
-using OOC.Util;
 using Brushes = System.Windows.Media.Brushes;
 using Color = System.Windows.Media.Color;
 
@@ -21,9 +22,9 @@ namespace FileClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        private FileItemView fileItemView = new FileItemView();
         private readonly FileServiceClient Client = new FileServiceClient();
-//        private readonly Logger _logger = new Logger("OOC.GUI.FileClient.log");
+        private FileItemView fileItemView = new FileItemView();
+        //        private readonly Logger _logger = new Logger("OOC.GUI.FileClient.log");
 
         public MainWindow()
         {
@@ -41,14 +42,26 @@ namespace FileClient
 
             menuDock.Visibility = Visibility.Collapsed;
 
-            fileItemView = new FileItemView()
+            SetBindings();
+        }
+
+        private void SetBindings()
+        {
+            fileItemView = new FileItemView
                 {
-                    Name = ""
+                    SubItems = new ObservableCollection<FileItemView>
+                        {
+                            new FileItemView
+                                {
+                                    Name = "",
+                                    DisplayName = "Root",
+                                    Icon = new BitmapImage(new Uri(@"Resources/Images/Computer16.png",
+                                                                   UriKind.RelativeOrAbsolute)),
+                                }
+                        }
                 };
-            Binding binding = new Binding();
-            binding.Source = fileItemView;
-            binding.Path = new PropertyPath("SubItems");
-            treeView.SetBinding(TreeView.ItemsSourceProperty, binding);
+            Binding binding = new Binding {Source = fileItemView, Path = new PropertyPath("SubItems")};
+            treeView.SetBinding(ItemsControl.ItemsSourceProperty, binding);
         }
 
         public void NavigateTo(string path)
@@ -59,7 +72,7 @@ namespace FileClient
             }
             catch (FaultException e)
             {
-//                _logger.Warn(e.Message);
+                //                _logger.Warn(e.Message);
             }
         }
 
@@ -154,7 +167,7 @@ namespace FileClient
                 FileSystemDescription filedesc = Client.Stat(path);
                 if (filedesc.IsDirectory)
                 {
-//                    _logger.Debug(string.Format("[LIST]{0}", path));
+                    //                    _logger.Debug(string.Format("[LIST]{0}", path));
                     FileSystemDescription[] fileDescriptions = Client.List(path);
                     foreach (FileSystemDescription file in fileDescriptions)
                     {
@@ -168,7 +181,7 @@ namespace FileClient
             }
             catch (FaultException ex)
             {
-//                _logger.Warn(ex.Message);
+                //                _logger.Warn(ex.Message);
             }
             //throw new NotImplementedException();
         }

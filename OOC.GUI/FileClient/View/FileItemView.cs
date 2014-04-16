@@ -143,7 +143,6 @@ namespace FileClient.View
             FileSystemDescription fileSystemDescription = Client.Stat(path);
             if (fileSystemDescription.IsDirectory)
             {
-                //                        _logger.Debug(string.Format("[LIST]{0}", path));
                 FileSystemDescription[] fileDescriptions = Client.List(path);
                 foreach (FileSystemDescription file in fileDescriptions)
                 {

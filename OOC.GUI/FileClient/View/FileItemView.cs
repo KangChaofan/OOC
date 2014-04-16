@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.ServiceModel;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -12,7 +13,7 @@ namespace FileClient.View
     public class FileItemView : INotifyPropertyChanged
     {
         private readonly FileServiceClient Client = new FileServiceClient();
-//        private static readonly Logger _logger = new Logger("OOC.GUI.FileClient.log");
+        //        private static readonly Logger _logger = new Logger("OOC.GUI.FileClient.log");
         private DateTime _accessTime;
         private DateTime _createTime;
         private ImageSource _icon;
@@ -20,6 +21,8 @@ namespace FileClient.View
         private DateTime _modifyTime;
         private string _name;
         private long _size;
+        private ObservableCollection<FileItemView> _subItems;
+        private string _displayName;
 
         public bool IsDirectory
         {
@@ -92,45 +95,17 @@ namespace FileClient.View
                 //                        new FileItemView(){Name = "test2"}
                 //                    };
 
-                ObservableCollection<FileItemView> result = new ObservableCollection<FileItemView>();
-                string path = Name;
                 try
                 {
-//                    _logger.Debug(string.Format("[STAT]{0}", path));
-                    FileSystemDescription fileSystemDescription = Client.Stat(path);
-                    if (fileSystemDescription.IsDirectory)
-                    {
-//                        _logger.Debug(string.Format("[LIST]{0}", path));
-                        FileSystemDescription[] fileDescriptions = Client.List(path);
-                        foreach (FileSystemDescription file in fileDescriptions)
-                        {
-                            result.Add(new FileItemView
-                                {
-                                    Name = file.Name,
-                                    Size = -1,
-                                    CreateTime = file.CreateTime,
-                                    AccessTime = file.AccessTime,
-                                    ModifyTime = file.ModifyTime,
-                                    IsDirectory = true,
-                                    Icon = file.IsDirectory
-                                               ? new BitmapImage(new Uri(@"Resources/Images/Folder16.png",
-                                                                         UriKind.RelativeOrAbsolute))
-                                               : new BitmapImage(new Uri(@"Resources/Images/Documents16.png",
-                                                                         UriKind.RelativeOrAbsolute)),
-                                });
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine(@"haha");
-                    }
+                    _subItems = getSubItems(Name);
                 }
                 catch (FaultException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
-                return result;
+                return _subItems;
             }
+            set { _subItems = value; }
         }
 
         public ImageSource Icon
@@ -143,7 +118,72 @@ namespace FileClient.View
             }
         }
 
+        public string DisplayName
+        {
+            get { return Path.GetFileName(Name); }
+            set
+            {
+                _displayName = value;
+                OnPropertyChanged("DisplayName");
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public ObservableCollection<FileItemView> getSubItems(string path)
+        {
+            ObservableCollection<FileItemView> result = new ObservableCollection<FileItemView>();
+            FileSystemDescription fileSystemDescription = Client.Stat(path);
+            if (fileSystemDescription.IsDirectory)
+            {
+                //                        _logger.Debug(string.Format("[LIST]{0}", path));
+                FileSystemDescription[] fileDescriptions = Client.List(path);
+                foreach (FileSystemDescription file in fileDescriptions)
+                {
+                    if (file.IsDirectory)
+                    {
+                        result.Add(new FileItemView
+                           {
+                               Name = file.Name,
+                               Size = -1,
+                               CreateTime = file.CreateTime,
+                               AccessTime = file.AccessTime,
+                               ModifyTime = file.ModifyTime,
+                               IsDirectory = true,
+                               Icon = file.IsDirectory
+                                          ? new BitmapImage(new Uri(@"Resources/Images/Folder16.png",
+                                                                    UriKind.RelativeOrAbsolute))
+                                          : new BitmapImage(new Uri(@"Resources/Images/Documents16.png",
+                                                                    UriKind.RelativeOrAbsolute)),
+                               SubItems = getSubItems(file.Name),
+                           });
+                    }
+                    else
+                    {
+                        result.Add(new FileItemView
+                        {
+                            Name = file.Name,
+                            Size = file.Size,
+                            CreateTime = file.CreateTime,
+                            AccessTime = file.AccessTime,
+                            ModifyTime = file.ModifyTime,
+                            IsDirectory = true,
+                            Icon = file.IsDirectory
+                                       ? new BitmapImage(new Uri(@"Resources/Images/Folder16.png",
+                                                                 UriKind.RelativeOrAbsolute))
+                                       : new BitmapImage(new Uri(@"Resources/Images/Documents16.png",
+                                                                 UriKind.RelativeOrAbsolute)),
+                        });
+                    }
+
+                }
+            }
+            else
+            {
+                Console.WriteLine(@"haha");
+            }
+            return result;
+        }
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged(string propertyName)

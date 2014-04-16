@@ -3,6 +3,7 @@ using System.Drawing;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Interop;
 using ActiproSoftware.Windows.Controls.Navigation;
@@ -20,6 +21,7 @@ namespace FileClient
     /// </summary>
     public partial class MainWindow : Window
     {
+        private FileItemView fileItemView = new FileItemView();
         private readonly FileServiceClient Client = new FileServiceClient();
 //        private readonly Logger _logger = new Logger("OOC.GUI.FileClient.log");
 
@@ -38,6 +40,15 @@ namespace FileClient
             Width = 1200;
 
             menuDock.Visibility = Visibility.Collapsed;
+
+            fileItemView = new FileItemView()
+                {
+                    Name = ""
+                };
+            Binding binding = new Binding();
+            binding.Source = fileItemView;
+            binding.Path = new PropertyPath("SubItems");
+            treeView.SetBinding(TreeView.ItemsSourceProperty, binding);
         }
 
         public void NavigateTo(string path)
@@ -164,7 +175,7 @@ namespace FileClient
 
         private void OnTreeViewSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            CurrentPath = e.NewValue.CastTo<FileItemView>().Name;
+            //CurrentPath = e.NewValue.CastTo<FileItemView>().Name;
         }
     }
 }

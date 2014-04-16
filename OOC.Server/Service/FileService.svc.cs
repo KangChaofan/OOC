@@ -51,7 +51,7 @@ namespace OOC.Service
             //add files in the path.
             List<FileSystemDescription> fileDescriptions =
                 (from file in files
-                 let fileName = Path.GetFileName(file)
+                 let fileName = Path.Combine(path,Path.GetFileName(file))
                  select new FileSystemDescription(fileName, new FileInfo(file))).ToList();
 
             //add directories in the path.
@@ -59,7 +59,7 @@ namespace OOC.Service
             fileDescriptions.AddRange(
                 directories.Select(Path.GetFileNameWithoutExtension)
                            .Select(
-                               dirName => new FileSystemDescription(dirName, new DirectoryInfo(dirName))));
+                               dirName => new FileSystemDescription(Path.Combine(path,dirName), new DirectoryInfo(dirName))));
 
             return fileDescriptions;
         }

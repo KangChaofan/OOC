@@ -116,10 +116,34 @@
 
         <TreeView x:Name="treeView"
                   Grid.Column="1" Grid.Row="4"
-                  ItemContainerStyle="{StaticResource TreeViewItemStyle}"
-                  ItemsSource="{Binding Path=SubItems, Source={StaticResource FileItemProvider}}"
-                  ItemTemplate="{StaticResource ComboBoxItemTemplate}"
-                  SelectedItemChanged="OnTreeViewSelectedItemChanged" />
+                  SelectedItemChanged="OnTreeViewSelectedItemChanged">
+            <TreeView.ItemTemplate>
+
+                <HierarchicalDataTemplate DataType="{x:Type view:FileItemView}" ItemsSource="{Binding Path=SubItems}">
+         
+                    <StackPanel Orientation="Horizontal">
+                     
+                        <Image VerticalAlignment="Center" Source="{Binding Icon}" Width="16" Height="16" Margin="0,0,2,2"></Image>
+                    
+                        <TextBlock VerticalAlignment="Center" Text="{Binding DisplayName}"></TextBlock>
+                   
+                        <StackPanel.ToolTip>
+                          
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Name}" TextWrapping="Wrap" MaxWidth="200" ></TextBlock>
+                    
+                        </StackPanel.ToolTip>
+                  
+                    </StackPanel>
+             
+                </HierarchicalDataTemplate>
+        
+            </TreeView.ItemTemplate>
+            <!--            <TreeViewItem-->
+<!--                ItemsSource="{Binding Path=SubItems, Source={StaticResource FileItemProvider}}"-->
+<!--                ItemTemplate="{StaticResource ComboBoxItemTemplate}"-->
+<!--                Header="Root">-->
+<!--            </TreeViewItem>-->
+        </TreeView>
 
         <!--        <TreeView Height="auto" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="auto"-->
         <!--                  Name="treeView1">-->

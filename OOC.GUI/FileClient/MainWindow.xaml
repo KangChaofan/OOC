@@ -99,9 +99,16 @@
         <ListView Grid.Column="2" Grid.Row="4">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn />
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding DisplayName}" />
+                    <GridViewColumn Header="Size" DisplayMemberBinding="{Binding Size}" />
+                    <GridViewColumn Header="Date Modified" DisplayMemberBinding="{Binding ModifyTime}" />
+                    <GridViewColumn Header="Date Created" DisplayMemberBinding="{Binding CreateTime}" />
+                    <GridViewColumn Header="Date Accessed" DisplayMemberBinding="{Binding AccessTime}" />
                 </GridView>
             </ListView.View>
+
+            <view:FileItemView Name="Calendar32.png" Size="151254" ModifyTime="2008/4/17 12:13 PM" CreateTime="2008/4/17 12:13 PM" AccessTime="2008/4/17 12:13 PM" />
+            <view:FileItemView Name="Readme.doc" Size="1626463" ModifyTime="2008/4/17 12:13 PM"  CreateTime="2008/4/17 12:13 PM" AccessTime="2008/4/17 12:13 PM"/>
         </ListView>
 
         <StatusBar Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2">

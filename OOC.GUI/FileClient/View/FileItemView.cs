@@ -12,7 +12,7 @@ namespace FileClient.View
 {
     public class FileItemView : INotifyPropertyChanged
     {
-        private readonly FileServiceClient Client = new FileServiceClient();
+        private static readonly FileServiceClient Client = new FileServiceClient();
         //        private static readonly Logger _logger = new Logger("OOC.GUI.FileClient.log");
         private DateTime _accessTime;
         private DateTime _createTime;

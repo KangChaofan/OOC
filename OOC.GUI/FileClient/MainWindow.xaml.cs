@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Drawing;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using ActiproSoftware.Windows.Controls.Navigation;
 using FileClient.FileService;
 using FileClient.View;
 using FileClient.WindowEffect;
-using Brushes = System.Windows.Media.Brushes;
-using Color = System.Windows.Media.Color;
+using OOC.Util;
 
 namespace FileClient
 {
@@ -23,7 +20,8 @@ namespace FileClient
     public partial class MainWindow : Window
     {
         private readonly FileServiceClient Client = new FileServiceClient();
-        private FileItemView fileItemView = new FileItemView();
+        private FileItemView current;
+        private FileItemView root = new FileItemView();
         //        private readonly Logger _logger = new Logger("OOC.GUI.FileClient.log");
 
         public MainWindow()
@@ -47,7 +45,7 @@ namespace FileClient
 
         private void SetBindings()
         {
-            fileItemView = new FileItemView
+            root = new FileItemView
                 {
                     SubItems = new ObservableCollection<FileItemView>
                         {
@@ -60,8 +58,13 @@ namespace FileClient
                                 }
                         }
                 };
-            Binding binding = new Binding {Source = fileItemView, Path = new PropertyPath("SubItems")};
-            treeView.SetBinding(ItemsControl.ItemsSourceProperty, binding);
+            TreeView.SetBinding(ItemsControl.ItemsSourceProperty,
+                                new Binding { Source = root, Path = new PropertyPath("SubItems") });
+            StatusText.SetBinding(TextBlock.TextProperty, new Binding
+                {
+                    Source = current,
+                    Path = new PropertyPath("DisplayName")
+                });
         }
 
         public void NavigateTo(string path)
@@ -93,7 +96,7 @@ namespace FileClient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ApplyGlassEffect(addressBorder);
+            GlassEffect.ApplyGlassEffect(this, addressBorder);
         }
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -101,57 +104,6 @@ namespace FileClient
             if (e.SystemKey == Key.LeftAlt || e.SystemKey == Key.RightAlt)
             {
                 menuDock.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void ApplyGlassEffect(Border border)
-        {
-            const int borderWidth = 1 + 2;
-            const int dpi = 96;
-
-            try
-            {
-                Application.Current.MainWindow.Background = Brushes.Transparent;
-                //menu.Background = Brushes.Transparent;
-                // Obtain the window handle for WPF application
-                IntPtr mainWindowPtr = new WindowInteropHelper(this).Handle;
-                HwndSource mainWindowSrc = HwndSource.FromHwnd(mainWindowPtr);
-                if (mainWindowSrc != null)
-                    if (mainWindowSrc.CompositionTarget != null)
-                        mainWindowSrc.CompositionTarget.BackgroundColor = Color.FromArgb(0, 0, 0, 0);
-
-                // Get System Dpi
-                Graphics desktop = Graphics.FromHwnd(mainWindowPtr);
-                float DesktopDpiX = desktop.DpiX;
-                float DesktopDpiY = desktop.DpiY;
-
-                // Set Margins
-                var margins = new NonClientRegionAPI.MARGINS
-                    {
-                        cxLeftWidth = Convert.ToInt32(borderWidth*(DesktopDpiX/dpi)),
-                        cxRightWidth = Convert.ToInt32(borderWidth*(DesktopDpiX/dpi)),
-                        cyTopHeight = Convert.ToInt32(((int) border.ActualHeight + borderWidth + 25)*(DesktopDpiY/dpi)),
-                        cyBottomHeight = Convert.ToInt32(borderWidth*(DesktopDpiY/dpi))
-                    };
-
-                // Extend glass frame into client area
-                // Note that the default desktop Dpi is 96dpi. The  margins are
-                // adjusted for the system Dpi.
-
-                if (mainWindowSrc != null)
-                {
-                    int hr = NonClientRegionAPI.DwmExtendFrameIntoClientArea(mainWindowSrc.Handle, ref margins);
-                    //
-                    if (hr < 0)
-                    {
-                        //DwmExtendFrameIntoClientArea Failed
-                    }
-                }
-            }
-                // If not Vista or up, paint background white.
-            catch (DllNotFoundException)
-            {
-                Application.Current.MainWindow.Background = Brushes.White;
             }
         }
 
@@ -179,16 +131,15 @@ namespace FileClient
                     }
                 }
             }
-            catch (FaultException ex)
+            catch (FaultException)
             {
-                //                _logger.Warn(ex.Message);
             }
-            //throw new NotImplementedException();
         }
 
         private void OnTreeViewSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            //CurrentPath = e.NewValue.CastTo<FileItemView>().Name;
+            current = e.NewValue.CastTo<FileItemView>();
+            StatusText.Text = string.Format("已选中 {0}, 大小 {1}字节, 上次访问 {2}", current.DisplayName, current.Size, current.AccessTime);
         }
     }
 }

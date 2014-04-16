@@ -49,7 +49,7 @@
                     </StackPanel>
                     <GridSplitter Grid.Column="1" Width="5" Margin="0,0,0,5" HorizontalAlignment="Center"
                                   Background="Transparent" />
-                    <TextBox Grid.Column="2" Margin="0,0,0,5" Text="Search" />
+                    <TextBox Text="Search" Grid.Column="2" Margin="0,0,0,5" />
                 </Grid>
             </Border>
         </DockPanel>
@@ -76,7 +76,7 @@
             </Menu>
         </DockPanel>
 
-        <TreeView x:Name="treeView"
+        <TreeView x:Name="TreeView"
                   Grid.Column="1" Grid.Row="4"
                   SelectedItemChanged="OnTreeViewSelectedItemChanged">
             <TreeView.ItemTemplate>
@@ -115,8 +115,8 @@
                     </Grid>
                 </ItemsPanelTemplate>
             </StatusBar.ItemsPanel>
-            <StatusBarItem Grid.Column="1" FontSize="14">
-                <TextBlock x:Name="StatusText" Text="test"></TextBlock>
+            <StatusBarItem Grid.Column="1" FontSize="14" FontFamily="Microsoft YaHei">
+                <TextBlock x:Name="StatusText" Text="{Binding DisplayName}"></TextBlock>
             </StatusBarItem>
         </StatusBar>
     </Grid>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using ActiproSoftware.Windows.Controls.Navigation;
+using FileClient.Annotations;
 using FileClient.FileService;
 using FileClient.View;
 using FileClient.WindowEffect;
@@ -17,11 +19,11 @@ namespace FileClient
     /// <summary>
     ///     MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private readonly FileServiceClient Client = new FileServiceClient();
-        private FileItemView current;
-        private FileItemView root = new FileItemView();
+        private FileItemView _currentPath;
+        private FileItemView rootPath = new FileItemView();
         //        private readonly Logger _logger = new Logger("OOC.GUI.FileClient.log");
 
         public MainWindow()
@@ -30,7 +32,17 @@ namespace FileClient
             Init();
         }
 
-        public string CurrentPath { get; set; }
+        public FileItemView CurrentPath
+        {
+            get { return _currentPath; }
+            set
+            {
+                _currentPath = value;
+                OnPropertyChanged("CurrentPath");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void Init()
         {
@@ -40,14 +52,10 @@ namespace FileClient
 
             menuDock.Visibility = Visibility.Collapsed;
 
-            SetBindings();
-        }
 
-        private void SetBindings()
-        {
-            root = new FileItemView
-                {
-                    SubItems = new ObservableCollection<FileItemView>
+            rootPath = new FileItemView
+            {
+                SubItems = new ObservableCollection<FileItemView>
                         {
                             new FileItemView
                                 {
@@ -57,14 +65,27 @@ namespace FileClient
                                                                    UriKind.RelativeOrAbsolute)),
                                 }
                         }
-                };
+            };
+            CurrentPath = rootPath;
+
+            SetBindings();
+        }
+
+        private void SetBindings()
+        {
             TreeView.SetBinding(ItemsControl.ItemsSourceProperty,
-                                new Binding { Source = root, Path = new PropertyPath("SubItems") });
-            StatusText.SetBinding(TextBlock.TextProperty, new Binding
-                {
-                    Source = current,
-                    Path = new PropertyPath("DisplayName")
-                });
+                                new Binding {Source = rootPath, Path = new PropertyPath("SubItems"),Mode = BindingMode.OneTime});
+            ListView.SetBinding(ItemsControl.ItemsSourceProperty,
+                                new Binding
+                                    {
+                                        Source = CurrentPath,
+                                        Path = new PropertyPath("SubItems"),
+                                    });
+//            StatusText.SetBinding(TextBlock.TextProperty, new Binding
+//                {
+//                    Source = _currentPath,
+//                    Path = new PropertyPath("DisplayName")
+//                });
         }
 
         public void NavigateTo(string path)
@@ -138,8 +159,23 @@ namespace FileClient
 
         private void OnTreeViewSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            current = e.NewValue.CastTo<FileItemView>();
-            StatusText.Text = string.Format("已选中 {0}, 大小 {1}字节, 上次访问 {2}", current.DisplayName, current.Size, current.AccessTime);
+            CurrentPath = e.NewValue.CastTo<FileItemView>();
+            StatusText.Text = string.Format("已选中 {0}, 大小 {1}字节, 上次访问 {2}", _currentPath.DisplayName, _currentPath.Size,
+                                            _currentPath.AccessTime);
+            ListView.SetBinding(ItemsControl.ItemsSourceProperty,
+                    new Binding
+                    {
+                        Source = CurrentPath,
+                        Path = new PropertyPath("SubItems"),
+                    });
+//            SetBindings();
+        }
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

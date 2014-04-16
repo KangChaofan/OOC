@@ -96,19 +96,35 @@
             </TreeView.ItemTemplate>
         </TreeView>
 
-        <ListView Grid.Column="2" Grid.Row="4">
+        <ListView x:Name="ListView" Grid.Column="2" Grid.Row="4">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding DisplayName}" />
-                    <GridViewColumn Header="Size" DisplayMemberBinding="{Binding Size}" />
+                    <GridViewColumn Header="Name">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image VerticalAlignment="Center" Source="{Binding Icon}" Width="16" Height="16"
+                               Margin="0,0,2,2">
+                                    </Image>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding DisplayName}"></TextBlock>
+                                    <StackPanel.ToolTip>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Name}" TextWrapping="Wrap"
+                                       MaxWidth="200">
+                                        </TextBlock>
+                                    </StackPanel.ToolTip>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Size" DisplayMemberBinding="{Binding Size}"/>
                     <GridViewColumn Header="Date Modified" DisplayMemberBinding="{Binding ModifyTime}" />
                     <GridViewColumn Header="Date Created" DisplayMemberBinding="{Binding CreateTime}" />
                     <GridViewColumn Header="Date Accessed" DisplayMemberBinding="{Binding AccessTime}" />
                 </GridView>
             </ListView.View>
 
-            <view:FileItemView Name="Calendar32.png" Size="151254" ModifyTime="2008/4/17 12:13 PM" CreateTime="2008/4/17 12:13 PM" AccessTime="2008/4/17 12:13 PM" />
-            <view:FileItemView Name="Readme.doc" Size="1626463" ModifyTime="2008/4/17 12:13 PM"  CreateTime="2008/4/17 12:13 PM" AccessTime="2008/4/17 12:13 PM"/>
+<!--            <view:FileItemView Name="Calendar32.png" Icon="/Resources/Images/Folder16.png" Size="151254" ModifyTime="2008/4/17 12:13 PM" CreateTime="2008/4/17 12:13 PM" AccessTime="2008/4/17 12:13 PM" />-->
+<!--            <view:FileItemView Name="Readme.doc" Icon="/Resources/Images/Folder16.png"  Size="1626463" ModifyTime="2008/4/17 12:13 PM"  CreateTime="2008/4/17 12:13 PM" AccessTime="2008/4/17 12:13 PM"/>-->
         </ListView>
 
         <StatusBar Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2">

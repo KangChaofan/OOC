@@ -158,7 +158,7 @@ namespace FileClient.View
                                IsDirectory = true,
                                Icon = new BitmapImage(new Uri(@"Resources/Images/Folder16.png",
                                                                     UriKind.RelativeOrAbsolute)),
-                               SubItems = getSubItems(file.Name),
+                               //SubItems = getSubItems(file.Name),
                            });
                     }
                     else

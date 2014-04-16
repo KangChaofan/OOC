@@ -59,17 +59,22 @@
                 GotKeyboardFocus="menu_GotKeyboardFocus"
                 LostKeyboardFocus="menu_LostKeyboardFocus"
                 ContextMenuOpening="menu_ContextMenuOpening" Visibility="Visible"
-                Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" FontSize="14">
+                Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" FontSize="14" FontFamily="Microsoft YaHei">
                 <MenuItem Header="文件(_F)">
-                    <MenuItem Header="打开(_O)..." />
-                    <MenuItem Header="保存(_S)" />
-                    <MenuItem Header="另存为(_A)..." />
+                    <MenuItem Header="新建连接(_O)..." />
+                    <MenuItem Header="打开连接(_O)..." />
+                    <MenuItem Header="保存连接(_S)" />
+                    <MenuItem Header="连接另存为(_A)..." />
+                    <Separator />
+                    <MenuItem Header="列出目录/下载文件(_D)..." />
+                    <MenuItem Header="上传文件(_U)..." />
                     <Separator />
                     <MenuItem Header="退出(_Q)" />
                 </MenuItem>
                 <MenuItem Header="帮助(_H)">
-                    <MenuItem Header="清除日志(_C)" />
-                    <MenuItem Header="帮助(_H)" />
+                    <MenuItem Header="查看日志(_C)" />
+                    <MenuItem Header="检测系统升级...(_U)" />
+                    <MenuItem Header="帮助主题(_H)" />
                     <Separator />
                     <MenuItem Header="关于(_A)" />
                 </MenuItem>
@@ -99,7 +104,7 @@
         <ListView x:Name="ListView" Grid.Column="2" Grid.Row="4">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name">
+                    <GridViewColumn Header="Name" Width="75">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -116,10 +121,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Size" DisplayMemberBinding="{Binding Size}"/>
-                    <GridViewColumn Header="Date Modified" DisplayMemberBinding="{Binding ModifyTime}" />
-                    <GridViewColumn Header="Date Created" DisplayMemberBinding="{Binding CreateTime}" />
-                    <GridViewColumn Header="Date Accessed" DisplayMemberBinding="{Binding AccessTime}" />
+                    <GridViewColumn Header="Size" Width="5" DisplayMemberBinding="{Binding Size}"/>
+                    <GridViewColumn Header="Date Modified" Width="85" DisplayMemberBinding="{Binding ModifyTime}" />
+                    <GridViewColumn Header="Date Created" Width="85" DisplayMemberBinding="{Binding CreateTime}" />
+                    <GridViewColumn Header="Date Accessed" Width="85" DisplayMemberBinding="{Binding AccessTime}" />
                 </GridView>
             </ListView.View>
 

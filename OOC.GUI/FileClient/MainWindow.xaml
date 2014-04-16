@@ -61,15 +61,15 @@
                 ContextMenuOpening="menu_ContextMenuOpening" Visibility="Visible"
                 Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" FontSize="14" FontFamily="Microsoft YaHei">
                 <MenuItem Header="文件(_F)">
-                    <MenuItem Header="新建连接(_O)..." />
-                    <MenuItem Header="打开连接(_O)..." />
-                    <MenuItem Header="保存连接(_S)" />
-                    <MenuItem Header="连接另存为(_A)..." />
+                    <MenuItem Header="新建连接(_O)..." Click="MenuItem_OnClick" />
+                    <MenuItem Header="打开连接(_O)..." Click="MenuItem_OnClick" />
+                    <MenuItem Header="保存连接(_S)"  Click="MenuItem_OnClick" />
+                    <MenuItem Header="连接另存为(_A)..." Click="MenuItem_OnClick" />
                     <Separator />
-                    <MenuItem Header="列出目录/下载文件(_D)..." />
-                    <MenuItem Header="上传文件(_U)..." />
+                    <MenuItem Header="下载文件(_D)..." Click="MenuItem_OnClick" />
+                    <MenuItem Header="上传文件(_U)..." Click="MenuItem_OnClick" />
                     <Separator />
-                    <MenuItem Header="退出(_Q)" />
+                    <MenuItem Header="退出(_Q)" Click="MenuItem_OnClick" />
                 </MenuItem>
                 <MenuItem Header="帮助(_H)">
                     <MenuItem Header="查看日志(_C)" />

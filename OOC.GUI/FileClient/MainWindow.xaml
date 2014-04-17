@@ -59,11 +59,12 @@
                 GotKeyboardFocus="menu_GotKeyboardFocus"
                 LostKeyboardFocus="menu_LostKeyboardFocus"
                 ContextMenuOpening="menu_ContextMenuOpening" Visibility="Visible"
-                Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" FontSize="14" FontFamily="Microsoft YaHei">
+                Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" FontSize="14"
+                FontFamily="Microsoft YaHei">
                 <MenuItem Header="文件(_F)">
                     <MenuItem Header="新建连接(_N)..." Click="MenuItem_OnClick" />
                     <MenuItem Header="打开连接(_O)..." Click="MenuItem_OnClick" />
-                    <MenuItem Header="保存连接(_S)"  Click="MenuItem_OnClick" />
+                    <MenuItem Header="保存连接(_S)" Click="MenuItem_OnClick" />
                     <MenuItem Header="连接另存为(_A)..." Click="MenuItem_OnClick" />
                     <Separator />
                     <MenuItem Header="下载文件(_D)..." Click="MenuItem_OnClick" />
@@ -109,27 +110,27 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <Image VerticalAlignment="Center" Source="{Binding Icon}" Width="16" Height="16"
-                               Margin="0,0,2,2">
+                                           Margin="0,0,2,2">
                                     </Image>
                                     <TextBlock VerticalAlignment="Center" Text="{Binding DisplayName}"></TextBlock>
                                     <StackPanel.ToolTip>
                                         <TextBlock VerticalAlignment="Center" Text="{Binding Name}" TextWrapping="Wrap"
-                                       MaxWidth="200">
+                                                   MaxWidth="200">
                                         </TextBlock>
                                     </StackPanel.ToolTip>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Size" Width="85" DisplayMemberBinding="{Binding Size}"/>
+                    <GridViewColumn Header="Size" Width="85" DisplayMemberBinding="{Binding Size}" />
                     <GridViewColumn Header="Date Modified" Width="200" DisplayMemberBinding="{Binding ModifyTime}" />
                     <GridViewColumn Header="Date Created" Width="200" DisplayMemberBinding="{Binding CreateTime}" />
                     <GridViewColumn Header="Date Accessed" Width="200" DisplayMemberBinding="{Binding AccessTime}" />
                 </GridView>
             </ListView.View>
 
-<!--            <view:FileItemView Name="Calendar32.png" Icon="/Resources/Images/Folder16.png" Size="151254" ModifyTime="2008/4/17 12:13 PM" CreateTime="2008/4/17 12:13 PM" AccessTime="2008/4/17 12:13 PM" />-->
-<!--            <view:FileItemView Name="Readme.doc" Icon="/Resources/Images/Folder16.png"  Size="1626463" ModifyTime="2008/4/17 12:13 PM"  CreateTime="2008/4/17 12:13 PM" AccessTime="2008/4/17 12:13 PM"/>-->
+            <!--            <view:FileItemView Name="Calendar32.png" Icon="/Resources/Images/Folder16.png" Size="151254" ModifyTime="2008/4/17 12:13 PM" CreateTime="2008/4/17 12:13 PM" AccessTime="2008/4/17 12:13 PM" />-->
+            <!--            <view:FileItemView Name="Readme.doc" Icon="/Resources/Images/Folder16.png"  Size="1626463" ModifyTime="2008/4/17 12:13 PM"  CreateTime="2008/4/17 12:13 PM" AccessTime="2008/4/17 12:13 PM"/>-->
         </ListView>
 
         <StatusBar Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2">

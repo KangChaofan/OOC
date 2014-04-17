@@ -18,7 +18,7 @@ namespace OOC.Service
 
         public FileEntityResponse Get(string fileName)
         {
-            string realPath = Path.Combine(new[] { fileRoot, fileName });
+            string realPath = Path.Combine(new[] {fileRoot, fileName});
             if (!File.Exists(realPath) || !realPath.StartsWith(fileRoot))
             {
                 throw new FaultException("FILE_NOT_EXISTS");
@@ -28,7 +28,7 @@ namespace OOC.Service
 
         public void Put(string fileName, byte[] content)
         {
-            string realPath = Path.Combine(new[] { fileRoot, fileName });
+            string realPath = Path.Combine(new[] {fileRoot, fileName});
             if (!realPath.StartsWith(fileRoot))
             {
                 throw new FaultException("ACCESS_DENIED");
@@ -40,7 +40,7 @@ namespace OOC.Service
 
         public List<FileSystemDescription> List(string path)
         {
-            string realPath = Path.Combine(new[] { fileRoot, path });
+            string realPath = Path.Combine(new[] {fileRoot, path});
             if (!Directory.Exists(realPath) || !realPath.StartsWith(fileRoot))
             {
                 throw new FaultException("PATH_NOT_EXISTS");
@@ -51,7 +51,7 @@ namespace OOC.Service
             //add files in the path.
             List<FileSystemDescription> fileDescriptions =
                 (from file in files
-                 let fileName = Path.Combine(path,Path.GetFileName(file))
+                 let fileName = Path.Combine(path, Path.GetFileName(file))
                  select new FileSystemDescription(fileName, new FileInfo(file))).ToList();
 
             //add directories in the path.
@@ -59,15 +59,16 @@ namespace OOC.Service
             fileDescriptions.AddRange(
                 directories.Select(Path.GetFileNameWithoutExtension)
                            .Select(
-                               dirName => new FileSystemDescription(Path.Combine(path,dirName), new DirectoryInfo(dirName))));
+                               dirName =>
+                               new FileSystemDescription(Path.Combine(path, dirName), new DirectoryInfo(dirName))));
 
             return fileDescriptions;
         }
 
         public void Copy(string sourceFileName, string destFileName)
         {
-            string srcRealPath = Path.Combine(new[] { fileRoot, sourceFileName });
-            string dstRealPath = Path.Combine(new[] { fileRoot, destFileName });
+            string srcRealPath = Path.Combine(new[] {fileRoot, sourceFileName});
+            string dstRealPath = Path.Combine(new[] {fileRoot, destFileName});
             if (!File.Exists(srcRealPath) || !srcRealPath.StartsWith(fileRoot))
             {
                 throw new FaultException("SRC_FILE_NOT_EXISTS");
@@ -81,7 +82,7 @@ namespace OOC.Service
 
         public FileSystemDescription Stat(string fileName)
         {
-            string realPath = Path.Combine(new[] { fileRoot, fileName });
+            string realPath = Path.Combine(new[] {fileRoot, fileName});
             if (!realPath.StartsWith(fileRoot))
             {
                 throw new FaultException("PERMISSION_DENIED");
@@ -99,7 +100,7 @@ namespace OOC.Service
 
         public void Delete(string path)
         {
-            string realPath = Path.Combine(new[] { fileRoot, path });
+            string realPath = Path.Combine(new[] {fileRoot, path});
             if (!realPath.StartsWith(fileRoot))
             {
                 throw new FaultException("ACCESS_DENIED");
@@ -119,7 +120,7 @@ namespace OOC.Service
 
         public void CreateDirectory(string path)
         {
-            string realPath = Path.Combine(new[] { fileRoot, path });
+            string realPath = Path.Combine(new[] {fileRoot, path});
             if (!realPath.StartsWith(fileRoot))
             {
                 throw new FaultException("ACCESS_DENIED");
@@ -129,7 +130,7 @@ namespace OOC.Service
 
         public FileChunkResponse Read(string fileName, long offset, long length)
         {
-            string realPath = Path.Combine(new[] { fileRoot, fileName });
+            string realPath = Path.Combine(new[] {fileRoot, fileName});
             if (!File.Exists(realPath) || !realPath.StartsWith(fileRoot))
             {
                 throw new FaultException("FILE_NOT_EXISTS");
@@ -140,7 +141,7 @@ namespace OOC.Service
 
         public void Append(string fileName, byte[] chunk)
         {
-            string realPath = Path.Combine(new[] { fileRoot, fileName });
+            string realPath = Path.Combine(new[] {fileRoot, fileName});
             if (!realPath.StartsWith(fileRoot))
             {
                 throw new FaultException("ACCESS_DENIED");
@@ -152,7 +153,7 @@ namespace OOC.Service
 
         public string Head(string fileName, int lines)
         {
-            string realPath = Path.Combine(new[] { fileRoot, fileName });
+            string realPath = Path.Combine(new[] {fileRoot, fileName});
             if (!File.Exists(realPath) || !realPath.StartsWith(fileRoot))
             {
                 throw new FaultException("FILE_NOT_EXISTS");

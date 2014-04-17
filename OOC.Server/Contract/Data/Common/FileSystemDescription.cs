@@ -8,7 +8,6 @@ namespace OOC.Contract.Data.Common
     [DataContract]
     public class FileSystemDescription
     {
-
         public FileSystemDescription()
         {
         }
@@ -19,7 +18,7 @@ namespace OOC.Contract.Data.Common
             if (info is DirectoryInfo)
             {
                 IsDirectory = true;
-                Size = -1;
+                Size = 0x1000;
             }
             else if (info is FileInfo)
             {

@@ -27,7 +27,6 @@ namespace FileClient
         private readonly FileServiceClient Client = new FileServiceClient();
         private FileItemView _currentPath;
         private FileItemView rootPath = new FileItemView();
-        private byte[] _config;
         //        private readonly Logger _logger = new Logger("OOC.GUI.FileClient.log");
 
         public MainWindow()
@@ -45,6 +44,8 @@ namespace FileClient
                 OnPropertyChanged("CurrentPath");
             }
         }
+
+        protected byte[] Config { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -116,9 +117,9 @@ namespace FileClient
         private void OpenConnection()
         {
             OpenFileDialog fileDialog = new OpenFileDialog
-            {
-                Filter = "Config Files (*.cfg)|*.cfg|All Files (*.*)|*.*",
-            };
+                {
+                    Filter = "Config Files (*.cfg)|*.cfg|All Files (*.*)|*.*",
+                };
             var showDialog = fileDialog.ShowDialog(this);
             if (showDialog.Value)
             {
@@ -130,10 +131,10 @@ namespace FileClient
         private void SaveConnection()
         {
             SaveFileDialog fileDialog = new SaveFileDialog
-            {
-                FileName = "Connection"+DateTime.Now.Ticks.ToString(CultureInfo.InvariantCulture)+ ".cfg",
-                Filter = "Config Files (*.cfg)|*.cfg|All Files (*.*)|*.*",
-            };
+                {
+                    FileName = "Connection" + DateTime.Now.Ticks.ToString(CultureInfo.InvariantCulture) + ".cfg",
+                    Filter = "Config Files (*.cfg)|*.cfg|All Files (*.*)|*.*",
+                };
             var showDialog = fileDialog.ShowDialog(this);
             if (showDialog.Value)
             {
@@ -141,19 +142,13 @@ namespace FileClient
             }
         }
 
-        protected byte[] Config
-        {
-            get { return _config; }
-            set { _config = value; }
-        }
-
         private void SaveConnectionAs()
         {
             SaveFileDialog fileDialog = new SaveFileDialog
-            {
-                FileName = "Connection" + DateTime.Now.Ticks.ToString(CultureInfo.InvariantCulture) + ".cfg",
-                Filter = "Default (*.cfg)|*.cfg|All Files (*.*)|*.*",
-            };
+                {
+                    FileName = "Connection" + DateTime.Now.Ticks.ToString(CultureInfo.InvariantCulture) + ".cfg",
+                    Filter = "Default (*.cfg)|*.cfg|All Files (*.*)|*.*",
+                };
             var showDialog = fileDialog.ShowDialog(this);
             if (showDialog.Value)
             {
@@ -165,12 +160,12 @@ namespace FileClient
         {
             var fileEntityResponse = Client.Get(CurrentPath.Name);
             SaveFileDialog fileDialog = new SaveFileDialog
-            {
-                FileName = fileEntityResponse.FileName,
-                Filter =
-                    string.Format("Default (*{0})|*{0}|All Files (*.*)|*.*",
-                                  Path.GetExtension(fileEntityResponse.FileName)),
-            };
+                {
+                    FileName = fileEntityResponse.FileName,
+                    Filter =
+                        string.Format("Default (*{0})|*{0}|All Files (*.*)|*.*",
+                                      Path.GetExtension(fileEntityResponse.FileName)),
+                };
             var showDialog = fileDialog.ShowDialog(this);
             if (showDialog.Value)
             {
@@ -181,13 +176,13 @@ namespace FileClient
         private void UploadFile()
         {
             OpenFileDialog fileDialog = new OpenFileDialog
-            {
-            };
+                {
+                };
             var showDialog = fileDialog.ShowDialog(this);
             if (showDialog.Value)
             {
                 var content = IOUtil.ReadAllBytes(fileDialog.FileName);
-                Client.Put(Path.Combine(CurrentPath.Name,Path.GetFileName(fileDialog.FileName)), content);
+                Client.Put(Path.Combine(CurrentPath.Name, Path.GetFileName(fileDialog.FileName)), content);
             }
         }
 

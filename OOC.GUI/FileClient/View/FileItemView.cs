@@ -16,13 +16,13 @@ namespace FileClient.View
         //        private static readonly Logger _logger = new Logger("OOC.GUI.FileClient.log");
         private DateTime _accessTime;
         private DateTime _createTime;
+        private string _displayName;
         private ImageSource _icon;
         private bool _isDirectory;
         private DateTime _modifyTime;
         private string _name;
         private long _size;
         private ObservableCollection<FileItemView> _subItems;
-        private string _displayName;
 
         public bool IsDirectory
         {
@@ -149,33 +149,32 @@ namespace FileClient.View
                     if (file.IsDirectory)
                     {
                         result.Add(new FileItemView
-                           {
-                               Name = file.Name,
-                               Size = 0x1000,
-                               CreateTime = file.CreateTime,
-                               AccessTime = file.AccessTime,
-                               ModifyTime = file.ModifyTime,
-                               IsDirectory = true,
-                               Icon = new BitmapImage(new Uri(@"Resources/Images/Folder16.png",
-                                                                    UriKind.RelativeOrAbsolute)),
-                               //SubItems = getSubItems(file.Name),
-                           });
+                            {
+                                Name = file.Name,
+                                Size = 0x1000,
+                                CreateTime = file.CreateTime,
+                                AccessTime = file.AccessTime,
+                                ModifyTime = file.ModifyTime,
+                                IsDirectory = true,
+                                Icon = new BitmapImage(new Uri(@"Resources/Images/Folder16.png",
+                                                               UriKind.RelativeOrAbsolute)),
+                                //SubItems = getSubItems(file.Name),
+                            });
                     }
                     else
                     {
                         result.Add(new FileItemView
-                        {
-                            Name = file.Name,
-                            Size = file.Size,
-                            CreateTime = file.CreateTime,
-                            AccessTime = file.AccessTime,
-                            ModifyTime = file.ModifyTime,
-                            IsDirectory = true,
-                            Icon = new BitmapImage(new Uri(@"Resources/Images/File16.png",
-                                                                 UriKind.RelativeOrAbsolute)),
-                        });
+                            {
+                                Name = file.Name,
+                                Size = file.Size,
+                                CreateTime = file.CreateTime,
+                                AccessTime = file.AccessTime,
+                                ModifyTime = file.ModifyTime,
+                                IsDirectory = true,
+                                Icon = new BitmapImage(new Uri(@"Resources/Images/File16.png",
+                                                               UriKind.RelativeOrAbsolute)),
+                            });
                     }
-
                 }
             }
             else

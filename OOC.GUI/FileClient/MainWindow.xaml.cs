@@ -187,7 +187,7 @@ namespace FileClient
             if (showDialog.Value)
             {
                 var content = IOUtil.ReadAllBytes(fileDialog.FileName);
-                Client.Put(CurrentPath.Name, content);
+                Client.Put(Path.Combine(CurrentPath.Name,Path.GetFileName(fileDialog.FileName)), content);
             }
         }
 

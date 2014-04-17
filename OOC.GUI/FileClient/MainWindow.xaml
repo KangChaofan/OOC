@@ -61,7 +61,7 @@
                 ContextMenuOpening="menu_ContextMenuOpening" Visibility="Visible"
                 Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" FontSize="14" FontFamily="Microsoft YaHei">
                 <MenuItem Header="文件(_F)">
-                    <MenuItem Header="新建连接(_O)..." Click="MenuItem_OnClick" />
+                    <MenuItem Header="新建连接(_N)..." Click="MenuItem_OnClick" />
                     <MenuItem Header="打开连接(_O)..." Click="MenuItem_OnClick" />
                     <MenuItem Header="保存连接(_S)"  Click="MenuItem_OnClick" />
                     <MenuItem Header="连接另存为(_A)..." Click="MenuItem_OnClick" />
@@ -104,7 +104,7 @@
         <ListView x:Name="ListView" Grid.Column="2" Grid.Row="4">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" Width="75">
+                    <GridViewColumn Header="Name" Width="175">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -121,10 +121,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Size" Width="5" DisplayMemberBinding="{Binding Size}"/>
-                    <GridViewColumn Header="Date Modified" Width="85" DisplayMemberBinding="{Binding ModifyTime}" />
-                    <GridViewColumn Header="Date Created" Width="85" DisplayMemberBinding="{Binding CreateTime}" />
-                    <GridViewColumn Header="Date Accessed" Width="85" DisplayMemberBinding="{Binding AccessTime}" />
+                    <GridViewColumn Header="Size" Width="85" DisplayMemberBinding="{Binding Size}"/>
+                    <GridViewColumn Header="Date Modified" Width="200" DisplayMemberBinding="{Binding ModifyTime}" />
+                    <GridViewColumn Header="Date Created" Width="200" DisplayMemberBinding="{Binding CreateTime}" />
+                    <GridViewColumn Header="Date Accessed" Width="200" DisplayMemberBinding="{Binding AccessTime}" />
                 </GridView>
             </ListView.View>
 

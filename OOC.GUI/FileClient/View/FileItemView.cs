@@ -151,7 +151,7 @@ namespace FileClient.View
                         result.Add(new FileItemView
                            {
                                Name = file.Name,
-                               Size = -1,
+                               Size = 0x1000,
                                CreateTime = file.CreateTime,
                                AccessTime = file.AccessTime,
                                ModifyTime = file.ModifyTime,

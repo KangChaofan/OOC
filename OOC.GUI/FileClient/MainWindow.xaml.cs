@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.ServiceModel;
 using System.Windows;
@@ -26,6 +27,7 @@ namespace FileClient
         private readonly FileServiceClient Client = new FileServiceClient();
         private FileItemView _currentPath;
         private FileItemView rootPath = new FileItemView();
+        private byte[] _config;
         //        private readonly Logger _logger = new Logger("OOC.GUI.FileClient.log");
 
         public MainWindow()
@@ -113,14 +115,50 @@ namespace FileClient
 
         private void OpenConnection()
         {
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Filter = "Config Files (*.cfg)|*.cfg|All Files (*.*)|*.*",
+            };
+            var showDialog = fileDialog.ShowDialog(this);
+            if (showDialog.Value)
+            {
+                var content = IOUtil.ReadAllBytes(fileDialog.FileName);
+                Config = content;
+            }
         }
 
         private void SaveConnection()
         {
+            SaveFileDialog fileDialog = new SaveFileDialog
+            {
+                FileName = "Connection"+DateTime.Now.Ticks.ToString(CultureInfo.InvariantCulture)+ ".cfg",
+                Filter = "Config Files (*.cfg)|*.cfg|All Files (*.*)|*.*",
+            };
+            var showDialog = fileDialog.ShowDialog(this);
+            if (showDialog.Value)
+            {
+                IOUtil.WriteAllBytes(fileDialog.FileName, Config);
+            }
+        }
+
+        protected byte[] Config
+        {
+            get { return _config; }
+            set { _config = value; }
         }
 
         private void SaveConnectionAs()
         {
+            SaveFileDialog fileDialog = new SaveFileDialog
+            {
+                FileName = "Connection" + DateTime.Now.Ticks.ToString(CultureInfo.InvariantCulture) + ".cfg",
+                Filter = "Default (*.cfg)|*.cfg|All Files (*.*)|*.*",
+            };
+            var showDialog = fileDialog.ShowDialog(this);
+            if (showDialog.Value)
+            {
+                IOUtil.WriteAllBytes(fileDialog.FileName, Config);
+            }
         }
 
         private void DownFile()

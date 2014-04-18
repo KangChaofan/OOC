@@ -40,6 +40,7 @@
     <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="ReachFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -85,6 +86,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Util\AppSettings.cs" />
     <Compile Include="Util\FriendlyExceptionMessage.cs" />
     <Compile Include="WindowEffect\GlassEffect.cs" />
     <Compile Include="WindowEffect\NonClientRegionAPI.cs" />

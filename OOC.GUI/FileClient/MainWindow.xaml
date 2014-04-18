@@ -67,10 +67,17 @@
                     <MenuItem Header="保存连接(_S)" Click="MenuItem_OnClick" />
                     <MenuItem Header="连接另存为(_A)..." Click="MenuItem_OnClick" />
                     <Separator />
+                    <MenuItem Header="退出(_Q)" Click="MenuItem_OnClick" />
+                </MenuItem>
+                <MenuItem Header="编辑(_E)">
                     <MenuItem Header="下载文件(_D)..." Click="MenuItem_OnClick" />
                     <MenuItem Header="上传文件(_U)..." Click="MenuItem_OnClick" />
                     <Separator />
-                    <MenuItem Header="退出(_Q)" Click="MenuItem_OnClick" />
+                    <MenuItem Header="重命名(_R)..." Click="MenuItem_OnClick" />
+                    <MenuItem Header="复制到(_C)..." Click="MenuItem_OnClick" />
+                    <MenuItem Header="删除(_D)..." Click="MenuItem_OnClick" />
+                    <Separator />
+                    <MenuItem Header="新建文件夹(_F)..." Click="MenuItem_OnClick" />
                 </MenuItem>
                 <MenuItem Header="帮助(_H)">
                     <MenuItem Header="查看日志(_C)" />
@@ -144,6 +151,9 @@
                     </Grid>
                 </ItemsPanelTemplate>
             </StatusBar.ItemsPanel>
+            <StatusBarItem Grid.Column="0" FontSize="14" FontFamily="Microsoft YaHei">
+                <TextBlock x:Name="ConnectionText" Text="{Binding RemoteUrl}"></TextBlock>
+            </StatusBarItem>
             <StatusBarItem Grid.Column="1" FontSize="14" FontFamily="Microsoft YaHei">
                 <TextBlock x:Name="StatusText" Text="{Binding DisplayName}"></TextBlock>
             </StatusBarItem>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.ServiceModel;
@@ -12,6 +13,7 @@ using System.Windows.Media.Imaging;
 using ActiproSoftware.Windows.Controls.Navigation;
 using FileClient.Annotations;
 using FileClient.FileService;
+using FileClient.Util;
 using FileClient.View;
 using FileClient.WindowEffect;
 using Microsoft.Win32;
@@ -25,9 +27,21 @@ namespace FileClient
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private readonly FileServiceClient Client = new FileServiceClient();
+        private string _connectionUrl = AppSettings.GetEndpointAddress("BasicHttpBinding_IFileService");
+        public string ConnectionUrl
+        {
+            get
+            {
+                return _connectionUrl;
+            }
+            set
+            {
+                _connectionUrl = value;
+                OnPropertyChanged("ConnectionUrl");
+            }
+        }
         private FileItemView _currentPath;
         private FileItemView rootPath = new FileItemView();
-        //        private readonly Logger _logger = new Logger("OOC.GUI.FileClient.log");
 
         public MainWindow()
         {
@@ -91,11 +105,11 @@ namespace FileClient
                                         Source = CurrentPath,
                                         Path = new PropertyPath("SubItems"),
                                     });
-//            StatusText.SetBinding(TextBlock.TextProperty, new Binding
-//                {
-//                    Source = _currentPath,
-//                    Path = new PropertyPath("DisplayName")
-//                });
+            //            StatusText.SetBinding(TextBlock.TextProperty, new Binding
+            //                {
+            //                    Source = _currentPath,
+            //                    Path = new PropertyPath("DisplayName")
+            //                });
         }
 
         public void NavigateTo(string path)
@@ -158,6 +172,12 @@ namespace FileClient
 
         private void DownFile()
         {
+            var fileSystemDescription = Client.Stat(CurrentPath.Name);
+            if (fileSystemDescription.IsDirectory)
+            {
+                return;
+            }
+
             var fileEntityResponse = Client.Get(CurrentPath.Name);
             SaveFileDialog fileDialog = new SaveFileDialog
                 {
@@ -246,6 +266,7 @@ namespace FileClient
         private void OnTreeViewSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             CurrentPath = e.NewValue.CastTo<FileItemView>();
+            ConnectionText.Text = string.Format("已连接至服务 {0}", ConnectionUrl);
             StatusText.Text = string.Format("已选中 {0}, 大小 {1}字节, 上次访问 {2}", _currentPath.DisplayName, _currentPath.Size,
                                             _currentPath.AccessTime);
             ListView.SetBinding(ItemsControl.ItemsSourceProperty,
@@ -254,7 +275,7 @@ namespace FileClient
                                         Source = CurrentPath,
                                         Path = new PropertyPath("SubItems"),
                                     });
-//            SetBindings();
+            //            SetBindings();
         }
 
         [NotifyPropertyChangedInvocator]

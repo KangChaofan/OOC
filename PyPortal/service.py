@@ -10,4 +10,4 @@ def getService(host, name):
     print 'Reading wsdl from %s' % name
     url = 'http://%s:6736/Service/%s.svc?wsdl' % (host, name)
     client = Client(url)
-    return client.service
+    return client.service, client.factory

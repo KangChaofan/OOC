@@ -1,0 +1,11 @@
+                    <tr>
+                        <td>{{ filetype }}</td>
+                        <td>{{ file.relativePath }}</td>
+                        <td>{{ stats[file.fileName].Size }}</td>
+                        <td>{{ stats[file.fileName].CreateTime }}</td>
+                        <td>{{ stats[file.fileName].ModifyTime }}</td>
+                        <td>
+                            <button data-name="{{ file.relativePath }}" data-file="{{ file.fileName }}" class="btn btn-primary btn-preview">预览</button> 
+                            <button data-name="{{ file.relativePath }}" data-file="{{ file.fileName }}" class="btn btn-info btn-download">下载</button> 
+                        </td>
+                    </tr>

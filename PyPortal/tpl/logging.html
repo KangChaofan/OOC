@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>OpenMI on Cloud</title>
+    <link type="text/css" rel="stylesheet" href="/static/bootstrap.css" />
+    <link type="text/css" rel="stylesheet" href="/static/bootstrap-resp.css" />
+    <link type="text/css" rel="stylesheet" href="/static/main.css" />
+    <link type="text/css" rel="stylesheet" href="/static/logging.css" />
+    <script src="/static/jquery.js"></script>
+    <script src="/static/bootstrap.js"></script>
+    <script src="/static/app.js"></script>
+</head>
+
+<body>
+    <div class="container login-content">
+        <div class="logo" id="logo">
+            OpenMI on Cloud - Test Portal
+        </div>
+        <div id="login_forms" class="login-forms">
+           <div id="login_forms_container" class="login-forms-container">
+                <div id="login_forms_panel" class="login-forms-panel">
+                    <form class="login-form-form" id="login_form">
+                        <div class="login-view login-account" id="login_account">
+                            <div class="form-row">
+                                <input type="text" placeholder="账号" id="login_name" name="username">
+                            </div>
+                            <div class="form-row">
+                                <input type="password" placeholder="密码" id="login_password" name="password">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <ul class="login-forms-errors alert alert-error" id="login_forms_errors">
+                <li class="error">账号或密码错误.</li>
+            </ul>
+            <button class="login-forms-submit btn" id="login_forms_submit">
+                <span class="login-btn">登录</span>   
+            </button>
+            <a href="#" rel="tooltip" data-placement="bottom" data-original-title="There is no spoon." class="help">Signup help?</a>
+        </div>
+    </div>
+    <script type="text/javascript">
+        (function() {
+            var userPost = function() {
+                var data = {
+                    username: $('#login_name').val(),
+                    password: $('#login_password').val()
+                };
+                $('#login_forms_submit').removeClass('shake');
+                $.ajax({
+                    type: "POST",
+                    url: '/api/logging',
+                    data: data,
+                    success: function(resp) {
+                        if (resp.success == 0) {
+                            $('ul').addClass('active');
+                            $('#login_forms_submit').addClass('shake');
+                            return;
+                        }
+                        window.location.href = 'dashboard';
+                    },
+                    'dataType': 'json'
+                });
+            };
+            
+            $('.help').tooltip();
+            $('.login-btn').on('click', function() {
+                    userPost();
+            });
+            $('input').keydown(function() {
+                if (event.which == 13) {
+                    userPost();
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>

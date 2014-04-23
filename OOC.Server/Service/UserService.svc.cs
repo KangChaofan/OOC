@@ -22,8 +22,9 @@ namespace OOC.Service
         {
             using (OOCEntities db = new OOCEntities())
             {
+                string passhash = Hash(password);
                 IQueryable<User> result = from o in db.User
-                                          where o.username == username && o.passhash == Hash(password)
+                                          where o.username == username && o.passhash == passhash
                                           select o;
                 return result.Any();
             }

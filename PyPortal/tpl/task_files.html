@@ -1,0 +1,32 @@
+{% include 'header.html' %}
+{% import constants %}
+<div class="container-fluid container-wrapper">
+    <div class="row-fluid">
+        <p><strong>任务输出文件</strong></p>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>类型</th>
+                    <th>文件路径</th>
+                    <th>大小 (字节)</th>
+                    <th>创建时间</th>
+                    <th>修改时间</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set filetype = '日志' %}
+                {% for file in log_files %}
+                {% include 'task_file_row.html' %}
+                {% end %}
+                {% set filetype = '输出' %}
+                {% for file in output_files %}
+                {% include 'task_file_row.html' %}
+                {% end %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% include 'task_file_preview.html' %}
+{% include 'task_file_download.html' %}
+{% include 'footer.html' %}

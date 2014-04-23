@@ -27,6 +27,12 @@ namespace OOC.Contract.Service
         TaskAssignResponse AssignPendingTask(string instanceName);
 
         [OperationContract]
+        Task QueryTaskByGuid(string guid);
+
+        [OperationContract]
+        ModelProgress QueryModelProgressByGuid(string guid);
+
+        [OperationContract]
         TaskDataResponse QueryTaskDataByGuid(string guid);
 
         [OperationContract]

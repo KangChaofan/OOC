@@ -1,0 +1,49 @@
+{% include 'header.html' %}
+<div class="container-fluid container-wrapper">
+    <div class="row-fluid">
+        <p><strong>任务基本状态</strong></p>
+        <table class="table table-bordered table-hover table-striped">
+            <tbody>
+                <tr>
+                    <td>任务标识</td>
+                    <td>{{ task.guid }}</td>
+                </tr>
+                <tr>
+                    <td>组合标识</td>
+                    <td>{{ task.compositionGuid }}</td>
+                </tr>
+                <tr>
+                    <td>仿真目标时间</td>
+                    <td>{{ task.triggerInvokeTime }}</td>
+                </tr>
+                <tr>
+                    <td>当前状态</td>
+                    <td id="task-state"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>仿真进度</strong></p>
+        <table class="table table-bordered table-hover table-striped">
+            <tbody id="task-progress">
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+var reloadTimer;
+function reloadStatus() {
+    invoke('task_status', 'guid={{ task.guid }}', function(result) {
+        $('#task-state').html(result.stateText + ' (' + result.state + ')');
+        var progress = '';
+        for (var key in result.progress) {
+            var value = result.progress[key];
+            progress += '<tr><td>' + result.modelName[key] + ' (' + key + ')</td><td>' + value + '</td></tr>';
+        }
+        $('#task-progress').html(progress);
+        reloadTimer = setTimeout('reloadStatus()', 5000)
+    });
+
+}
+$(document).ready(reloadStatus);
+</script>
+{% include 'footer.html' %}

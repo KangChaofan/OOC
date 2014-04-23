@@ -18,7 +18,7 @@
             <tbody>
                 {% for task in tasks %}
                     <tr>
-                        <td>{{ task.guid }}</td>
+                        <td><a href="/task/status/{{ task.guid }}">{{ task.guid }}</a></td>
                         <td>{{ task.compositionGuid }}</td>
                         <td>{{ task.triggerInvokeTime }}</td>
                         <td>{{ constants.get_task_state(task.state) }}</td>

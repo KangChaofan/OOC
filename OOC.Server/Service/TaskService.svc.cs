@@ -192,5 +192,35 @@ namespace OOC.Service
                 db.SaveChanges();
             }
         }
+
+        public Task QueryTaskByGuid(string guid)
+        {
+            using (OOCEntities db = new OOCEntities())
+            {
+                IQueryable<Task> result = from o in db.Task
+                                          where o.guid == guid
+                                          select o;
+                if (!result.Any())
+                {
+                    throw new FaultException("TASK_NOT_EXISTS");
+                }
+                return result.First();
+            }
+        }
+
+        public ModelProgress QueryModelProgressByGuid(string guid)
+        {
+            using (OOCEntities db = new OOCEntities())
+            {
+                IQueryable<Task> result = from o in db.Task
+                                          where o.guid == guid
+                                          select o;
+                if (!result.Any())
+                {
+                    throw new FaultException("TASK_NOT_EXISTS");
+                }
+                return new ModelProgress() { Serialized = result.First().modelProgress };
+            }
+        }
     }
 }

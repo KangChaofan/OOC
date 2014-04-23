@@ -10,6 +10,8 @@ import tornado.web
 import datetime
 import hashlib
 import base64
+import constants
+import util
 from ooc import soap, factory
 from jsonutil import default
 from random import random
@@ -23,7 +25,8 @@ def get_session(self):
     if sessionid not in sessions:
         sessionid = md5("sessionkey:%s" % random())
         self.set_cookie(SESSION_NAME, sessionid)
-        sessions[sessionid] = {'userid': '1', 'username': 'test'}
+        sessions[sessionid] = {}
+        #sessions[sessionid] = {'userid': '1', 'username': 'test'}
     return sessions[sessionid]
 
 def md5(key):
@@ -83,6 +86,21 @@ class ApiHandler(tornado.web.RequestHandler):
         headContent = soap['FileService'].Head(fileName, 10)
         self.callback({'success': 1, 'fileName': fileName, 'headContent': headContent})
 
+    def api_task_status(self):
+        guid = self.get_argument('guid')
+        task = soap['TaskService'].QueryTaskByGuid(guid)
+        progress = util.kvs2dict(soap['TaskService'].QueryModelProgressByGuid(guid))
+        modelName = {}
+        for k in progress:
+            modelName[k] = soap['CompositionService'].GetCompositionModelData(k).Model.name
+        self.callback({
+            'success': 1, 
+            'state': task.state, 
+            'stateText': constants.get_task_state(task.state),
+            'progress': progress,
+            'modelName': modelName
+        })
+
     def process(self, method):
         if not check_privilege(self, method):
             self.callback({'success': 0, 'error': 'ACCESS_DENIED'})
@@ -128,6 +146,10 @@ class PortalHandler(tornado.web.RequestHandler):
 
     def portal_task_new(self):
         self._render('task_new.html')
+
+    def portal_task_status(self, guid):
+        task = soap['TaskService'].QueryTaskByGuid(guid)
+        self._render('task_status.html', task=task)
 
     def portal_task_files(self, guid):
         output_files = soap['TaskService'].QueryTaskFileMapping(guid, "Output")[0]

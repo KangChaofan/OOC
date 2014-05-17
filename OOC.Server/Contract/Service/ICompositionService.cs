@@ -39,6 +39,9 @@ namespace OOC.Contract.Service
         void UpdateCompositionModelProperties(string cmGuid, CompositionModelProperties properties);
 
         [OperationContract]
+        void UpdateCompositionModelProperty(string cmGuid, string key, string value);
+
+        [OperationContract]
         CompositionModel GetCompositionModel(string cmGuid);
 
         [OperationContract]

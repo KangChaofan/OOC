@@ -26,7 +26,7 @@ def get_session(self):
         sessionid = md5("sessionkey:%s" % random())
         self.set_cookie(SESSION_NAME, sessionid)
         sessions[sessionid] = {}
-        #sessions[sessionid] = {'userid': '1', 'username': 'test'}
+        sessions[sessionid] = {'userid': '1', 'username': 'test'}
     return sessions[sessionid]
 
 def md5(key):
@@ -101,6 +101,31 @@ class ApiHandler(tornado.web.RequestHandler):
             'modelName': modelName
         })
 
+    def api_composition_data(self):
+        guid = self.get_argument('guid')
+        compositionData = soap['CompositionService'].GetCompositionData(guid)
+        self.callback({'success': 1, 'data': util.recursive_asdict(compositionData)})
+
+    def api_composition_set_model_position(self):
+        guid = self.get_argument('guid')
+        x = self.get_argument('x')
+        y = self.get_argument('y')
+        soap['CompositionService'].UpdateCompositionModelProperty(guid, 'x', x)
+        soap['CompositionService'].UpdateCompositionModelProperty(guid, 'y', y)
+        self.callback({'success': 1})
+
+    def api_create_task(self):
+        compositionGuid = self.get_argument('compositionGuid')
+        userId = get_userid(self)
+        triggerInvokeTime = self.get_argument('triggerInvokeTime')
+        taskGuid = soap['TaskService'].Create(compositionGuid, userId, triggerInvokeTime)
+        self.callback({'success': 1, 'taskGuid': taskGuid})
+
+    def api_run_task(self):
+        guid = self.get_argument('guid')
+        soap['TaskService'].UpdateState(guid, "Ready")
+        self.callback({'success': 1})
+
     def process(self, method):
         if not check_privilege(self, method):
             self.callback({'success': 0, 'error': 'ACCESS_DENIED'})
@@ -160,6 +185,9 @@ class PortalHandler(tornado.web.RequestHandler):
         for f in log_files:
             stats[f.fileName] = soap['FileService'].Stat(f.fileName)
         self._render('task_files.html', output_files=output_files, log_files=log_files, stats=stats)
+
+    def portal_composition_view(self, guid):
+        self._render('composition_canvas.html', guid=guid)
 
     def portal_task_file_download(self, *args):
         fileName = self.get_argument('fileName')

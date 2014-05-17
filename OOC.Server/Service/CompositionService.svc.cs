@@ -250,5 +250,21 @@ namespace OOC.Service
                 return result.Distinct().ToList();
             }
         }
+
+
+        public void UpdateCompositionModelProperty(string cmGuid, string key, string value)
+        {
+            using (OOCEntities db = new OOCEntities())
+            {
+                IQueryable<CompositionModel> result = from o in db.CompositionModel
+                                                      where o.guid == cmGuid
+                                                      select o;
+                CompositionModel compositionModel = result.First();
+                CompositionModelProperties properties = new CompositionModelProperties() { Serialized = compositionModel.properties };
+                properties.Kvs[key] = value;
+                compositionModel.properties = properties.Serialized;
+                db.SaveChanges();
+            }
+        }
     }
 }

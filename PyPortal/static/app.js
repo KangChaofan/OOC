@@ -43,6 +43,7 @@ Date.prototype.pattern=function(fmt) {
 function invoke(method, param, callback) {
 	var url = api_base + method;
 	$.post(url, param, function(result){
+        if (!callback) return;
 		callback(result);
 	}, 'json')
 }

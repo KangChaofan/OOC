@@ -26,7 +26,7 @@ def get_session(self):
         sessionid = md5("sessionkey:%s" % random())
         self.set_cookie(SESSION_NAME, sessionid)
         sessions[sessionid] = {}
-        sessions[sessionid] = {'userid': '1', 'username': 'test'}
+        #sessions[sessionid] = {'userid': '1', 'username': 'test'}
     return sessions[sessionid]
 
 def md5(key):

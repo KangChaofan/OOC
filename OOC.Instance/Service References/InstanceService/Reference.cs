@@ -24,10 +24,13 @@ namespace OOC.Instance.InstanceService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CurrentRunningTaskField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string InstanceNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int RunningTaskField;
+        private int MaxRunningTaskField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OOC.Instance.InstanceService.NodeSystemStatus SystemStatusField;
@@ -39,6 +42,19 @@ namespace OOC.Instance.InstanceService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CurrentRunningTask {
+            get {
+                return this.CurrentRunningTaskField;
+            }
+            set {
+                if ((this.CurrentRunningTaskField.Equals(value) != true)) {
+                    this.CurrentRunningTaskField = value;
+                    this.RaisePropertyChanged("CurrentRunningTask");
+                }
             }
         }
         
@@ -56,14 +72,14 @@ namespace OOC.Instance.InstanceService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int RunningTask {
+        public int MaxRunningTask {
             get {
-                return this.RunningTaskField;
+                return this.MaxRunningTaskField;
             }
             set {
-                if ((this.RunningTaskField.Equals(value) != true)) {
-                    this.RunningTaskField = value;
-                    this.RaisePropertyChanged("RunningTask");
+                if ((this.MaxRunningTaskField.Equals(value) != true)) {
+                    this.MaxRunningTaskField = value;
+                    this.RaisePropertyChanged("MaxRunningTask");
                 }
             }
         }
@@ -193,6 +209,9 @@ namespace OOC.Instance.InstanceService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string InstanceEndPointField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime LastHeartbeatField;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string InstanceEndPoint {
             get {
@@ -202,6 +221,19 @@ namespace OOC.Instance.InstanceService {
                 if ((object.ReferenceEquals(this.InstanceEndPointField, value) != true)) {
                     this.InstanceEndPointField = value;
                     this.RaisePropertyChanged("InstanceEndPoint");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime LastHeartbeat {
+            get {
+                return this.LastHeartbeatField;
+            }
+            set {
+                if ((this.LastHeartbeatField.Equals(value) != true)) {
+                    this.LastHeartbeatField = value;
+                    this.RaisePropertyChanged("LastHeartbeat");
                 }
             }
         }
@@ -216,6 +248,9 @@ namespace OOC.Instance.InstanceService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInstanceService/QueryStatusByInstanceName", ReplyAction="http://tempuri.org/IInstanceService/QueryStatusByInstanceNameResponse")]
         OOC.Instance.InstanceService.InstanceStatus QueryStatusByInstanceName(string instanceName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInstanceService/GetLoadFactor", ReplyAction="http://tempuri.org/IInstanceService/GetLoadFactorResponse")]
+        double GetLoadFactor();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -251,6 +286,10 @@ namespace OOC.Instance.InstanceService {
         
         public OOC.Instance.InstanceService.InstanceStatus QueryStatusByInstanceName(string instanceName) {
             return base.Channel.QueryStatusByInstanceName(instanceName);
+        }
+        
+        public double GetLoadFactor() {
+            return base.Channel.GetLoadFactor();
         }
     }
 }

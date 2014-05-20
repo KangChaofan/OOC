@@ -27,18 +27,20 @@ namespace OOC.Instance
         public int HeartbeatInterval { get; set; }
         public string InstanceName { get; set; }
         public int RunningTask { get; set; }
+        public int MaxRunningTask { get; set; }
         public bool IsRunning { get; set; }
 
         private TaskServiceClient taskService = new TaskServiceClient();
 
         private Logger logger;
 
-        public InstanceKeeper(string instanceName)
+        public InstanceKeeper(string instanceName, int maxRunningTask)
         {
             LogLocation = null;
             HeartbeatInterval = 30000;
             InstanceName = instanceName;
             RunningTask = 0;
+            MaxRunningTask = maxRunningTask;
         }
 
         private void startManager(TaskAssignResponse taskAssign)
@@ -80,7 +82,8 @@ namespace OOC.Instance
                         instanceService.Heartbeat(new InstanceHeartbeatStatus()
                         {
                             InstanceName = InstanceName,
-                            RunningTask = RunningTask,
+                            CurrentRunningTask = RunningTask,
+                            MaxRunningTask = MaxRunningTask,
                             SystemStatus = new NodeSystemStatus()
                             {
                                 TotalRamSize = SysUtil.getTotalRamSize(),
@@ -97,7 +100,7 @@ namespace OOC.Instance
                     }
                     try
                     {
-                        if (RunningTask == 0)
+                        if (RunningTask < MaxRunningTask)
                         {
                             TaskAssignResponse taskAssign = taskService.AssignPendingTask(InstanceName);
                             new Thread(new ThreadStart(delegate()

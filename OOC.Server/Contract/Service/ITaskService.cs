@@ -24,6 +24,9 @@ namespace OOC.Contract.Service
         void UpdateState(string guid, TaskState state);
 
         [OperationContract]
+        void ReportInstanceFault(string instanceName);
+
+        [OperationContract]
         TaskAssignResponse AssignPendingTask(string instanceName);
 
         [OperationContract]

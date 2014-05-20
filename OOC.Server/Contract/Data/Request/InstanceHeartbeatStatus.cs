@@ -10,7 +10,10 @@ namespace OOC.Contract.Data.Request
         public string InstanceName { get; set; }
 
         [DataMember]
-        public int RunningTask { get; set; }
+        public int CurrentRunningTask { get; set; }
+
+        [DataMember]
+        public int MaxRunningTask { get; set; }
 
         [DataMember]
         public NodeSystemStatus SystemStatus { get; set; }

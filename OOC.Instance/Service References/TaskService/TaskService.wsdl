@@ -31,11 +31,29 @@
   <wsdl:message name="ITaskService_UpdateState_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateStateResponse" />
   </wsdl:message>
+  <wsdl:message name="ITaskService_ReportInstanceFault_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReportInstanceFault" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_ReportInstanceFault_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReportInstanceFaultResponse" />
+  </wsdl:message>
   <wsdl:message name="ITaskService_AssignPendingTask_InputMessage">
     <wsdl:part name="parameters" element="tns:AssignPendingTask" />
   </wsdl:message>
   <wsdl:message name="ITaskService_AssignPendingTask_OutputMessage">
     <wsdl:part name="parameters" element="tns:AssignPendingTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_QueryTaskByGuid_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryTaskByGuid" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_QueryTaskByGuid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryTaskByGuidResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_QueryModelProgressByGuid_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryModelProgressByGuid" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_QueryModelProgressByGuid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryModelProgressByGuidResponse" />
   </wsdl:message>
   <wsdl:message name="ITaskService_QueryTaskDataByGuid_InputMessage">
     <wsdl:part name="parameters" element="tns:QueryTaskDataByGuid" />
@@ -86,9 +104,21 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/UpdateState" message="tns:ITaskService_UpdateState_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/UpdateStateResponse" message="tns:ITaskService_UpdateState_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ReportInstanceFault">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/ReportInstanceFault" message="tns:ITaskService_ReportInstanceFault_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/ReportInstanceFaultResponse" message="tns:ITaskService_ReportInstanceFault_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="AssignPendingTask">
       <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/AssignPendingTask" message="tns:ITaskService_AssignPendingTask_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/AssignPendingTaskResponse" message="tns:ITaskService_AssignPendingTask_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryTaskByGuid">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/QueryTaskByGuid" message="tns:ITaskService_QueryTaskByGuid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/QueryTaskByGuidResponse" message="tns:ITaskService_QueryTaskByGuid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryModelProgressByGuid">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/QueryModelProgressByGuid" message="tns:ITaskService_QueryModelProgressByGuid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/QueryModelProgressByGuidResponse" message="tns:ITaskService_QueryModelProgressByGuid_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="QueryTaskDataByGuid">
       <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/QueryTaskDataByGuid" message="tns:ITaskService_QueryTaskDataByGuid_InputMessage" />
@@ -144,8 +174,35 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ReportInstanceFault">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/ReportInstanceFault" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AssignPendingTask">
       <soap:operation soapAction="http://tempuri.org/ITaskService/AssignPendingTask" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryTaskByGuid">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/QueryTaskByGuid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryModelProgressByGuid">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/QueryModelProgressByGuid" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

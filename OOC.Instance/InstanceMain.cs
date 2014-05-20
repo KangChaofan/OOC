@@ -10,6 +10,7 @@ namespace OOC.Instance
         {
             string instanceName = GuidUtil.newGuid();
             string logLocation = null;
+            int slots = 1;
             for (int i = 0; i < args.Length; i++)
             {
                 switch (args[i])
@@ -22,9 +23,13 @@ namespace OOC.Instance
                     case "--log":
                         logLocation = args[++i];
                         break;
+                    case "-s":
+                    case "--slots":
+                        slots = Int32.Parse(args[++i]);
+                        break;
                 }
             }
-            InstanceKeeper instanceKeeper = new InstanceKeeper(instanceName);
+            InstanceKeeper instanceKeeper = new InstanceKeeper(instanceName, slots);
             instanceKeeper.LogLocation = logLocation;
             instanceKeeper.Run();
         }

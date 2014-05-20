@@ -20,6 +20,12 @@
   <wsdl:message name="IInstanceService_QueryStatusByInstanceName_OutputMessage">
     <wsdl:part name="parameters" element="tns:QueryStatusByInstanceNameResponse" />
   </wsdl:message>
+  <wsdl:message name="IInstanceService_GetLoadFactor_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLoadFactor" />
+  </wsdl:message>
+  <wsdl:message name="IInstanceService_GetLoadFactor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLoadFactorResponse" />
+  </wsdl:message>
   <wsdl:portType name="IInstanceService">
     <wsdl:operation name="Heartbeat">
       <wsdl:input wsaw:Action="http://tempuri.org/IInstanceService/Heartbeat" message="tns:IInstanceService_Heartbeat_InputMessage" />
@@ -28,6 +34,10 @@
     <wsdl:operation name="QueryStatusByInstanceName">
       <wsdl:input wsaw:Action="http://tempuri.org/IInstanceService/QueryStatusByInstanceName" message="tns:IInstanceService_QueryStatusByInstanceName_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IInstanceService/QueryStatusByInstanceNameResponse" message="tns:IInstanceService_QueryStatusByInstanceName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLoadFactor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IInstanceService/GetLoadFactor" message="tns:IInstanceService_GetLoadFactor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInstanceService/GetLoadFactorResponse" message="tns:IInstanceService_GetLoadFactor_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IInstanceService" type="tns:IInstanceService">
@@ -43,6 +53,15 @@
     </wsdl:operation>
     <wsdl:operation name="QueryStatusByInstanceName">
       <soap:operation soapAction="http://tempuri.org/IInstanceService/QueryStatusByInstanceName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoadFactor">
+      <soap:operation soapAction="http://tempuri.org/IInstanceService/GetLoadFactor" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

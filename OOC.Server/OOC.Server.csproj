@@ -180,10 +180,6 @@
       <Project>{5acdb1c5-29e3-4f1f-9696-e8abaab67f0a}</Project>
       <Name>OOC.Util</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OOC.OpenMIWrapper\OOC.OpenMIWrapper.csproj">
-      <Project>{EAD62B60-BF9F-463B-B817-AE55C3655C7C}</Project>
-      <Name>OOC.OpenMIWrapper</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Entity\OOCModel.tt">

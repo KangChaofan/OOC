@@ -19,5 +19,8 @@ namespace OOC.Contract.Service
         [OperationContract]
         InstanceStatus QueryStatusByInstanceName(string instanceName);
 
+        [OperationContract]
+        double GetLoadFactor();
+
     }
 }

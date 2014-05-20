@@ -3,8 +3,9 @@
   <xs:import schemaLocation="http://localhost:6736/Service/InstanceService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" />
   <xs:complexType name="InstanceHeartbeatStatus">
     <xs:sequence>
+      <xs:element minOccurs="0" name="CurrentRunningTask" type="xs:int" />
       <xs:element minOccurs="0" name="InstanceName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="RunningTask" type="xs:int" />
+      <xs:element minOccurs="0" name="MaxRunningTask" type="xs:int" />
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="SystemStatus" nillable="true" type="q1:NodeSystemStatus" />
     </xs:sequence>
   </xs:complexType>

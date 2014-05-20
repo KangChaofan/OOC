@@ -9,6 +9,7 @@
       <xs:enumeration value="Ready" />
       <xs:enumeration value="Assigned" />
       <xs:enumeration value="Running" />
+      <xs:enumeration value="Finishing" />
       <xs:enumeration value="Aborted" />
       <xs:enumeration value="Completed" />
     </xs:restriction>
@@ -71,6 +72,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="CompositionModelProperties" nillable="true" type="tns:CompositionModelProperties" />
+  <xs:complexType name="ModelProgress">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q10="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract" base="q10:Dict">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ModelProgress" nillable="true" type="tns:ModelProgress" />
   <xs:simpleType name="TaskFileType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Input">
@@ -97,12 +106,4 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="TaskFileType" nillable="true" type="tns:TaskFileType" />
-  <xs:complexType name="ModelProgress">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q10="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract" base="q10:Dict">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="ModelProgress" nillable="true" type="tns:ModelProgress" />
 </xs:schema>

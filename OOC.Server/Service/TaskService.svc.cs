@@ -244,5 +244,20 @@ namespace OOC.Service
                 return new ModelProgress() { Serialized = result.First().modelProgress };
             }
         }
+
+        public void ReportInstanceFault(string instanceName)
+        {
+            using (OOCEntities db = new OOCEntities())
+            {
+                IQueryable<Task> result = from o in db.Task
+                                          where o.instanceName == instanceName && o.state >= (sbyte)TaskState.Assigned && o.state <= (sbyte)TaskState.Finishing
+                                          select o;
+                foreach (Task task in result)
+                {
+                    task.state = (sbyte)TaskState.Aborted;
+                }
+                db.SaveChanges();
+            }
+        }
     }
 }

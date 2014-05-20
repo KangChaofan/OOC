@@ -15,6 +15,7 @@
       <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Request" base="q1:InstanceHeartbeatStatus">
         <xs:sequence>
           <xs:element minOccurs="0" name="InstanceEndPoint" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LastHeartbeat" type="xs:dateTime" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

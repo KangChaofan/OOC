@@ -30,10 +30,13 @@ namespace OOC.Instance.TaskService {
         Running = 3,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Aborted = 4,
+        Finishing = 4,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Completed = 5,
+        Aborted = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Completed = 6,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1757,8 +1760,8 @@ namespace OOC.Instance.TaskService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModelData[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModelData))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModelProperties))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileType))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelProgress))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileType))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskAssignResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskDataResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, string>))]
@@ -1907,8 +1910,17 @@ namespace OOC.Instance.TaskService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/UpdateState", ReplyAction="http://tempuri.org/ITaskService/UpdateStateResponse")]
         void UpdateState(string guid, OOC.Instance.TaskService.TaskState state);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/ReportInstanceFault", ReplyAction="http://tempuri.org/ITaskService/ReportInstanceFaultResponse")]
+        void ReportInstanceFault(string instanceName);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/AssignPendingTask", ReplyAction="http://tempuri.org/ITaskService/AssignPendingTaskResponse")]
         OOC.Instance.TaskService.TaskAssignResponse AssignPendingTask(string instanceName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/QueryTaskByGuid", ReplyAction="http://tempuri.org/ITaskService/QueryTaskByGuidResponse")]
+        OOC.Instance.TaskService.Task QueryTaskByGuid(string guid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/QueryModelProgressByGuid", ReplyAction="http://tempuri.org/ITaskService/QueryModelProgressByGuidResponse")]
+        OOC.Instance.TaskService.ModelProgress QueryModelProgressByGuid(string guid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/QueryTaskDataByGuid", ReplyAction="http://tempuri.org/ITaskService/QueryTaskDataByGuidResponse")]
         OOC.Instance.TaskService.TaskDataResponse QueryTaskDataByGuid(string guid);
@@ -1968,8 +1980,20 @@ namespace OOC.Instance.TaskService {
             base.Channel.UpdateState(guid, state);
         }
         
+        public void ReportInstanceFault(string instanceName) {
+            base.Channel.ReportInstanceFault(instanceName);
+        }
+        
         public OOC.Instance.TaskService.TaskAssignResponse AssignPendingTask(string instanceName) {
             return base.Channel.AssignPendingTask(instanceName);
+        }
+        
+        public OOC.Instance.TaskService.Task QueryTaskByGuid(string guid) {
+            return base.Channel.QueryTaskByGuid(guid);
+        }
+        
+        public OOC.Instance.TaskService.ModelProgress QueryModelProgressByGuid(string guid) {
+            return base.Channel.QueryModelProgressByGuid(guid);
         }
         
         public OOC.Instance.TaskService.TaskDataResponse QueryTaskDataByGuid(string guid) {

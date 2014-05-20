@@ -123,11 +123,14 @@ namespace OOC.TaskRunner
                                 modelProgress = new Dictionary<string, string>();
                                 composition.CompositionModelProgressChangedHandler += new CompositionModelProgressChangedDelegate(delegate(object sender, string cmGuid, string progress)
                                 {
-                                    modelProgress[cmGuid] = progress;
-                                    if ((DateTime.Now - lastReport).TotalSeconds > progressReportInterval)
+                                    lock (this)
                                     {
-                                        lastReport = DateTime.Now;
-                                        PipeUtil.WriteCommand(bw, new PipeCommand("Progress", modelProgress));
+                                        modelProgress[cmGuid] = progress;
+                                        if ((DateTime.Now - lastReport).TotalSeconds > progressReportInterval)
+                                        {
+                                            lastReport = DateTime.Now;
+                                            PipeUtil.WriteCommand(bw, new PipeCommand("Progress", modelProgress));
+                                        }
                                     }
                                 });
                                 RunSimulation(delegate(object sender, bool succeed)

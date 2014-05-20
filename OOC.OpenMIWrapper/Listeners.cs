@@ -83,7 +83,10 @@ namespace OOC.OpenMIWrapper
 
             if (_logger != null)
             {
-                _logger.Info(Utils.EventToString(e));
+                lock (this)
+                {
+                    _logger.Info(Utils.EventToString(e));
+                }
             }
         }
     }

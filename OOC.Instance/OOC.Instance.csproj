@@ -108,6 +108,9 @@
     <None Include="Service References\InstanceService\OOC.Instance.InstanceService.InstanceStatus.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\TaskService\OOC.Instance.TaskService.ModelProgress.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\TaskService\OOC.Instance.TaskService.Task.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

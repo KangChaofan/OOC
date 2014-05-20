@@ -602,6 +602,53 @@ namespace OOC.OpenMIWrapper
             return typeof(LinkableRunEngine).IsAssignableFrom(component.GetType());
         }
 
+        private List<Model> getZeroDegreeNodes(List<Model> uimodels)
+        {
+            List<Model> tier = new List<Model>();
+            foreach (Model uimodel in uimodels)
+            {
+                int inDegree = 0;
+                LinkableRunEngine runEngine = (LinkableRunEngine)uimodel.LinkableComponent;
+                foreach (ILink link in runEngine.GetAcceptingLinks())
+                {
+                    if (!isModelEngineComponent(link.SourceComponent)) continue;
+                    foreach (Model m in uimodels)
+                        if (m.LinkableComponent == link.SourceComponent)
+                            inDegree++;
+                }
+                if (inDegree == 0)
+                {
+                    tier.Add(uimodel);
+                }
+            }
+            return tier;
+        }
+
+        private List<List<Model>> getTopologicalOrder(IList<Model> models)
+        {
+            List<Model> uimodels = new List<Model>();
+            List<List<Model>> orders = new List<List<Model>>();
+            foreach (Model uimodel in models)
+                if (isModelEngineComponent(uimodel.LinkableComponent))
+                    uimodels.Add(uimodel);
+            while (uimodels.Count > 0)
+            {
+                List<Model> tier = getZeroDegreeNodes(uimodels);
+                if (tier.Count > 0)
+                {
+                    orders.Add(tier);
+                    foreach (Model uimodel in tier) uimodels.Remove(uimodel);
+                }
+                else
+                {
+                    foreach (Model uimodel in uimodels)
+                        orders.Add(new List<Model>(new Model[] { uimodel }));
+                    uimodels.Clear();
+                }
+            }
+            return orders;
+        }
+
         /// <summary>
         /// This method is called in <see cref="Run">Run</see> method.
         /// </summary>
@@ -631,24 +678,34 @@ namespace OOC.OpenMIWrapper
                 // run it !!!
                 // trigger.Run(new TimeStamp(CalendarConverter.Gregorian2ModifiedJulian(TriggerInvokeTime)));
                 ITime triggerTime = new TimeStamp(CalendarConverter.Gregorian2ModifiedJulian(TriggerInvokeTime));
-                foreach (Model uimodel in _models)
+                List<Thread> threads = new List<Thread>();
+                List<Model> uimodels = new List<Model>(_models);
+                List<List<Model>> orders;
+                while ((orders = getTopologicalOrder(uimodels)).Count > 0)
                 {
-                    if (!isModelEngineComponent(uimodel.LinkableComponent)) continue;
-                    LinkableRunEngine runEngine = (LinkableRunEngine)uimodel.LinkableComponent;
-                    // Calculating out-degree
-                    int outDegree = 0;
-                    foreach (ILink link in runEngine.GetProvidingLinks())
-                    {
-                        if (!isModelEngineComponent(link.TargetComponent)) continue;
-                        outDegree++;
-                    }
-                    // Find edge in graph
-                    if (outDegree > 0) continue;
+                    List<Model> tier = orders[0];
+                    string modelIds = "";
+                    foreach (Model uimodel in tier) modelIds += uimodel.ModelID + ", ";
                     Event theEvent = new Event(EventType.Informative);
-                    theEvent.Description = "Found edge model: " + uimodel.ModelID;
+                    theEvent.Description = "Tier models: " + modelIds;
                     _runListener.OnEvent(theEvent);
-                    // Trigger it
-                    runEngine.RunToTime(triggerTime, -1);
+                    foreach (Model uimodel in tier)
+                    {
+                        if (!isModelEngineComponent(uimodel.LinkableComponent)) continue;
+                        LinkableRunEngine runEngine = (LinkableRunEngine)uimodel.LinkableComponent;
+                        Thread th = new Thread(new ThreadStart(delegate()
+                        {
+                            runEngine.RunToTime(triggerTime, -1);
+                        }));
+                        th.Start();
+                        threads.Add(th);
+                        uimodels.Remove(uimodel);
+                    }
+                    foreach (Thread th in threads)
+                    {
+                        th.Join();
+                    }
+                    threads.Clear();
                 }
 
                 // close models down

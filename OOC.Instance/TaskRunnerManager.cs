@@ -186,11 +186,13 @@ namespace OOC.Instance
                 {
                     if (runnerLifetime() == true)
                     {
+                        TaskState = TaskState.Finishing;
                         WorkspaceManager.CollectOutput();
                         TaskState = TaskState.Completed;
                     }
                     else
                     {
+                        WorkspaceManager.CollectOutput();
                         TaskState = TaskState.Aborted;
                     }
                 }

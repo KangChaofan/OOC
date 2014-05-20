@@ -44,6 +44,18 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="ReportInstanceFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="instanceName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReportInstanceFaultResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="AssignPendingTask">
     <xs:complexType>
       <xs:sequence>
@@ -58,6 +70,34 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="QueryTaskByGuid">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QueryTaskByGuidResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="QueryTaskByGuidResult" nillable="true" type="q3:Task" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QueryModelProgressByGuid">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QueryModelProgressByGuidResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="QueryModelProgressByGuidResult" nillable="true" type="q4:ModelProgress" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="QueryTaskDataByGuid">
     <xs:complexType>
       <xs:sequence>
@@ -68,7 +108,7 @@
   <xs:element name="QueryTaskDataByGuidResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" minOccurs="0" name="QueryTaskDataByGuidResult" nillable="true" type="q3:TaskDataResponse" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" minOccurs="0" name="QueryTaskDataByGuidResult" nillable="true" type="q5:TaskDataResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -82,7 +122,7 @@
   <xs:element name="QueryTaskByUserIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="QueryTaskByUserIdResult" nillable="true" type="q4:ArrayOfTask" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="QueryTaskByUserIdResult" nillable="true" type="q6:ArrayOfTask" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -92,7 +132,7 @@
         <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="relativePath" nillable="true" type="xs:string" />
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="type" type="q5:TaskFileType" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="type" type="q7:TaskFileType" />
         <xs:element minOccurs="0" name="isDownloadable" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
@@ -106,7 +146,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="type" type="q6:TaskFileType" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="type" type="q8:TaskFileType" />
         <xs:element minOccurs="0" name="relativePath" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -122,14 +162,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="type" type="q7:TaskFileType" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="type" type="q9:TaskFileType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="QueryTaskFileMappingResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="QueryTaskFileMappingResult" nillable="true" type="q8:ArrayOfTaskFileMapping" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="QueryTaskFileMappingResult" nillable="true" type="q10:ArrayOfTaskFileMapping" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -137,7 +177,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="modelProgress" nillable="true" type="q9:ModelProgress" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" minOccurs="0" name="modelProgress" nillable="true" type="q11:ModelProgress" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

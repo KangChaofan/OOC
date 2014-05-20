@@ -63,6 +63,7 @@ namespace OOC.Service
         {
             using (OOCEntities db = new OOCEntities())
             {
+                if (properties == null) properties = new CompositionModelProperties();
                 CompositionModel compositionModel = new CompositionModel()
                 {
                     guid = GuidUtil.newGuid(),
@@ -152,6 +153,7 @@ namespace OOC.Service
 
         public string CreateCompositionLink(string compositionGuid, string sourceCmGuid, string targetCmGuid, string sourceQuantity, string targetQuantity, string sourceElementSet, string targetElementSet, LinkDataOperation dataOperation)
         {
+            if (dataOperation == null) dataOperation = new LinkDataOperation();
             using (OOCEntities db = new OOCEntities())
             {
                 CompositionLink compositionLink = new CompositionLink()
@@ -265,6 +267,30 @@ namespace OOC.Service
                 compositionModel.properties = properties.Serialized;
                 db.SaveChanges();
             }
+        }
+
+        public string GenerateInputFileName(string compositionGuid, string modelGuid, string relativePath)
+        {
+            return @"Compositions\" + compositionGuid + @"\" + modelGuid + @"\" + relativePath;
+        }
+
+        public List<string> GetInputFileNames(string compositionGuid)
+        {
+            List<string> fileNames = new List<string>();
+            CompositionData compositionData = GetCompositionData(compositionGuid);
+            foreach (CompositionModelData cmData in compositionData.Models)
+            {
+                foreach (ModelProperty property in cmData.ModelProperties)
+                {
+                    if (property.type == (sbyte)ModelPropertyType.InputFile)
+                    {
+                        string value = cmData.PropertyValues.Kvs[property.key];
+                        if (value != null && value.Length > 0)
+                            fileNames.Add(value);
+                    }
+                }
+            }
+            return fileNames;
         }
     }
 }

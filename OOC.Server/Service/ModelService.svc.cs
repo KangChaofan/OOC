@@ -25,28 +25,6 @@ namespace OOC.Service
             }
         }
 
-        public void Create(string name, string version, int authorUserId, string className, DateTime creation,
-                           DateTime modification,
-                           bool isPublic, bool isApproved)
-        {
-            using (var db = new OOCEntities())
-            {
-                var model = new Model
-                    {
-                        name = name,
-                        version = version,
-                        authorUserId = authorUserId,
-                        className = className,
-                        creation = creation,
-                        modification = modification,
-                        isPublic = isPublic,
-                        isApproved = isApproved,
-                    };
-                db.Model.AddObject(model);
-                db.SaveChanges();
-            }
-        }
-
         public Model GetByGuid(string guid)
         {
             using (var db = new OOCEntities())

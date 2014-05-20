@@ -12,10 +12,6 @@ namespace OOC.Contract.Service
         void Create(string name, string version, int authorUserId, string className);
 
         [OperationContract]
-        void Create(string name, string version, int authorUserId, string className, DateTime creation,
-                    DateTime modification, bool isPublic, bool isApproved);
-
-        [OperationContract]
         Model GetByGuid(string guid);
 
         [OperationContract]

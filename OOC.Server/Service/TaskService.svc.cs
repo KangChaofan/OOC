@@ -17,6 +17,26 @@ namespace OOC.Service
     {
         private static readonly object assigningLock = new object();
 
+        public void SyncCompositionInputFiles(string guid)
+        {
+            using (OOCEntities db = new OOCEntities())
+            {
+                Task task = QueryTaskByGuid(guid);
+                CompositionService compositionService = new CompositionService();
+                List<string> fileNames = compositionService.GetInputFileNames(task.compositionGuid);
+                foreach (string fileName in fileNames)
+                {
+                    IQueryable<TaskFileMapping> result = from o in db.TaskFileMapping
+                                                         where o.taskGuid == guid && o.fileName == fileName
+                                                         select o;
+                    if (!result.Any())
+                    {
+                        AddTaskFileMapping(guid, fileName, GuidUtil.newGuid() + ".in", TaskFileType.Input, false);
+                    }
+                }
+            }
+        }
+
         public string Create(string compositionGuid, int userId, string triggerInvokeTime)
         {
             using (OOCEntities db = new OOCEntities())
@@ -42,6 +62,7 @@ namespace OOC.Service
                 };
                 db.Task.AddObject(task);
                 db.SaveChanges();
+                SyncCompositionInputFiles(task.guid);
                 return task.guid;
             }
         }
@@ -190,6 +211,7 @@ namespace OOC.Service
                 CompositionData compositionData = new CompositionData(task.Composition);
                 task.compositionData = compositionData.Serialized;
                 db.SaveChanges();
+                SyncCompositionInputFiles(guid);
             }
         }
 

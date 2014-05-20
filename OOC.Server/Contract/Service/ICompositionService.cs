@@ -71,5 +71,10 @@ namespace OOC.Contract.Service
         [OperationContract]
         CompositionData GetCompositionData(string compositionGuid);
 
+        [OperationContract]
+        string GenerateInputFileName(string compositionGuid, string modelGuid, string relativePath);
+
+        [OperationContract]
+        List<string> GetInputFileNames(string compositionGuid);
     }
 }

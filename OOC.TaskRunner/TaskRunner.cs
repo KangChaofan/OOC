@@ -133,6 +133,7 @@ namespace OOC.TaskRunner
                                 RunSimulation(delegate(object sender, bool succeed)
                                 {
                                     logger.Info("Simulation finished, succeed=" + succeed);
+                                    PipeUtil.WriteCommand(bw, new PipeCommand("Progress", modelProgress));
                                     PipeUtil.WriteCommand(bw, new PipeCommand(succeed ? "Completed" : "Failed"));
                                 });
                                 break;

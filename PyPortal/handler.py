@@ -26,7 +26,7 @@ def get_session(self):
         sessionid = md5("sessionkey:%s" % random())
         self.set_cookie(SESSION_NAME, sessionid)
         sessions[sessionid] = {}
-        #sessions[sessionid] = {'userid': '1', 'username': 'test'}
+        sessions[sessionid] = {'userid': '1', 'username': 'test'}
     return sessions[sessionid]
 
 def md5(key):
@@ -114,6 +114,22 @@ class ApiHandler(tornado.web.RequestHandler):
         soap['CompositionService'].UpdateCompositionModelProperty(guid, 'y', y)
         self.callback({'success': 1})
 
+    def api_composition_remove_model(self):
+        guid = self.get_argument('guid')
+        soap['CompositionService'].RemoveModel(guid)
+        self.callback({'success': 1})
+
+    def api_composition_add_link(self):
+        compositionGuid = self.get_argument('compositionGuid')
+        sourceCmGuid = self.get_argument('sourceCmGuid')
+        targetCmGuid = self.get_argument('targetCmGuid')
+        sourceQuantity = self.get_argument('sourceQuantity')
+        targetQuantity = self.get_argument('targetQuantity')
+        sourceElementSet = self.get_argument('sourceElementSet')
+        targetElementSet = self.get_argument('targetElementSet')
+        soap['CompositionService'].CreateCompositionLink(compositionGuid, sourceCmGuid, targetCmGuid, sourceQuantity, targetQuantity, sourceElementSet, targetElementSet, {})
+        self.callback({'success': 1})
+
     def api_create_task(self):
         compositionGuid = self.get_argument('compositionGuid')
         userId = get_userid(self)
@@ -169,9 +185,6 @@ class PortalHandler(tornado.web.RequestHandler):
         tasks = soap['TaskService'].QueryTaskByUserId(get_userid(self))[0]
         self._render('task_my.html', tasks=tasks)
 
-    def portal_task_new(self):
-        self._render('task_new.html')
-
     def portal_task_status(self, guid):
         task = soap['TaskService'].QueryTaskByGuid(guid)
         self._render('task_status.html', task=task)
@@ -186,8 +199,41 @@ class PortalHandler(tornado.web.RequestHandler):
             stats[f.fileName] = soap['FileService'].Stat(f.fileName)
         self._render('task_files.html', output_files=output_files, log_files=log_files, stats=stats)
 
+    def portal_composition_my(self):
+        compositions = soap['CompositionService'].QueryCompositionByAuthorUserId(get_userid(self))[0]
+        self._render('composition_my.html', compositions=compositions)
+
     def portal_composition_view(self, guid):
-        self._render('composition_canvas.html', guid=guid)
+        self._render('composition_view.html', guid=guid)
+
+    def portal_composition_new(self):
+        guid = soap['CompositionService'].Create(get_userid(self), "Untitled Composition", False, False)
+        self.portal_composition_view(guid)
+
+    def portal_composition_addModel(self, modelGuid, compositionGuid):
+        properties = soap['ModelService'].GetModelProperties(modelGuid)[0]
+        model = soap['ModelService'].GetByGuid(modelGuid)
+        guid = soap['CompositionService'].Create(get_userid(self), "Untitled Composition", False, False)
+        self._render('composition_add_model.html', compositionGuid=compositionGuid, modelGuid=modelGuid, model=model, properties=properties)
+
+    def portal_composition_doAddModel(self):
+        compositionGuid = self.get_argument('compositionGuid')
+        modelGuid = self.get_argument('modelGuid')
+        properties = soap['ModelService'].GetModelProperties(modelGuid)[0]
+        kvs = {}
+        for p in properties:
+            if p.type == 4:
+                f = self.request.files[p.key][0]
+                body = base64.b64encode(f['body'])
+                fileName = soap['CompositionService'].GenerateInputFileName(compositionGuid, modelGuid, f['filename'])
+                soap['FileService'].Put(fileName, body)
+                kvs[p.key] = fileName
+            else:
+                kvs[p.key] = self.get_argument(p.key)
+        cmGuid = soap['CompositionService'].CreateCompositionModel(compositionGuid, modelGuid, None)
+        for key in kvs:
+            soap['CompositionService'].UpdateCompositionModelProperty(cmGuid, key, kvs[key])
+        self.portal_composition_view(compositionGuid)
 
     def portal_task_file_download(self, *args):
         fileName = self.get_argument('fileName')

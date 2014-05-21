@@ -115,8 +115,10 @@ namespace OOC.TaskRunner
                                 break;
                             case "SetSimulationProperties":
                                 DateTime triggerInvokeTime = DateTime.Parse(command.Parameters["triggerInvokeTime"]);
+                                bool parallelized = Boolean.Parse(command.Parameters["parallelized"]);
                                 progressReportInterval = Int32.Parse(command.Parameters["progressReportInterval"]);
                                 composition.TriggerInvokeTime = triggerInvokeTime;
+                                composition.Parallelized = parallelized;
                                 break;
                             case "RunSimulation":
                                 lastReport = DateTime.Now;

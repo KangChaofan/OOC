@@ -134,6 +134,8 @@ namespace OOC.Instance
             properties = new Dictionary<string, string>();
             properties["triggerInvokeTime"] = TaskAssign.TriggerInvokeTime;
             properties["progressReportInterval"] = progressReportInterval.ToString();
+            /* TODO: make some attribute for it */
+            properties["parallelized"] = "false";
             PipeUtil.WriteCommand(bw, new PipeCommand("SetSimulationProperties", properties));
         }
 

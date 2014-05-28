@@ -8,6 +8,11 @@
         <button onclick="addModel()">添加模型</button>
         <button onclick="addLink()">创建链接</button>
         <button onclick="reloadComposition()">刷新</button>
+        <span id="trigger-text"></span>
+    </p>
+    <p>
+        <input id="title" type="text" class="composition-title" value=""/> 
+        <button onclick="updateTitle()">修改标题</button>
     </p>
     <p>
         <input id="triggerInvokeTime" type="text" value="1990-06-01 00:00:00"/> 
@@ -95,6 +100,12 @@
     <div class="modal-body">
         <div class="form-horizontal" id="add_group_form">
             ModelGuid: <input type="text" id="add-model-guid" name="modelGuid" value=""/>
+            <p>
+                常用: 
+                <a href="/composition/addModel/{{ guid }}/794a9489-3bae-45dc-9654-27aa306462ce">RiverNetwork</a>  
+                <a href="/composition/addModel/{{ guid }}/942f7612-b95f-6666-7777-72dd482fbc12">RiverModel</a> 
+                <a href="/composition/addModel/{{ guid }}/180512cf-b424-4e7f-9d9e-e2850874040d">DataLogger</a>
+            </p>
         </div>
     </div>
     <div class="modal-footer">
@@ -129,8 +140,22 @@
 </div>
 
 <script type="text/javascript">
-var triggerType = 'info';
+var triggerType;
 var linkSourceGuid, linkTargetGuid; 
+function setTriggerType(t) {
+    triggerType = t;
+    switch (t) {
+        case 'linkSource':
+            $('#trigger-text').html('选择链接源模型');
+            break;
+        case 'linkTarget':
+            $('#trigger-text').html('选择链接目标模型');
+            break;
+        case 'info':
+            $('#trigger-text').html('模型可拖拽，点击模型或链接可查看信息');
+            break;
+    }
+}
 $(document).ready(function(){
     initComposition('{{ guid }}');
     onComposition('modelClicked', function(evt) {
@@ -146,12 +171,12 @@ $(document).ready(function(){
         }
         else if (triggerType == 'linkSource') {
             linkSourceGuid = evt.guid;
-            triggerType = 'linkTarget';
+            setTriggerType('linkTarget');
         }
         else if (triggerType == 'linkTarget') {
             linkTargetGuid = evt.guid;
             createNewLink(linkSourceGuid, linkTargetGuid);
-            triggerType = 'info';
+            setTriggerType('info');
         }
     });
     onComposition('linkClicked', function(evt) {
@@ -189,6 +214,7 @@ $(document).ready(function(){
         $('#add-link-modal').modal('hide');
         return false;
     });
+    setTriggerType('info');
 });
 function run() {
     invoke('create_task', 'compositionGuid={{ guid }}&triggerInvokeTime=' + encodeURIComponent($('#triggerInvokeTime').val()), function(result) {
@@ -202,7 +228,7 @@ function addModel() {
     $('#add-model-modal').modal();
 }
 function addLink() {
-    triggerType = 'linkSource';
+    setTriggerType('linkSource');
 }
 function createNewLink(sourceGuid, targetGuid) {
     var source = getModelData(sourceGuid);
@@ -212,6 +238,11 @@ function createNewLink(sourceGuid, targetGuid) {
     $('#link-source-guid').val(sourceGuid);
     $('#link-target-guid').val(targetGuid);
     $('#add-link-modal').modal();
+}
+function updateTitle() {
+    invoke('composition_set_title', 'guid={{ guid }}&title=' + encodeURIComponent($('#title').val()), function(result) {
+        reloadComposition();
+    });
 }
 </script>
 {% include 'footer.html' %}

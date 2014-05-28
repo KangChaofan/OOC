@@ -127,6 +127,7 @@ function reloadComposition() {
     draw.clear();
     var text = draw.text("Loading...").font({size: 20, 'family': 'Verdana'}).move(340, 210);
     invoke('composition_data', 'guid=' + compositionGuid, function(result) {
+        $('.composition-title').val(result.data.Composition.title);
         models = [];
         links = [];
         if (result.data.Models != null)

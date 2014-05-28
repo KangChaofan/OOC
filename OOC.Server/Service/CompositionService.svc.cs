@@ -292,5 +292,21 @@ namespace OOC.Service
             }
             return fileNames;
         }
+
+        public void UpdateCompositionTitle(string compositionGuid, string title)
+        {
+            using (OOCEntities db = new OOCEntities())
+            {
+                IQueryable<Composition> result = from o in db.Composition
+                                                 where o.guid == compositionGuid
+                                                 select o;
+                if (!result.Any())
+                {
+                    throw new FaultException("COMPOSITION_NOT_EXISTS");
+                }
+                result.First().title = title;
+                db.SaveChanges();
+            }
+        }
     }
 }

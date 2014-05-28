@@ -76,5 +76,8 @@ namespace OOC.Contract.Service
 
         [OperationContract]
         List<string> GetInputFileNames(string compositionGuid);
+
+        [OperationContract]
+        void UpdateCompositionTitle(string compositionGuid, string title);
     }
 }

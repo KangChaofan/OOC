@@ -26,7 +26,7 @@ def get_session(self):
         sessionid = md5("sessionkey:%s" % random())
         self.set_cookie(SESSION_NAME, sessionid)
         sessions[sessionid] = {}
-        sessions[sessionid] = {'userid': '1', 'username': 'test'}
+        #sessions[sessionid] = {'userid': '1', 'username': 'test'}
     return sessions[sessionid]
 
 def md5(key):
@@ -112,6 +112,12 @@ class ApiHandler(tornado.web.RequestHandler):
         y = self.get_argument('y')
         soap['CompositionService'].UpdateCompositionModelProperty(guid, 'x', x)
         soap['CompositionService'].UpdateCompositionModelProperty(guid, 'y', y)
+        self.callback({'success': 1})
+
+    def api_composition_set_title(self):
+        guid = self.get_argument('guid')
+        title = self.get_argument('title')
+        soap['CompositionService'].UpdateCompositionTitle(guid, title)
         self.callback({'success': 1})
 
     def api_composition_remove_model(self):
@@ -208,12 +214,11 @@ class PortalHandler(tornado.web.RequestHandler):
 
     def portal_composition_new(self):
         guid = soap['CompositionService'].Create(get_userid(self), "Untitled Composition", False, False)
-        self.portal_composition_view(guid)
+        self.redirect('/composition/view/' + guid)
 
     def portal_composition_addModel(self, modelGuid, compositionGuid):
         properties = soap['ModelService'].GetModelProperties(modelGuid)[0]
         model = soap['ModelService'].GetByGuid(modelGuid)
-        guid = soap['CompositionService'].Create(get_userid(self), "Untitled Composition", False, False)
         self._render('composition_add_model.html', compositionGuid=compositionGuid, modelGuid=modelGuid, model=model, properties=properties)
 
     def portal_composition_doAddModel(self):
@@ -233,7 +238,7 @@ class PortalHandler(tornado.web.RequestHandler):
         cmGuid = soap['CompositionService'].CreateCompositionModel(compositionGuid, modelGuid, None)
         for key in kvs:
             soap['CompositionService'].UpdateCompositionModelProperty(cmGuid, key, kvs[key])
-        self.portal_composition_view(compositionGuid)
+        self.redirect('/composition/view/' + compositionGuid)
 
     def portal_task_file_download(self, *args):
         fileName = self.get_argument('fileName')

@@ -175,6 +175,9 @@ namespace OOC.OpenMIWrapper
 
         public void RunSequence(ITime triggerTime)
         {
+            Event theEvent = new Event(EventType.Informative);
+            theEvent.Description = "Parallel execution feature disabled.";
+            _runListener.OnEvent(theEvent);
             /* try find edge model and trigger them first, is possible */
             int edgeModel = 0;
             foreach (Model uimodel in _models)
@@ -184,9 +187,12 @@ namespace OOC.OpenMIWrapper
                 LinkableRunEngine runEngine = (LinkableRunEngine)uimodel.LinkableComponent;
                 foreach (ILink link in runEngine.GetProvidingLinks())
                 {
-                    if (!isModelEngineComponent(link.SourceComponent)) continue;
-                    outDegree++;
+                    if (isModelEngineComponent(link.TargetComponent))
+                        outDegree++;
                 }
+                theEvent = new Event(EventType.Informative);
+                theEvent.Description = "Out degree of " + uimodel.ModelID + " is " + outDegree + ".";
+                _runListener.OnEvent(theEvent);
                 if (outDegree == 0)
                 {
                     runEngine.RunToTime(triggerTime, -1);
@@ -196,6 +202,9 @@ namespace OOC.OpenMIWrapper
             /* no edge model was found, perhaps the composition is combined with circles */
             if (edgeModel == 0)
             {
+                theEvent = new Event(EventType.Informative);
+                theEvent.Description = "No edge model found, try invoke all of them.";
+                _runListener.OnEvent(theEvent);
                 foreach (Model uimodel in _models)
                 {
                     if (!isModelEngineComponent(uimodel.LinkableComponent)) continue;

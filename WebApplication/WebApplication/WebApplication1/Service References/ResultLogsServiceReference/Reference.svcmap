@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e79bbd0c-9287-445c-9968-a28a70315570" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:6736/Service/ResultLogsService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ResultLogsService.xsd" MetadataType="Schema" ID="7495997c-cf16-41e7-bd41-03ce4eb6e57f" SourceId="1" SourceUrl="http://localhost:6736/Service/ResultLogsService.svc?xsd=xsd4" />
+    <MetadataFile FileName="ResultLogsService1.xsd" MetadataType="Schema" ID="c110af03-8b25-4d96-ad3b-adb264cc2bd0" SourceId="1" SourceUrl="http://localhost:6736/Service/ResultLogsService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ResultLogsService2.xsd" MetadataType="Schema" ID="d92ab150-fabf-4552-bc37-dc1ecbd2279a" SourceId="1" SourceUrl="http://localhost:6736/Service/ResultLogsService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ResultLogsService.wsdl" MetadataType="Wsdl" ID="a71b0aac-57e0-47b2-93d2-ddf22fe083d0" SourceId="1" SourceUrl="http://localhost:6736/Service/ResultLogsService.svc?wsdl" />
+    <MetadataFile FileName="ResultLogsService3.xsd" MetadataType="Schema" ID="bc0dfd6e-61b4-4051-9f6a-0570978e897e" SourceId="1" SourceUrl="http://localhost:6736/Service/ResultLogsService.svc?xsd=xsd3" />
+    <MetadataFile FileName="ResultLogsService4.xsd" MetadataType="Schema" ID="7e7e658c-bbe7-485a-88b1-0556d07f0781" SourceId="1" SourceUrl="http://localhost:6736/Service/ResultLogsService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ResultLogsService.disco" MetadataType="Disco" ID="bb67bec1-99ce-4d00-9920-50069b926475" SourceId="1" SourceUrl="http://localhost:6736/Service/ResultLogsService.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

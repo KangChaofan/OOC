@@ -15,81 +15,12 @@
           <EntitySet Name="ModelProperty" EntityType="oocModel.Store.ModelProperty" store:Type="Tables" Schema="ooc" />
           <EntitySet Name="ModelTag" EntityType="oocModel.Store.ModelTag" store:Type="Tables" Schema="ooc" />
           <EntitySet Name="ModelTagMapping" EntityType="oocModel.Store.ModelTagMapping" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="ModelType" EntityType="oocModel.Store.ModelType" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="OutputParameter" EntityType="oocModel.Store.OutputParameter" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="ResultLogs" EntityType="oocModel.Store.ResultLogs" store:Type="Tables" Schema="ooc" />
           <EntitySet Name="Task" EntityType="oocModel.Store.Task" store:Type="Tables" Schema="ooc" />
           <EntitySet Name="TaskFileMapping" EntityType="oocModel.Store.TaskFileMapping" store:Type="Tables" Schema="ooc" />
           <EntitySet Name="User" EntityType="oocModel.Store.User" store:Type="Tables" Schema="ooc" />
-          <AssociationSet Name="fk_bill_cm" Association="oocModel.Store.fk_bill_cm">
-            <End Role="CompositionModel" EntitySet="CompositionModel" />
-            <End Role="Bill" EntitySet="Bill" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bill_task" Association="oocModel.Store.fk_bill_task">
-            <End Role="Task" EntitySet="Task" />
-            <End Role="Bill" EntitySet="Bill" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bill_user" Association="oocModel.Store.fk_bill_user">
-            <End Role="User" EntitySet="User" />
-            <End Role="Bill" EntitySet="Bill" />
-          </AssociationSet>
-          <AssociationSet Name="fk_cm_comp" Association="oocModel.Store.fk_cm_comp">
-            <End Role="Composition" EntitySet="Composition" />
-            <End Role="CompositionModel" EntitySet="CompositionModel" />
-          </AssociationSet>
-          <AssociationSet Name="fk_cm_model" Association="oocModel.Store.fk_cm_model">
-            <End Role="Model" EntitySet="Model" />
-            <End Role="CompositionModel" EntitySet="CompositionModel" />
-          </AssociationSet>
-          <AssociationSet Name="fk_comp_author" Association="oocModel.Store.fk_comp_author">
-            <End Role="User" EntitySet="User" />
-            <End Role="Composition" EntitySet="Composition" />
-          </AssociationSet>
-          <AssociationSet Name="fk_file_model" Association="oocModel.Store.fk_file_model">
-            <End Role="Model" EntitySet="Model" />
-            <End Role="ModelFileMapping" EntitySet="ModelFileMapping" />
-          </AssociationSet>
-          <AssociationSet Name="fk_file_task" Association="oocModel.Store.fk_file_task">
-            <End Role="Task" EntitySet="Task" />
-            <End Role="TaskFileMapping" EntitySet="TaskFileMapping" />
-          </AssociationSet>
-          <AssociationSet Name="fk_link_comp" Association="oocModel.Store.fk_link_comp">
-            <End Role="Composition" EntitySet="Composition" />
-            <End Role="CompositionLink" EntitySet="CompositionLink" />
-          </AssociationSet>
-          <AssociationSet Name="fk_link_source_cm" Association="oocModel.Store.fk_link_source_cm">
-            <End Role="CompositionModel" EntitySet="CompositionModel" />
-            <End Role="CompositionLink" EntitySet="CompositionLink" />
-          </AssociationSet>
-          <AssociationSet Name="fk_link_target_cm" Association="oocModel.Store.fk_link_target_cm">
-            <End Role="CompositionModel" EntitySet="CompositionModel" />
-            <End Role="CompositionLink" EntitySet="CompositionLink" />
-          </AssociationSet>
-          <AssociationSet Name="fk_mapping_model" Association="oocModel.Store.fk_mapping_model">
-            <End Role="Model" EntitySet="Model" />
-            <End Role="ModelTagMapping" EntitySet="ModelTagMapping" />
-          </AssociationSet>
-          <AssociationSet Name="fk_mapping_tag" Association="oocModel.Store.fk_mapping_tag">
-            <End Role="ModelTag" EntitySet="ModelTag" />
-            <End Role="ModelTagMapping" EntitySet="ModelTagMapping" />
-          </AssociationSet>
-          <AssociationSet Name="fk_model_author" Association="oocModel.Store.fk_model_author">
-            <End Role="User" EntitySet="User" />
-            <End Role="Model" EntitySet="Model" />
-          </AssociationSet>
-          <AssociationSet Name="fk_property_model" Association="oocModel.Store.fk_property_model">
-            <End Role="Model" EntitySet="Model" />
-            <End Role="ModelProperty" EntitySet="ModelProperty" />
-          </AssociationSet>
-          <AssociationSet Name="fk_tag_parent" Association="oocModel.Store.fk_tag_parent">
-            <End Role="ModelTag" EntitySet="ModelTag" />
-            <End Role="ModelTag1" EntitySet="ModelTag" />
-          </AssociationSet>
-          <AssociationSet Name="fk_task_comp" Association="oocModel.Store.fk_task_comp">
-            <End Role="Composition" EntitySet="Composition" />
-            <End Role="Task" EntitySet="Task" />
-          </AssociationSet>
-          <AssociationSet Name="fk_task_user" Association="oocModel.Store.fk_task_user">
-            <End Role="User" EntitySet="User" />
-            <End Role="Task" EntitySet="Task" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Bill">
           <Key>
@@ -157,6 +88,10 @@
           <Property Name="className" Type="varchar" MaxLength="256" />
           <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="modification" Type="timestamp" />
+          <Property Name="topId" Type="int" />
+          <Property Name="typeId" Type="int" />
+          <Property Name="eName" Type="varchar" MaxLength="100" />
+          <Property Name="riverBasin" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ModelFileMapping">
           <Key>
@@ -205,6 +140,40 @@
           <Property Name="modelGuid" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="tagGuid" Type="varchar" Nullable="false" MaxLength="40" />
         </EntityType>
+        <EntityType Name="ModelType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="TypeName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsSub" Type="bit" Nullable="false" />
+          <Property Name="IsTop" Type="bit" Nullable="false" />
+          <Property Name="TopID" Type="int" />
+          <Property Name="Notes" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="OutputParameter">
+          <Key>
+            <PropertyRef Name="guid" />
+          </Key>
+          <Property Name="guid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="taskGuid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="compositionGuid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="compositionModelGuid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="elementSet" Type="varchar" Nullable="false" MaxLength="64" />
+          <Property Name="quantity" Type="varchar" Nullable="false" MaxLength="64" />
+          <Property Name="parameterValue" Type="text" Nullable="false" />
+          <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="ResultLogs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ModelID" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="UserID" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CalTime" Type="datetime" Nullable="false" />
+          <Property Name="FileFolder" Type="varchar" MaxLength="200" />
+        </EntityType>
         <EntityType Name="Task">
           <Key>
             <PropertyRef Name="guid" />
@@ -246,222 +215,15 @@
           <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="modification" Type="timestamp" />
         </EntityType>
-        <Association Name="fk_bill_cm">
-          <End Role="CompositionModel" Type="oocModel.Store.CompositionModel" Multiplicity="0..1" />
-          <End Role="Bill" Type="oocModel.Store.Bill" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CompositionModel">
-              <PropertyRef Name="guid" />
-            </Principal>
-            <Dependent Role="Bill">
-              <PropertyRef Name="cmGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_bill_task">
-          <End Role="Task" Type="oocModel.Store.Task" Multiplicity="0..1" />
-          <End Role="Bill" Type="oocModel.Store.Bill" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Task">
-              <PropertyRef Name="guid" />
-            </Principal>
-            <Dependent Role="Bill">
-              <PropertyRef Name="taskGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_bill_user">
-          <End Role="User" Type="oocModel.Store.User" Multiplicity="1" />
-          <End Role="Bill" Type="oocModel.Store.Bill" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Bill">
-              <PropertyRef Name="userId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_cm_comp">
-          <End Role="Composition" Type="oocModel.Store.Composition" Multiplicity="1" />
-          <End Role="CompositionModel" Type="oocModel.Store.CompositionModel" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Composition">
-              <PropertyRef Name="guid" />
-            </Principal>
-            <Dependent Role="CompositionModel">
-              <PropertyRef Name="compositionGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_cm_model">
-          <End Role="Model" Type="oocModel.Store.Model" Multiplicity="1" />
-          <End Role="CompositionModel" Type="oocModel.Store.CompositionModel" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Model">
-              <PropertyRef Name="guid" />
-            </Principal>
-            <Dependent Role="CompositionModel">
-              <PropertyRef Name="modelGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_comp_author">
-          <End Role="User" Type="oocModel.Store.User" Multiplicity="1" />
-          <End Role="Composition" Type="oocModel.Store.Composition" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Composition">
-              <PropertyRef Name="authorUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_file_model">
-          <End Role="Model" Type="oocModel.Store.Model" Multiplicity="1" />
-          <End Role="ModelFileMapping" Type="oocModel.Store.ModelFileMapping" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Model">
-              <PropertyRef Name="guid" />
-            </Principal>
-            <Dependent Role="ModelFileMapping">
-              <PropertyRef Name="modelGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_file_task">
-          <End Role="Task" Type="oocModel.Store.Task" Multiplicity="1" />
-          <End Role="TaskFileMapping" Type="oocModel.Store.TaskFileMapping" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Task">
-              <PropertyRef Name="guid" />
-            </Principal>
-            <Dependent Role="TaskFileMapping">
-              <PropertyRef Name="taskGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_link_comp">
-          <End Role="Composition" Type="oocModel.Store.Composition" Multiplicity="1" />
-          <End Role="CompositionLink" Type="oocModel.Store.CompositionLink" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Composition">
-              <PropertyRef Name="guid" />
-            </Principal>
-            <Dependent Role="CompositionLink">
-              <PropertyRef Name="compositionGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_link_source_cm">
-          <End Role="CompositionModel" Type="oocModel.Store.CompositionModel" Multiplicity="1" />
-          <End Role="CompositionLink" Type="oocModel.Store.CompositionLink" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CompositionModel">
-              <PropertyRef Name="guid" />
-            </Principal>
-            <Dependent Role="CompositionLink">
-              <PropertyRef Name="sourceCmGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_link_target_cm">
-          <End Role="CompositionModel" Type="oocModel.Store.CompositionModel" Multiplicity="1" />
-          <End Role="CompositionLink" Type="oocModel.Store.CompositionLink" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CompositionModel">
-              <PropertyRef Name="guid" />
-            </Principal>
-            <Dependent Role="CompositionLink">
-              <PropertyRef Name="targetCmGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_mapping_model">
-          <End Role="Model" Type="oocModel.Store.Model" Multiplicity="1" />
-          <End Role="ModelTagMapping" Type="oocModel.Store.ModelTagMapping" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Model">
-              <PropertyRef Name="guid" />
-            </Principal>
-            <Dependent Role="ModelTagMapping">
-              <PropertyRef Name="modelGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_mapping_tag">
-          <End Role="ModelTag" Type="oocModel.Store.ModelTag" Multiplicity="1" />
-          <End Role="ModelTagMapping" Type="oocModel.Store.ModelTagMapping" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ModelTag">
-              <PropertyRef Name="guid" />
-            </Principal>
-            <Dependent Role="ModelTagMapping">
-              <PropertyRef Name="tagGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_model_author">
-          <End Role="User" Type="oocModel.Store.User" Multiplicity="1" />
-          <End Role="Model" Type="oocModel.Store.Model" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Model">
-              <PropertyRef Name="authorUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_property_model">
-          <End Role="Model" Type="oocModel.Store.Model" Multiplicity="1" />
-          <End Role="ModelProperty" Type="oocModel.Store.ModelProperty" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Model">
-              <PropertyRef Name="guid" />
-            </Principal>
-            <Dependent Role="ModelProperty">
-              <PropertyRef Name="modelGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_tag_parent">
-          <End Role="ModelTag" Type="oocModel.Store.ModelTag" Multiplicity="0..1" />
-          <End Role="ModelTag1" Type="oocModel.Store.ModelTag" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ModelTag">
-              <PropertyRef Name="guid" />
-            </Principal>
-            <Dependent Role="ModelTag1">
-              <PropertyRef Name="parentTagGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_task_comp">
-          <End Role="Composition" Type="oocModel.Store.Composition" Multiplicity="1" />
-          <End Role="Task" Type="oocModel.Store.Task" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Composition">
-              <PropertyRef Name="guid" />
-            </Principal>
-            <Dependent Role="Task">
-              <PropertyRef Name="compositionGuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_task_user">
-          <End Role="User" Type="oocModel.Store.User" Multiplicity="1" />
-          <End Role="Task" Type="oocModel.Store.Task" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Task">
-              <PropertyRef Name="userId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <Function Name="OutputParameter_show" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ooc">
+          <Parameter Name="taskGuid" Type="varchar" Mode="In" />
+          <Parameter Name="compGuid" Type="varchar" Mode="In" />
+          <Parameter Name="cmGuid" Type="varchar" Mode="In" />
+          <Parameter Name="startTime" Type="timestamp" Mode="In" />
+          <Parameter Name="overTime" Type="timestamp" Mode="In" />
+          <Parameter Name="pageIndex" Type="int" Mode="In" />
+          <Parameter Name="pageSize" Type="int" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -546,6 +308,30 @@
             <End Role="Model" EntitySet="Model" />
             <End Role="ModelTag" EntitySet="ModelTag" />
           </AssociationSet>
+          <EntitySet Name="OutputParameter" EntityType="oocModel.OutputParameter" />
+          <AssociationSet Name="fk_op_comp" Association="oocModel.fk_op_comp">
+            <End Role="Composition" EntitySet="Composition" />
+            <End Role="OutputParameter" EntitySet="OutputParameter" />
+          </AssociationSet>
+          <AssociationSet Name="fk_op_cm" Association="oocModel.fk_op_cm">
+            <End Role="CompositionModel" EntitySet="CompositionModel" />
+            <End Role="OutputParameter" EntitySet="OutputParameter" />
+          </AssociationSet>
+          <AssociationSet Name="fk_op_task" Association="oocModel.fk_op_task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="OutputParameter" EntitySet="OutputParameter" />
+          </AssociationSet>
+          <FunctionImport Name="OutputParameter_show" EntitySet="OutputParameter" ReturnType="Collection(oocModel.OutputParameter)">
+            <Parameter Name="taskGuid" Mode="In" Type="String" />
+            <Parameter Name="compGuid" Mode="In" Type="String" />
+            <Parameter Name="cmGuid" Mode="In" Type="String" />
+            <Parameter Name="startTime" Mode="In" Type="DateTime" />
+            <Parameter Name="overTime" Mode="In" Type="DateTime" />
+            <Parameter Name="pageIndex" Mode="In" Type="Int32" />
+            <Parameter Name="pageSize" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="ModelType" EntityType="oocModel.ModelType" />
+          <EntitySet Name="ResultLogs" EntityType="oocModel.ResultLogs" />
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -595,6 +381,7 @@
           <NavigationProperty Name="User" Relationship="oocModel.fk_comp_author" FromRole="Composition" ToRole="User" />
           <NavigationProperty Name="CompositionLink" Relationship="oocModel.fk_link_comp" FromRole="Composition" ToRole="CompositionLink" />
           <NavigationProperty Name="Task" Relationship="oocModel.fk_task_comp" FromRole="Composition" ToRole="Task" />
+          <NavigationProperty Name="OutputParameter" Relationship="oocModel.fk_op_comp" FromRole="Composition" ToRole="OutputParameter" />
         </EntityType>
         <EntityType Name="CompositionLink">
           <Key>
@@ -630,6 +417,7 @@
           <NavigationProperty Name="CompositionLinkSource" Relationship="oocModel.fk_link_source_cm" FromRole="CompositionModel" ToRole="CompositionLink" />
           <NavigationProperty Name="CompositionLinkTarget" Relationship="oocModel.fk_link_target_cm" FromRole="CompositionModel" ToRole="CompositionLink" />
           <NavigationProperty Name="Model" Relationship="oocModel.fk_cm_model" FromRole="CompositionModel" ToRole="Model" />
+          <NavigationProperty Name="OutputParameter" Relationship="oocModel.fk_op_cm" FromRole="CompositionModel" ToRole="OutputParameter" />
         </EntityType>
         <EntityType Name="Model">
           <Key>
@@ -650,6 +438,10 @@
           <Property Type="Boolean" Name="isPublic" Nullable="false" />
           <Property Type="Boolean" Name="isApproved" Nullable="false" />
           <NavigationProperty Name="ModelTag" Relationship="oocModel.ModelTagMapping" FromRole="Model" ToRole="ModelTag" />
+          <Property Type="Int32" Name="topId" />
+          <Property Type="Int32" Name="typeId" />
+          <Property Type="String" Name="eName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="riverBasin" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ModelFileMapping">
           <Key>
@@ -701,6 +493,7 @@
           <NavigationProperty Name="TaskFileMapping" Relationship="oocModel.fk_file_task" FromRole="Task" ToRole="TaskFileMapping" />
           <NavigationProperty Name="User" Relationship="oocModel.fk_task_user" FromRole="Task" ToRole="User" />
           <Property Type="String" Name="triggerInvokeTime" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OutputParameter" Relationship="oocModel.fk_op_task" FromRole="Task" ToRole="OutputParameter" />
         </EntityType>
         <EntityType Name="TaskFileMapping">
           <Key>
@@ -924,6 +717,85 @@
           <End Type="oocModel.Model" Role="Model" Multiplicity="*" />
           <End Type="oocModel.ModelTag" Role="ModelTag" Multiplicity="*" />
         </Association>
+        <EntityType Name="OutputParameter">
+          <Key>
+            <PropertyRef Name="guid" />
+          </Key>
+          <Property Type="String" Name="guid" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="taskGuid" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="compositionGuid" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="compositionModelGuid" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="elementSet" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="quantity" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="parameterValue" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" Precision="0" />
+          <NavigationProperty Name="Composition" Relationship="oocModel.fk_op_comp" FromRole="OutputParameter" ToRole="Composition" />
+          <NavigationProperty Name="CompositionModel" Relationship="oocModel.fk_op_cm" FromRole="OutputParameter" ToRole="CompositionModel" />
+          <NavigationProperty Name="Task" Relationship="oocModel.fk_op_task" FromRole="OutputParameter" ToRole="Task" />
+        </EntityType>
+        <Association Name="fk_op_comp">
+          <End Type="oocModel.Composition" Role="Composition" Multiplicity="1" />
+          <End Type="oocModel.OutputParameter" Role="OutputParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Composition">
+              <PropertyRef Name="guid" />
+            </Principal>
+            <Dependent Role="OutputParameter">
+              <PropertyRef Name="compositionGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_op_cm">
+          <End Type="oocModel.CompositionModel" Role="CompositionModel" Multiplicity="1" />
+          <End Type="oocModel.OutputParameter" Role="OutputParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompositionModel">
+              <PropertyRef Name="guid" />
+            </Principal>
+            <Dependent Role="OutputParameter">
+              <PropertyRef Name="compositionModelGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_op_task">
+          <End Type="oocModel.Task" Role="Task" Multiplicity="1" />
+          <End Type="oocModel.OutputParameter" Role="OutputParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="guid" />
+            </Principal>
+            <Dependent Role="OutputParameter">
+              <PropertyRef Name="taskGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ModelType">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="TypeName" />
+            <PropertyRef Name="IsSub" />
+            <PropertyRef Name="IsTop" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="TypeName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsSub" Nullable="false" />
+          <Property Type="Boolean" Name="IsTop" Nullable="false" />
+          <Property Type="Int32" Name="TopID" />
+          <Property Type="String" Name="Notes" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ResultLogs">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ModelID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="CalTime" />
+          </Key>
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ModelID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UserID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CalTime" Nullable="false" Precision="0" />
+          <Property Type="String" Name="FileFolder" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -999,6 +871,10 @@
           <EntitySetMapping Name="Model">
             <EntityTypeMapping TypeName="oocModel.Model">
               <MappingFragment StoreEntitySet="Model">
+                <ScalarProperty Name="riverBasin" ColumnName="riverBasin" />
+                <ScalarProperty Name="eName" ColumnName="eName" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="topId" ColumnName="topId" />
                 <ScalarProperty Name="isApproved" ColumnName="isApproved" />
                 <ScalarProperty Name="isPublic" ColumnName="isPublic" />
                 <ScalarProperty Name="abstract" ColumnName="abstract" />
@@ -1089,6 +965,44 @@
               <ScalarProperty Name="guid" ColumnName="modelGuid" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="OutputParameter">
+            <EntityTypeMapping TypeName="oocModel.OutputParameter">
+              <MappingFragment StoreEntitySet="OutputParameter">
+                <ScalarProperty Name="creation" ColumnName="creation" />
+                <ScalarProperty Name="parameterValue" ColumnName="parameterValue" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="elementSet" ColumnName="elementSet" />
+                <ScalarProperty Name="compositionModelGuid" ColumnName="compositionModelGuid" />
+                <ScalarProperty Name="compositionGuid" ColumnName="compositionGuid" />
+                <ScalarProperty Name="taskGuid" ColumnName="taskGuid" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="OutputParameter_show" FunctionName="oocModel.Store.OutputParameter_show" />
+          <EntitySetMapping Name="ModelType">
+            <EntityTypeMapping TypeName="oocModel.ModelType">
+              <MappingFragment StoreEntitySet="ModelType">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="TopID" ColumnName="TopID" />
+                <ScalarProperty Name="IsTop" ColumnName="IsTop" />
+                <ScalarProperty Name="IsSub" ColumnName="IsSub" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultLogs">
+            <EntityTypeMapping TypeName="oocModel.ResultLogs">
+              <MappingFragment StoreEntitySet="ResultLogs">
+                <ScalarProperty Name="FileFolder" ColumnName="FileFolder" />
+                <ScalarProperty Name="CalTime" ColumnName="CalTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1111,13 +1025,13 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="OOCDB" ZoomLevel="124">
+      <Diagram Name="OOCDB" ZoomLevel="75">
         <EntityTypeShape EntityType="oocModel.User" Width="1.625" PointX="0.875" PointY="15.625" Height="3.3071704101562496" IsExpanded="false" />
         <EntityTypeShape EntityType="oocModel.Bill" Width="2" PointX="9.125" PointY="17.125" Height="3.1161507161458353" IsExpanded="false" />
         <EntityTypeShape EntityType="oocModel.Composition" Width="1.875" PointX="3.125" PointY="14.125" Height="3.1161507161458317" IsExpanded="false" />
         <EntityTypeShape EntityType="oocModel.CompositionLink" Width="2.25" PointX="11.375" PointY="14.625" Height="3.6892097981770817" IsExpanded="false" />
         <EntityTypeShape EntityType="oocModel.CompositionModel" Width="2" PointX="6.25" PointY="15.125" Height="3.1161507161458317" IsExpanded="false" />
-        <EntityTypeShape EntityType="oocModel.Model" Width="1.875" PointX="3.125" PointY="17.125" Height="3.307170410156246" IsExpanded="false" />
+        <EntityTypeShape EntityType="oocModel.Model" Width="1.875" PointX="3.125" PointY="17.125" Height="3.307170410156246" IsExpanded="true" />
         <EntityTypeShape EntityType="oocModel.ModelFileMapping" Width="1.875" PointX="6.25" PointY="13.75" Height="2.161052246093746" IsExpanded="false" />
         <EntityTypeShape EntityType="oocModel.ModelProperty" Width="1.75" PointX="6.25" PointY="18.25" Height="2.3520719401041674" IsExpanded="false" />
         <EntityTypeShape EntityType="oocModel.Task" Width="1.875" PointX="9.125" PointY="15.375" Height="3.8802294921874996" IsExpanded="false" />
@@ -1201,6 +1115,12 @@
         <EntityTypeShape EntityType="oocModel.ModelTag" Width="1.75" PointX="6.25" PointY="16.625" IsExpanded="false" />
         <AssociationConnector Association="oocModel.fk_tag_parent" />
         <AssociationConnector Association="oocModel.ModelTagMapping" />
+        <EntityTypeShape EntityType="oocModel.OutputParameter" Width="1.5" PointX="5.875" PointY="10.375" IsExpanded="false" />
+        <AssociationConnector Association="oocModel.fk_op_comp" />
+        <AssociationConnector Association="oocModel.fk_op_cm" />
+        <AssociationConnector Association="oocModel.fk_op_task" />
+        <EntityTypeShape EntityType="oocModel.ModelType" Width="1.5" PointX="10" PointY="18.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="oocModel.ResultLogs" Width="1.5" PointX="12.375" PointY="18.25" IsExpanded="false" />
       </Diagram>
     </Diagrams>
   </Designer>

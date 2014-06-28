@@ -1,0 +1,2 @@
+C:\wht\ooc\WebApplication\WebApplication1\obj\Release\WebApplication1.csprojResolveAssemblyReference.cache
+E:\项目相关--------\wht\ooc\WebApplication\WebApplication1\obj\Release\WebApplication1.csprojResolveAssemblyReference.cache

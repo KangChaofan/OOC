@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ModelTypeService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:6736/Service/ModelTypeService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/ModelTypeService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/ModelTypeService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OOC.Entity" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/ModelTypeService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/ModelTypeService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/ModelTypeService.svc?xsd=xsd5" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IModelTypeService_GetTypeList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTypeList" />
+  </wsdl:message>
+  <wsdl:message name="IModelTypeService_GetTypeList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTypeListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelTypeService_GetTypeListDS_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTypeListDS" />
+  </wsdl:message>
+  <wsdl:message name="IModelTypeService_GetTypeListDS_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTypeListDSResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelTypeService_GetTopList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTopList" />
+  </wsdl:message>
+  <wsdl:message name="IModelTypeService_GetTopList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTopListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelTypeService_GetSubByTopID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubByTopID" />
+  </wsdl:message>
+  <wsdl:message name="IModelTypeService_GetSubByTopID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubByTopIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelTypeService_IsTopType_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsTopType" />
+  </wsdl:message>
+  <wsdl:message name="IModelTypeService_IsTopType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsTopTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelTypeService_GetTypeByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTypeByID" />
+  </wsdl:message>
+  <wsdl:message name="IModelTypeService_GetTypeByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTypeByIDResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IModelTypeService">
+    <wsdl:operation name="GetTypeList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelTypeService/GetTypeList" message="tns:IModelTypeService_GetTypeList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelTypeService/GetTypeListResponse" message="tns:IModelTypeService_GetTypeList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTypeListDS">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelTypeService/GetTypeListDS" message="tns:IModelTypeService_GetTypeListDS_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelTypeService/GetTypeListDSResponse" message="tns:IModelTypeService_GetTypeListDS_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTopList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelTypeService/GetTopList" message="tns:IModelTypeService_GetTopList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelTypeService/GetTopListResponse" message="tns:IModelTypeService_GetTopList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubByTopID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelTypeService/GetSubByTopID" message="tns:IModelTypeService_GetSubByTopID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelTypeService/GetSubByTopIDResponse" message="tns:IModelTypeService_GetSubByTopID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsTopType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelTypeService/IsTopType" message="tns:IModelTypeService_IsTopType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelTypeService/IsTopTypeResponse" message="tns:IModelTypeService_IsTopType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTypeByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelTypeService/GetTypeByID" message="tns:IModelTypeService_GetTypeByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelTypeService/GetTypeByIDResponse" message="tns:IModelTypeService_GetTypeByID_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IModelTypeService" type="tns:IModelTypeService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetTypeList">
+      <soap:operation soapAction="http://tempuri.org/IModelTypeService/GetTypeList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTypeListDS">
+      <soap:operation soapAction="http://tempuri.org/IModelTypeService/GetTypeListDS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTopList">
+      <soap:operation soapAction="http://tempuri.org/IModelTypeService/GetTopList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubByTopID">
+      <soap:operation soapAction="http://tempuri.org/IModelTypeService/GetSubByTopID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsTopType">
+      <soap:operation soapAction="http://tempuri.org/IModelTypeService/IsTopType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTypeByID">
+      <soap:operation soapAction="http://tempuri.org/IModelTypeService/GetTypeByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ModelTypeService">
+    <wsdl:port name="BasicHttpBinding_IModelTypeService" binding="tns:BasicHttpBinding_IModelTypeService">
+      <soap:address location="http://localhost:6736/Service/ModelTypeService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

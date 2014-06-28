@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ModelService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:6736/Service/ModelService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/ModelService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/ModelService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OOC.Entity" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/ModelService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/ModelService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IModelService_Create_InputMessage">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_Create_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_GetByGuid_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetByGuid" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_GetByGuid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetByGuidResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_ListByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListByName" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_ListByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_ListByAuthorUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListByAuthorUserId" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_ListByAuthorUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListByAuthorUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_ListByClassName_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListByClassName" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_ListByClassName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListByClassNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_ListByModelTags_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListByModelTags" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_ListByModelTags_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListByModelTagsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_Audit_InputMessage">
+    <wsdl:part name="parameters" element="tns:Audit" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_Audit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuditResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_GetModelProperties_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetModelProperties" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_GetModelProperties_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetModelPropertiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_AddModelProperty_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddModelProperty" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_AddModelProperty_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddModelPropertyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_RemoveModelProperty_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveModelProperty" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_RemoveModelProperty_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveModelPropertyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_UpdateModelProperty_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateModelProperty" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_UpdateModelProperty_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateModelPropertyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_ModelSimpleList_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModelSimpleList" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_ModelSimpleList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModelSimpleListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_GetRiverBasinByModelGuid_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRiverBasinByModelGuid" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_GetRiverBasinByModelGuid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRiverBasinByModelGuidResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_ModelSimpleListByTopID_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModelSimpleListByTopID" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_ModelSimpleListByTopID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModelSimpleListByTopIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_ModelSimpleListByTypeID_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModelSimpleListByTypeID" />
+  </wsdl:message>
+  <wsdl:message name="IModelService_ModelSimpleListByTypeID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModelSimpleListByTypeIDResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IModelService">
+    <wsdl:operation name="Create">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/Create" message="tns:IModelService_Create_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/CreateResponse" message="tns:IModelService_Create_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetByGuid">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/GetByGuid" message="tns:IModelService_GetByGuid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/GetByGuidResponse" message="tns:IModelService_GetByGuid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/ListByName" message="tns:IModelService_ListByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/ListByNameResponse" message="tns:IModelService_ListByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListByAuthorUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/ListByAuthorUserId" message="tns:IModelService_ListByAuthorUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/ListByAuthorUserIdResponse" message="tns:IModelService_ListByAuthorUserId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListByClassName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/ListByClassName" message="tns:IModelService_ListByClassName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/ListByClassNameResponse" message="tns:IModelService_ListByClassName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListByModelTags">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/ListByModelTags" message="tns:IModelService_ListByModelTags_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/ListByModelTagsResponse" message="tns:IModelService_ListByModelTags_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Audit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/Audit" message="tns:IModelService_Audit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/AuditResponse" message="tns:IModelService_Audit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModelProperties">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/GetModelProperties" message="tns:IModelService_GetModelProperties_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/GetModelPropertiesResponse" message="tns:IModelService_GetModelProperties_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddModelProperty">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/AddModelProperty" message="tns:IModelService_AddModelProperty_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/AddModelPropertyResponse" message="tns:IModelService_AddModelProperty_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveModelProperty">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/RemoveModelProperty" message="tns:IModelService_RemoveModelProperty_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/RemoveModelPropertyResponse" message="tns:IModelService_RemoveModelProperty_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateModelProperty">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/UpdateModelProperty" message="tns:IModelService_UpdateModelProperty_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/UpdateModelPropertyResponse" message="tns:IModelService_UpdateModelProperty_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModelSimpleList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/ModelSimpleList" message="tns:IModelService_ModelSimpleList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/ModelSimpleListResponse" message="tns:IModelService_ModelSimpleList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRiverBasinByModelGuid">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/GetRiverBasinByModelGuid" message="tns:IModelService_GetRiverBasinByModelGuid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/GetRiverBasinByModelGuidResponse" message="tns:IModelService_GetRiverBasinByModelGuid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModelSimpleListByTopID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/ModelSimpleListByTopID" message="tns:IModelService_ModelSimpleListByTopID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/ModelSimpleListByTopIDResponse" message="tns:IModelService_ModelSimpleListByTopID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModelSimpleListByTypeID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IModelService/ModelSimpleListByTypeID" message="tns:IModelService_ModelSimpleListByTypeID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IModelService/ModelSimpleListByTypeIDResponse" message="tns:IModelService_ModelSimpleListByTypeID_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IModelService" type="tns:IModelService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/IModelService/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByGuid">
+      <soap:operation soapAction="http://tempuri.org/IModelService/GetByGuid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListByName">
+      <soap:operation soapAction="http://tempuri.org/IModelService/ListByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListByAuthorUserId">
+      <soap:operation soapAction="http://tempuri.org/IModelService/ListByAuthorUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListByClassName">
+      <soap:operation soapAction="http://tempuri.org/IModelService/ListByClassName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListByModelTags">
+      <soap:operation soapAction="http://tempuri.org/IModelService/ListByModelTags" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Audit">
+      <soap:operation soapAction="http://tempuri.org/IModelService/Audit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelProperties">
+      <soap:operation soapAction="http://tempuri.org/IModelService/GetModelProperties" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddModelProperty">
+      <soap:operation soapAction="http://tempuri.org/IModelService/AddModelProperty" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveModelProperty">
+      <soap:operation soapAction="http://tempuri.org/IModelService/RemoveModelProperty" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateModelProperty">
+      <soap:operation soapAction="http://tempuri.org/IModelService/UpdateModelProperty" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModelSimpleList">
+      <soap:operation soapAction="http://tempuri.org/IModelService/ModelSimpleList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRiverBasinByModelGuid">
+      <soap:operation soapAction="http://tempuri.org/IModelService/GetRiverBasinByModelGuid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModelSimpleListByTopID">
+      <soap:operation soapAction="http://tempuri.org/IModelService/ModelSimpleListByTopID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModelSimpleListByTypeID">
+      <soap:operation soapAction="http://tempuri.org/IModelService/ModelSimpleListByTypeID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ModelService">
+    <wsdl:port name="BasicHttpBinding_IModelService" binding="tns:BasicHttpBinding_IModelService">
+      <soap:address location="http://localhost:6736/Service/ModelService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

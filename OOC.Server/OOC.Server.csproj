@@ -57,12 +57,24 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\MySQL\MySQL Connector Net 6.7.4\Assemblies\v4.0\MySql.Web.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="OpenMI.Standard, Version=1.4.0.0, Culture=neutral, PublicKeyToken=82bbb00ca5ab39e4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Oatc\src\csharp\Sdk\Wrapper\bin\Debug\OpenMI.Standard.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -78,6 +90,12 @@
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -86,8 +104,11 @@
     <Content Include="Service\BillService.svc" />
     <Content Include="Service\InstanceService.svc" />
     <Content Include="Service\ModelService.svc" />
+    <Content Include="Service\ModelTypeService.svc" />
     <Content Include="Service\TaskService.svc" />
     <Content Include="Service\CompositionService.svc" />
+    <Content Include="Service\OutputParameterService.svc" />
+    <Content Include="Service\ResultLogsService.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -120,6 +141,9 @@
     <Compile Include="Contract\Service\IModelService.cs" />
     <Compile Include="Contract\Service\ITaskService.cs" />
     <Compile Include="Contract\Service\ICompositionService.cs" />
+    <Compile Include="Contract\Service\IOutputParameterService.cs" />
+    <Compile Include="Contract\Service\IModelTypeService.cs" />
+    <Compile Include="Contract\Service\IResultLogsService.cs" />
     <Compile Include="Entity\OOCEntityObject.cs" />
     <Compile Include="ServiceAttribute\ExposedService.cs" />
     <Compile Include="Entity\OOCModel.cs">
@@ -154,11 +178,20 @@
     <Compile Include="Service\InstanceService.svc.cs">
       <DependentUpon>InstanceService.svc</DependentUpon>
     </Compile>
+    <Compile Include="Service\ModelTypeService.svc.cs">
+      <DependentUpon>ModelTypeService.svc</DependentUpon>
+    </Compile>
     <Compile Include="Service\TaskService.svc.cs">
       <DependentUpon>TaskService.svc</DependentUpon>
     </Compile>
     <Compile Include="Service\CompositionService.svc.cs">
       <DependentUpon>CompositionService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Service\OutputParameterService.svc.cs">
+      <DependentUpon>OutputParameterService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Service\ResultLogsService.svc.cs">
+      <DependentUpon>ResultLogsService.svc</DependentUpon>
     </Compile>
     <Compile Include="Util\RemoteUtil.cs" />
   </ItemGroup>
@@ -186,6 +219,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>OOCModel.cs</LastGenOutput>
     </None>
+    <Content Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

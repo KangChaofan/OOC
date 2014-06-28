@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="UserService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:6736/Service/UserService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/UserService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/UserService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OOC.Entity" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/UserService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/UserService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/UserService.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IUserService_Hash_InputMessage">
+    <wsdl:part name="parameters" element="tns:Hash" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_Hash_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HashResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_Auth_InputMessage">
+    <wsdl:part name="parameters" element="tns:Auth" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_Auth_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdatePassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePassword" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdatePassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateMobile_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateMobile" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateMobile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateMobileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_Create_InputMessage">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_Create_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetByUsername_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetByUsername" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetByUsername_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetByUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetById" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_QueryAcl_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryAcl" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_QueryAcl_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryAclResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_HasAclEntry_InputMessage">
+    <wsdl:part name="parameters" element="tns:HasAclEntry" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_HasAclEntry_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HasAclEntryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_AddAclEntry_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddAclEntry" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_AddAclEntry_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddAclEntryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_RemoveAclEntry_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveAclEntry" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_RemoveAclEntry_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveAclEntryResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IUserService">
+    <wsdl:operation name="Hash">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/Hash" message="tns:IUserService_Hash_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/HashResponse" message="tns:IUserService_Hash_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Auth">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/Auth" message="tns:IUserService_Auth_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/AuthResponse" message="tns:IUserService_Auth_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdatePassword" message="tns:IUserService_UpdatePassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdatePasswordResponse" message="tns:IUserService_UpdatePassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMobile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateMobile" message="tns:IUserService_UpdateMobile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdateMobileResponse" message="tns:IUserService_UpdateMobile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/Create" message="tns:IUserService_Create_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/CreateResponse" message="tns:IUserService_Create_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetByUsername">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetByUsername" message="tns:IUserService_GetByUsername_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetByUsernameResponse" message="tns:IUserService_GetByUsername_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetById" message="tns:IUserService_GetById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetByIdResponse" message="tns:IUserService_GetById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryAcl">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/QueryAcl" message="tns:IUserService_QueryAcl_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/QueryAclResponse" message="tns:IUserService_QueryAcl_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HasAclEntry">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/HasAclEntry" message="tns:IUserService_HasAclEntry_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/HasAclEntryResponse" message="tns:IUserService_HasAclEntry_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAclEntry">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/AddAclEntry" message="tns:IUserService_AddAclEntry_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/AddAclEntryResponse" message="tns:IUserService_AddAclEntry_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAclEntry">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/RemoveAclEntry" message="tns:IUserService_RemoveAclEntry_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/RemoveAclEntryResponse" message="tns:IUserService_RemoveAclEntry_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IUserService" type="tns:IUserService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Hash">
+      <soap:operation soapAction="http://tempuri.org/IUserService/Hash" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Auth">
+      <soap:operation soapAction="http://tempuri.org/IUserService/Auth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePassword">
+      <soap:operation soapAction="http://tempuri.org/IUserService/UpdatePassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMobile">
+      <soap:operation soapAction="http://tempuri.org/IUserService/UpdateMobile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/IUserService/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByUsername">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetByUsername" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetById">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryAcl">
+      <soap:operation soapAction="http://tempuri.org/IUserService/QueryAcl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HasAclEntry">
+      <soap:operation soapAction="http://tempuri.org/IUserService/HasAclEntry" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAclEntry">
+      <soap:operation soapAction="http://tempuri.org/IUserService/AddAclEntry" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAclEntry">
+      <soap:operation soapAction="http://tempuri.org/IUserService/RemoveAclEntry" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserService">
+    <wsdl:port name="BasicHttpBinding_IUserService" binding="tns:BasicHttpBinding_IUserService">
+      <soap:address location="http://localhost:6736/Service/UserService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

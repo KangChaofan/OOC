@@ -9,7 +9,7 @@ namespace OOC.Service
 {
     public class ModelService : IModelService
     {
-        public void Create(string name, string version, int authorUserId, string className)
+        public void Create(string name, string version, int authorUserId, string className, Int32 topId, Int32 typeId)
         {
             using (var db = new OOCEntities())
             {
@@ -19,6 +19,8 @@ namespace OOC.Service
                         version = version,
                         authorUserId = authorUserId,
                         className = className,
+                        topId = topId,
+                        typeId = typeId
                     };
                 db.Model.AddObject(model);
                 db.SaveChanges();
@@ -154,6 +156,51 @@ namespace OOC.Service
                     throw new FaultException("MODEL_MOT_FOUND");
                 }
                 db.ModelProperty.ApplyCurrentValues(modelProperty);
+            }
+        }
+
+        public List<Model> ModelSimpleList()
+        {
+            using (var db = new OOCEntities())
+            {
+                IQueryable<Model> result = from o in db.Model
+                                           select o;
+                return result.ToList();
+            }
+
+        }
+
+        public ModelProperty GetRiverBasinByModelGuid(string modelGuid)
+        {
+            string key = "RiverBasin";
+            using (var db = new OOCEntities())
+            {
+                IQueryable<ModelProperty> result = from o in db.ModelProperty
+                                                   where o.modelGuid == modelGuid && o.key == key
+                                                   select o;
+                return result.First();
+            }
+        }
+
+        public List<Model> ModelSimpleListByTopID(int TypeID)
+        {
+            using (var db = new OOCEntities())
+            {
+                IQueryable<Model> result = from o in db.Model
+                                           where o.topId == TypeID
+                                           select o;
+                return result.ToList();
+            }
+        }
+
+        public List<Model> ModelSimpleListByTypeID(int TypeID)
+        {
+            using (var db = new OOCEntities())
+            {
+                IQueryable<Model> result = from o in db.Model
+                                           where o.typeId == TypeID
+                                           select o;
+                return result.ToList();
             }
         }
     }

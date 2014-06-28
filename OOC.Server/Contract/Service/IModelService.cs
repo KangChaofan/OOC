@@ -9,7 +9,7 @@ namespace OOC.Contract.Service
     public interface IModelService
     {
         [OperationContract]
-        void Create(string name, string version, int authorUserId, string className);
+        void Create(string name, string version, int authorUserId, string className,Int32 topId,Int32 typeId);
 
         [OperationContract]
         Model GetByGuid(string guid);
@@ -40,5 +40,17 @@ namespace OOC.Contract.Service
 
         [OperationContract]
         void UpdateModelProperty(string guid, string key, ModelProperty modelProperty);
+
+        [OperationContract]
+        List<Model> ModelSimpleList();
+
+        [OperationContract]
+        ModelProperty GetRiverBasinByModelGuid(string modelGuid);
+
+        [OperationContract]
+        List<Model> ModelSimpleListByTopID(int TypeID);
+
+        [OperationContract]
+        List<Model> ModelSimpleListByTypeID(int TypeID);
     }
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<LinkableComponent Type="test.OpenMICom" Assembly="test.dll">
+  <Arguments>
+    <Argument Key="FilePath" ReadOnly="true" Value= "" />
+   </Arguments>
+</LinkableComponent>

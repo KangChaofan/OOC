@@ -18,6 +18,9 @@ OOC.UnitTest/bin/Release/OOC.*
 OOC.OpenMIComponent.DataMonitor/obj/*
 OOC.OpenMIComponent.DataMonitor/bin/Debug/OOC.*
 OOC.OpenMIComponent.DataMonitor/bin/Release/OOC.*
+OOC.OutputProcessor/obj/*
+OOC.OutputProcessor/bin/Debug/OOC.*
+OOC.OutputProcessor/bin/Release/OOC.*
 Oatc.OpenMI.Sdk/Backbone/bin/*
 Oatc.OpenMI.Sdk/Backbone/obj/*
 Oatc.OpenMI.Sdk/Buffer/bin/*

@@ -199,7 +199,7 @@ namespace OOC.Instance
                             channelMapping[channel] = dataSetGuid;
                             break;
                         case "DataRecord":
-                            double[] record = SerializationUtil.Deserialize<double[]>(command.Parameters["Record"]);
+                            double[] record = SerializationUtil.ToArray(command.Parameters["Record"]);
                             channel = command.Parameters["Channel"];
                             // write data record
                             break;

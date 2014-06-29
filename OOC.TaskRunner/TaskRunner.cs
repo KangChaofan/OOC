@@ -203,7 +203,7 @@ namespace OOC.TaskRunner
                                             double[] record = processor.GetNextRecord();
                                             parameters = new Dictionary<string, string>();
                                             parameters["Channel"] = channel.ToString();
-                                            parameters["Record"] = SerializationUtil.Serialize(record);
+                                            parameters["Record"] = SerializationUtil.FromArray(record);
                                             PipeUtil.WriteCommand(bw, new PipeCommand("DataRecord", parameters));
                                         }
                                         channel++;

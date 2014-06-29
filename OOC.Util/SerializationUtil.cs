@@ -36,5 +36,27 @@ namespace OOC.Util
                 return default(T);
             }
         }
+
+        public static string FromArray<T>(T[] array)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (T element in array)
+            {
+                sb.Append(element);
+                sb.Append(',');
+            }
+            return sb.ToString();
+        }
+
+        public static double[] ToArray(string s)
+        {
+            string[] cols = s.Split(',');
+            double[] array = new double[cols.Length];
+            for (int i = 0; i < cols.Length; i++)
+            {
+                array[i] = double.Parse(cols[i]);
+            }
+            return array;
+        }
     }
 }

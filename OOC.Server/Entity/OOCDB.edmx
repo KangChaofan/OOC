@@ -23,6 +23,10 @@
           <EntitySet Name="TaskProcessedDataRecord" EntityType="oocModel.Store.TaskProcessedDataRecord" store:Type="Tables" Schema="ooc" />
           <EntitySet Name="TaskProcessedDataSet" EntityType="oocModel.Store.TaskProcessedDataSet" store:Type="Tables" Schema="ooc" />
           <EntitySet Name="User" EntityType="oocModel.Store.User" store:Type="Tables" Schema="ooc" />
+          <AssociationSet Name="fk_dr_ds" Association="oocModel.Store.fk_dr_ds">
+            <End Role="TaskProcessedDataSet" EntitySet="TaskProcessedDataSet" />
+            <End Role="TaskProcessedDataRecord" EntitySet="TaskProcessedDataRecord" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Bill">
           <Key>
@@ -105,7 +109,7 @@
           <Property Name="relativePath" Type="varchar" Nullable="false" MaxLength="512" />
           <Property Name="isMainLibrary" Type="bool" Nullable="false" />
           <Property Name="isDocument" Type="bool" Nullable="false" />
-          <Property Name="isDataProcessor" Type="bool" />
+          <Property Name="isDataProcessor" Type="bool" Nullable="false" />
           <Property Name="signature" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="modification" Type="timestamp" />
@@ -207,7 +211,7 @@
         </EntityType>
         <EntityType Name="TaskProcessedDataRecord">
           <Key>
-            <PropertyRef Name="dataSetGuid" />
+            <PropertyRef Name="seq" />
           </Key>
           <Property Name="dataSetGuid" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="seq" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
@@ -237,6 +241,18 @@
           <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="modification" Type="timestamp" />
         </EntityType>
+        <Association Name="fk_dr_ds">
+          <End Role="TaskProcessedDataSet" Type="oocModel.Store.TaskProcessedDataSet" Multiplicity="1" />
+          <End Role="TaskProcessedDataRecord" Type="oocModel.Store.TaskProcessedDataRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskProcessedDataSet">
+              <PropertyRef Name="guid" />
+            </Principal>
+            <Dependent Role="TaskProcessedDataRecord">
+              <PropertyRef Name="dataSetGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="OutputParameter_show" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ooc">
           <Parameter Name="taskGuid" Type="varchar" Mode="In" />
           <Parameter Name="compGuid" Type="varchar" Mode="In" />
@@ -354,8 +370,12 @@
           </FunctionImport>
           <EntitySet Name="ModelType" EntityType="oocModel.ModelType" />
           <EntitySet Name="ResultLogs" EntityType="oocModel.ResultLogs" />
-          <EntitySet Name="TaskProcessedDataRecord" EntityType="oocModel.TaskProcessedDataRecord" />
           <EntitySet Name="TaskProcessedDataSet" EntityType="oocModel.TaskProcessedDataSet" />
+          <EntitySet Name="TaskProcessedDataRecord" EntityType="oocModel.TaskProcessedDataRecord" />
+          <AssociationSet Name="fk_dr_ds" Association="oocModel.fk_dr_ds">
+            <End Role="TaskProcessedDataSet" EntitySet="TaskProcessedDataSet" />
+            <End Role="TaskProcessedDataRecord" EntitySet="TaskProcessedDataRecord" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -481,7 +501,7 @@
           <Property Type="Boolean" Name="isDocument" Nullable="false" />
           <Property Type="String" Name="signature" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="relativePath" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Type="Boolean" Name="isDataProcessor" />
+          <Property Type="Boolean" Name="isDataProcessor" Nullable="false" />
         </EntityType>
         <EntityType Name="ModelProperty">
           <Key>
@@ -815,14 +835,6 @@
           <Property Name="calTime" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="fileFolder" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="TaskProcessedDataRecord">
-          <Key>
-            <PropertyRef Name="dataSetGuid" />
-          </Key>
-          <Property Type="String" Name="dataSetGuid" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Type="Int64" Name="seq" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="record" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="TaskProcessedDataSet">
           <Key>
             <PropertyRef Name="guid" />
@@ -833,7 +845,29 @@
           <Property Type="String" Name="className" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" Precision="0" />
+          <NavigationProperty Name="TaskProcessedDataRecord" Relationship="oocModel.fk_dr_ds" FromRole="TaskProcessedDataSet" ToRole="TaskProcessedDataRecord" />
         </EntityType>
+        <EntityType Name="TaskProcessedDataRecord">
+          <Key>
+            <PropertyRef Name="seq" />
+          </Key>
+          <Property Type="String" Name="dataSetGuid" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="Int64" Name="seq" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="record" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TaskProcessedDataSet" Relationship="oocModel.fk_dr_ds" FromRole="TaskProcessedDataRecord" ToRole="TaskProcessedDataSet" />
+        </EntityType>
+        <Association Name="fk_dr_ds">
+          <End Type="oocModel.TaskProcessedDataSet" Role="TaskProcessedDataSet" Multiplicity="1" />
+          <End Type="oocModel.TaskProcessedDataRecord" Role="TaskProcessedDataRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskProcessedDataSet">
+              <PropertyRef Name="guid" />
+            </Principal>
+            <Dependent Role="TaskProcessedDataRecord">
+              <PropertyRef Name="dataSetGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1042,15 +1076,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TaskProcessedDataRecord">
-            <EntityTypeMapping TypeName="oocModel.TaskProcessedDataRecord">
-              <MappingFragment StoreEntitySet="TaskProcessedDataRecord">
-                <ScalarProperty Name="record" ColumnName="record" />
-                <ScalarProperty Name="seq" ColumnName="seq" />
-                <ScalarProperty Name="dataSetGuid" ColumnName="dataSetGuid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TaskProcessedDataSet">
             <EntityTypeMapping TypeName="oocModel.TaskProcessedDataSet">
               <MappingFragment StoreEntitySet="TaskProcessedDataSet">
@@ -1060,6 +1085,15 @@
                 <ScalarProperty Name="cmGuid" ColumnName="cmGuid" />
                 <ScalarProperty Name="taskGuid" ColumnName="taskGuid" />
                 <ScalarProperty Name="guid" ColumnName="guid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskProcessedDataRecord">
+            <EntityTypeMapping TypeName="oocModel.TaskProcessedDataRecord">
+              <MappingFragment StoreEntitySet="TaskProcessedDataRecord">
+                <ScalarProperty Name="record" ColumnName="record" />
+                <ScalarProperty Name="seq" ColumnName="seq" />
+                <ScalarProperty Name="dataSetGuid" ColumnName="dataSetGuid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1079,7 +1113,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="默认值" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
         <DesignerProperty Name="DDLGenerationTemplate" Value="$(VSEFTools)\DBGen\SSDLToMySQL.tt" />
         <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>
@@ -1182,8 +1216,9 @@
         <AssociationConnector Association="oocModel.fk_op_task" />
         <EntityTypeShape EntityType="oocModel.ModelType" Width="1.5" PointX="5.5" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="oocModel.ResultLogs" Width="1.5" PointX="9.625" PointY="7.75" />
-        <EntityTypeShape EntityType="oocModel.TaskProcessedDataRecord" Width="1.5" PointX="6.912877413869313" PointY="18.471207463401932" />
         <EntityTypeShape EntityType="oocModel.TaskProcessedDataSet" Width="1.5" PointX="10.53469612753703" PointY="12.118857478778278" />
+        <EntityTypeShape EntityType="oocModel.TaskProcessedDataRecord" Width="1.5" PointX="4.6164744759986522" PointY="31.828992560426236" />
+        <AssociationConnector Association="oocModel.fk_dr_ds" />
       </Diagram>
     </Diagrams>
   </Designer>

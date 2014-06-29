@@ -1,6 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
 
 namespace OOC.Util
 {
@@ -39,11 +40,16 @@ namespace OOC.Util
 
         public static string FromArray<T>(T[] array)
         {
+            return string.Join(",", array);
+        }
+
+        public static string FromArrayList<T>(List<T[]> array)
+        {
             StringBuilder sb = new StringBuilder();
-            foreach (T element in array)
+            foreach (T[] row in array)
             {
-                sb.Append(element);
-                sb.Append(',');
+                sb.Append(FromArray(row));
+                sb.Append('\n');
             }
             return sb.ToString();
         }
@@ -51,6 +57,16 @@ namespace OOC.Util
         public static string[] ToArray(string s)
         {
             return s.Split(',');
+        }
+
+        public static List<string[]> ToArrayList(string s)
+        {
+            List<string[]> lines = new List<string[]>();
+            foreach (string line in s.Split('\n')) {
+                if (line.Length == 0) continue;
+                lines.Add(line.Split(','));
+            }
+            return lines;
         }
     }
 }

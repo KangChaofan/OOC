@@ -3,7 +3,7 @@ using OOC.OutputProcessor;
 
 namespace OOC.OpenMIComponent.DataMonitor
 {
-    class DataProcessor : StandardLineDataProcessor
+    public class DataProcessor : StandardLineDataProcessor
     {
         public string GetName()
         {

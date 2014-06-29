@@ -29,6 +29,7 @@ namespace OOC.Instance
         private static string taskUsername = ConfigurationManager.AppSettings["taskUsername"];
         private static string taskPassword = ConfigurationManager.AppSettings["taskPassword"];
         private static int progressReportInterval = Int32.Parse(ConfigurationManager.AppSettings["progressReportInterval"]);
+        private static int dataRecordBatchSize = Int32.Parse(ConfigurationManager.AppSettings["dataRecordBatchSize"]);
 
         public TaskAssignResponse TaskAssign { get; set; }
         public TaskStateChanged TaskStateChangedHandler;
@@ -121,6 +122,8 @@ namespace OOC.Instance
                         }
                     }
                 }
+                PipeUtil.WriteCommand(bw, new PipeCommand("SetModelProperties", properties));
+
                 foreach (ModelFileMapping fileMapping in cmData.ModelFiles)
                 {
                     if (fileMapping.isDataProcessor != true) continue;
@@ -130,8 +133,6 @@ namespace OOC.Instance
                     properties["outputFiles"] = SerializationUtil.Serialize(outputFiles);
                     PipeUtil.WriteCommand(bw, new PipeCommand("AddDataProcessor", properties));
                 }
-
-                PipeUtil.WriteCommand(bw, new PipeCommand("SetModelProperties", properties));
             }
 
             foreach (CompositionLinkData link in TaskAssign.CompositionData.Links)
@@ -150,6 +151,7 @@ namespace OOC.Instance
             properties = new Dictionary<string, string>();
             properties["triggerInvokeTime"] = TaskAssign.TriggerInvokeTime;
             properties["progressReportInterval"] = progressReportInterval.ToString();
+            properties["dataRecordBatchSize"] = dataRecordBatchSize.ToString();
             /* TODO: make some attribute for it */
             properties["parallelized"] = "false";
             PipeUtil.WriteCommand(bw, new PipeCommand("SetSimulationProperties", properties));
@@ -157,7 +159,7 @@ namespace OOC.Instance
 
         private bool runnerLifetime()
         {
-            Dictionary<string, string> channelMapping = new Dictionary<string,string>();
+            Dictionary<string, string> channelMapping = new Dictionary<string, string>();
             bool succeed = false;
             using (BinaryReader br = new BinaryReader(pipeServer))
             using (BinaryWriter bw = new BinaryWriter(pipeServer))
@@ -178,7 +180,7 @@ namespace OOC.Instance
                 {
                     string channel;
                     PipeCommand command = PipeUtil.ReadCommand(br);
-                    logger.Info("Pipe: Received command: " + command.Command);
+                    //logger.Info("Pipe: Received command: " + command.Command);
                     switch (command.Command)
                     {
                         case "Progress":
@@ -203,10 +205,10 @@ namespace OOC.Instance
                             channelMapping[channel] = dataSetGuid;
                             break;
                         case "DataRecord":
-                            string[] record = SerializationUtil.ToArray(command.Parameters["Record"]);
+                            List<string[]> records = SerializationUtil.ToArrayList(command.Parameters["Records"]);
                             channel = command.Parameters["Channel"];
                             // write data record
-                            taskProcessedDataService.InsertIntoDataSet(channelMapping[channel], record);
+                            taskProcessedDataService.InsertMultipleIntoDataSet(channelMapping[channel], records.ToArray());
                             break;
                     }
                 } while (!isReleased);

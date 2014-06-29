@@ -20,6 +20,6 @@ namespace OOC.OutputProcessor
         bool HasNextRecord();
 
         // Get next data record
-        double[] GetNextRecord();
+        string[] GetNextRecord();
     }
 }

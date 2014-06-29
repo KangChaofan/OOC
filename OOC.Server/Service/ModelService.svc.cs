@@ -172,11 +172,11 @@ namespace OOC.Service
 
         public ModelProperty GetRiverBasinByModelGuid(string modelGuid)
         {
-            string key = "RiverBasin";
+            //string key = "RiverBasin";
             using (var db = new OOCEntities())
             {
                 IQueryable<ModelProperty> result = from o in db.ModelProperty
-                                                   where o.modelGuid == modelGuid && o.key == key
+                                                   where o.modelGuid == modelGuid //&& o.key == key
                                                    select o;
                 return result.First();
             }

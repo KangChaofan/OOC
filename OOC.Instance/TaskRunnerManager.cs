@@ -11,6 +11,7 @@ using System.IO;
 using System.IO.Pipes;
 using System.ServiceModel;
 using OOC.Instance.TaskService;
+using OOC.Instance.TaskProcessedDataService;
 using OOC.Util;
 
 namespace OOC.Instance
@@ -74,6 +75,8 @@ namespace OOC.Instance
         private Thread pipeKeeper;
         private Process runnerProcess;
         private bool isReleased = false;
+
+        private TaskProcessedDataServiceClient taskProcessedDataService = new TaskProcessedDataServiceClient();
 
         public TaskRunnerManager(TaskAssignResponse taskAssign)
         {
@@ -196,13 +199,14 @@ namespace OOC.Instance
                             string name = command.Parameters["Name"];
                             channel = command.Parameters["Channel"];
                             // create data set
-                            string dataSetGuid = ""; // TODO
+                            string dataSetGuid = taskProcessedDataService.CreateDataSet(TaskAssign.Task.guid, modelId, className, name);
                             channelMapping[channel] = dataSetGuid;
                             break;
                         case "DataRecord":
                             string[] record = SerializationUtil.ToArray(command.Parameters["Record"]);
                             channel = command.Parameters["Channel"];
                             // write data record
+                            taskProcessedDataService.InsertIntoDataSet(channelMapping[channel], record);
                             break;
                     }
                 } while (!isReleased);

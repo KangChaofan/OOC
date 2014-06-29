@@ -58,6 +58,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\TaskProcessedDataService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\TaskService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -107,6 +112,16 @@
     </None>
     <None Include="Service References\InstanceService\OOC.Instance.InstanceService.InstanceStatus.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TaskProcessedDataService\TaskProcessedDataService.wsdl" />
+    <None Include="Service References\TaskProcessedDataService\TaskProcessedDataService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaskProcessedDataService\TaskProcessedDataService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaskProcessedDataService\TaskProcessedDataService2.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Service References\TaskService\OOC.Instance.TaskService.ModelProgress.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -168,6 +183,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\FileService\" />
     <WCFMetadataStorage Include="Service References\InstanceService\" />
+    <WCFMetadataStorage Include="Service References\TaskProcessedDataService\" />
     <WCFMetadataStorage Include="Service References\TaskService\" />
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +227,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\InstanceService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TaskProcessedDataService\TaskProcessedDataService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TaskProcessedDataService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TaskProcessedDataService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TaskProcessedDataService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

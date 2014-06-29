@@ -109,7 +109,7 @@
     <Content Include="Service\CompositionService.svc" />
     <Content Include="Service\OutputParameterService.svc" />
     <Content Include="Service\ResultLogsService.svc" />
-    <Content Include="Service\TaskProcessedDataSetService.svc" />
+    <Content Include="Service\TaskProcessedDataService.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -189,8 +189,8 @@
     <Compile Include="Service\ResultLogsService.svc.cs">
       <DependentUpon>ResultLogsService.svc</DependentUpon>
     </Compile>
-    <Compile Include="Service\TaskProcessedDataSetService.svc.cs">
-      <DependentUpon>TaskProcessedDataSetService.svc</DependentUpon>
+    <Compile Include="Service\TaskProcessedDataService.svc.cs">
+      <DependentUpon>TaskProcessedDataService.svc</DependentUpon>
     </Compile>
     <Compile Include="Util\RemoteUtil.cs" />
   </ItemGroup>

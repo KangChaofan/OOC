@@ -67,7 +67,7 @@ namespace WebApplication1
                 sb.Append(" <tr>");
                 sb.Append(" <td>" + one.name + "</td>");
                 sb.Append(" <td>" + one.eName + "</td>");
-                sb.Append(" <td id=\"ModelTypeName\" name=\""+one.typeId+"\">" + mt.TypeName + "</td>");
+                sb.Append(" <td id=\"ModelTypeName\" name=\"" + one.typeId + "\">" + mt.typeName + "</td>");
                 sb.Append(" <td>" + one.@abstract + "</td>");
                 sb.Append(" <td>" + one.riverBasin+ "</td>");//直接从model中取
                 //sb.Append(" <td><input type=\"button\" class=\"buttonS bLightBlue\" id=\""+one.ID+"\" name=\"" + one.ModelName + "\" value=\"配置计算\" /> </td>");
@@ -104,7 +104,7 @@ namespace WebApplication1
                 sb.Append(" <tr>");
                 sb.Append(" <td>" + one.name + "</td>");
                 sb.Append(" <td>" + one.eName + "</td>");
-                sb.Append(" <td id=\"ModelTypeName\" name=\"" + one.typeId + "\">" + mt.TypeName + "</td>");
+                sb.Append(" <td id=\"ModelTypeName\" name=\"" + one.typeId + "\">" + mt.typeName + "</td>");
                 sb.Append(" <td>" + one.@abstract + "</td>");
                 sb.Append(" <td>" + mp.@default+ "</td>");
                 sb.Append(" <td><input type=\"button\" class=\"buttonS bLightBlue\" id=\"" + one.guid+ "\" name=\"" + one.name + "\" value=\"配置计算\" alt=\"" + one.typeId+ "\" /> </td>");

@@ -20,17 +20,17 @@ namespace WebApplication1.UserControl
             mtl.AddRange(mts.GetTopList());
             StringBuilder sb = new StringBuilder();
             sb.Append("<ul class=\"subNav\">");
-            foreach (ModelType oneType in mtl)
+            foreach (var oneType in mtl)
             {
                 List<ModelType> sublist = new List<ModelType>();
-                   sublist.AddRange( mts.GetSubByTopID(oneType.ID));
+                sublist.AddRange(mts.GetSubByTopID(oneType.id));
                 string TopPage = DBHelper.Tools.GetBelongTo(Request.Url.AbsoluteUri);
-                sb.Append("<li><a value=\"" + DBHelper.Tools.GetUrlHost(Request.Url.AbsoluteUri) + TopPage + "" + "?Type=" + oneType.ID.ToString() + "\" href=\"#\" class=\"exp\"><span class=\"icos-list\"></span>" + oneType.TypeName + IsNumShow(sublist.Count) + "</a>");
+                sb.Append("<li><a value=\"" + DBHelper.Tools.GetUrlHost(Request.Url.AbsoluteUri) + TopPage + "" + "?Type=" + oneType.id.ToString() + "\" href=\"#\" class=\"exp\"><span class=\"icos-list\"></span>" + oneType.typeName + IsNumShow(sublist.Count) + "</a>");
                 sb.Append("<ul>");
-                foreach (ModelType subType in sublist)
+                foreach (var subType in sublist)
                 {
                     string SubPage = DBHelper.Tools.GetBelongTo(Request.Url.AbsoluteUri);
-                    sb.Append("<li><a  value=\"" + DBHelper.Tools.GetUrlHost(Request.Url.AbsoluteUri) + SubPage + "" + "?Type=" + subType.ID.ToString() + "\" href=\"#\">" + subType.TypeName + "</a></li>");
+                    sb.Append("<li><a  value=\"" + DBHelper.Tools.GetUrlHost(Request.Url.AbsoluteUri) + SubPage + "" + "?Type=" + subType.id.ToString() + "\" href=\"#\">" + subType.typeName + "</a></li>");
                 }
                 sb.Append("</ul>");
                 sb.Append("</li>");

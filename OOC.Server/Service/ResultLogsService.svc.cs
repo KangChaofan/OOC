@@ -54,7 +54,7 @@ namespace OOC.Service
             return oneModel;*/
             using (OOCEntities db = new OOCEntities()) {
                 IQueryable<ResultLogs> result = from o in db.ResultLogs
-                                                where o.ID == ID
+                                                where o.id == ID
                                                 select o;
                 return result.First();
             }
@@ -79,7 +79,7 @@ namespace OOC.Service
             return list;*/
             using (OOCEntities db = new OOCEntities()) {
                 IQueryable<ResultLogs> result = from o in db.ResultLogs
-                                                orderby o.CalTime descending
+                                                orderby o.calTime descending
                                                 select o;
                 return result.ToList();
             }

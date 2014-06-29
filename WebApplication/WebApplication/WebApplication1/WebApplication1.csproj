@@ -402,13 +402,13 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Service References\ModelTypeServiceReference\ModelTypeService.disco" />
-    <Content Include="Service References\ModelTypeServiceReference\configuration91.svcinfo" />
-    <Content Include="Service References\ModelTypeServiceReference\configuration.svcinfo" />
-    <Content Include="Service References\ModelTypeServiceReference\Reference.svcmap">
+    <None Include="Service References\ModelTypeServiceReference\ModelTypeService.disco" />
+    <None Include="Service References\ModelTypeServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\ModelTypeServiceReference\configuration.svcinfo" />
+    <None Include="Service References\ModelTypeServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <Content Include="Service References\ResultLogsServiceReference\ResultLogsService.disco" />
     <Content Include="Service References\ResultLogsServiceReference\configuration91.svcinfo" />
     <Content Include="Service References\ResultLogsServiceReference\configuration.svcinfo" />
@@ -740,7 +740,7 @@
     <None Include="images\icons\options" />
     <Content Include="UploadHandler.ashx" />
     <None Include="js\plugins\layer\skin\default\Thumbs.db" />
-    <Content Include="Service References\ModelTypeServiceReference\ModelTypeService.wsdl" />
+    <None Include="Service References\ModelTypeServiceReference\ModelTypeService.wsdl" />
     <None Include="Service References\ModelTypeServiceReference\ModelTypeService.xsd">
       <SubType>Designer</SubType>
     </None>

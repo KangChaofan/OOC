@@ -17,39 +17,45 @@ namespace WebApplication1.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Names = new List<string>(3);
-            GetTitleName(Request.Url.AbsoluteUri);
-            if (Request["Type"] == null)
+            //--
+            if(!IsPostBack)
             {
-                Names.Add("");
-                Names.Add("");
-
-            }
-            else
-            {
-                int typeID = Convert.ToInt32(Request["Type"]);
-                //ModelYunBLL.ModelType typeBLL = new ModelYunBLL.ModelType();
-                ModelTypeServiceClient mts = new ModelTypeServiceClient();
-                //ModelYunModel.ModelType modelType = new ModelYunModel.ModelType();
-                ModelType modelType = new ModelType();
-                modelType = mts.GetTypeByID(typeID);
-
-                //判断是否是父类
-                if (mts.IsTopType(typeID))
+                Names = new List<string>(3);
+                GetTitleName(Request.Url.AbsoluteUri);
+                if (Request["Type"] == null)
                 {
-                    Names.Add(modelType.TypeName);
                     Names.Add("");
+                    Names.Add("");
+
                 }
-                //非父类
                 else
                 {
-                    string topTypeName = mts.GetTypeByID((int)modelType.TopID).TypeName;
-                    //获取父类名称
-                    Names.Add(topTypeName);
-                    Names.Add(modelType.TypeName);
-                }
+                    int typeID = Convert.ToInt32(Request["Type"]);
+                    //ModelYunBLL.ModelType typeBLL = new ModelYunBLL.ModelType();
+                    ModelTypeServiceClient mts = new ModelTypeServiceClient();
+                    //ModelYunModel.ModelType modelType = new ModelYunModel.ModelType();
+                    ModelType modelType = new ModelType();
+                    modelType = mts.GetTypeByID(typeID);
 
+                    //判断是否是父类
+                    if (mts.IsTopType(typeID))
+                    {
+                        Names.Add(modelType.typeName);
+                        Names.Add("");
+                    }
+                    //非父类
+                    else
+                    {
+                        string topTypeName = mts.GetTypeByID((int)modelType.topId).typeName;
+                        //获取父类名称
+                        Names.Add(topTypeName);
+                        Names.Add(modelType.typeName);
+                    }
+
+                }
             }
+            
+            //--
         }
 
         //初步判断属于哪个页面

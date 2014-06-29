@@ -41,6 +41,8 @@ Oatc.OpenMI.Sdk/Spatial/UnitTest/bin/*
 Oatc.OpenMI.Sdk/Spatial/UnitTest/obj/*
 Oatc.OpenMI.Sdk/Wrapper/UnitTest/bin/*
 Oatc.OpenMI.Sdk/Wrapper/UnitTest/obj/*
+WebApplication/WebApplication/WebApplication1/bin/*
+WebApplication/WebApplication/WebApplication1/obj/*
 *.pdb
 *.suo
 .DS_Store

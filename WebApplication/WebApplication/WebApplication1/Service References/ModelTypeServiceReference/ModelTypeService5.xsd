@@ -11,12 +11,12 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:OOCEntityObject">
         <xs:sequence>
-          <xs:element minOccurs="0" name="ID" type="xs:int" />
-          <xs:element minOccurs="0" name="IsSub" type="xs:boolean" />
-          <xs:element minOccurs="0" name="IsTop" type="xs:boolean" />
-          <xs:element minOccurs="0" name="Notes" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="TopID" nillable="true" type="xs:int" />
-          <xs:element minOccurs="0" name="TypeName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="id" type="xs:int" />
+          <xs:element minOccurs="0" name="isSub" type="xs:boolean" />
+          <xs:element minOccurs="0" name="isTop" type="xs:boolean" />
+          <xs:element minOccurs="0" name="notes" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="topId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="typeName" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

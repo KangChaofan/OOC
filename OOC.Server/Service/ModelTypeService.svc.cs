@@ -38,10 +38,12 @@ namespace OOC.Service
             bool IsTop = true;
             using (OOCEntities db = new OOCEntities())
             {
-                IQueryable<ModelType> result = from o in db.ModelType
-                                               where o.IsTop == IsTop
-                                               select o;
-                return result.ToList();
+            
+                    IQueryable<ModelType> result = from o in db.ModelType
+                                                   where o.isTop == IsTop
+                                                   select o;
+                    string temp = result.First().typeName;
+                    return result.ToList();           
             }
         }
 
@@ -51,20 +53,20 @@ namespace OOC.Service
             using (OOCEntities db = new OOCEntities())
             {
                 IQueryable<ModelType> result = from o in db.ModelType
-                                               where o.TopID == topId
+                                               where o.topId == topId
                                                select o;
                 return result.ToList();
             }
         }
 
-        public bool IsTopType(Int32 TypeID)
+        public bool IsTopType(int TypeID)
         {
             Int32 typeId = TypeID;
 
             using (OOCEntities db = new OOCEntities())
             {
                 int result = (from o in db.ModelType
-                              where o.ID == typeId && o.TopID == 0
+                              where o.id == typeId && o.topId == 0
                               select o).Count();
 
 
@@ -80,15 +82,12 @@ namespace OOC.Service
 
         }
 
-        public ModelType GetTypeByID(Int32 ID)
+        public ModelType GetTypeByID(int ID)
         {
-            Int32 id = ID;
-            ModelType mt = new ModelType();
-
             using (OOCEntities db = new OOCEntities())
             {
                 IQueryable<ModelType> result = from o in db.ModelType
-                                               where o.ID == id
+                                               where o.id == ID
                                                select o;
                 return result.First();
             }

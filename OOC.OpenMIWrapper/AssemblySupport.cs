@@ -61,7 +61,7 @@ namespace OOC.OpenMIWrapper
 		/// <remarks>See <see cref="Utils.GetFileInfo">Utils.GetFileInfo</see> for more info about how
 		/// specified file is searched. If file isn't found, method tries to
 		/// load assembly from global assembly cache (GAC).</remarks>
-		public static void LoadAssembly( string directory, string filename )
+        public static Assembly LoadAssembly(string directory, string filename)
 		{
 			Assembly assembly;
 			
@@ -88,13 +88,14 @@ namespace OOC.OpenMIWrapper
 			// add assembly to list of assemblies only if not already present
 			foreach( AssemblyItem assemblyItem in _assemblies )
 				if( 0==String.Compare(assemblyItem.fullName, assembly.FullName, true) )
-					return;
+                    return assembly;
 			
 			AssemblyItem newItem = new AssemblyItem();
 			newItem.assembly = assembly;
 			newItem.fullName = assembly.FullName;
             newItem.fileInfo = assemblyFileInfo;
-			_assemblies.Add( newItem );			
+			_assemblies.Add( newItem );
+            return assembly;
 		}
 
 

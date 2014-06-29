@@ -35,5 +35,15 @@ namespace OOC.OutputProcessor
             }
             return record;
         }
+
+        public void SetParameters(Hashtable parameters)
+        {
+            return;
+        }
+
+        public string GetName()
+        {
+            return "Standard Output";
+        }
     }
 }

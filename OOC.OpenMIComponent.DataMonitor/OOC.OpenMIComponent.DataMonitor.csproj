@@ -59,7 +59,14 @@
   <ItemGroup>
     <Compile Include="DataLogger.cs" />
     <Compile Include="DataMonitor.cs" />
+    <Compile Include="DataProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OOC.OutputProcessor\OOC.OutputProcessor.csproj">
+      <Project>{f2ee40c3-6e0d-4dc2-b5de-57a473fdf404}</Project>
+      <Name>OOC.OutputProcessor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

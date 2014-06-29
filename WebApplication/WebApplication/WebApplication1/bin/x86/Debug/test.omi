@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<LinkableComponent Type="ForReal.OpenMICom" Assembly="ForReal.dll">
-  <Arguments>
-    <Argument Key="FilePath" ReadOnly="true" Value= "" />
-   </Arguments>
-</LinkableComponent>

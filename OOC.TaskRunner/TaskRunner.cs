@@ -9,6 +9,8 @@ using System.Security.Principal;
 using System.Collections;
 using OOC.Util;
 using OOC.OpenMIWrapper;
+using OOC.OutputProcessor;
+using System.Reflection;
 
 namespace OOC.TaskRunner
 {
@@ -35,6 +37,8 @@ namespace OOC.TaskRunner
         private Dictionary<string, string> modelProgress;
 
         private int progressReportInterval = 10;
+        private Dictionary<OutputDataProcessor, string> outputDataProcessors;
+
 
         public TaskRunner(string pipeName)
         {
@@ -55,9 +59,24 @@ namespace OOC.TaskRunner
             composition.Run(logger, true);
         }
 
+        private List<OutputDataProcessor> getOutputDataProcessors(Model model, string assemblyPath)
+        {
+            Assembly assembly = AssemblySupport.LoadAssembly(null, assemblyPath);
+            List<OutputDataProcessor> processors = new List<OutputDataProcessor>();
+            foreach (Type type in assembly.GetExportedTypes())
+            {
+                if (type.IsSubclassOf(typeof(OutputProcessor.OutputDataProcessor)))
+                {
+                    processors.Add((OutputDataProcessor)Activator.CreateInstance(type));
+                }
+            }
+            return processors;
+        }
+
         public void Run()
         {
             DateTime lastReport;
+            outputDataProcessors = new Dictionary<OutputDataProcessor, string>();
             logger.Info("TaskRunner is initializing...");
             pipeClient = new NamedPipeClientStream(".", PipeName,
                            PipeDirection.InOut, PipeOptions.WriteThrough,
@@ -79,7 +98,7 @@ namespace OOC.TaskRunner
                     composition = new CompositionManager();
                     do
                     {
-                        string modelId;
+                        string modelId, assemblyPath;
                         PipeCommand command = PipeUtil.ReadCommand(br);
                         logger.Info("Pipe: Received command: " + command.Command);
                         switch (command.Command)
@@ -87,12 +106,21 @@ namespace OOC.TaskRunner
                             case "AddModel":
                                 modelId = command.Parameters["modelId"];
                                 string workingDirectory = command.Parameters["workingDirectory"];
-                                string assemblyPath = command.Parameters["assemblyPath"];
+                                assemblyPath = command.Parameters["assemblyPath"];
                                 string linkableComponent = command.Parameters["linkableComponent"];
                                 Model model = new Model();
                                 model.Create(modelId, workingDirectory, assemblyPath, linkableComponent);
                                 composition.AddModel(model);
                                 logger.Info("Created model " + modelId + ": " + linkableComponent);
+                                break;
+                            case "AddDataProcessor":
+                                modelId = command.Parameters["modelId"];
+                                assemblyPath = command.Parameters["assemblyPath"];
+                                List<OutputDataProcessor> processors = getOutputDataProcessors(composition.GetModel(modelId), assemblyPath);
+                                foreach (OutputDataProcessor processor in processors)
+                                {
+                                    outputDataProcessors.Add(processor, processor.GetName() + " (" + modelId + ")");
+                                }
                                 break;
                             case "SetModelProperties":
                                 modelId = command.Parameters["modelId"];
@@ -137,6 +165,7 @@ namespace OOC.TaskRunner
                                 });
                                 RunSimulation(delegate(object sender, bool succeed)
                                 {
+                                    logger.Info("");
                                     logger.Info("Simulation finished, succeed=" + succeed);
                                     PipeUtil.WriteCommand(bw, new PipeCommand("Progress", modelProgress));
                                     PipeUtil.WriteCommand(bw, new PipeCommand(succeed ? "Completed" : "Failed"));

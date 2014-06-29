@@ -1,1 +1,0 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ForSession.aspx.cs" Inherits="WebApplication1.ForSession" %>

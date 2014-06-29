@@ -144,13 +144,7 @@
     <Compile Include="Contract\Service\IOutputParameterService.cs" />
     <Compile Include="Contract\Service\IModelTypeService.cs" />
     <Compile Include="Contract\Service\IResultLogsService.cs" />
-    <Compile Include="Entity\OOCEntityObject.cs" />
     <Compile Include="ServiceAttribute\ExposedService.cs" />
-    <Compile Include="Entity\OOCModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OOCModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Contract\Data\Response\FileEntityResponse.cs" />
     <Compile Include="Contract\Service\IInstanceService.cs" />
     <Compile Include="Service\BillService.svc.cs">
@@ -215,10 +209,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Entity\OOCModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OOCModel.cs</LastGenOutput>
-    </None>
     <Content Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>

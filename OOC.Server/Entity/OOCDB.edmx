@@ -4,73 +4,90 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="oocModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="oocModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="oocModelStoreContainer">
+          <EntitySet Name="Bill" EntityType="oocModel.Store.Bill" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="Composition" EntityType="oocModel.Store.Composition" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="CompositionLink" EntityType="oocModel.Store.CompositionLink" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="CompositionModel" EntityType="oocModel.Store.CompositionModel" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="Model" EntityType="oocModel.Store.Model" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="ModelFileMapping" EntityType="oocModel.Store.ModelFileMapping" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="ModelProperty" EntityType="oocModel.Store.ModelProperty" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="ModelTag" EntityType="oocModel.Store.ModelTag" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="ModelTagMapping" EntityType="oocModel.Store.ModelTagMapping" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="ModelType" EntityType="oocModel.Store.ModelType" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="OutputParameter" EntityType="oocModel.Store.OutputParameter" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="ResultLogs" EntityType="oocModel.Store.ResultLogs" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="Task" EntityType="oocModel.Store.Task" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="TaskFileMapping" EntityType="oocModel.Store.TaskFileMapping" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="User" EntityType="oocModel.Store.User" store:Type="Tables" Schema="ooc" />
+        </EntityContainer>
         <EntityType Name="Bill">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="userId" Type="uint" Nullable="false" />
           <Property Name="taskGuid" Type="varchar" MaxLength="40" />
           <Property Name="cmGuid" Type="varchar" MaxLength="40" />
           <Property Name="isRefunded" Type="bool" Nullable="false" />
           <Property Name="amount" Type="double" Nullable="false" />
-          <Property Name="creation" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="modification" Type="timestamp" Precision="0" />
+          <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="modification" Type="timestamp" />
         </EntityType>
         <EntityType Name="Composition">
           <Key>
             <PropertyRef Name="guid" />
           </Key>
-          <Property Name="guid" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="guid" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="authorUserId" Type="uint" Nullable="false" />
-          <Property Name="title" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="title" Type="varchar" Nullable="false" MaxLength="64" />
           <Property Name="isShared" Type="bool" Nullable="false" />
           <Property Name="isFinished" Type="bool" Nullable="false" />
-          <Property Name="creation" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="modification" Type="timestamp" Precision="0" />
+          <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="modification" Type="timestamp" />
         </EntityType>
         <EntityType Name="CompositionLink">
           <Key>
             <PropertyRef Name="guid" />
           </Key>
-          <Property Name="guid" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="compositionGuid" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="sourceCmGuid" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="targetCmGuid" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="sourceQuantity" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="targetQuantity" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="sourceElementSet" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="targetElementSet" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="guid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="compositionGuid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="sourceCmGuid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="targetCmGuid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="sourceQuantity" Type="varchar" Nullable="false" MaxLength="64" />
+          <Property Name="targetQuantity" Type="varchar" Nullable="false" MaxLength="64" />
+          <Property Name="sourceElementSet" Type="varchar" Nullable="false" MaxLength="64" />
+          <Property Name="targetElementSet" Type="varchar" Nullable="false" MaxLength="64" />
           <Property Name="dataOperation" Type="text" />
-          <Property Name="creation" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="modification" Type="timestamp" Precision="0" />
+          <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="modification" Type="timestamp" />
         </EntityType>
         <EntityType Name="CompositionModel">
           <Key>
             <PropertyRef Name="guid" />
           </Key>
-          <Property Name="guid" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="compositionGuid" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="modelGuid" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="guid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="compositionGuid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="modelGuid" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="properties" Type="text" Nullable="false" />
-          <Property Name="creation" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="modification" Type="timestamp" Precision="0" />
+          <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="modification" Type="timestamp" />
         </EntityType>
         <EntityType Name="Model">
           <Key>
             <PropertyRef Name="guid" />
           </Key>
-          <Property Name="guid" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="version" Type="varchar" MaxLength="16" Nullable="false" />
-          <Property Name="abstract" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="guid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="64" />
+          <Property Name="version" Type="varchar" Nullable="false" MaxLength="16" />
+          <Property Name="abstract" Type="varchar" Nullable="false" MaxLength="500" />
           <Property Name="authorUserId" Type="uint" Nullable="false" />
           <Property Name="isPublic" Type="bool" Nullable="false" />
           <Property Name="isApproved" Type="bool" Nullable="false" />
           <Property Name="className" Type="varchar" MaxLength="256" />
-          <Property Name="creation" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="modification" Type="timestamp" Precision="0" />
+          <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="modification" Type="timestamp" />
           <Property Name="topId" Type="int" />
           <Property Name="typeId" Type="int" />
           <Property Name="eName" Type="varchar" MaxLength="100" />
@@ -81,54 +98,55 @@
             <PropertyRef Name="modelGuid" />
             <PropertyRef Name="fileName" />
           </Key>
-          <Property Name="modelGuid" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="fileName" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="relativePath" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="modelGuid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="fileName" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="relativePath" Type="varchar" Nullable="false" MaxLength="512" />
           <Property Name="isMainLibrary" Type="bool" Nullable="false" />
           <Property Name="isDocument" Type="bool" Nullable="false" />
-          <Property Name="signature" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="creation" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="modification" Type="timestamp" Precision="0" />
+          <Property Name="isDataProcessor" Type="bool" />
+          <Property Name="signature" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="modification" Type="timestamp" />
         </EntityType>
         <EntityType Name="ModelProperty">
           <Key>
             <PropertyRef Name="modelGuid" />
             <PropertyRef Name="key" />
           </Key>
-          <Property Name="modelGuid" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="key" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="modelGuid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="key" Type="varchar" Nullable="false" MaxLength="64" />
           <Property Name="type" Type="tinyint" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="256" />
           <Property Name="default" Type="varchar" MaxLength="64" />
           <Property Name="additional" Type="text" />
-          <Property Name="creation" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="modification" Type="timestamp" Precision="0" />
+          <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="modification" Type="timestamp" />
         </EntityType>
         <EntityType Name="ModelTag">
           <Key>
             <PropertyRef Name="guid" />
           </Key>
-          <Property Name="guid" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="description" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="guid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="64" />
+          <Property Name="description" Type="varchar" Nullable="false" MaxLength="200" />
           <Property Name="parentTagGuid" Type="varchar" MaxLength="40" />
-          <Property Name="creation" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="modification" Type="timestamp" Precision="0" />
+          <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="modification" Type="timestamp" />
         </EntityType>
         <EntityType Name="ModelTagMapping">
           <Key>
             <PropertyRef Name="modelGuid" />
             <PropertyRef Name="tagGuid" />
           </Key>
-          <Property Name="modelGuid" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="tagGuid" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="modelGuid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="tagGuid" Type="varchar" Nullable="false" MaxLength="40" />
         </EntityType>
         <EntityType Name="ModelType">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="typeName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="typeName" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="isSub" Type="bit" Nullable="false" />
           <Property Name="isTop" Type="bit" Nullable="false" />
           <Property Name="topId" Type="int" />
@@ -138,50 +156,50 @@
           <Key>
             <PropertyRef Name="guid" />
           </Key>
-          <Property Name="guid" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="taskGuid" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="compositionGuid" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="compositionModelGuid" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="elementSet" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="quantity" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="guid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="taskGuid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="compositionGuid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="compositionModelGuid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="elementSet" Type="varchar" Nullable="false" MaxLength="64" />
+          <Property Name="quantity" Type="varchar" Nullable="false" MaxLength="64" />
           <Property Name="parameterValue" Type="text" Nullable="false" />
-          <Property Name="creation" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="ResultLogs">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="modelId" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="userId" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="calTime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="id" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="modelId" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="userId" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="calTime" Type="datetime" Nullable="false" />
           <Property Name="fileFolder" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Task">
           <Key>
             <PropertyRef Name="guid" />
           </Key>
-          <Property Name="guid" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="guid" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="instanceName" Type="varchar" MaxLength="64" />
-          <Property Name="compositionGuid" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="compositionGuid" Type="varchar" Nullable="false" MaxLength="40" />
           <Property Name="compositionData" Type="longtext" Nullable="false" />
           <Property Name="state" Type="tinyint" Nullable="false" />
           <Property Name="modelProgress" Type="text" />
           <Property Name="userId" Type="uint" Nullable="false" />
-          <Property Name="triggerInvokeTime" Type="varchar" MaxLength="32" Nullable="false" />
-          <Property Name="timeStarted" Type="timestamp" Precision="0" />
-          <Property Name="timeFinished" Type="timestamp" Precision="0" />
-          <Property Name="creation" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="modification" Type="timestamp" Precision="0" />
+          <Property Name="triggerInvokeTime" Type="varchar" Nullable="false" MaxLength="32" />
+          <Property Name="timeStarted" Type="timestamp" />
+          <Property Name="timeFinished" Type="timestamp" />
+          <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="modification" Type="timestamp" />
         </EntityType>
         <EntityType Name="TaskFileMapping">
           <Key>
             <PropertyRef Name="taskGuid" />
             <PropertyRef Name="fileName" />
           </Key>
-          <Property Name="taskGuid" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="fileName" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="relativePath" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="taskGuid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="fileName" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="relativePath" Type="varchar" Nullable="false" MaxLength="512" />
           <Property Name="type" Type="tinyint" Nullable="false" />
           <Property Name="isDownloadable" Type="bool" Nullable="false" />
         </EntityType>
@@ -189,14 +207,14 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="username" Type="varchar" MaxLength="32" Nullable="false" />
-          <Property Name="passhash" Type="varchar" MaxLength="32" Nullable="false" />
-          <Property Name="mobile" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="id" Type="uint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="varchar" Nullable="false" MaxLength="32" />
+          <Property Name="passhash" Type="varchar" Nullable="false" MaxLength="32" />
+          <Property Name="mobile" Type="varchar" Nullable="false" MaxLength="16" />
           <Property Name="balance" Type="double" Nullable="false" />
           <Property Name="acl" Type="text" Nullable="false" />
-          <Property Name="creation" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="modification" Type="timestamp" Precision="0" />
+          <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="modification" Type="timestamp" />
         </EntityType>
         <Function Name="OutputParameter_show" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ooc">
           <Parameter Name="taskGuid" Type="varchar" Mode="In" />
@@ -207,23 +225,6 @@
           <Parameter Name="pageIndex" Type="int" Mode="In" />
           <Parameter Name="pageSize" Type="int" Mode="In" />
         </Function>
-        <EntityContainer Name="oocModelStoreContainer">
-          <EntitySet Name="Bill" EntityType="Self.Bill" Schema="ooc" store:Type="Tables" />
-          <EntitySet Name="Composition" EntityType="Self.Composition" Schema="ooc" store:Type="Tables" />
-          <EntitySet Name="CompositionLink" EntityType="Self.CompositionLink" Schema="ooc" store:Type="Tables" />
-          <EntitySet Name="CompositionModel" EntityType="Self.CompositionModel" Schema="ooc" store:Type="Tables" />
-          <EntitySet Name="Model" EntityType="Self.Model" Schema="ooc" store:Type="Tables" />
-          <EntitySet Name="ModelFileMapping" EntityType="Self.ModelFileMapping" Schema="ooc" store:Type="Tables" />
-          <EntitySet Name="ModelProperty" EntityType="Self.ModelProperty" Schema="ooc" store:Type="Tables" />
-          <EntitySet Name="ModelTag" EntityType="Self.ModelTag" Schema="ooc" store:Type="Tables" />
-          <EntitySet Name="ModelTagMapping" EntityType="Self.ModelTagMapping" Schema="ooc" store:Type="Tables" />
-          <EntitySet Name="ModelType" EntityType="Self.ModelType" Schema="ooc" store:Type="Tables" />
-          <EntitySet Name="OutputParameter" EntityType="Self.OutputParameter" Schema="ooc" store:Type="Tables" />
-          <EntitySet Name="ResultLogs" EntityType="Self.ResultLogs" Schema="ooc" store:Type="Tables" />
-          <EntitySet Name="Task" EntityType="Self.Task" Schema="ooc" store:Type="Tables" />
-          <EntitySet Name="TaskFileMapping" EntityType="Self.TaskFileMapping" Schema="ooc" store:Type="Tables" />
-          <EntitySet Name="User" EntityType="Self.User" Schema="ooc" store:Type="Tables" />
-        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -322,7 +323,7 @@
             <End Role="OutputParameter" EntitySet="OutputParameter" />
           </AssociationSet>
           <FunctionImport Name="OutputParameter_show" EntitySet="OutputParameter" ReturnType="Collection(oocModel.OutputParameter)">
-            <Parameter Name="taskGuid" Mode="In" Type="String" />
+          <Parameter Name="taskGuid" Mode="In" Type="String" />
             <Parameter Name="compGuid" Mode="In" Type="String" />
             <Parameter Name="cmGuid" Mode="In" Type="String" />
             <Parameter Name="startTime" Mode="In" Type="DateTime" />
@@ -457,6 +458,7 @@
           <Property Type="Boolean" Name="isDocument" Nullable="false" />
           <Property Type="String" Name="signature" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="relativePath" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="isDataProcessor" />
         </EntityType>
         <EntityType Name="ModelProperty">
           <Key>
@@ -885,6 +887,7 @@
           <EntitySetMapping Name="ModelFileMapping">
             <EntityTypeMapping TypeName="oocModel.ModelFileMapping">
               <MappingFragment StoreEntitySet="ModelFileMapping">
+                <ScalarProperty Name="isDataProcessor" ColumnName="isDataProcessor" />
                 <ScalarProperty Name="relativePath" ColumnName="relativePath" />
                 <ScalarProperty Name="signature" ColumnName="signature" />
                 <ScalarProperty Name="isDocument" ColumnName="isDocument" />
@@ -1013,7 +1016,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="默认值" />
         <DesignerProperty Name="DDLGenerationTemplate" Value="$(VSEFTools)\DBGen\SSDLToMySQL.tt" />
         <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>

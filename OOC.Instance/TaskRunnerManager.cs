@@ -83,6 +83,7 @@ namespace OOC.Instance
         private void transmitComposition(BinaryWriter bw)
         {
             Dictionary<string, string> properties;
+            Dictionary<string, string> outputFiles;
 
             foreach (CompositionModelData cmData in TaskAssign.CompositionData.Models)
             {
@@ -95,6 +96,7 @@ namespace OOC.Instance
                 PipeUtil.WriteCommand(bw, new PipeCommand("AddModel", properties));
 
                 properties = new Dictionary<string, string>();
+                outputFiles = new Dictionary<string, string>();
                 properties["modelId"] = cmData.CompositionModel.guid;
                 if (cmData.PropertyValues != null)
                 {
@@ -108,6 +110,7 @@ namespace OOC.Instance
                                 break;
                             case 5:
                                 properties[property.key] = WorkspaceManager.HomeDirectory + @"\" + propertyValues[property.key];
+                                outputFiles[property.key] = properties[property.key];
                                 break;
                             default:
                                 properties[property.key] = propertyValues[property.key];
@@ -115,6 +118,15 @@ namespace OOC.Instance
                         }
                     }
                 }
+                foreach (ModelFileMapping fileMapping in cmData.ModelFiles)
+                {
+                    properties = new Dictionary<string, string>();
+                    properties["modelId"] = cmData.CompositionModel.guid;
+                    properties["assemblyPath"] = WorkspaceManager.GetLocalPath(fileMapping.fileName);
+                    properties["outputFiles"] = SerializationUtil.Serialize(outputFiles);
+                    PipeUtil.WriteCommand(bw, new PipeCommand("AddDataProcessor", properties));
+                }
+
                 PipeUtil.WriteCommand(bw, new PipeCommand("SetModelProperties", properties));
             }
 
@@ -141,6 +153,7 @@ namespace OOC.Instance
 
         private bool runnerLifetime()
         {
+            Dictionary<string, string> channelMapping = new Dictionary<string,string>();
             bool succeed = false;
             using (BinaryReader br = new BinaryReader(pipeServer))
             using (BinaryWriter bw = new BinaryWriter(pipeServer))
@@ -159,6 +172,7 @@ namespace OOC.Instance
                 /* waiting for simulation finish */
                 do
                 {
+                    string channel;
                     PipeCommand command = PipeUtil.ReadCommand(br);
                     logger.Info("Pipe: Received command: " + command.Command);
                     switch (command.Command)
@@ -167,10 +181,27 @@ namespace OOC.Instance
                             TaskProgressChangedHandler(this, command.Parameters);
                             break;
                         case "Completed":
+                            PipeUtil.WriteCommand(bw, new PipeCommand("PostProcess"));
+                            break;
+                        case "PostProcessCompleted":
                         case "Failed":
                             PipeUtil.WriteCommand(bw, new PipeCommand("Halt"));
-                            succeed = (command.Command == "Completed");
+                            succeed = (command.Command == "PostProcessCompleted");
                             isReleased = true;
+                            break;
+                        case "DataSet":
+                            string modelId = command.Parameters["ModelId"];
+                            string className = command.Parameters["ClassName"];
+                            string name = command.Parameters["Name"];
+                            channel = command.Parameters["Channel"];
+                            // create data set
+                            string dataSetGuid = ""; // TODO
+                            channelMapping[channel] = dataSetGuid;
+                            break;
+                        case "DataRecord":
+                            double[] record = SerializationUtil.Deserialize<double[]>(command.Parameters["Record"]);
+                            channel = command.Parameters["Channel"];
+                            // write data record
                             break;
                     }
                 } while (!isReleased);

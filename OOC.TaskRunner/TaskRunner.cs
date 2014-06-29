@@ -37,8 +37,10 @@ namespace OOC.TaskRunner
         private Dictionary<string, string> modelProgress;
 
         private int progressReportInterval = 10;
-        private Dictionary<OutputDataProcessor, string> outputDataProcessors;
 
+        private Dictionary<string, List<OutputDataProcessor>> outputDataProcessors;
+        private Dictionary<string, Dictionary<string, string>> outputFiles;
+        private Dictionary<string, Dictionary<string, string>> modelProperties;
 
         public TaskRunner(string pipeName)
         {
@@ -76,7 +78,8 @@ namespace OOC.TaskRunner
         public void Run()
         {
             DateTime lastReport;
-            outputDataProcessors = new Dictionary<OutputDataProcessor, string>();
+            outputDataProcessors = new Dictionary<string, List<OutputDataProcessor>>();
+            modelProperties = new Dictionary<string, Dictionary<string, string>>();
             logger.Info("TaskRunner is initializing...");
             pipeClient = new NamedPipeClientStream(".", PipeName,
                            PipeDirection.InOut, PipeOptions.WriteThrough,
@@ -116,11 +119,11 @@ namespace OOC.TaskRunner
                             case "AddDataProcessor":
                                 modelId = command.Parameters["modelId"];
                                 assemblyPath = command.Parameters["assemblyPath"];
+                                outputFiles[modelId] = SerializationUtil.Deserialize<Dictionary<string, string>>(command.Parameters["outputFiles"]);
                                 List<OutputDataProcessor> processors = getOutputDataProcessors(composition.GetModel(modelId), assemblyPath);
-                                foreach (OutputDataProcessor processor in processors)
-                                {
-                                    outputDataProcessors.Add(processor, processor.GetName() + " (" + modelId + ")");
-                                }
+                                if (!outputDataProcessors.ContainsKey(modelId))
+                                    outputDataProcessors[modelId] = new List<OutputDataProcessor>();
+                                outputDataProcessors[modelId].AddRange(processors);
                                 break;
                             case "SetModelProperties":
                                 modelId = command.Parameters["modelId"];
@@ -128,7 +131,8 @@ namespace OOC.TaskRunner
                                 {
                                     logger.Info("Model " + modelId + " Property: [Key=" + entry.Key + ", Value=" + entry.Value + "]");
                                 }
-                                composition.GetModel(modelId).Init(command.Parameters);
+                                modelProperties[modelId] = command.Parameters;
+                                composition.GetModel(modelId).Init(modelProperties[modelId]);
                                 break;
                             case "AddLink":
                                 string linkId = command.Parameters["linkId"];
@@ -165,11 +169,53 @@ namespace OOC.TaskRunner
                                 });
                                 RunSimulation(delegate(object sender, bool succeed)
                                 {
-                                    logger.Info("");
                                     logger.Info("Simulation finished, succeed=" + succeed);
                                     PipeUtil.WriteCommand(bw, new PipeCommand("Progress", modelProgress));
                                     PipeUtil.WriteCommand(bw, new PipeCommand(succeed ? "Completed" : "Failed"));
                                 });
+                                break;
+                            case "PostProcess":
+                                int channel = 0;
+                                foreach (KeyValuePair<string, List<OutputDataProcessor>> p in outputDataProcessors)
+                                {
+                                    foreach (OutputDataProcessor processor in p.Value)
+                                    {
+                                        List<Stream> openedFs = new List<Stream>();
+                                        // set properties
+                                        processor.SetProperties(modelProperties[p.Key]);
+                                        // open data readers
+                                        foreach (KeyValuePair<string, string> o in outputFiles[p.Key])
+                                        {
+                                            if (!File.Exists(o.Value)) continue;
+                                            Stream fs = new FileStream(o.Value, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                                            processor.SetDataReader(o.Key, fs);
+                                            openedFs.Add(fs);
+                                        }
+                                        // transfer data
+                                        Dictionary<string, string> parameters = new Dictionary<string, string>();
+                                        parameters["ModelId"] = p.Key;
+                                        parameters["ClassName"] = processor.GetType().FullName;
+                                        parameters["Name"] = processor.GetName();
+                                        parameters["Channel"] = channel.ToString();
+                                        PipeUtil.WriteCommand(bw, new PipeCommand("DataSet", parameters));
+                                        while (processor.HasNextRecord())
+                                        {
+                                            double[] record = processor.GetNextRecord();
+                                            parameters = new Dictionary<string, string>();
+                                            parameters["Channel"] = channel.ToString();
+                                            parameters["Record"] = SerializationUtil.Serialize(record);
+                                            PipeUtil.WriteCommand(bw, new PipeCommand("DataRecord", parameters));
+                                        }
+                                        channel++;
+                                        // clean up
+                                        foreach (Stream fs in openedFs)
+                                        {
+                                            fs.Close();
+                                            fs.Dispose();
+                                        }
+                                    }
+                                }
+                                PipeUtil.WriteCommand(bw, new PipeCommand("PostProcessCompleted"));
                                 break;
                             case "Halt":
                                 isReleased = true;

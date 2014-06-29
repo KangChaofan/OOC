@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 namespace OOC.OutputProcessor
 {
     public interface OutputDataProcessor
     {
-        // Set model parameters
-        void SetParameters(Hashtable parameters);
+        // Set model properties
+        void SetProperties(Dictionary<string, string> properties);
 
         // Get data processor name
         string GetName();

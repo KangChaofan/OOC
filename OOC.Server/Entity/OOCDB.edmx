@@ -20,6 +20,8 @@
           <EntitySet Name="ResultLogs" EntityType="oocModel.Store.ResultLogs" store:Type="Tables" Schema="ooc" />
           <EntitySet Name="Task" EntityType="oocModel.Store.Task" store:Type="Tables" Schema="ooc" />
           <EntitySet Name="TaskFileMapping" EntityType="oocModel.Store.TaskFileMapping" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="TaskProcessedDataRecord" EntityType="oocModel.Store.TaskProcessedDataRecord" store:Type="Tables" Schema="ooc" />
+          <EntitySet Name="TaskProcessedDataSet" EntityType="oocModel.Store.TaskProcessedDataSet" store:Type="Tables" Schema="ooc" />
           <EntitySet Name="User" EntityType="oocModel.Store.User" store:Type="Tables" Schema="ooc" />
         </EntityContainer>
         <EntityType Name="Bill">
@@ -203,6 +205,25 @@
           <Property Name="type" Type="tinyint" Nullable="false" />
           <Property Name="isDownloadable" Type="bool" Nullable="false" />
         </EntityType>
+        <EntityType Name="TaskProcessedDataRecord">
+          <Key>
+            <PropertyRef Name="dataSetGuid" />
+          </Key>
+          <Property Name="dataSetGuid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="seq" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="record" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskProcessedDataSet">
+          <Key>
+            <PropertyRef Name="guid" />
+          </Key>
+          <Property Name="guid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="taskGuid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="cmGuid" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="className" Type="varchar" Nullable="false" MaxLength="128" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="128" />
+          <Property Name="creation" Type="timestamp" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="id" />
@@ -323,7 +344,7 @@
             <End Role="OutputParameter" EntitySet="OutputParameter" />
           </AssociationSet>
           <FunctionImport Name="OutputParameter_show" EntitySet="OutputParameter" ReturnType="Collection(oocModel.OutputParameter)">
-          <Parameter Name="taskGuid" Mode="In" Type="String" />
+            <Parameter Name="taskGuid" Mode="In" Type="String" />
             <Parameter Name="compGuid" Mode="In" Type="String" />
             <Parameter Name="cmGuid" Mode="In" Type="String" />
             <Parameter Name="startTime" Mode="In" Type="DateTime" />
@@ -333,6 +354,8 @@
           </FunctionImport>
           <EntitySet Name="ModelType" EntityType="oocModel.ModelType" />
           <EntitySet Name="ResultLogs" EntityType="oocModel.ResultLogs" />
+          <EntitySet Name="TaskProcessedDataRecord" EntityType="oocModel.TaskProcessedDataRecord" />
+          <EntitySet Name="TaskProcessedDataSet" EntityType="oocModel.TaskProcessedDataSet" />
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -789,8 +812,27 @@
           <Property Name="id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="modelId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="userId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="calTime" Type="DateTime" Nullable="false" />
+          <Property Name="calTime" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="fileFolder" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TaskProcessedDataRecord">
+          <Key>
+            <PropertyRef Name="dataSetGuid" />
+          </Key>
+          <Property Type="String" Name="dataSetGuid" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="Int64" Name="seq" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="record" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TaskProcessedDataSet">
+          <Key>
+            <PropertyRef Name="guid" />
+          </Key>
+          <Property Type="String" Name="guid" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="taskGuid" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="cmGuid" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="className" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="creation" Nullable="false" annotation:StoreGeneratedPattern="Identity" Precision="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1000,6 +1042,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TaskProcessedDataRecord">
+            <EntityTypeMapping TypeName="oocModel.TaskProcessedDataRecord">
+              <MappingFragment StoreEntitySet="TaskProcessedDataRecord">
+                <ScalarProperty Name="record" ColumnName="record" />
+                <ScalarProperty Name="seq" ColumnName="seq" />
+                <ScalarProperty Name="dataSetGuid" ColumnName="dataSetGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskProcessedDataSet">
+            <EntityTypeMapping TypeName="oocModel.TaskProcessedDataSet">
+              <MappingFragment StoreEntitySet="TaskProcessedDataSet">
+                <ScalarProperty Name="creation" ColumnName="creation" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="className" ColumnName="className" />
+                <ScalarProperty Name="cmGuid" ColumnName="cmGuid" />
+                <ScalarProperty Name="taskGuid" ColumnName="taskGuid" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1119,6 +1182,8 @@
         <AssociationConnector Association="oocModel.fk_op_task" />
         <EntityTypeShape EntityType="oocModel.ModelType" Width="1.5" PointX="5.5" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="oocModel.ResultLogs" Width="1.5" PointX="9.625" PointY="7.75" />
+        <EntityTypeShape EntityType="oocModel.TaskProcessedDataRecord" Width="1.5" PointX="6.912877413869313" PointY="18.471207463401932" />
+        <EntityTypeShape EntityType="oocModel.TaskProcessedDataSet" Width="1.5" PointX="10.53469612753703" PointY="12.118857478778278" />
       </Diagram>
     </Diagrams>
   </Designer>

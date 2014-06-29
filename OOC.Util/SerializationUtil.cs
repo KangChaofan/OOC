@@ -48,15 +48,9 @@ namespace OOC.Util
             return sb.ToString();
         }
 
-        public static double[] ToArray(string s)
+        public static string[] ToArray(string s)
         {
-            string[] cols = s.Split(',');
-            double[] array = new double[cols.Length];
-            for (int i = 0; i < cols.Length; i++)
-            {
-                array[i] = double.Parse(cols[i]);
-            }
-            return array;
+            return s.Split(',');
         }
     }
 }

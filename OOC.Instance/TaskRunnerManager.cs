@@ -120,6 +120,7 @@ namespace OOC.Instance
                 }
                 foreach (ModelFileMapping fileMapping in cmData.ModelFiles)
                 {
+                    if (fileMapping.isDataProcessor != true) continue;
                     properties = new Dictionary<string, string>();
                     properties["modelId"] = cmData.CompositionModel.guid;
                     properties["assemblyPath"] = WorkspaceManager.GetLocalPath(fileMapping.fileName);
@@ -199,7 +200,7 @@ namespace OOC.Instance
                             channelMapping[channel] = dataSetGuid;
                             break;
                         case "DataRecord":
-                            double[] record = SerializationUtil.ToArray(command.Parameters["Record"]);
+                            string[] record = SerializationUtil.ToArray(command.Parameters["Record"]);
                             channel = command.Parameters["Channel"];
                             // write data record
                             break;

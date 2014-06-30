@@ -1,5 +1,13 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="top.ascx.cs" Inherits="WebApplication1.UserControl.top" %>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#LogOutBtn").click(function () {
+            $.cookie('DigitalBasinUserName', null);
+            window.location.replace("login.aspx")
+        });
+    });
 
+</script> 
 <div id="top">
     <div class="wrapper">
         <a href="index.aspx" title="" class="logo"><img src="images/logo.png" alt=""></a>
@@ -10,7 +18,7 @@
                 <li><a title="" class="search"></a></li>
                 <li><a href="#" title="" class="screen"></a></li>
                 <li><a href="#" title="" class="settings"></a></li>
-                <li><a href="#" title="" class="logout"></a></li>
+                <li><a href="#" title="" id="LogOutBtn" class="logout"></a></li>
                 <li class="showTabletP"><a href="#" title="" class="sidebar"></a></li>
             </ul>
             <a title="" class="iButton"></a>

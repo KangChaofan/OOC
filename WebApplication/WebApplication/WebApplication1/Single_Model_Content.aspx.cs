@@ -14,8 +14,10 @@ namespace WebApplication1
         public string ThisModelName = "";
         protected void Page_Load(object sender, EventArgs e)
         {
+
             try
             {
+
                 if (Request["Type"] == null)
                 {
                     GetAllModelListForHTML(forModelList);
@@ -28,10 +30,8 @@ namespace WebApplication1
             }
             catch
             {
-
+                
             }
-
-
             //全局变量，用于记录需要备份的所属文件夹名称（模型ID）
             Application["CalModel"] = "";
         }

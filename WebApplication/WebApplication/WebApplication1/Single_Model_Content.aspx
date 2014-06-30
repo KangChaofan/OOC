@@ -33,7 +33,7 @@
                 type: 2,
                 title: ['参数配置', true],
                 iframe: { src: 'ParamCanShuPeiZhi.aspx?ModelID=' + $("#ModelNameForCal span").attr("id") },
-                area: ['1000px', '500px'],
+                area: ['80%', '60%'],
                 offset: ['100px', ''],
                 success: function () {
                     layer.shift('bottom', 200)
@@ -51,7 +51,7 @@
                 type: 2,
                 title: ['边界控制', true],
                 iframe: { src: 'ParamBianJieKongZhi.aspx?ModelID=' + $("#ModelNameForCal span").attr("id") },
-                area: ['1000px', '500px'],
+                area: ['80%', '60%'],
                 success: function () {
                     layer.shift('bottom', 200)
                 },
@@ -67,7 +67,7 @@
                 type: 2,
                 title: ['初始条件', true],
                 iframe: { src: 'ParamChuShiTiaoJian.aspx?ModelID=' + $("#ModelNameForCal span").attr("id") },
-                area: ['1000px', '500px'],
+                area: ['80%', '60%'],
                 success: function () {
                     layer.shift('bottom', 400)
                 },
@@ -87,7 +87,7 @@
                 type: 2,
                 title: ['过程控制', true],
                 iframe: { src: 'ParamGuoChengKongZhi.aspx?ModelID=' + $("#ModelNameForCal span").attr("id") },
-                area: ['1000px', '650px'],
+                area: ['80%', '60%'],
                 success: function () {
                     layer.shift('bottom', 200)
                 },
@@ -118,7 +118,7 @@
                         type: 2,
                         title: false,
                         iframe: { src: 'LatestResultShow.aspx?ResultLogsID=' + result },
-                        area: ['1000px', '650px'],
+                        area: ['80%', '60%'],
                         success: function () {
                             layer.shift('bottom', 200)
                         }

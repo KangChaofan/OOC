@@ -121,7 +121,7 @@
 <!-- Content begins -->
 <!-- Content begins -->
 <div id="content" style=" margin-left:0px;">
-<iframe id="contentiframe" src="introduce_Content.aspx" width="100%" height="100%" scrolling="auto"></iframe>
+<iframe id="contentiframe" src="introduce_Content.aspx" width="100%" height="1100" scrolling="auto"></iframe>
 </div>
 <!-- Content ends -->    
    

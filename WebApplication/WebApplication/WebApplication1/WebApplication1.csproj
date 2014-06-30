@@ -366,6 +366,7 @@
     <Content Include="js\plugins\wizards\jquery.form.wizard.js" />
     <Content Include="js\plugins\wizards\jquery.validate.js" />
     <Content Include="LatestResultShow.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="messages.aspx" />
     <Content Include="other_403.html" />
     <Content Include="other_404.html" />
@@ -567,6 +568,13 @@
     </Compile>
     <Compile Include="LatestResultShow.aspx.designer.cs">
       <DependentUpon>LatestResultShow.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="messages.aspx.cs">
       <DependentUpon>messages.aspx</DependentUpon>

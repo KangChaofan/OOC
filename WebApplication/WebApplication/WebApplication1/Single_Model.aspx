@@ -156,7 +156,7 @@
     
 <!-- Content begins -->
 <div id="content">
-<iframe id="contentiframe" src="Single_Model_Content.aspx" width="100%" height="1100"></iframe>
+<iframe id="contentiframe" src="Single_Model_Content.aspx" width="100%" height="750px"></iframe>
 </div>
 <!-- Content ends -->    
 

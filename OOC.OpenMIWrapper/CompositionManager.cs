@@ -687,10 +687,10 @@ namespace OOC.OpenMIWrapper
                 _running = false;
                 _runListener = null; // release listener
 
-                if (AfterSimulationHandler != null)
-                {
-                    AfterSimulationHandler(this, succeed);
-                }
+            }
+            if (AfterSimulationHandler != null)
+            {
+                AfterSimulationHandler(this, succeed);
             }
         }
 

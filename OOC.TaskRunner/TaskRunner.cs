@@ -38,6 +38,7 @@ namespace OOC.TaskRunner
 
         private int progressReportInterval = 10;
 
+        private int dataRecordBatchSize = 1000;
         private Dictionary<string, List<OutputDataProcessor>> outputDataProcessors;
         private Dictionary<string, Dictionary<string, string>> outputFiles;
         private Dictionary<string, Dictionary<string, string>> modelProperties;
@@ -65,21 +66,31 @@ namespace OOC.TaskRunner
         {
             Assembly assembly = AssemblySupport.LoadAssembly(null, assemblyPath);
             List<OutputDataProcessor> processors = new List<OutputDataProcessor>();
-            foreach (Type type in assembly.GetExportedTypes())
+            foreach (Type type in assembly.GetTypes())
             {
-                if (type.IsSubclassOf(typeof(OutputProcessor.OutputDataProcessor)))
+                if (typeof(OutputDataProcessor).IsAssignableFrom(type))
                 {
+                    logger.Info("Found data processor: " + type.FullName);
                     processors.Add((OutputDataProcessor)Activator.CreateInstance(type));
                 }
             }
             return processors;
         }
 
+        private void flushDataRecord(BinaryWriter bw, string channel, List<string[]> buffer)
+        {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters["Channel"] = channel;
+            parameters["Records"] = SerializationUtil.FromArrayList(buffer);
+            PipeUtil.WriteCommand(bw, new PipeCommand("DataRecord", parameters));
+            buffer.Clear();
+        }
         public void Run()
         {
             DateTime lastReport;
             outputDataProcessors = new Dictionary<string, List<OutputDataProcessor>>();
             modelProperties = new Dictionary<string, Dictionary<string, string>>();
+            outputFiles = new Dictionary<string, Dictionary<string, string>>();
             logger.Info("TaskRunner is initializing...");
             pipeClient = new NamedPipeClientStream(".", PipeName,
                            PipeDirection.InOut, PipeOptions.WriteThrough,
@@ -120,10 +131,19 @@ namespace OOC.TaskRunner
                                 modelId = command.Parameters["modelId"];
                                 assemblyPath = command.Parameters["assemblyPath"];
                                 outputFiles[modelId] = SerializationUtil.Deserialize<Dictionary<string, string>>(command.Parameters["outputFiles"]);
+                                logger.Info("Adding data processor for model " + modelId + ": " + assemblyPath + "...");
+                                foreach (KeyValuePair<string, string> entry in outputFiles[modelId])
+                                {
+                                    logger.Info("Output file " + entry.Key + ": " + entry.Value);
+                                }
                                 List<OutputDataProcessor> processors = getOutputDataProcessors(composition.GetModel(modelId), assemblyPath);
                                 if (!outputDataProcessors.ContainsKey(modelId))
                                     outputDataProcessors[modelId] = new List<OutputDataProcessor>();
                                 outputDataProcessors[modelId].AddRange(processors);
+                                foreach (OutputDataProcessor processor in processors)
+                                {
+                                    logger.Info("Model " + modelId + " data processor: " + processor.GetType().FullName);
+                                }
                                 break;
                             case "SetModelProperties":
                                 modelId = command.Parameters["modelId"];
@@ -149,6 +169,7 @@ namespace OOC.TaskRunner
                                 DateTime triggerInvokeTime = DateTime.Parse(command.Parameters["triggerInvokeTime"]);
                                 bool parallelized = Boolean.Parse(command.Parameters["parallelized"]);
                                 progressReportInterval = Int32.Parse(command.Parameters["progressReportInterval"]);
+                                dataRecordBatchSize = Int32.Parse(command.Parameters["dataRecordBatchSize"]);
                                 composition.TriggerInvokeTime = triggerInvokeTime;
                                 composition.Parallelized = parallelized;
                                 break;
@@ -178,40 +199,50 @@ namespace OOC.TaskRunner
                                 int channel = 0;
                                 foreach (KeyValuePair<string, List<OutputDataProcessor>> p in outputDataProcessors)
                                 {
+                                    logger.Info("Post-processing model " + p.Key + "...");
                                     foreach (OutputDataProcessor processor in p.Value)
                                     {
+                                        logger.Info("Calling data processor " + processor.GetType().FullName + "...");
                                         List<Stream> openedFs = new List<Stream>();
-                                        // set properties
-                                        processor.SetProperties(modelProperties[p.Key]);
-                                        // open data readers
-                                        foreach (KeyValuePair<string, string> o in outputFiles[p.Key])
+                                        try
                                         {
-                                            if (!File.Exists(o.Value)) continue;
-                                            Stream fs = new FileStream(o.Value, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-                                            processor.SetDataReader(o.Key, fs);
-                                            openedFs.Add(fs);
-                                        }
-                                        // transfer data
-                                        Dictionary<string, string> parameters = new Dictionary<string, string>();
-                                        parameters["ModelId"] = p.Key;
-                                        parameters["ClassName"] = processor.GetType().FullName;
-                                        parameters["Name"] = processor.GetName();
-                                        parameters["Channel"] = channel.ToString();
-                                        PipeUtil.WriteCommand(bw, new PipeCommand("DataSet", parameters));
-                                        while (processor.HasNextRecord())
-                                        {
-                                            double[] record = processor.GetNextRecord();
-                                            parameters = new Dictionary<string, string>();
+                                            // set properties
+                                            processor.SetProperties(modelProperties[p.Key]);
+                                            // open data readers
+                                            foreach (KeyValuePair<string, string> o in outputFiles[p.Key])
+                                            {
+                                                if (!File.Exists(o.Value)) continue;
+                                                Stream fs = new FileStream(o.Value, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                                                processor.SetDataReader(o.Key, fs);
+                                                openedFs.Add(fs);
+                                                logger.Info("Opened " + o.Value + " as " + o.Key + ".");
+                                            }
+                                            // transfer data
+                                            Dictionary<string, string> parameters = new Dictionary<string, string>();
+                                            parameters["ModelId"] = p.Key;
+                                            parameters["ClassName"] = processor.GetType().FullName;
+                                            parameters["Name"] = processor.GetName();
                                             parameters["Channel"] = channel.ToString();
-                                            parameters["Record"] = SerializationUtil.FromArray(record);
-                                            PipeUtil.WriteCommand(bw, new PipeCommand("DataRecord", parameters));
+                                            PipeUtil.WriteCommand(bw, new PipeCommand("DataSet", parameters));
+                                            List<string[]> buffer = new List<string[]>();
+                                            while (processor.HasNextRecord())
+                                            {
+                                                buffer.Add(processor.GetNextRecord());
+                                                if (buffer.Count >= dataRecordBatchSize)
+                                                    flushDataRecord(bw, channel.ToString(), buffer);
+                                            }
+                                            if (buffer.Count > 0)
+                                                flushDataRecord(bw, channel.ToString(), buffer);
+                                            channel++;
                                         }
-                                        channel++;
-                                        // clean up
-                                        foreach (Stream fs in openedFs)
+                                        finally
                                         {
-                                            fs.Close();
-                                            fs.Dispose();
+                                            // clean up
+                                            foreach (Stream fs in openedFs)
+                                            {
+                                                fs.Close();
+                                                fs.Dispose();
+                                            }
                                         }
                                     }
                                 }

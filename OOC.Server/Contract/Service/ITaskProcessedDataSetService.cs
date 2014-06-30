@@ -10,26 +10,22 @@ using OOC.Entity;
 namespace OOC.Contract.Service
 {
     [ServiceContract]
-    public interface ITaskProcessedDataSetService
+    public interface ITaskProcessedDataService
     {
         [OperationContract]
-        string CreateDataSet(string taskGuid,string cmGuid,string className,string name);
+        string CreateDataSet(string taskGuid, string cmGuid, string className, string name);
 
         [OperationContract]
         void RemoveDataSetByGuid(string dataSetGuid);
 
         [OperationContract]
-        void InsertIntoDataSet(string dataSetGuid,string[] record);
+        void InsertIntoDataSet(string dataSetGuid, string[] record);
 
         [OperationContract]
         void InsertMultipleIntoDataSet(string dataSetGuid, List<string[]> records);
 
         [OperationContract]
-        List<string[]> QueryDataSet(int start, int limit);
-
-        [OperationContract]
-        List<string[]> QueryDataSetByGuid(string dataSetGuid,int start, int limit);
-
+        List<string[]> QueryDataSet(string dataSetGuid, int start, int limit);
 
     }
 }

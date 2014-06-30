@@ -64,6 +64,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Oatc\src\csharp\Sdk\Wrapper\bin\Debug\OpenMI.Standard.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -109,7 +110,7 @@
     <Content Include="Service\CompositionService.svc" />
     <Content Include="Service\OutputParameterService.svc" />
     <Content Include="Service\ResultLogsService.svc" />
-    <Content Include="Service\TaskProcessedDataSetService.svc" />
+    <Content Include="Service\TaskProcessedDataService.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -146,6 +147,12 @@
     <Compile Include="Contract\Service\IModelTypeService.cs" />
     <Compile Include="Contract\Service\IResultLogsService.cs" />
     <Compile Include="Contract\Service\ITaskProcessedDataSetService.cs" />
+    <Compile Include="Entity\OOCEntityObject.cs" />
+    <Compile Include="Entity\OOCModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OOCModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ServiceAttribute\ExposedService.cs" />
     <Compile Include="Contract\Data\Response\FileEntityResponse.cs" />
     <Compile Include="Contract\Service\IInstanceService.cs" />
@@ -189,8 +196,8 @@
     <Compile Include="Service\ResultLogsService.svc.cs">
       <DependentUpon>ResultLogsService.svc</DependentUpon>
     </Compile>
-    <Compile Include="Service\TaskProcessedDataSetService.svc.cs">
-      <DependentUpon>TaskProcessedDataSetService.svc</DependentUpon>
+    <Compile Include="Service\TaskProcessedDataService.svc.cs">
+      <DependentUpon>TaskProcessedDataService.svc</DependentUpon>
     </Compile>
     <Compile Include="Util\RemoteUtil.cs" />
   </ItemGroup>
@@ -215,6 +222,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Entity\OOCModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OOCModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

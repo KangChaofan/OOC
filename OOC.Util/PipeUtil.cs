@@ -39,8 +39,11 @@ namespace OOC.Util
         {
             string serialized = SerializationUtil.Serialize(command);
             byte[] bytes = Encoding.UTF8.GetBytes(serialized);
-            bw.Write((int)bytes.Length);
-            bw.Write(Encoding.UTF8.GetBytes(serialized));
+            lock (bw)
+            {
+                bw.Write((int)bytes.Length);
+                bw.Write(Encoding.UTF8.GetBytes(serialized));
+            }
         }
     }
 }

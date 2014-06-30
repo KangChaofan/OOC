@@ -4,7 +4,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text;
-using Oatc.OpenMI.Examples.ModelComponents.SimpleRiver.Wrapper;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Xml;
@@ -111,7 +110,7 @@ namespace WebApplication1
         private void CreateAndThrowException()
         {
             int numberOfMessages = 0;
-            numberOfMessages = SimpleRiverEngineDllAccess.GetNumberOfMessages();
+            //numberOfMessages = SimpleRiverEngineDllAccess.GetNumberOfMessages();
             string message = "Error Message from SimpleRiver Fortran Core ";
 
             for (int i = 0; i < numberOfMessages; i++)

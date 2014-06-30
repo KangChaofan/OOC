@@ -191,25 +191,10 @@ namespace OOC.Instance.TaskService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Task", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
     [System.SerializableAttribute()]
-    public partial class Task : OOC.Instance.TaskService.EntityObject {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Bill[] BillField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Composition CompositionField;
+    public partial class Task : OOC.Instance.TaskService.OOCEntityObject {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OOC.Instance.TaskService.EntityReferenceOfCompositiondfwjoNxd CompositionReferenceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.OutputParameter[] OutputParameterField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.TaskFileMapping[] TaskFileMappingField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.User UserField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OOC.Instance.TaskService.EntityReferenceOfUserdfwjoNxd UserReferenceField;
@@ -251,32 +236,6 @@ namespace OOC.Instance.TaskService {
         private long userIdField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.Bill[] Bill {
-            get {
-                return this.BillField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BillField, value) != true)) {
-                    this.BillField = value;
-                    this.RaisePropertyChanged("Bill");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.Composition Composition {
-            get {
-                return this.CompositionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompositionField, value) != true)) {
-                    this.CompositionField = value;
-                    this.RaisePropertyChanged("Composition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public OOC.Instance.TaskService.EntityReferenceOfCompositiondfwjoNxd CompositionReference {
             get {
                 return this.CompositionReferenceField;
@@ -285,45 +244,6 @@ namespace OOC.Instance.TaskService {
                 if ((object.ReferenceEquals(this.CompositionReferenceField, value) != true)) {
                     this.CompositionReferenceField = value;
                     this.RaisePropertyChanged("CompositionReference");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.OutputParameter[] OutputParameter {
-            get {
-                return this.OutputParameterField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.OutputParameterField, value) != true)) {
-                    this.OutputParameterField = value;
-                    this.RaisePropertyChanged("OutputParameter");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.TaskFileMapping[] TaskFileMapping {
-            get {
-                return this.TaskFileMappingField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TaskFileMappingField, value) != true)) {
-                    this.TaskFileMappingField = value;
-                    this.RaisePropertyChanged("TaskFileMapping");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.User User {
-            get {
-                return this.UserField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserField, value) != true)) {
-                    this.UserField = value;
-                    this.RaisePropertyChanged("User");
                 }
             }
         }
@@ -502,10 +422,7 @@ namespace OOC.Instance.TaskService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="TaskFileMapping", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
     [System.SerializableAttribute()]
-    public partial class TaskFileMapping : OOC.Instance.TaskService.EntityObject {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Task TaskField;
+    public partial class TaskFileMapping : OOC.Instance.TaskService.OOCEntityObject {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OOC.Instance.TaskService.EntityReferenceOfTaskdfwjoNxd TaskReferenceField;
@@ -524,19 +441,6 @@ namespace OOC.Instance.TaskService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private sbyte typeField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.Task Task {
-            get {
-                return this.TaskField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TaskField, value) != true)) {
-                    this.TaskField = value;
-                    this.RaisePropertyChanged("Task");
-                }
-            }
-        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public OOC.Instance.TaskService.EntityReferenceOfTaskdfwjoNxd TaskReference {
@@ -702,22 +606,7 @@ namespace OOC.Instance.TaskService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Composition", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
     [System.SerializableAttribute()]
-    public partial class Composition : OOC.Instance.TaskService.EntityObject {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.CompositionLink[] CompositionLinkField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.CompositionModel[] CompositionModelField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.OutputParameter[] OutputParameterField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Task[] TaskField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.User UserField;
+    public partial class Composition : OOC.Instance.TaskService.OOCEntityObject {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OOC.Instance.TaskService.EntityReferenceOfUserdfwjoNxd UserReferenceField;
@@ -742,71 +631,6 @@ namespace OOC.Instance.TaskService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string titleField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.CompositionLink[] CompositionLink {
-            get {
-                return this.CompositionLinkField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompositionLinkField, value) != true)) {
-                    this.CompositionLinkField = value;
-                    this.RaisePropertyChanged("CompositionLink");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.CompositionModel[] CompositionModel {
-            get {
-                return this.CompositionModelField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompositionModelField, value) != true)) {
-                    this.CompositionModelField = value;
-                    this.RaisePropertyChanged("CompositionModel");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.OutputParameter[] OutputParameter {
-            get {
-                return this.OutputParameterField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.OutputParameterField, value) != true)) {
-                    this.OutputParameterField = value;
-                    this.RaisePropertyChanged("OutputParameter");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.Task[] Task {
-            get {
-                return this.TaskField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TaskField, value) != true)) {
-                    this.TaskField = value;
-                    this.RaisePropertyChanged("Task");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.User User {
-            get {
-                return this.UserField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserField, value) != true)) {
-                    this.UserField = value;
-                    this.RaisePropertyChanged("User");
-                }
-            }
-        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public OOC.Instance.TaskService.EntityReferenceOfUserdfwjoNxd UserReference {
@@ -1088,17 +912,14 @@ namespace OOC.Instance.TaskService {
     [System.Runtime.Serialization.DataContractAttribute(Name="StructuralObject", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses", IsReference=true)]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.OOCEntityObject))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionLink))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModel))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Bill))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Task))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.OutputParameter))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileMapping))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.User))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Model))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelFileMapping))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelProperty))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelTag))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileMapping))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Task))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Composition))]
     public partial class StructuralObject : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -1129,17 +950,14 @@ namespace OOC.Instance.TaskService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="EntityObject", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses", IsReference=true)]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.OOCEntityObject))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionLink))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModel))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Bill))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Task))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.OutputParameter))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileMapping))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.User))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Model))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelFileMapping))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelProperty))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelTag))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileMapping))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Task))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Composition))]
     public partial class EntityObject : OOC.Instance.TaskService.StructuralObject {
         
@@ -1162,21 +980,27 @@ namespace OOC.Instance.TaskService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OOCEntityObject", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionLink))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModel))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Model))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelFileMapping))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelProperty))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileMapping))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Task))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Composition))]
+    public partial class OOCEntityObject : OOC.Instance.TaskService.EntityObject {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="CompositionLink", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
     [System.SerializableAttribute()]
-    public partial class CompositionLink : OOC.Instance.TaskService.EntityObject {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Composition CompositionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.CompositionModel CompositionModelSourceField;
+    public partial class CompositionLink : OOC.Instance.TaskService.OOCEntityObject {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OOC.Instance.TaskService.EntityReferenceOfCompositionModeldfwjoNxd CompositionModelSourceReferenceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.CompositionModel CompositionModelTargetField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OOC.Instance.TaskService.EntityReferenceOfCompositionModeldfwjoNxd CompositionModelTargetReferenceField;
@@ -1218,32 +1042,6 @@ namespace OOC.Instance.TaskService {
         private string targetQuantityField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.Composition Composition {
-            get {
-                return this.CompositionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompositionField, value) != true)) {
-                    this.CompositionField = value;
-                    this.RaisePropertyChanged("Composition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.CompositionModel CompositionModelSource {
-            get {
-                return this.CompositionModelSourceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompositionModelSourceField, value) != true)) {
-                    this.CompositionModelSourceField = value;
-                    this.RaisePropertyChanged("CompositionModelSource");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public OOC.Instance.TaskService.EntityReferenceOfCompositionModeldfwjoNxd CompositionModelSourceReference {
             get {
                 return this.CompositionModelSourceReferenceField;
@@ -1252,19 +1050,6 @@ namespace OOC.Instance.TaskService {
                 if ((object.ReferenceEquals(this.CompositionModelSourceReferenceField, value) != true)) {
                     this.CompositionModelSourceReferenceField = value;
                     this.RaisePropertyChanged("CompositionModelSourceReference");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.CompositionModel CompositionModelTarget {
-            get {
-                return this.CompositionModelTargetField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompositionModelTargetField, value) != true)) {
-                    this.CompositionModelTargetField = value;
-                    this.RaisePropertyChanged("CompositionModelTarget");
                 }
             }
         }
@@ -1443,31 +1228,13 @@ namespace OOC.Instance.TaskService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="CompositionModel", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
     [System.SerializableAttribute()]
-    public partial class CompositionModel : OOC.Instance.TaskService.EntityObject {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Bill[] BillField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Composition CompositionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.CompositionLink[] CompositionLinkSourceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.CompositionLink[] CompositionLinkTargetField;
+    public partial class CompositionModel : OOC.Instance.TaskService.OOCEntityObject {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OOC.Instance.TaskService.EntityReferenceOfCompositiondfwjoNxd CompositionReferenceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Model ModelField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OOC.Instance.TaskService.EntityReferenceOfModeldfwjoNxd ModelReferenceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.OutputParameter[] OutputParameterField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string compositionGuidField;
@@ -1488,58 +1255,6 @@ namespace OOC.Instance.TaskService {
         private string propertiesField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.Bill[] Bill {
-            get {
-                return this.BillField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BillField, value) != true)) {
-                    this.BillField = value;
-                    this.RaisePropertyChanged("Bill");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.Composition Composition {
-            get {
-                return this.CompositionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompositionField, value) != true)) {
-                    this.CompositionField = value;
-                    this.RaisePropertyChanged("Composition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.CompositionLink[] CompositionLinkSource {
-            get {
-                return this.CompositionLinkSourceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompositionLinkSourceField, value) != true)) {
-                    this.CompositionLinkSourceField = value;
-                    this.RaisePropertyChanged("CompositionLinkSource");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.CompositionLink[] CompositionLinkTarget {
-            get {
-                return this.CompositionLinkTargetField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompositionLinkTargetField, value) != true)) {
-                    this.CompositionLinkTargetField = value;
-                    this.RaisePropertyChanged("CompositionLinkTarget");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public OOC.Instance.TaskService.EntityReferenceOfCompositiondfwjoNxd CompositionReference {
             get {
                 return this.CompositionReferenceField;
@@ -1553,19 +1268,6 @@ namespace OOC.Instance.TaskService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.Model Model {
-            get {
-                return this.ModelField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ModelField, value) != true)) {
-                    this.ModelField = value;
-                    this.RaisePropertyChanged("Model");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public OOC.Instance.TaskService.EntityReferenceOfModeldfwjoNxd ModelReference {
             get {
                 return this.ModelReferenceField;
@@ -1574,19 +1276,6 @@ namespace OOC.Instance.TaskService {
                 if ((object.ReferenceEquals(this.ModelReferenceField, value) != true)) {
                     this.ModelReferenceField = value;
                     this.RaisePropertyChanged("ModelReference");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.OutputParameter[] OutputParameter {
-            get {
-                return this.OutputParameterField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.OutputParameterField, value) != true)) {
-                    this.OutputParameterField = value;
-                    this.RaisePropertyChanged("OutputParameter");
                 }
             }
         }
@@ -1672,688 +1361,12 @@ namespace OOC.Instance.TaskService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Bill", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
-    [System.SerializableAttribute()]
-    public partial class Bill : OOC.Instance.TaskService.EntityObject {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.CompositionModel CompositionModelField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.EntityReferenceOfCompositionModeldfwjoNxd CompositionModelReferenceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Task TaskField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.EntityReferenceOfTaskdfwjoNxd TaskReferenceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.User UserField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.EntityReferenceOfUserdfwjoNxd UserReferenceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double amountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string cmGuidField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime creationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long idField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool isRefundedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.DateTime> modificationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string taskGuidField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long userIdField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.CompositionModel CompositionModel {
-            get {
-                return this.CompositionModelField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompositionModelField, value) != true)) {
-                    this.CompositionModelField = value;
-                    this.RaisePropertyChanged("CompositionModel");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.EntityReferenceOfCompositionModeldfwjoNxd CompositionModelReference {
-            get {
-                return this.CompositionModelReferenceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompositionModelReferenceField, value) != true)) {
-                    this.CompositionModelReferenceField = value;
-                    this.RaisePropertyChanged("CompositionModelReference");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.Task Task {
-            get {
-                return this.TaskField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TaskField, value) != true)) {
-                    this.TaskField = value;
-                    this.RaisePropertyChanged("Task");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.EntityReferenceOfTaskdfwjoNxd TaskReference {
-            get {
-                return this.TaskReferenceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TaskReferenceField, value) != true)) {
-                    this.TaskReferenceField = value;
-                    this.RaisePropertyChanged("TaskReference");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.User User {
-            get {
-                return this.UserField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserField, value) != true)) {
-                    this.UserField = value;
-                    this.RaisePropertyChanged("User");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.EntityReferenceOfUserdfwjoNxd UserReference {
-            get {
-                return this.UserReferenceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserReferenceField, value) != true)) {
-                    this.UserReferenceField = value;
-                    this.RaisePropertyChanged("UserReference");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public double amount {
-            get {
-                return this.amountField;
-            }
-            set {
-                if ((this.amountField.Equals(value) != true)) {
-                    this.amountField = value;
-                    this.RaisePropertyChanged("amount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string cmGuid {
-            get {
-                return this.cmGuidField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.cmGuidField, value) != true)) {
-                    this.cmGuidField = value;
-                    this.RaisePropertyChanged("cmGuid");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime creation {
-            get {
-                return this.creationField;
-            }
-            set {
-                if ((this.creationField.Equals(value) != true)) {
-                    this.creationField = value;
-                    this.RaisePropertyChanged("creation");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long id {
-            get {
-                return this.idField;
-            }
-            set {
-                if ((this.idField.Equals(value) != true)) {
-                    this.idField = value;
-                    this.RaisePropertyChanged("id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool isRefunded {
-            get {
-                return this.isRefundedField;
-            }
-            set {
-                if ((this.isRefundedField.Equals(value) != true)) {
-                    this.isRefundedField = value;
-                    this.RaisePropertyChanged("isRefunded");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.DateTime> modification {
-            get {
-                return this.modificationField;
-            }
-            set {
-                if ((this.modificationField.Equals(value) != true)) {
-                    this.modificationField = value;
-                    this.RaisePropertyChanged("modification");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string taskGuid {
-            get {
-                return this.taskGuidField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.taskGuidField, value) != true)) {
-                    this.taskGuidField = value;
-                    this.RaisePropertyChanged("taskGuid");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long userId {
-            get {
-                return this.userIdField;
-            }
-            set {
-                if ((this.userIdField.Equals(value) != true)) {
-                    this.userIdField = value;
-                    this.RaisePropertyChanged("userId");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OutputParameter", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
-    [System.SerializableAttribute()]
-    public partial class OutputParameter : OOC.Instance.TaskService.EntityObject {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Composition CompositionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.CompositionModel CompositionModelField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.EntityReferenceOfCompositionModeldfwjoNxd CompositionModelReferenceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.EntityReferenceOfCompositiondfwjoNxd CompositionReferenceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Task TaskField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.EntityReferenceOfTaskdfwjoNxd TaskReferenceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string compositionGuidField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string compositionModelGuidField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime creationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string elementSetField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string guidField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parameterValueField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string quantityField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string taskGuidField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.Composition Composition {
-            get {
-                return this.CompositionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompositionField, value) != true)) {
-                    this.CompositionField = value;
-                    this.RaisePropertyChanged("Composition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.CompositionModel CompositionModel {
-            get {
-                return this.CompositionModelField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompositionModelField, value) != true)) {
-                    this.CompositionModelField = value;
-                    this.RaisePropertyChanged("CompositionModel");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.EntityReferenceOfCompositionModeldfwjoNxd CompositionModelReference {
-            get {
-                return this.CompositionModelReferenceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompositionModelReferenceField, value) != true)) {
-                    this.CompositionModelReferenceField = value;
-                    this.RaisePropertyChanged("CompositionModelReference");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.EntityReferenceOfCompositiondfwjoNxd CompositionReference {
-            get {
-                return this.CompositionReferenceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompositionReferenceField, value) != true)) {
-                    this.CompositionReferenceField = value;
-                    this.RaisePropertyChanged("CompositionReference");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.Task Task {
-            get {
-                return this.TaskField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TaskField, value) != true)) {
-                    this.TaskField = value;
-                    this.RaisePropertyChanged("Task");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.EntityReferenceOfTaskdfwjoNxd TaskReference {
-            get {
-                return this.TaskReferenceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TaskReferenceField, value) != true)) {
-                    this.TaskReferenceField = value;
-                    this.RaisePropertyChanged("TaskReference");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string compositionGuid {
-            get {
-                return this.compositionGuidField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.compositionGuidField, value) != true)) {
-                    this.compositionGuidField = value;
-                    this.RaisePropertyChanged("compositionGuid");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string compositionModelGuid {
-            get {
-                return this.compositionModelGuidField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.compositionModelGuidField, value) != true)) {
-                    this.compositionModelGuidField = value;
-                    this.RaisePropertyChanged("compositionModelGuid");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime creation {
-            get {
-                return this.creationField;
-            }
-            set {
-                if ((this.creationField.Equals(value) != true)) {
-                    this.creationField = value;
-                    this.RaisePropertyChanged("creation");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string elementSet {
-            get {
-                return this.elementSetField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.elementSetField, value) != true)) {
-                    this.elementSetField = value;
-                    this.RaisePropertyChanged("elementSet");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string guid {
-            get {
-                return this.guidField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.guidField, value) != true)) {
-                    this.guidField = value;
-                    this.RaisePropertyChanged("guid");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parameterValue {
-            get {
-                return this.parameterValueField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parameterValueField, value) != true)) {
-                    this.parameterValueField = value;
-                    this.RaisePropertyChanged("parameterValue");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string quantity {
-            get {
-                return this.quantityField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.quantityField, value) != true)) {
-                    this.quantityField = value;
-                    this.RaisePropertyChanged("quantity");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string taskGuid {
-            get {
-                return this.taskGuidField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.taskGuidField, value) != true)) {
-                    this.taskGuidField = value;
-                    this.RaisePropertyChanged("taskGuid");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
-    [System.SerializableAttribute()]
-    public partial class User : OOC.Instance.TaskService.EntityObject {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Bill[] BillField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Composition[] CompositionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Model[] ModelField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Task[] TaskField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string aclField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double balanceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime creationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long idField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string mobileField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.DateTime> modificationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string passhashField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string usernameField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.Bill[] Bill {
-            get {
-                return this.BillField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BillField, value) != true)) {
-                    this.BillField = value;
-                    this.RaisePropertyChanged("Bill");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.Composition[] Composition {
-            get {
-                return this.CompositionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompositionField, value) != true)) {
-                    this.CompositionField = value;
-                    this.RaisePropertyChanged("Composition");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.Model[] Model {
-            get {
-                return this.ModelField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ModelField, value) != true)) {
-                    this.ModelField = value;
-                    this.RaisePropertyChanged("Model");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.Task[] Task {
-            get {
-                return this.TaskField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TaskField, value) != true)) {
-                    this.TaskField = value;
-                    this.RaisePropertyChanged("Task");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string acl {
-            get {
-                return this.aclField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.aclField, value) != true)) {
-                    this.aclField = value;
-                    this.RaisePropertyChanged("acl");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public double balance {
-            get {
-                return this.balanceField;
-            }
-            set {
-                if ((this.balanceField.Equals(value) != true)) {
-                    this.balanceField = value;
-                    this.RaisePropertyChanged("balance");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime creation {
-            get {
-                return this.creationField;
-            }
-            set {
-                if ((this.creationField.Equals(value) != true)) {
-                    this.creationField = value;
-                    this.RaisePropertyChanged("creation");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long id {
-            get {
-                return this.idField;
-            }
-            set {
-                if ((this.idField.Equals(value) != true)) {
-                    this.idField = value;
-                    this.RaisePropertyChanged("id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string mobile {
-            get {
-                return this.mobileField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.mobileField, value) != true)) {
-                    this.mobileField = value;
-                    this.RaisePropertyChanged("mobile");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.DateTime> modification {
-            get {
-                return this.modificationField;
-            }
-            set {
-                if ((this.modificationField.Equals(value) != true)) {
-                    this.modificationField = value;
-                    this.RaisePropertyChanged("modification");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string passhash {
-            get {
-                return this.passhashField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.passhashField, value) != true)) {
-                    this.passhashField = value;
-                    this.RaisePropertyChanged("passhash");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string username {
-            get {
-                return this.usernameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.usernameField, value) != true)) {
-                    this.usernameField = value;
-                    this.RaisePropertyChanged("username");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Model", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
     [System.SerializableAttribute()]
-    public partial class Model : OOC.Instance.TaskService.EntityObject {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.User AuthorUserField;
+    public partial class Model : OOC.Instance.TaskService.OOCEntityObject {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OOC.Instance.TaskService.EntityReferenceOfUserdfwjoNxd AuthorUserReferenceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.CompositionModel[] CompositionModelField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.ModelFileMapping[] ModelFileMappingField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.ModelProperty[] ModelPropertyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.ModelTag[] ModelTagField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string abstractField;
@@ -2398,19 +1411,6 @@ namespace OOC.Instance.TaskService {
         private string versionField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.User AuthorUser {
-            get {
-                return this.AuthorUserField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AuthorUserField, value) != true)) {
-                    this.AuthorUserField = value;
-                    this.RaisePropertyChanged("AuthorUser");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public OOC.Instance.TaskService.EntityReferenceOfUserdfwjoNxd AuthorUserReference {
             get {
                 return this.AuthorUserReferenceField;
@@ -2419,58 +1419,6 @@ namespace OOC.Instance.TaskService {
                 if ((object.ReferenceEquals(this.AuthorUserReferenceField, value) != true)) {
                     this.AuthorUserReferenceField = value;
                     this.RaisePropertyChanged("AuthorUserReference");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.CompositionModel[] CompositionModel {
-            get {
-                return this.CompositionModelField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CompositionModelField, value) != true)) {
-                    this.CompositionModelField = value;
-                    this.RaisePropertyChanged("CompositionModel");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.ModelFileMapping[] ModelFileMapping {
-            get {
-                return this.ModelFileMappingField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ModelFileMappingField, value) != true)) {
-                    this.ModelFileMappingField = value;
-                    this.RaisePropertyChanged("ModelFileMapping");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.ModelProperty[] ModelProperty {
-            get {
-                return this.ModelPropertyField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ModelPropertyField, value) != true)) {
-                    this.ModelPropertyField = value;
-                    this.RaisePropertyChanged("ModelProperty");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.ModelTag[] ModelTag {
-            get {
-                return this.ModelTagField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ModelTagField, value) != true)) {
-                    this.ModelTagField = value;
-                    this.RaisePropertyChanged("ModelTag");
                 }
             }
         }
@@ -2662,10 +1610,7 @@ namespace OOC.Instance.TaskService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ModelFileMapping", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
     [System.SerializableAttribute()]
-    public partial class ModelFileMapping : OOC.Instance.TaskService.EntityObject {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Model ModelField;
+    public partial class ModelFileMapping : OOC.Instance.TaskService.OOCEntityObject {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OOC.Instance.TaskService.EntityReferenceOfModeldfwjoNxd ModelReferenceField;
@@ -2677,7 +1622,7 @@ namespace OOC.Instance.TaskService {
         private string fileNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<bool> isDataProcessorField;
+        private bool isDataProcessorField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool isDocumentField;
@@ -2696,19 +1641,6 @@ namespace OOC.Instance.TaskService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string signatureField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.Model Model {
-            get {
-                return this.ModelField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ModelField, value) != true)) {
-                    this.ModelField = value;
-                    this.RaisePropertyChanged("Model");
-                }
-            }
-        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public OOC.Instance.TaskService.EntityReferenceOfModeldfwjoNxd ModelReference {
@@ -2750,7 +1682,7 @@ namespace OOC.Instance.TaskService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<bool> isDataProcessor {
+        public bool isDataProcessor {
             get {
                 return this.isDataProcessorField;
             }
@@ -2845,10 +1777,7 @@ namespace OOC.Instance.TaskService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ModelProperty", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
     [System.SerializableAttribute()]
-    public partial class ModelProperty : OOC.Instance.TaskService.EntityObject {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Model ModelField;
+    public partial class ModelProperty : OOC.Instance.TaskService.OOCEntityObject {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OOC.Instance.TaskService.EntityReferenceOfModeldfwjoNxd ModelReferenceField;
@@ -2876,19 +1805,6 @@ namespace OOC.Instance.TaskService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private sbyte typeField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.Model Model {
-            get {
-                return this.ModelField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ModelField, value) != true)) {
-                    this.ModelField = value;
-                    this.RaisePropertyChanged("Model");
-                }
-            }
-        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public OOC.Instance.TaskService.EntityReferenceOfModeldfwjoNxd ModelReference {
@@ -3010,173 +1926,6 @@ namespace OOC.Instance.TaskService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ModelTag", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
-    [System.SerializableAttribute()]
-    public partial class ModelTag : OOC.Instance.TaskService.EntityObject {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.ModelTag[] ChildModelTagsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.Model[] ModelField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.ModelTag ParentModelTagField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private OOC.Instance.TaskService.EntityReferenceOfModelTagdfwjoNxd ParentModelTagReferenceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime creationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string descriptionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string guidField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<System.DateTime> modificationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string nameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string parentTagGuidField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.ModelTag[] ChildModelTags {
-            get {
-                return this.ChildModelTagsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ChildModelTagsField, value) != true)) {
-                    this.ChildModelTagsField = value;
-                    this.RaisePropertyChanged("ChildModelTags");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.Model[] Model {
-            get {
-                return this.ModelField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ModelField, value) != true)) {
-                    this.ModelField = value;
-                    this.RaisePropertyChanged("Model");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.ModelTag ParentModelTag {
-            get {
-                return this.ParentModelTagField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ParentModelTagField, value) != true)) {
-                    this.ParentModelTagField = value;
-                    this.RaisePropertyChanged("ParentModelTag");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public OOC.Instance.TaskService.EntityReferenceOfModelTagdfwjoNxd ParentModelTagReference {
-            get {
-                return this.ParentModelTagReferenceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ParentModelTagReferenceField, value) != true)) {
-                    this.ParentModelTagReferenceField = value;
-                    this.RaisePropertyChanged("ParentModelTagReference");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime creation {
-            get {
-                return this.creationField;
-            }
-            set {
-                if ((this.creationField.Equals(value) != true)) {
-                    this.creationField = value;
-                    this.RaisePropertyChanged("creation");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string description {
-            get {
-                return this.descriptionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.descriptionField, value) != true)) {
-                    this.descriptionField = value;
-                    this.RaisePropertyChanged("description");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string guid {
-            get {
-                return this.guidField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.guidField, value) != true)) {
-                    this.guidField = value;
-                    this.RaisePropertyChanged("guid");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.DateTime> modification {
-            get {
-                return this.modificationField;
-            }
-            set {
-                if ((this.modificationField.Equals(value) != true)) {
-                    this.modificationField = value;
-                    this.RaisePropertyChanged("modification");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.nameField, value) != true)) {
-                    this.nameField = value;
-                    this.RaisePropertyChanged("name");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string parentTagGuid {
-            get {
-                return this.parentTagGuidField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.parentTagGuidField, value) != true)) {
-                    this.parentTagGuidField = value;
-                    this.RaisePropertyChanged("parentTagGuid");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="EntityKey", Namespace="http://schemas.datacontract.org/2004/07/System.Data", IsReference=true)]
     [System.SerializableAttribute()]
     public partial class EntityKey : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -3265,40 +2014,29 @@ namespace OOC.Instance.TaskService {
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityObject))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.StructuralObject))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfCompositionModeldfwjoNxd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfUserdfwjoNxd))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReference))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.RelatedEnd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfCompositionModeldfwjoNxd))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfCompositiondfwjoNxd))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfTaskdfwjoNxd))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfUserdfwjoNxd))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfModeldfwjoNxd))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfModelTagdfwjoNxd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfTaskdfwjoNxd))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityKey))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityKeyMember[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.SerializableData))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Dict))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Composition))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionLink[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.OOCEntityObject))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionLink))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModel))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Bill[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Bill))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Task))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.OutputParameter[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.OutputParameter))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileMapping[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileMapping))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.User))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Composition[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Model[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Model))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionModel[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelFileMapping[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelFileMapping))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelProperty[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelProperty))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelTag[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.ModelTag))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileMapping[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskFileMapping))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Task))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.Task[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.TaskState))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.CompositionData))]
@@ -3372,20 +2110,12 @@ namespace OOC.Instance.TaskService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReferenceOfCompositionModeldfwjoNxd", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
-    [System.SerializableAttribute()]
-    public partial class EntityReferenceOfCompositionModeldfwjoNxd : OOC.Instance.TaskService.EntityReference {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="EntityReference", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfCompositiondfwjoNxd))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfTaskdfwjoNxd))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfUserdfwjoNxd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfCompositiondfwjoNxd))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfModeldfwjoNxd))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfModelTagdfwjoNxd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfTaskdfwjoNxd))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfCompositionModeldfwjoNxd))]
     public partial class EntityReference : OOC.Instance.TaskService.RelatedEnd {
         
@@ -3411,11 +2141,10 @@ namespace OOC.Instance.TaskService {
     [System.Runtime.Serialization.DataContractAttribute(Name="RelatedEnd", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReference))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfCompositiondfwjoNxd))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfTaskdfwjoNxd))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfUserdfwjoNxd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfCompositiondfwjoNxd))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfModeldfwjoNxd))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfModelTagdfwjoNxd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfTaskdfwjoNxd))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(OOC.Instance.TaskService.EntityReferenceOfCompositionModeldfwjoNxd))]
     public partial class RelatedEnd : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -3444,16 +2173,16 @@ namespace OOC.Instance.TaskService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReferenceOfCompositiondfwjoNxd", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReferenceOfCompositionModeldfwjoNxd", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
     [System.SerializableAttribute()]
-    public partial class EntityReferenceOfCompositiondfwjoNxd : OOC.Instance.TaskService.EntityReference {
+    public partial class EntityReferenceOfCompositionModeldfwjoNxd : OOC.Instance.TaskService.EntityReference {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReferenceOfTaskdfwjoNxd", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReferenceOfCompositiondfwjoNxd", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
     [System.SerializableAttribute()]
-    public partial class EntityReferenceOfTaskdfwjoNxd : OOC.Instance.TaskService.EntityReference {
+    public partial class EntityReferenceOfCompositiondfwjoNxd : OOC.Instance.TaskService.EntityReference {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -3465,9 +2194,9 @@ namespace OOC.Instance.TaskService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReferenceOfModelTagdfwjoNxd", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReferenceOfTaskdfwjoNxd", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
     [System.SerializableAttribute()]
-    public partial class EntityReferenceOfModelTagdfwjoNxd : OOC.Instance.TaskService.EntityReference {
+    public partial class EntityReferenceOfTaskdfwjoNxd : OOC.Instance.TaskService.EntityReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]

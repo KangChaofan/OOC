@@ -1,0 +1,248 @@
+{% include 'header.html' %}
+<script src="/static/svg.js"></script>
+<script src="/static/svg.marker.js"></script>
+<script src="/static/composition.js"></script>
+<div class="container-fluid container-wrapper">
+    <div id="composition-svg"></div>
+    <p>
+        <button onclick="addModel()">添加模型</button>
+        <button onclick="addLink()">创建链接</button>
+        <button onclick="reloadComposition()">刷新</button>
+        <span id="trigger-text"></span>
+    </p>
+    <p>
+        <input id="title" type="text" class="composition-title" value=""/> 
+        <button onclick="updateTitle()">修改标题</button>
+    </p>
+    <p>
+        <input id="triggerInvokeTime" type="text" value="1990-06-01 00:00:00"/> 
+        <button onclick="run()">运行仿真计算</button>
+    </p>
+</div>
+<div class="modal hide fade in add-group-modal" id="model-modal" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3 class="modal-title" id="model-title"></h3>
+    </div>
+    <div class="modal-body">
+        <div class="form-horizontal" id="add_group_form">
+            <div class="control-group">
+                <span class="control-span">组合模型标识</span>
+                <div class="controls">
+                    <span id="model-cmGuid"></span>
+                </div>
+            </div>
+            <div class="control-group">
+                <span class="control-span">模型标识</span>
+                <div class="controls">
+                    <span id="model-guid"></span>
+                </div>
+            </div>
+            <div class="control-group">
+                <span class="control-span">模型名称</span>
+                <div class="controls">
+                    <span id="model-name"></span>
+                </div>
+            </div>
+            <div class="control-group">
+                <span class="control-span">模型版本</span>
+                <div class="controls">
+                    <span id="model-version"></span>
+                </div>
+            </div>
+            <div class="control-group">
+                <span class="control-span">模型类名</span>
+                <div class="controls">
+                    <span id="model-className"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="btn-remove-model" class="btn btn-danger">移除模型</button>
+        <button class="btn modal-dismiss" data-dismiss="modal">关闭</button>
+    </div>
+</div>
+
+<div class="modal hide fade in add-group-modal" id="link-modal" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3 class="modal-title" id="link-title"></h3>
+    </div>
+    <div class="modal-body">
+        <div class="form-horizontal" id="add_group_form">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>源模型</th>
+                        <th>ElementSet</th>
+                        <th>Quantity</th>
+                        <th>目标模型</th>
+                        <th>ElementSet</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody id="link-rows">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn modal-dismiss" data-dismiss="modal">关闭</button>
+    </div>
+</div>
+
+<div class="modal hide fade in add-group-modal" id="add-model-modal" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3 class="modal-title">添加模型</h3>
+    </div>
+    <div class="modal-body">
+        <div class="form-horizontal" id="add_group_form">
+            ModelGuid: <input type="text" id="add-model-guid" name="modelGuid" value=""/>
+            <p>
+                常用: 
+                <a href="/composition/addModel/{{ guid }}/794a9489-3bae-45dc-9654-27aa306462ce">RiverNetwork</a>  
+                <a href="/composition/addModel/{{ guid }}/942f7612-b95f-6666-7777-72dd482fbc12">RiverModel</a> 
+                <a href="/composition/addModel/{{ guid }}/180512cf-b424-4e7f-9d9e-e2850874040d">DataLogger</a>
+            </p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" id="btn-add-model">添加</button>
+        <button class="btn modal-dismiss" data-dismiss="modal">关闭</button>
+    </div>
+</div>
+
+<div class="modal hide fade in add-group-modal" id="add-link-modal" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3 class="modal-title">创建链接</h3>
+    </div>
+    <form id="add-link-form">
+        <div class="modal-body">
+            <div class="form-horizontal" id="add_group_form">
+                <p>源模型: <span id="link-source-model"></span></p>
+                <p>ElementSet: <input type="text" name="sourceElementSet" value=""/></p>
+                <p>Quantity: <input type="text" name="sourceQuantity" value=""/></p>
+                <p>目标模型: <span id="link-target-model"></span></p>
+                <p>ElementSet: <input type="text" name="targetElementSet" value=""/></p>
+                <p>Quantity: <input type="text" name="targetQuantity" value=""/></p>
+            </div>
+            <input type="hidden" id="link-source-guid" name="sourceCmGuid" value=""/>
+            <input type="hidden" id="link-target-guid" name="targetCmGuid" value=""/>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="btn-add-link">创建</button>
+            <button class="btn modal-dismiss" data-dismiss="modal">关闭</button>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+var triggerType;
+var linkSourceGuid, linkTargetGuid; 
+function setTriggerType(t) {
+    triggerType = t;
+    switch (t) {
+        case 'linkSource':
+            $('#trigger-text').html('选择链接源模型');
+            break;
+        case 'linkTarget':
+            $('#trigger-text').html('选择链接目标模型');
+            break;
+        case 'info':
+            $('#trigger-text').html('模型可拖拽，点击模型或链接可查看信息');
+            break;
+    }
+}
+$(document).ready(function(){
+    initComposition('{{ guid }}');
+    onComposition('modelClicked', function(evt) {
+        if (triggerType == 'info') {
+            var modelData = getModelData(evt.guid);
+            $('#model-title').html(modelData.Model.name);
+            $('#model-cmGuid').html(modelData.CompositionModel.guid);
+            $('#model-guid').html(modelData.Model.guid);
+            $('#model-name').html(modelData.Model.name);
+            $('#model-version').html(modelData.Model.version);
+            $('#model-className').html(modelData.Model.className);
+            $('#model-modal').modal();
+        }
+        else if (triggerType == 'linkSource') {
+            linkSourceGuid = evt.guid;
+            setTriggerType('linkTarget');
+        }
+        else if (triggerType == 'linkTarget') {
+            linkTargetGuid = evt.guid;
+            createNewLink(linkSourceGuid, linkTargetGuid);
+            setTriggerType('info');
+        }
+    });
+    onComposition('linkClicked', function(evt) {
+        var links = getRelatedLinkData(evt.guid);
+        var html = '';
+        for (var i in links) {
+            var sourceModel = getModelData(links[i].CompositionLink.sourceCmGuid);
+            var targetModel = getModelData(links[i].CompositionLink.targetCmGuid);
+            html += '<tr>';
+            html += '<td>' + sourceModel.Model.name + '</td>';
+            html += '<td>' + links[i].CompositionLink.sourceElementSet + '</td>';
+            html += '<td>' + links[i].CompositionLink.sourceQuantity + '</td>';
+            html += '<td>' + targetModel.Model.name + '</td>';
+            html += '<td>' + links[i].CompositionLink.targetElementSet + '</td>';
+            html += '<td>' + links[i].CompositionLink.targetQuantity + '</td>';
+            html += '</tr>';
+        }
+        $('#link-rows').html(html);
+        $('#link-modal').modal();
+    });
+    $('#btn-add-model').click(function() {
+        window.location.href = '/composition/addModel/{{ guid }}/' + $('#add-model-guid').val();
+    });
+    $('#btn-remove-model').click(function() {
+        var guid = $('#model-cmGuid').html();
+        invoke('composition_remove_model', 'guid=' + guid, function(result) {
+            reloadComposition();
+        });
+        $('#model-modal').modal('hide');
+    });
+    $('#add-link-form').submit(function() {
+        invoke('composition_add_link', 'compositionGuid={{ guid }}&' + $(this).serialize(), function(result) {
+            reloadComposition();
+        });
+        $('#add-link-modal').modal('hide');
+        return false;
+    });
+    setTriggerType('info');
+});
+function run() {
+    invoke('create_task', 'compositionGuid={{ guid }}&triggerInvokeTime=' + encodeURIComponent($('#triggerInvokeTime').val()), function(result) {
+        var taskGuid = result.taskGuid;
+        invoke('run_task', 'guid=' + taskGuid, function() {
+            window.location.href = "/task/status/" + taskGuid;
+        });
+    });
+}
+function addModel() {
+    $('#add-model-modal').modal();
+}
+function addLink() {
+    setTriggerType('linkSource');
+}
+function createNewLink(sourceGuid, targetGuid) {
+    var source = getModelData(sourceGuid);
+    var target = getModelData(targetGuid);
+    $('#link-source-model').html(source.Model.name);
+    $('#link-target-model').html(target.Model.name);
+    $('#link-source-guid').val(sourceGuid);
+    $('#link-target-guid').val(targetGuid);
+    $('#add-link-modal').modal();
+}
+function updateTitle() {
+    invoke('composition_set_title', 'guid={{ guid }}&title=' + encodeURIComponent($('#title').val()), function(result) {
+        reloadComposition();
+    });
+}
+</script>
+{% include 'footer.html' %}

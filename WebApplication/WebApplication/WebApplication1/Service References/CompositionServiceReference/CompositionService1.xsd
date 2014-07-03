@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:6736/Service/CompositionService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OOC.Entity" />
+  <xs:import schemaLocation="http://localhost:6736/Service/CompositionService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract" />
+  <xs:complexType name="ArrayOfCompositionModelData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CompositionModelData" nillable="true" type="tns:CompositionModelData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCompositionModelData" nillable="true" type="tns:ArrayOfCompositionModelData" />
+  <xs:complexType name="CompositionModelData">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="CompositionModel" nillable="true" type="q1:CompositionModel" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="Model" nillable="true" type="q2:Model" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="ModelFiles" nillable="true" type="q3:ArrayOfModelFileMapping" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="ModelProperties" nillable="true" type="q4:ArrayOfModelProperty" />
+      <xs:element minOccurs="0" name="PropertyValues" nillable="true" type="tns:CompositionModelProperties" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CompositionModelData" nillable="true" type="tns:CompositionModelData" />
+  <xs:complexType name="CompositionModelProperties">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q5="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract" base="q5:Dict">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CompositionModelProperties" nillable="true" type="tns:CompositionModelProperties" />
+  <xs:complexType name="ArrayOfCompositionLinkData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CompositionLinkData" nillable="true" type="tns:CompositionLinkData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCompositionLinkData" nillable="true" type="tns:ArrayOfCompositionLinkData" />
+  <xs:complexType name="CompositionLinkData">
+    <xs:sequence>
+      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="CompositionLink" nillable="true" type="q6:CompositionLink" />
+      <xs:element minOccurs="0" name="DataOperation" nillable="true" type="tns:LinkDataOperation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CompositionLinkData" nillable="true" type="tns:CompositionLinkData" />
+  <xs:complexType name="LinkDataOperation">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q7="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract" base="q7:Dict">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="LinkDataOperation" nillable="true" type="tns:LinkDataOperation" />
+  <xs:complexType name="CompositionData">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q8="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract" base="q8:SerializableData">
+        <xs:sequence>
+          <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="Composition" nillable="true" type="q9:Composition" />
+          <xs:element minOccurs="0" name="Links" nillable="true" type="tns:ArrayOfCompositionLinkData" />
+          <xs:element minOccurs="0" name="Models" nillable="true" type="tns:ArrayOfCompositionModelData" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CompositionData" nillable="true" type="tns:CompositionData" />
+</xs:schema>

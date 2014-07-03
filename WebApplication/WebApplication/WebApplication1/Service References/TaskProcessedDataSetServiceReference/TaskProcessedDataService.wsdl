@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="TaskProcessedDataService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:6736/Service/TaskProcessedDataService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/TaskProcessedDataService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/TaskProcessedDataService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OOC.Entity" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/TaskProcessedDataService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/TaskProcessedDataService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/TaskProcessedDataService.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ITaskProcessedDataService_CreateDataSet_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDataSet" />
+  </wsdl:message>
+  <wsdl:message name="ITaskProcessedDataService_CreateDataSet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDataSetResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskProcessedDataService_RemoveDataSetByGuid_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveDataSetByGuid" />
+  </wsdl:message>
+  <wsdl:message name="ITaskProcessedDataService_RemoveDataSetByGuid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveDataSetByGuidResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskProcessedDataService_GetDataSetByTaskGuid_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataSetByTaskGuid" />
+  </wsdl:message>
+  <wsdl:message name="ITaskProcessedDataService_GetDataSetByTaskGuid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataSetByTaskGuidResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskProcessedDataService_InsertIntoDataSet_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertIntoDataSet" />
+  </wsdl:message>
+  <wsdl:message name="ITaskProcessedDataService_InsertIntoDataSet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertIntoDataSetResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskProcessedDataService_InsertMultipleIntoDataSet_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertMultipleIntoDataSet" />
+  </wsdl:message>
+  <wsdl:message name="ITaskProcessedDataService_InsertMultipleIntoDataSet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertMultipleIntoDataSetResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskProcessedDataService_QueryDataSetRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryDataSetRecords" />
+  </wsdl:message>
+  <wsdl:message name="ITaskProcessedDataService_QueryDataSetRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryDataSetRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskProcessedDataService_QueryDataSet_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryDataSet" />
+  </wsdl:message>
+  <wsdl:message name="ITaskProcessedDataService_QueryDataSet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryDataSetResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ITaskProcessedDataService">
+    <wsdl:operation name="CreateDataSet">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskProcessedDataService/CreateDataSet" message="tns:ITaskProcessedDataService_CreateDataSet_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskProcessedDataService/CreateDataSetResponse" message="tns:ITaskProcessedDataService_CreateDataSet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveDataSetByGuid">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskProcessedDataService/RemoveDataSetByGuid" message="tns:ITaskProcessedDataService_RemoveDataSetByGuid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskProcessedDataService/RemoveDataSetByGuidResponse" message="tns:ITaskProcessedDataService_RemoveDataSetByGuid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetByTaskGuid">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskProcessedDataService/GetDataSetByTaskGuid" message="tns:ITaskProcessedDataService_GetDataSetByTaskGuid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskProcessedDataService/GetDataSetByTaskGuidResponse" message="tns:ITaskProcessedDataService_GetDataSetByTaskGuid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertIntoDataSet">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskProcessedDataService/InsertIntoDataSet" message="tns:ITaskProcessedDataService_InsertIntoDataSet_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskProcessedDataService/InsertIntoDataSetResponse" message="tns:ITaskProcessedDataService_InsertIntoDataSet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertMultipleIntoDataSet">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskProcessedDataService/InsertMultipleIntoDataSet" message="tns:ITaskProcessedDataService_InsertMultipleIntoDataSet_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskProcessedDataService/InsertMultipleIntoDataSetResponse" message="tns:ITaskProcessedDataService_InsertMultipleIntoDataSet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryDataSetRecords">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskProcessedDataService/QueryDataSetRecords" message="tns:ITaskProcessedDataService_QueryDataSetRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskProcessedDataService/QueryDataSetRecordsResponse" message="tns:ITaskProcessedDataService_QueryDataSetRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryDataSet">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskProcessedDataService/QueryDataSet" message="tns:ITaskProcessedDataService_QueryDataSet_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskProcessedDataService/QueryDataSetResponse" message="tns:ITaskProcessedDataService_QueryDataSet_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ITaskProcessedDataService" type="tns:ITaskProcessedDataService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateDataSet">
+      <soap:operation soapAction="http://tempuri.org/ITaskProcessedDataService/CreateDataSet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveDataSetByGuid">
+      <soap:operation soapAction="http://tempuri.org/ITaskProcessedDataService/RemoveDataSetByGuid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSetByTaskGuid">
+      <soap:operation soapAction="http://tempuri.org/ITaskProcessedDataService/GetDataSetByTaskGuid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertIntoDataSet">
+      <soap:operation soapAction="http://tempuri.org/ITaskProcessedDataService/InsertIntoDataSet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertMultipleIntoDataSet">
+      <soap:operation soapAction="http://tempuri.org/ITaskProcessedDataService/InsertMultipleIntoDataSet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryDataSetRecords">
+      <soap:operation soapAction="http://tempuri.org/ITaskProcessedDataService/QueryDataSetRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryDataSet">
+      <soap:operation soapAction="http://tempuri.org/ITaskProcessedDataService/QueryDataSet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TaskProcessedDataService">
+    <wsdl:port name="BasicHttpBinding_ITaskProcessedDataService" binding="tns:BasicHttpBinding_ITaskProcessedDataService">
+      <soap:address location="http://localhost:6736/Service/TaskProcessedDataService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

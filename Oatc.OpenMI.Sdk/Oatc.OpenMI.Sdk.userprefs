@@ -1,0 +1,39 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench>
+    <Files>
+      <File FileName="Backbone/ExchangeItem.cs" Line="1" Column="1" />
+      <File FileName="Backbone/Quantity.cs" Line="1" Column="1" />
+      <File FileName="Backbone/OutputExchangeItem.cs" Line="1" Column="1" />
+      <File FileName="../Gui/ConfigurationEditor/MainForm.cs" Line="1" Column="1" />
+      <File FileName="../Gui/ConfigurationEditor/RunBox.cs" Line="1" Column="1" />
+      <File FileName="../Gui/ConfigurationEditor/RunProperties.cs" Line="1" Column="1" />
+      <File FileName="../Gui/Core/CompositionManager.cs" Line="45" Column="1" />
+      <File FileName="Wrapper/IRunEngine.cs" Line="107" Column="58" />
+      <File FileName="Wrapper/SmartInputLink.cs" Line="40" Column="39" />
+      <File FileName="Wrapper/SmartLink.cs" Line="47" Column="16" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Oatc.OpenMI.Sdk.Wrapper" expanded="True">
+            <Node name="SmartLink.cs" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+      <Pad Id="MonoDevelop.NUnit.TestPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

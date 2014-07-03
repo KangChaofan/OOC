@@ -1,0 +1,40 @@
+{% include 'header.html' %}
+<div class="container-fluid container-wrapper">
+    <div class="row-fluid">
+        <p><strong>账户信息</strong></p>
+        <table class="table table-bordered table-hover table-striped">
+            <tbody>
+                <tr>
+                    <td>账户编号</td>
+                    <td>{{ user.id }}</td>
+                </tr>
+                <tr>
+                    <td>账户名称</td>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <td>手机号码</td>
+                    <td>{{ user.mobile }}</td>
+                </tr>
+                <tr>
+                    <td>创建时间</td>
+                    <td>{{ user.creation }}</td>
+                </tr>
+                <tr>
+                    <td>账户余额</td>
+                    <td>{{ user.balance }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row-fluid">
+        <p><strong>设置新密码</strong></p>
+        <form class="async-form" method="post" data-method="update_password" data-response="success">
+            <p>
+                新密码: <input name="password" type="text" value=""/> 
+                <button type="submit" class="btn btn-danger">设置</button>
+            </p>
+        </form>
+    </div>
+</div>
+{% include 'footer.html' %}

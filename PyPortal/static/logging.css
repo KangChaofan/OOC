@@ -1,0 +1,187 @@
+body {
+    background: #f9f9f9;
+    font: normal 14px/1.4 "Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
+    color: #444;
+    margin: 0;
+    padding: 0;
+}
+.login-content {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+#logo {
+    position: fixed;
+    left: 48.2%;
+    margin-left: -75px;
+    top: 37%;
+    font-weight: bold;
+}
+.login-content .login-forms {
+    left: 50%;
+    opacity: 1;
+    
+}
+.login-forms {
+    position: fixed;
+    display: block;
+    top: 32%;
+    margin: 71px 0 0 -122px;
+    width: 245px;
+    padding: 0 0 60px 0;
+    z-index: 3;
+}
+.login-forms .login-forms-container {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #C9CACF;
+    overflow: hidden;
+    background: white;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-background-clip: padding-box;
+}
+.login-forms-container .login-forms-panel {
+    left: 0;
+    position: relative;
+    width: 1525px;
+}
+form {
+    margin: 0;
+    padding: 0;
+    display: inline;
+}
+.login-view {
+    max-height: 200px;
+}
+.login-forms .login-view {
+    position: relative;
+    float: left;
+    width: 245px;
+    overflow: hidden;
+    padding-right: 245px;
+}
+.login-forms .form-row:first-child {
+    border-top: 0;
+}
+.login-forms .form-row {
+    position: relative;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+.login-content input:-webkit-autofill {
+    background: none!important;
+}
+
+.login-forms input {
+    width: 100%;
+    display: block;
+    padding: 8px 10px 8px 10px;
+    margin: 0;
+    border: 0;
+    background: 0;
+    font: bold 14px/1.4 "Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    height: 38px;
+}
+.login-forms .login-forms-errors {
+    margin: -2px 0 0 0 ;
+    max-height: 0px;
+    opacity: 0;
+    -webkit-font-smoothing: antialiased;
+    list-style-type: none;
+    border: 1px solid rgba(0,0,0,.18);
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    padding: 0;
+    overflow: hidden;
+    clear: both;
+}
+ul {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+.login-forms .login-forms-errors.active {
+    opacity: 1;
+    margin: 15px 0 0 0;
+    max-height: 300px;
+    -webkit-transition-property: max-height,opacity,margin;
+    -webkit-transition-duration: .5s;
+    -webkit-transition-delay:.5s;
+    -webkit-transition-timing-function: ease
+}
+.login-forms-errors .error {
+    text-align: center;
+    padding: 8px 15px;
+    line-height: 16px;
+    font-weight: bold;
+}
+input[type="text"] {
+    color: black;
+}
+.login-forms-submit {
+    width: 100%;
+    margin: 15px 0 0 0;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    padding: 0;
+    line-height: 35px;
+    height: 37px;
+    float: none;
+    display: inline-block;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
+}
+button {
+    padding: 2px 5px 3px;
+}
+.login-forms-submit span {
+    display: block;
+}
+@-webkit-keyframes spaceboots {
+0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
+10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
+30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
+40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
+50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
+60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
+70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
+80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
+90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
+100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
+}
+.shake {
+-webkit-animation-name: spaceboots;
+-webkit-animation-duration: 0.8s;
+-webkit-transform-origin:50% 50%;
+-webkit-animation-timing-function: linear;
+}
+.login-forms .help {
+    opacity: 1;
+    max-height: none;
+    margin: 20px 0 0;
+    float: left;
+    width: 100%;
+    clear: both;
+    color: #30393D;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, .6);
+    text-decoration: none;
+    font-family: "Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+    text-align: center;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+};

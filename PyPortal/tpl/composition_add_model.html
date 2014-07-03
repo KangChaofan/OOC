@@ -1,0 +1,61 @@
+{% include 'header.html' %}
+<div class="container-fluid container-wrapper">
+    <div class="row-fluid">
+        <form action="/composition/doAddModel" method="post" enctype="multipart/form-data">
+            <p><strong>添加模型: {{ model.name }}</strong></p>
+            <table class="table table-bordered table-hover table-striped">
+                <tbody>
+                    <tr>
+                        <td>组合标识</td>
+                        <td>{{ compositionGuid }}</td>
+                    </tr>
+                    <tr>
+                        <td>模型标识</td>
+                        <td>{{ model.guid }}</td>
+                    </tr>
+                    <tr>
+                        <td>模型名称</td>
+                        <td>{{ model.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>模型版本</td>
+                        <td>{{ model.version }}</td>
+                    </tr>
+                    <tr>
+                        <td>模型类名</td>
+                        <td>{{ model.className }}</td>
+                    </tr>
+                    {% for property in properties %}
+                    <tr>
+                        <td>
+                            {{ property.key }}
+                            {% if property.description is not None %}<p>{{ property.description }}</p>{% end %}
+                        </td>
+                        <td>
+                            {% if property.type == 0 or property.type == 1 or property.type == 2 or property.type == 5 %}
+                            <input type="text" name="{{ property.key }}" value="{% if property.default is not None %}{{ property.default }}{% end %}" />
+                            {% end %}
+                            {% if property.type == 4 %}
+                            <input type="file" name="{{ property.key }}" />
+                            {% end %}
+                            {% if property.type == 255 %}
+                            {{ property.default }}
+                            {% end %}
+                        </td>
+                    </tr>
+                    {% end %}
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">添加</button>
+                            <button type="button" onclick="window.location.href='/composition/view/{{ compositionGuid }}'; return false;" class="btn btn-danger">取消</button>
+                        </td>
+                    </td>
+                </tbody>
+            </table>
+            <input type="hidden" name="compositionGuid" value="{{ compositionGuid }}"/>
+            <input type="hidden" name="modelGuid" value="{{ modelGuid }}"/>
+        </form>
+    </div>
+</div>
+{% include 'footer.html' %}

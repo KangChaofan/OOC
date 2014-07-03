@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OOC.Entity" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OOC.Entity" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:6736/Service/TaskProcessedDataService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" />
+  <xs:complexType name="ArrayOfTaskProcessedDataSet">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskProcessedDataSet" nillable="true" type="tns:TaskProcessedDataSet" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskProcessedDataSet" nillable="true" type="tns:ArrayOfTaskProcessedDataSet" />
+  <xs:complexType name="TaskProcessedDataSet">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OOCEntityObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="className" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="cmGuid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="creation" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="taskGuid" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TaskProcessedDataSet" nillable="true" type="tns:TaskProcessedDataSet" />
+  <xs:complexType name="OOCEntityObject">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" base="q1:EntityObject">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="OOCEntityObject" nillable="true" type="tns:OOCEntityObject" />
+  <xs:complexType name="ArrayOfTaskProcessedDataRecord">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskProcessedDataRecord" nillable="true" type="tns:TaskProcessedDataRecord" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskProcessedDataRecord" nillable="true" type="tns:ArrayOfTaskProcessedDataRecord" />
+  <xs:complexType name="TaskProcessedDataRecord">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OOCEntityObject">
+        <xs:sequence>
+          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" minOccurs="0" name="TaskProcessedDataSetReference" nillable="true" type="q2:EntityReferenceOfTaskProcessedDataSetdfwjoNxd" />
+          <xs:element minOccurs="0" name="dataSetGuid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="record" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="seq" type="xs:long" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TaskProcessedDataRecord" nillable="true" type="tns:TaskProcessedDataRecord" />
+</xs:schema>

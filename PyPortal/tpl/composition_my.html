@@ -1,0 +1,33 @@
+{% include 'header.html' %}
+{% import constants %}
+<div class="container-fluid container-wrapper">
+    <div class="row-fluid">
+        <p><strong>模型组合列表</strong></p>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>组合标识</th>
+                    <th>名称</th>
+                    <th>创建时间</th>
+                    <th>修改时间</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for composition in compositions %}
+                    <tr>
+                        <td><a href="/composition/view/{{ composition.guid }}">{{ composition.guid }}</a></td>
+                        <td>{{ composition.title }}</td>
+                        <td>{{ composition.creation }}</td>
+                        <td>{{ composition.modification }}</td>
+                        <td>
+                            <a href="/composition/view/{{ composition.guid }}">打开</a>
+                        </td>
+                    </tr>
+                {% end %}
+            </tbody>
+        </table>
+        <p><button class="btn btn-primary" onclick="window.location.href='/composition/new'">创建模型组合</button></p>
+    </div>
+</div>
+{% include 'footer.html' %}

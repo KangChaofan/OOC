@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="FileService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:6736/Service/FileService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/FileService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/FileService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/FileService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IFileService_Stat_InputMessage">
+    <wsdl:part name="parameters" element="tns:Stat" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_Stat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StatResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_Get_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_Get_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_Delete_InputMessage">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_Delete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_Put_InputMessage">
+    <wsdl:part name="parameters" element="tns:Put" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_Put_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PutResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_Copy_InputMessage">
+    <wsdl:part name="parameters" element="tns:Copy" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_Copy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CopyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_List_InputMessage">
+    <wsdl:part name="parameters" element="tns:List" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_List_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_CreateDirectory_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDirectory" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_CreateDirectory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDirectoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_Read_InputMessage">
+    <wsdl:part name="parameters" element="tns:Read" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_Read_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_Append_InputMessage">
+    <wsdl:part name="parameters" element="tns:Append" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_Append_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AppendResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_Head_InputMessage">
+    <wsdl:part name="parameters" element="tns:Head" />
+  </wsdl:message>
+  <wsdl:message name="IFileService_Head_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HeadResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IFileService">
+    <wsdl:operation name="Stat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileService/Stat" message="tns:IFileService_Stat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileService/StatResponse" message="tns:IFileService_Stat_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileService/Get" message="tns:IFileService_Get_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileService/GetResponse" message="tns:IFileService_Get_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileService/Delete" message="tns:IFileService_Delete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileService/DeleteResponse" message="tns:IFileService_Delete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Put">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileService/Put" message="tns:IFileService_Put_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileService/PutResponse" message="tns:IFileService_Put_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Copy">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileService/Copy" message="tns:IFileService_Copy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileService/CopyResponse" message="tns:IFileService_Copy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="List">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileService/List" message="tns:IFileService_List_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileService/ListResponse" message="tns:IFileService_List_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateDirectory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileService/CreateDirectory" message="tns:IFileService_CreateDirectory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileService/CreateDirectoryResponse" message="tns:IFileService_CreateDirectory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileService/Read" message="tns:IFileService_Read_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileService/ReadResponse" message="tns:IFileService_Read_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Append">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileService/Append" message="tns:IFileService_Append_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileService/AppendResponse" message="tns:IFileService_Append_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Head">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileService/Head" message="tns:IFileService_Head_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileService/HeadResponse" message="tns:IFileService_Head_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IFileService" type="tns:IFileService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Stat">
+      <soap:operation soapAction="http://tempuri.org/IFileService/Stat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <soap:operation soapAction="http://tempuri.org/IFileService/Get" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/IFileService/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Put">
+      <soap:operation soapAction="http://tempuri.org/IFileService/Put" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Copy">
+      <soap:operation soapAction="http://tempuri.org/IFileService/Copy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="List">
+      <soap:operation soapAction="http://tempuri.org/IFileService/List" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDirectory">
+      <soap:operation soapAction="http://tempuri.org/IFileService/CreateDirectory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap:operation soapAction="http://tempuri.org/IFileService/Read" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Append">
+      <soap:operation soapAction="http://tempuri.org/IFileService/Append" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Head">
+      <soap:operation soapAction="http://tempuri.org/IFileService/Head" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FileService">
+    <wsdl:port name="BasicHttpBinding_IFileService" binding="tns:BasicHttpBinding_IFileService">
+      <soap:address location="http://localhost:6736/Service/FileService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="43d29395-9903-4375-8300-45d8b4d81bb1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:6736/Service/InstanceService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="InstanceService.wsdl" MetadataType="Wsdl" ID="5f187361-71e9-4802-b8fb-2472146b14ad" SourceId="1" SourceUrl="http://localhost:6736/Service/InstanceService.svc?wsdl" />
+    <MetadataFile FileName="InstanceService.xsd" MetadataType="Schema" ID="ccbef0be-63ad-43a5-96ad-f43e0ac4664f" SourceId="1" SourceUrl="http://localhost:6736/Service/InstanceService.svc?xsd=xsd0" />
+    <MetadataFile FileName="InstanceService1.xsd" MetadataType="Schema" ID="38a7578a-813f-4a2f-95b9-3c1149c2f740" SourceId="1" SourceUrl="http://localhost:6736/Service/InstanceService.svc?xsd=xsd1" />
+    <MetadataFile FileName="InstanceService2.xsd" MetadataType="Schema" ID="ef66b1f5-5605-4028-a8d7-bc4542b6f9bf" SourceId="1" SourceUrl="http://localhost:6736/Service/InstanceService.svc?xsd=xsd2" />
+    <MetadataFile FileName="InstanceService3.xsd" MetadataType="Schema" ID="d64e1d57-905a-48be-ae1d-a671a12acdf2" SourceId="1" SourceUrl="http://localhost:6736/Service/InstanceService.svc?xsd=xsd3" />
+    <MetadataFile FileName="InstanceService.disco" MetadataType="Disco" ID="b9eb48df-4b70-40bf-9f4f-79ced4b0d8ae" SourceId="1" SourceUrl="http://localhost:6736/Service/InstanceService.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

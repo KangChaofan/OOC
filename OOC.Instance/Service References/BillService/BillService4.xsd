@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:6736/Service/BillService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OOC.Entity" />
+  <xs:element name="Create">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" type="xs:int" />
+        <xs:element minOccurs="0" name="taskGuid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="cmGuid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="amount" type="xs:double" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="GetByIdResult" nillable="true" type="q1:Bill" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetByUserId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetByUserIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="GetByUserIdResult" nillable="true" type="q2:ArrayOfBill" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetByTaskGuid">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="taskGuid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetByTaskGuidResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="GetByTaskGuidResult" nillable="true" type="q3:ArrayOfBill" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetByCmGuid">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cmGuid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetByCmGuidResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/OOC.Entity" minOccurs="0" name="GetByCmGuidResult" nillable="true" type="q4:ArrayOfBill" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Refund">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RefundResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

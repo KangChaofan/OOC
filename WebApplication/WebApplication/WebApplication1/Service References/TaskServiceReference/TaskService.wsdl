@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="TaskService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Response" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/OOC.Entity" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd8" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ITaskService_Create_InputMessage">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_Create_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_SyncComposition_InputMessage">
+    <wsdl:part name="parameters" element="tns:SyncComposition" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_SyncComposition_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SyncCompositionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_UpdateState_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateState" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_UpdateState_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_ReportInstanceFault_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReportInstanceFault" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_ReportInstanceFault_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReportInstanceFaultResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_AssignPendingTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:AssignPendingTask" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_AssignPendingTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AssignPendingTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_QueryTaskByGuid_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryTaskByGuid" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_QueryTaskByGuid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryTaskByGuidResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_QueryModelProgressByGuid_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryModelProgressByGuid" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_QueryModelProgressByGuid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryModelProgressByGuidResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_QueryTaskDataByGuid_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryTaskDataByGuid" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_QueryTaskDataByGuid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryTaskDataByGuidResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_QueryTaskByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryTaskByUserId" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_QueryTaskByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryTaskByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_AddTaskFileMapping_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddTaskFileMapping" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_AddTaskFileMapping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddTaskFileMappingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_GenerateTaskFileName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateTaskFileName" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_GenerateTaskFileName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateTaskFileNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_QueryTaskFileMapping_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryTaskFileMapping" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_QueryTaskFileMapping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryTaskFileMappingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_UpdateModelProgress_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateModelProgress" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_UpdateModelProgress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateModelProgressResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_GetTaskByCompositionAndUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTaskByCompositionAndUser" />
+  </wsdl:message>
+  <wsdl:message name="ITaskService_GetTaskByCompositionAndUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTaskByCompositionAndUserResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ITaskService">
+    <wsdl:operation name="Create">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/Create" message="tns:ITaskService_Create_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/CreateResponse" message="tns:ITaskService_Create_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncComposition">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/SyncComposition" message="tns:ITaskService_SyncComposition_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/SyncCompositionResponse" message="tns:ITaskService_SyncComposition_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateState">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/UpdateState" message="tns:ITaskService_UpdateState_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/UpdateStateResponse" message="tns:ITaskService_UpdateState_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReportInstanceFault">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/ReportInstanceFault" message="tns:ITaskService_ReportInstanceFault_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/ReportInstanceFaultResponse" message="tns:ITaskService_ReportInstanceFault_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AssignPendingTask">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/AssignPendingTask" message="tns:ITaskService_AssignPendingTask_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/AssignPendingTaskResponse" message="tns:ITaskService_AssignPendingTask_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryTaskByGuid">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/QueryTaskByGuid" message="tns:ITaskService_QueryTaskByGuid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/QueryTaskByGuidResponse" message="tns:ITaskService_QueryTaskByGuid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryModelProgressByGuid">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/QueryModelProgressByGuid" message="tns:ITaskService_QueryModelProgressByGuid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/QueryModelProgressByGuidResponse" message="tns:ITaskService_QueryModelProgressByGuid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryTaskDataByGuid">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/QueryTaskDataByGuid" message="tns:ITaskService_QueryTaskDataByGuid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/QueryTaskDataByGuidResponse" message="tns:ITaskService_QueryTaskDataByGuid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryTaskByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/QueryTaskByUserId" message="tns:ITaskService_QueryTaskByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/QueryTaskByUserIdResponse" message="tns:ITaskService_QueryTaskByUserId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddTaskFileMapping">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/AddTaskFileMapping" message="tns:ITaskService_AddTaskFileMapping_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/AddTaskFileMappingResponse" message="tns:ITaskService_AddTaskFileMapping_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateTaskFileName">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/GenerateTaskFileName" message="tns:ITaskService_GenerateTaskFileName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/GenerateTaskFileNameResponse" message="tns:ITaskService_GenerateTaskFileName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryTaskFileMapping">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/QueryTaskFileMapping" message="tns:ITaskService_QueryTaskFileMapping_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/QueryTaskFileMappingResponse" message="tns:ITaskService_QueryTaskFileMapping_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateModelProgress">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/UpdateModelProgress" message="tns:ITaskService_UpdateModelProgress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/UpdateModelProgressResponse" message="tns:ITaskService_UpdateModelProgress_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTaskByCompositionAndUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITaskService/GetTaskByCompositionAndUser" message="tns:ITaskService_GetTaskByCompositionAndUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITaskService/GetTaskByCompositionAndUserResponse" message="tns:ITaskService_GetTaskByCompositionAndUser_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ITaskService" type="tns:ITaskService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncComposition">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/SyncComposition" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateState">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/UpdateState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReportInstanceFault">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/ReportInstanceFault" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssignPendingTask">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/AssignPendingTask" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryTaskByGuid">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/QueryTaskByGuid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryModelProgressByGuid">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/QueryModelProgressByGuid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryTaskDataByGuid">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/QueryTaskDataByGuid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryTaskByUserId">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/QueryTaskByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddTaskFileMapping">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/AddTaskFileMapping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateTaskFileName">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/GenerateTaskFileName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryTaskFileMapping">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/QueryTaskFileMapping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateModelProgress">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/UpdateModelProgress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTaskByCompositionAndUser">
+      <soap:operation soapAction="http://tempuri.org/ITaskService/GetTaskByCompositionAndUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TaskService">
+    <wsdl:port name="BasicHttpBinding_ITaskService" binding="tns:BasicHttpBinding_ITaskService">
+      <soap:address location="http://localhost:6736/Service/TaskService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

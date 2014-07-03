@@ -1,0 +1,9 @@
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.btn-download').click(function() {
+        var fileName = $(this).data('file');
+        var path = $(this).data('name');
+        window.location.href = '/task/file/download/' + path + '?fileName=' + encodeURIComponent(fileName);
+    });
+});
+</script>

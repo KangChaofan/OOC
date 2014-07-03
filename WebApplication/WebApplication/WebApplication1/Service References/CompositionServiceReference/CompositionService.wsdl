@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CompositionService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:6736/Service/CompositionService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/CompositionService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/CompositionService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OOC.Entity" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/CompositionService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/CompositionService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/CompositionService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/CompositionService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract" />
+      <xsd:import schemaLocation="http://localhost:6736/Service/CompositionService.svc?xsd=xsd7" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICompositionService_QueryCompositionByAuthorUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryCompositionByAuthorUserId" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_QueryCompositionByAuthorUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryCompositionByAuthorUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_QueryCompositionByKeyword_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryCompositionByKeyword" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_QueryCompositionByKeyword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryCompositionByKeywordResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_QueryCompositionByModel_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryCompositionByModel" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_QueryCompositionByModel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryCompositionByModelResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_Create_InputMessage">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_Create_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetCompositionModels_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompositionModels" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetCompositionModels_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompositionModelsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetCompositionModelsData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompositionModelsData" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetCompositionModelsData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompositionModelsDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_CreateCompositionModel_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCompositionModel" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_CreateCompositionModel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCompositionModelResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_UpdateCompositionModelProperties_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCompositionModelProperties" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_UpdateCompositionModelProperties_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCompositionModelPropertiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_UpdateCompositionModelProperty_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCompositionModelProperty" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_UpdateCompositionModelProperty_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCompositionModelPropertyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetCompositionModel_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompositionModel" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetCompositionModel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompositionModelResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetCompositionModelData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompositionModelData" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetCompositionModelData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompositionModelDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_RemoveModel_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveModel" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_RemoveModel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveModelResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetCompositionLinks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompositionLinks" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetCompositionLinks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompositionLinksResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetCompositionLinksData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompositionLinksData" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetCompositionLinksData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompositionLinksDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_CreateCompositionLink_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCompositionLink" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_CreateCompositionLink_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCompositionLinkResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetCompositionLink_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompositionLink" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetCompositionLink_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompositionLinkResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetCompositionLinkData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompositionLinkData" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetCompositionLinkData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompositionLinkDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_RemoveCompositionLink_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveCompositionLink" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_RemoveCompositionLink_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveCompositionLinkResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetCompositionData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompositionData" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetCompositionData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompositionDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GenerateInputFileName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateInputFileName" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GenerateInputFileName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateInputFileNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetInputFileNames_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInputFileNames" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_GetInputFileNames_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInputFileNamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_UpdateCompositionTitle_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCompositionTitle" />
+  </wsdl:message>
+  <wsdl:message name="ICompositionService_UpdateCompositionTitle_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCompositionTitleResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICompositionService">
+    <wsdl:operation name="QueryCompositionByAuthorUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/QueryCompositionByAuthorUserId" message="tns:ICompositionService_QueryCompositionByAuthorUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/QueryCompositionByAuthorUserIdResponse" message="tns:ICompositionService_QueryCompositionByAuthorUserId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryCompositionByKeyword">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/QueryCompositionByKeyword" message="tns:ICompositionService_QueryCompositionByKeyword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/QueryCompositionByKeywordResponse" message="tns:ICompositionService_QueryCompositionByKeyword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryCompositionByModel">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/QueryCompositionByModel" message="tns:ICompositionService_QueryCompositionByModel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/QueryCompositionByModelResponse" message="tns:ICompositionService_QueryCompositionByModel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/Create" message="tns:ICompositionService_Create_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/CreateResponse" message="tns:ICompositionService_Create_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompositionModels">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/GetCompositionModels" message="tns:ICompositionService_GetCompositionModels_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/GetCompositionModelsResponse" message="tns:ICompositionService_GetCompositionModels_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompositionModelsData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/GetCompositionModelsData" message="tns:ICompositionService_GetCompositionModelsData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/GetCompositionModelsDataResponse" message="tns:ICompositionService_GetCompositionModelsData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateCompositionModel">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/CreateCompositionModel" message="tns:ICompositionService_CreateCompositionModel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/CreateCompositionModelResponse" message="tns:ICompositionService_CreateCompositionModel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCompositionModelProperties">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/UpdateCompositionModelProperties" message="tns:ICompositionService_UpdateCompositionModelProperties_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/UpdateCompositionModelPropertiesResponse" message="tns:ICompositionService_UpdateCompositionModelProperties_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCompositionModelProperty">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/UpdateCompositionModelProperty" message="tns:ICompositionService_UpdateCompositionModelProperty_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/UpdateCompositionModelPropertyResponse" message="tns:ICompositionService_UpdateCompositionModelProperty_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompositionModel">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/GetCompositionModel" message="tns:ICompositionService_GetCompositionModel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/GetCompositionModelResponse" message="tns:ICompositionService_GetCompositionModel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompositionModelData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/GetCompositionModelData" message="tns:ICompositionService_GetCompositionModelData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/GetCompositionModelDataResponse" message="tns:ICompositionService_GetCompositionModelData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveModel">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/RemoveModel" message="tns:ICompositionService_RemoveModel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/RemoveModelResponse" message="tns:ICompositionService_RemoveModel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompositionLinks">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/GetCompositionLinks" message="tns:ICompositionService_GetCompositionLinks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/GetCompositionLinksResponse" message="tns:ICompositionService_GetCompositionLinks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompositionLinksData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/GetCompositionLinksData" message="tns:ICompositionService_GetCompositionLinksData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/GetCompositionLinksDataResponse" message="tns:ICompositionService_GetCompositionLinksData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateCompositionLink">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/CreateCompositionLink" message="tns:ICompositionService_CreateCompositionLink_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/CreateCompositionLinkResponse" message="tns:ICompositionService_CreateCompositionLink_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompositionLink">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/GetCompositionLink" message="tns:ICompositionService_GetCompositionLink_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/GetCompositionLinkResponse" message="tns:ICompositionService_GetCompositionLink_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompositionLinkData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/GetCompositionLinkData" message="tns:ICompositionService_GetCompositionLinkData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/GetCompositionLinkDataResponse" message="tns:ICompositionService_GetCompositionLinkData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCompositionLink">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/RemoveCompositionLink" message="tns:ICompositionService_RemoveCompositionLink_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/RemoveCompositionLinkResponse" message="tns:ICompositionService_RemoveCompositionLink_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompositionData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/GetCompositionData" message="tns:ICompositionService_GetCompositionData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/GetCompositionDataResponse" message="tns:ICompositionService_GetCompositionData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateInputFileName">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/GenerateInputFileName" message="tns:ICompositionService_GenerateInputFileName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/GenerateInputFileNameResponse" message="tns:ICompositionService_GenerateInputFileName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInputFileNames">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/GetInputFileNames" message="tns:ICompositionService_GetInputFileNames_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/GetInputFileNamesResponse" message="tns:ICompositionService_GetInputFileNames_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCompositionTitle">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICompositionService/UpdateCompositionTitle" message="tns:ICompositionService_UpdateCompositionTitle_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICompositionService/UpdateCompositionTitleResponse" message="tns:ICompositionService_UpdateCompositionTitle_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ICompositionService" type="tns:ICompositionService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="QueryCompositionByAuthorUserId">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/QueryCompositionByAuthorUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryCompositionByKeyword">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/QueryCompositionByKeyword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryCompositionByModel">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/QueryCompositionByModel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/Create" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompositionModels">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/GetCompositionModels" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompositionModelsData">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/GetCompositionModelsData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCompositionModel">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/CreateCompositionModel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCompositionModelProperties">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/UpdateCompositionModelProperties" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCompositionModelProperty">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/UpdateCompositionModelProperty" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompositionModel">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/GetCompositionModel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompositionModelData">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/GetCompositionModelData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveModel">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/RemoveModel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompositionLinks">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/GetCompositionLinks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompositionLinksData">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/GetCompositionLinksData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCompositionLink">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/CreateCompositionLink" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompositionLink">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/GetCompositionLink" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompositionLinkData">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/GetCompositionLinkData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveCompositionLink">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/RemoveCompositionLink" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompositionData">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/GetCompositionData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateInputFileName">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/GenerateInputFileName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInputFileNames">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/GetInputFileNames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCompositionTitle">
+      <soap:operation soapAction="http://tempuri.org/ICompositionService/UpdateCompositionTitle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CompositionService">
+    <wsdl:port name="BasicHttpBinding_ICompositionService" binding="tns:BasicHttpBinding_ICompositionService">
+      <soap:address location="http://localhost:6736/Service/CompositionService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

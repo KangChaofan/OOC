@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OOC.Entity" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OOC.Entity" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:6736/Service/TaskService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" />
+  <xs:complexType name="Composition">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OOCEntityObject">
+        <xs:sequence>
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" minOccurs="0" name="UserReference" nillable="true" type="q1:EntityReferenceOfUserdfwjoNxd" />
+          <xs:element minOccurs="0" name="authorUserId" type="xs:long" />
+          <xs:element minOccurs="0" name="creation" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isFinished" type="xs:boolean" />
+          <xs:element minOccurs="0" name="isShared" type="xs:boolean" />
+          <xs:element minOccurs="0" name="modification" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="title" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Composition" nillable="true" type="tns:Composition" />
+  <xs:complexType name="OOCEntityObject">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" base="q2:EntityObject">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="OOCEntityObject" nillable="true" type="tns:OOCEntityObject" />
+  <xs:complexType name="CompositionLink">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OOCEntityObject">
+        <xs:sequence>
+          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" minOccurs="0" name="CompositionModelSourceReference" nillable="true" type="q3:EntityReferenceOfCompositionModeldfwjoNxd" />
+          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" minOccurs="0" name="CompositionModelTargetReference" nillable="true" type="q4:EntityReferenceOfCompositionModeldfwjoNxd" />
+          <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" minOccurs="0" name="CompositionReference" nillable="true" type="q5:EntityReferenceOfCompositiondfwjoNxd" />
+          <xs:element minOccurs="0" name="compositionGuid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="creation" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="dataOperation" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="modification" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="sourceCmGuid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="sourceElementSet" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="sourceQuantity" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="targetCmGuid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="targetElementSet" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="targetQuantity" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CompositionLink" nillable="true" type="tns:CompositionLink" />
+  <xs:complexType name="CompositionModel">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OOCEntityObject">
+        <xs:sequence>
+          <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" minOccurs="0" name="CompositionReference" nillable="true" type="q6:EntityReferenceOfCompositiondfwjoNxd" />
+          <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" minOccurs="0" name="ModelReference" nillable="true" type="q7:EntityReferenceOfModeldfwjoNxd" />
+          <xs:element minOccurs="0" name="compositionGuid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="creation" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="modelGuid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="modification" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="properties" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CompositionModel" nillable="true" type="tns:CompositionModel" />
+  <xs:complexType name="Model">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OOCEntityObject">
+        <xs:sequence>
+          <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" minOccurs="0" name="AuthorUserReference" nillable="true" type="q8:EntityReferenceOfUserdfwjoNxd" />
+          <xs:element minOccurs="0" name="abstract" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="authorUserId" type="xs:long" />
+          <xs:element minOccurs="0" name="className" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="creation" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="eName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isApproved" type="xs:boolean" />
+          <xs:element minOccurs="0" name="isPublic" type="xs:boolean" />
+          <xs:element minOccurs="0" name="modification" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="riverBasin" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="topId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="typeId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="version" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Model" nillable="true" type="tns:Model" />
+  <xs:complexType name="ArrayOfModelFileMapping">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ModelFileMapping" nillable="true" type="tns:ModelFileMapping" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfModelFileMapping" nillable="true" type="tns:ArrayOfModelFileMapping" />
+  <xs:complexType name="ModelFileMapping">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OOCEntityObject">
+        <xs:sequence>
+          <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" minOccurs="0" name="ModelReference" nillable="true" type="q9:EntityReferenceOfModeldfwjoNxd" />
+          <xs:element minOccurs="0" name="creation" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isDataProcessor" type="xs:boolean" />
+          <xs:element minOccurs="0" name="isDocument" type="xs:boolean" />
+          <xs:element minOccurs="0" name="isMainLibrary" type="xs:boolean" />
+          <xs:element minOccurs="0" name="modelGuid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="modification" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="relativePath" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="signature" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ModelFileMapping" nillable="true" type="tns:ModelFileMapping" />
+  <xs:complexType name="ArrayOfModelProperty">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ModelProperty" nillable="true" type="tns:ModelProperty" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfModelProperty" nillable="true" type="tns:ArrayOfModelProperty" />
+  <xs:complexType name="ModelProperty">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OOCEntityObject">
+        <xs:sequence>
+          <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" minOccurs="0" name="ModelReference" nillable="true" type="q10:EntityReferenceOfModeldfwjoNxd" />
+          <xs:element minOccurs="0" name="additional" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="creation" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="default" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="key" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="modelGuid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="modification" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="type" type="xs:byte" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ModelProperty" nillable="true" type="tns:ModelProperty" />
+  <xs:complexType name="ArrayOfTaskFileMapping">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskFileMapping" nillable="true" type="tns:TaskFileMapping" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskFileMapping" nillable="true" type="tns:ArrayOfTaskFileMapping" />
+  <xs:complexType name="TaskFileMapping">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OOCEntityObject">
+        <xs:sequence>
+          <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" minOccurs="0" name="TaskReference" nillable="true" type="q11:EntityReferenceOfTaskdfwjoNxd" />
+          <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isDownloadable" type="xs:boolean" />
+          <xs:element minOccurs="0" name="relativePath" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="taskGuid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="type" type="xs:byte" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TaskFileMapping" nillable="true" type="tns:TaskFileMapping" />
+  <xs:complexType name="Task">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OOCEntityObject">
+        <xs:sequence>
+          <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" minOccurs="0" name="CompositionReference" nillable="true" type="q12:EntityReferenceOfCompositiondfwjoNxd" />
+          <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" minOccurs="0" name="UserReference" nillable="true" type="q13:EntityReferenceOfUserdfwjoNxd" />
+          <xs:element minOccurs="0" name="compositionData" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="compositionGuid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="creation" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="guid" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="instanceName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="modelProgress" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="modification" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="state" type="xs:byte" />
+          <xs:element minOccurs="0" name="timeFinished" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="timeStarted" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="triggerInvokeTime" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userId" type="xs:long" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Task" nillable="true" type="tns:Task" />
+  <xs:complexType name="ArrayOfTask">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Task" nillable="true" type="tns:Task" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTask" nillable="true" type="tns:ArrayOfTask" />
+</xs:schema>

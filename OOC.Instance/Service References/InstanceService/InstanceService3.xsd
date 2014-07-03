@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:6736/Service/InstanceService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Request" />
+  <xs:complexType name="NodeSystemStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AvailableRamSize" type="xs:long" />
+      <xs:element minOccurs="0" name="LoadAverage" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ProcessCount" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalRamSize" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NodeSystemStatus" nillable="true" type="tns:NodeSystemStatus" />
+  <xs:complexType name="InstanceStatus">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Request" base="q1:InstanceHeartbeatStatus">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="InstanceEndPoint" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LastHeartbeat" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="InstanceStatus" nillable="true" type="tns:InstanceStatus" />
+</xs:schema>

@@ -1,0 +1,945 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{14A49AD4-3585-4C34-B39E-4801A4276750}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebApplication1</RootNamespace>
+    <AssemblyName>WebApplication1</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\WebApplication1.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\WebApplication1.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\WebApplication1.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\WebApplication1.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Oatc.OpenMI.Examples.ModelComponents.SimpleRiver.Wrapper, Version=1.3.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\x86\Debug\Oatc.OpenMI.Examples.ModelComponents.SimpleRiver.Wrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="OOC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\datatable.css" />
+    <Content Include="css\elfinder.css" />
+    <Content Include="css\fancybox.css" />
+    <Content Include="css\font.css" />
+    <Content Include="css\fullcalendar.css" />
+    <Content Include="css\ie.css" />
+    <Content Include="css\main.css" />
+    <Content Include="css\plugins.css" />
+    <Content Include="css\prettyPhoto.css" />
+    <Content Include="css\reset.css" />
+    <Content Include="css\styles.css" />
+    <Content Include="css\ui_custom.css" />
+    <Content Include="default.aspx" />
+    <Content Include="forms.aspx" />
+    <Content Include="ForMutilTest.aspx" />
+    <Content Include="ForSession.aspx" />
+    <Content Include="images\backgrounds\body.jpg" />
+    <Content Include="images\backgrounds\breadcrumbs.png" />
+    <Content Include="images\backgrounds\contentTop.png" />
+    <Content Include="images\backgrounds\side.jpg" />
+    <Content Include="images\backgrounds\sidebar.jpg" />
+    <Content Include="images\backgrounds\top.jpg" />
+    <Content Include="images\demo.png" />
+    <Content Include="images\div.png" />
+    <Content Include="images\dropFiles.png" />
+    <Content Include="images\elements\colorPicker\select.png" />
+    <Content Include="images\elements\control\hasddArrow.png" />
+    <Content Include="images\elements\control\headSubmit.png" />
+    <Content Include="images\elements\control\resultsarrow.png" />
+    <Content Include="images\elements\control\rightArrow.png" />
+    <Content Include="images\elements\control\subnav_arrow.png" />
+    <Content Include="images\elements\forms\addFiles.png" />
+    <Content Include="images\elements\forms\checkboxes.png" />
+    <Content Include="images\elements\forms\radios.png" />
+    <Content Include="images\elements\forms\selectArrow.png" />
+    <Content Include="images\elements\lightbox\blank.gif" />
+    <Content Include="images\elements\lightbox\fancybox.png" />
+    <Content Include="images\elements\loaders\1.gif" />
+    <Content Include="images\elements\loaders\10.gif" />
+    <Content Include="images\elements\loaders\10s.gif" />
+    <Content Include="images\elements\loaders\1s.gif" />
+    <Content Include="images\elements\loaders\2.gif" />
+    <Content Include="images\elements\loaders\2s.gif" />
+    <Content Include="images\elements\loaders\3.gif" />
+    <Content Include="images\elements\loaders\3s.gif" />
+    <Content Include="images\elements\loaders\4.gif" />
+    <Content Include="images\elements\loaders\4s.gif" />
+    <Content Include="images\elements\loaders\5.gif" />
+    <Content Include="images\elements\loaders\5s.gif" />
+    <Content Include="images\elements\loaders\6.gif" />
+    <Content Include="images\elements\loaders\6s.gif" />
+    <Content Include="images\elements\loaders\7.gif" />
+    <Content Include="images\elements\loaders\7s.gif" />
+    <Content Include="images\elements\loaders\8.gif" />
+    <Content Include="images\elements\loaders\8s.gif" />
+    <Content Include="images\elements\loaders\9.gif" />
+    <Content Include="images\elements\loaders\9s.gif" />
+    <Content Include="images\elements\other\contact_status.png" />
+    <Content Include="images\elements\other\dropped.png" />
+    <Content Include="images\elements\other\dropTopArrow.png" />
+    <Content Include="images\elements\other\fileError.png" />
+    <Content Include="images\elements\other\fileSuccess.png" />
+    <Content Include="images\elements\other\grown.png" />
+    <Content Include="images\elements\other\iButton.png" />
+    <Content Include="images\elements\other\iTop.png" />
+    <Content Include="images\elements\other\link.png" />
+    <Content Include="images\elements\other\messageArrow_left.png" />
+    <Content Include="images\elements\other\messageArrow_right.png" />
+    <Content Include="images\elements\other\overlay.png" />
+    <Content Include="images\elements\other\photo.png" />
+    <Content Include="images\elements\other\removeLi.png" />
+    <Content Include="images\elements\other\tableArrows.png" />
+    <Content Include="images\elements\other\taskDone.png" />
+    <Content Include="images\elements\other\taskPending.png" />
+    <Content Include="images\elements\other\taskProgress.png" />
+    <Content Include="images\elements\other\updateDone.png" />
+    <Content Include="images\elements\other\updateNotice.png" />
+    <Content Include="images\elements\other\updateWarning.png" />
+    <Content Include="images\elements\other\userArrow.png" />
+    <Content Include="images\elements\ui\progress.png" />
+    <Content Include="images\elements\ui\triangles.png" />
+    <Content Include="images\elements\uploader\drag.png" />
+    <Content Include="images\elements\wysiwyg\buttons.gif" />
+    <Content Include="images\elements\wysiwyg\toolbar.gif" />
+    <Content Include="images\gallery.png" />
+    <Content Include="images\icons\breadsArrow.png" />
+    <Content Include="images\icons\breadsHome.png" />
+    <Content Include="images\icons\color\config.png" />
+    <Content Include="images\icons\color\donate.png" />
+    <Content Include="images\icons\color\hire-me.png" />
+    <Content Include="images\icons\color\issue.png" />
+    <Content Include="images\icons\color\order-149.png" />
+    <Content Include="images\icons\delete.png" />
+    <Content Include="images\icons\mainnav\dashboard.png" />
+    <Content Include="images\icons\mainnav\forms.png" />
+    <Content Include="images\icons\mainnav\other.png" />
+    <Content Include="images\icons\mainnav\statistics.png" />
+    <Content Include="images\icons\mainnav\tables.png" />
+    <Content Include="images\icons\mainnav\ui.png" />
+    <Content Include="images\icons\middlenav\add.png" />
+    <Content Include="images\icons\middlenav\create.png" />
+    <Content Include="images\icons\middlenav\dialogs.png" />
+    <Content Include="images\icons\middlenav\stats.png" />
+    <Content Include="images\icons\middlenav\upload.png" />
+    <Content Include="images\icons\quickstats\money.png" />
+    <Content Include="images\icons\quickstats\plus.png" />
+    <Content Include="images\icons\sidebarButtons\users.png" />
+    <Content Include="images\icons\update.png" />
+    <Content Include="images\icons\usernav\logout.png" />
+    <Content Include="images\icons\usernav\messages.png" />
+    <Content Include="images\icons\usernav\profile.png" />
+    <Content Include="images\icons\usernav\screen.png" />
+    <Content Include="images\icons\usernav\search.png" />
+    <Content Include="images\icons\usernav\settings.png" />
+    <Content Include="images\icons\usernav\sidebar.png" />
+    <Content Include="images\icons\usual\icon-download.png" />
+    <Content Include="images\live\face1.png" />
+    <Content Include="images\live\face2.png" />
+    <Content Include="images\live\face3.png" />
+    <Content Include="images\live\face4.png" />
+    <Content Include="images\live\face5.png" />
+    <Content Include="images\live\face6.png" />
+    <Content Include="images\live\face7.png" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\newLogo.png" />
+    <Content Include="images\sprites\paymentIcons.png" />
+    <Content Include="images\sprites\sprite.png" />
+    <Content Include="images\subArrow.png" />
+    <Content Include="images\switcher\1.png" />
+    <Content Include="images\switcher\10.png" />
+    <Content Include="images\switcher\2.png" />
+    <Content Include="images\switcher\3.png" />
+    <Content Include="images\switcher\4.png" />
+    <Content Include="images\switcher\5.png" />
+    <Content Include="images\switcher\6.png" />
+    <Content Include="images\switcher\7.png" />
+    <Content Include="images\switcher\8.png" />
+    <Content Include="images\switcher\9.png" />
+    <Content Include="images\switcher\bg.png" />
+    <Content Include="images\tables\searchSmall.png" />
+    <Content Include="images\tables\sort.png" />
+    <Content Include="images\tables\sort_both.png" />
+    <Content Include="images\user.png" />
+    <Content Include="images\widgetDiv.png" />
+    <Content Include="index.aspx" />
+    <Content Include="introduce_Content.aspx" />
+    <Content Include="js\charts\bar.js" />
+    <Content Include="js\charts\bar_side.js" />
+    <Content Include="js\charts\chart.js" />
+    <Content Include="js\charts\chart_side.js" />
+    <Content Include="js\charts\hBar.js" />
+    <Content Include="js\charts\hBar_side.js" />
+    <Content Include="js\charts\pie.js" />
+    <Content Include="js\charts\updating.js" />
+    <Content Include="js\files\bootstrap.js" />
+    <Content Include="js\files\functions.js" />
+    <Content Include="js\files\roundLoader.js" />
+    <Content Include="js\plugins\charts\excanvas.min.js" />
+    <Content Include="js\plugins\charts\jquery.flot.axislabels.js" />
+    <Content Include="js\plugins\charts\jquery.flot.js" />
+    <Content Include="js\plugins\charts\jquery.flot.orderBars.js" />
+    <Content Include="js\plugins\charts\jquery.flot.pie.js" />
+    <Content Include="js\plugins\charts\jquery.flot.resize.js" />
+    <Content Include="js\plugins\charts\jquery.flot.symbol.js" />
+    <Content Include="js\plugins\charts\jquery.flot.time.js" />
+    <Content Include="js\plugins\charts\jquery.numberformatter-1.2.3.min.js" />
+    <Content Include="js\plugins\charts\jquery.sparkline.min.js" />
+    <Content Include="js\plugins\charts\jshashtable-2.1.js" />
+    <Content Include="js\plugins\forms\autogrowtextarea.js" />
+    <Content Include="js\plugins\forms\chosen.jquery.min.js" />
+    <Content Include="js\plugins\forms\jquery.autotab.js" />
+    <Content Include="js\plugins\forms\jquery.chosen.min.js" />
+    <Content Include="js\plugins\forms\jquery.cleditor.js" />
+    <Content Include="js\plugins\forms\jquery.cleditor.min.js" />
+    <Content Include="js\plugins\forms\jquery.dualListBox.js" />
+    <Content Include="js\plugins\forms\jquery.ibutton.js" />
+    <Content Include="js\plugins\forms\jquery.inputlimiter.min.js" />
+    <Content Include="js\plugins\forms\jquery.maskedinput.min.js" />
+    <Content Include="js\plugins\forms\jquery.mousewheel.js" />
+    <Content Include="js\plugins\forms\jquery.tagsinput.min.js" />
+    <Content Include="js\plugins\forms\jquery.uniform.js" />
+    <Content Include="js\plugins\forms\jquery.validationEngine-en.js" />
+    <Content Include="js\plugins\forms\jquery.validationEngine.js" />
+    <Content Include="js\plugins\forms\ui.spinner.js" />
+    <Content Include="js\plugins\forms\uniform.js" />
+    <Content Include="js\plugins\layer\extend\layer.ext.js" />
+    <Content Include="js\plugins\layer\layer.js" />
+    <Content Include="js\plugins\layer\layer.min.js" />
+    <Content Include="js\plugins\layer\skin\default\textbg.png" />
+    <Content Include="js\plugins\layer\skin\default\xubox_ico0.png" />
+    <Content Include="js\plugins\layer\skin\default\xubox_loading0.gif" />
+    <Content Include="js\plugins\layer\skin\default\xubox_loading1.gif" />
+    <Content Include="js\plugins\layer\skin\default\xubox_loading2.gif" />
+    <Content Include="js\plugins\layer\skin\default\xubox_loading3.gif" />
+    <Content Include="js\plugins\layer\skin\default\xubox_title0.png" />
+    <Content Include="js\plugins\layer\skin\layer.css" />
+    <Content Include="js\plugins\layer\skin\layer.ext.css" />
+    <Content Include="js\plugins\others\jquery.elfinder.js" />
+    <Content Include="js\plugins\others\jquery.fullcalendar.js" />
+    <Content Include="js\plugins\tables\jquery.dataTables.js" />
+    <Content Include="js\plugins\tables\jquery.resizable.js" />
+    <Content Include="js\plugins\tables\jquery.sortable.js" />
+    <Content Include="js\plugins\ui\jquery.breadcrumbs.js" />
+    <Content Include="js\plugins\ui\jquery.collapsible.min.js" />
+    <Content Include="js\plugins\ui\jquery.colorpicker.js" />
+    <Content Include="js\plugins\ui\jquery.easytabs.min.js" />
+    <Content Include="js\plugins\ui\jquery.fancybox.js" />
+    <Content Include="js\plugins\ui\jquery.fileTree.js" />
+    <Content Include="js\plugins\ui\jquery.jgrowl.js" />
+    <Content Include="js\plugins\ui\jquery.progress.js" />
+    <Content Include="js\plugins\ui\jquery.rounded.progress.js" />
+    <Content Include="js\plugins\ui\jquery.sourcerer.js" />
+    <Content Include="js\plugins\ui\jquery.timeentry.min.js" />
+    <Content Include="js\plugins\ui\jquery.tipsy.js" />
+    <Content Include="js\plugins\uploader\jquery.plupload.queue.js" />
+    <Content Include="js\plugins\uploader\jquery.uploadify.js" />
+    <Content Include="js\plugins\uploader\plupload.html4.js" />
+    <Content Include="js\plugins\uploader\plupload.html5.js" />
+    <Content Include="js\plugins\uploader\plupload.js" />
+    <Content Include="js\plugins\uploadify\jquery.uploadify.js" />
+    <Content Include="js\plugins\uploadify\jquery.uploadify.min.js" />
+    <Content Include="js\plugins\uploadify\uploadify-cancel.png" />
+    <Content Include="js\plugins\uploadify\uploadify.css" />
+    <Content Include="js\plugins\uploadify\uploadify.swf" />
+    <Content Include="js\plugins\wizards\jquery.form.js" />
+    <Content Include="js\plugins\wizards\jquery.form.wizard.js" />
+    <Content Include="js\plugins\wizards\jquery.validate.js" />
+    <Content Include="LatestResultShow.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="messages.aspx" />
+    <Content Include="other_403.html" />
+    <Content Include="other_404.html" />
+    <Content Include="other_405.html" />
+    <Content Include="other_500.html" />
+    <Content Include="other_calendar.aspx" />
+    <Content Include="other_calendar.html" />
+    <Content Include="other_file_manager.html" />
+    <Content Include="other_gallery.html" />
+    <Content Include="other_invoice.html" />
+    <Content Include="other_offline.html" />
+    <Content Include="other_typography.html" />
+    <Content Include="ParamBianJieKongZhi.aspx" />
+    <Content Include="ParamCanShuPeiZhi.aspx" />
+    <Content Include="ParamChuShiTiaoJian.aspx" />
+    <Content Include="ParamGuoChengKongZhi.aspx" />
+    <Content Include="ResultShow.aspx" />
+    <Content Include="ResultShow_Content.aspx" />
+    <Content Include="runModel.aspx" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\jquery-1.8.0.js" />
+    <Content Include="Scripts\jquery-1.8.0.min.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\Jquery.Query.js" />
+    <Content Include="Scripts\JScript1.js" />
+    <Content Include="Properties\DataSources\System.Data.DataSet.datasource" />
+    <Content Include="Properties\DataSources\OOC.Contract.Data.Common.CompositionData.datasource" />
+    <Content Include="Properties\DataSources\OOC.Contract.Data.Common.CompositionLinkData.datasource" />
+    <Content Include="Properties\DataSources\OOC.Contract.Data.Common.CompositionModelData.datasource" />
+    <Content Include="Properties\DataSources\OOC.Entity.Composition.datasource" />
+    <Content Include="Properties\DataSources\OOC.Entity.CompositionLink.datasource" />
+    <Content Include="Properties\DataSources\OOC.Entity.CompositionModel.datasource" />
+    <None Include="Service References\CompositionServiceReference\CompositionService.wsdl" />
+    <Content Include="Properties\DataSources\OOC.Entity.TaskProcessedDataSet.datasource" />
+    <Content Include="Properties\DataSources\OOC.Entity.TaskProcessedDataRecord.datasource" />
+    <None Include="Service References\CompositionServiceReference\CompositionService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CompositionServiceReference\CompositionService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CompositionServiceReference\CompositionService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CompositionServiceReference\CompositionService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CompositionServiceReference\CompositionService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CompositionServiceReference\CompositionService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CompositionServiceReference\CompositionService6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CompositionServiceReference\CompositionService7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ModelServiceReference\ModelService.disco" />
+    <None Include="Service References\ModelServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\ModelServiceReference\configuration.svcinfo" />
+    <None Include="Service References\ModelServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ModelTypeServiceReference\ModelTypeService.disco" />
+    <None Include="Service References\ModelTypeServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\ModelTypeServiceReference\configuration.svcinfo" />
+    <None Include="Service References\ModelTypeServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\CompositionServiceReference\CompositionService.disco" />
+    <None Include="Service References\CompositionServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\CompositionServiceReference\configuration.svcinfo" />
+    <None Include="Service References\CompositionServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service References\ResultLogsServiceReference\ResultLogsService.disco" />
+    <Content Include="Service References\ResultLogsServiceReference\configuration91.svcinfo" />
+    <Content Include="Service References\ResultLogsServiceReference\configuration.svcinfo" />
+    <Content Include="Service References\ResultLogsServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Service References\TaskProcessedDataSetServiceReference\TaskProcessedDataService.disco" />
+    <None Include="Service References\TaskProcessedDataSetServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\TaskProcessedDataSetServiceReference\configuration.svcinfo" />
+    <None Include="Service References\TaskProcessedDataSetServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service References\TaskServiceReference\TaskService.wsdl" />
+    <None Include="Service References\TaskProcessedDataSetServiceReference\TaskProcessedDataService.wsdl" />
+    <None Include="Service References\TaskProcessedDataSetServiceReference\TaskProcessedDataService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaskProcessedDataSetServiceReference\TaskProcessedDataService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaskProcessedDataSetServiceReference\TaskProcessedDataService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaskProcessedDataSetServiceReference\TaskProcessedDataService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaskProcessedDataSetServiceReference\TaskProcessedDataService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaskProcessedDataSetServiceReference\TaskProcessedDataService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaskServiceReference\TaskService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaskServiceReference\TaskService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaskServiceReference\TaskService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaskServiceReference\TaskService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaskServiceReference\TaskService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaskServiceReference\TaskService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaskServiceReference\TaskService6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaskServiceReference\TaskService7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TaskServiceReference\TaskService8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\TaskServiceReference\WebApplication1.TaskServiceReference.ModelProgress.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TaskServiceReference\WebApplication1.TaskServiceReference.Task.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TaskServiceReference\WebApplication1.TaskServiceReference.TaskAssignResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TaskServiceReference\WebApplication1.TaskServiceReference.TaskDataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TaskServiceReference\WebApplication1.TaskServiceReference.TaskFileMapping.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\UserServiceReference\UserService.disco" />
+    <None Include="Service References\UserServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\UserServiceReference\configuration.svcinfo" />
+    <None Include="Service References\UserServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service References\TaskServiceReference\TaskService.disco" />
+    <Content Include="Service References\TaskServiceReference\configuration91.svcinfo" />
+    <Content Include="Service References\TaskServiceReference\configuration.svcinfo" />
+    <Content Include="Service References\TaskServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Single_Model.aspx" />
+    <Content Include="Single_Model_Content.aspx" />
+    <Content Include="statistics.aspx" />
+    <Content Include="introduce.aspx" />
+    <Content Include="ui.aspx" />
+    <Content Include="UserControl\Breadcrumbs.ascx" />
+    <Content Include="UserControl\MainNav.ascx" />
+    <Content Include="UserControl\subNav.ascx" />
+    <Content Include="UserControl\top.ascx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="WebForm1.aspx" />
+    <None Include="Service References\ModelServiceReference\ModelService.wsdl" />
+    <None Include="Service References\ModelServiceReference\ModelService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ModelServiceReference\ModelService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ModelServiceReference\ModelService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ModelServiceReference\ModelService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ModelServiceReference\ModelService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\ModelServiceReference\WebApplication1.ModelServiceReference.Model.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ModelServiceReference\WebApplication1.ModelServiceReference.ModelProperty.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\ModelTypeServiceReference\ModelTypeService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ModelTypeServiceReference\ModelTypeService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ModelTypeServiceReference\ModelTypeService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ModelTypeServiceReference\ModelTypeService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ModelTypeServiceReference\ModelTypeService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\ModelTypeServiceReference\WebApplication1.ModelTypeServiceReference.ModelType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ResultLogsServiceReference\ResultLogsService.wsdl" />
+    <None Include="Service References\ResultLogsServiceReference\ResultLogsService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ResultLogsServiceReference\ResultLogsService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ResultLogsServiceReference\ResultLogsService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ResultLogsServiceReference\ResultLogsService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ResultLogsServiceReference\ResultLogsService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\ResultLogsServiceReference\WebApplication1.ResultLogsServiceReference.ResultLogs.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\UserServiceReference\UserService.wsdl" />
+    <None Include="Service References\UserServiceReference\UserService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UserServiceReference\UserService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UserServiceReference\UserService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UserServiceReference\UserService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UserServiceReference\UserService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UserServiceReference\UserService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\UserServiceReference\WebApplication1.UserServiceReference.User.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="forms.aspx.cs">
+      <DependentUpon>forms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forms.aspx.designer.cs">
+      <DependentUpon>forms.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForMutilTest.aspx.cs">
+      <DependentUpon>ForMutilTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForMutilTest.aspx.designer.cs">
+      <DependentUpon>ForMutilTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForSession.aspx.cs">
+      <DependentUpon>ForSession.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForSession.aspx.designer.cs">
+      <DependentUpon>ForSession.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="introduce_Content.aspx.cs">
+      <DependentUpon>introduce_Content.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="introduce_Content.aspx.designer.cs">
+      <DependentUpon>introduce_Content.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LatestResultShow.aspx.cs">
+      <DependentUpon>LatestResultShow.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LatestResultShow.aspx.designer.cs">
+      <DependentUpon>LatestResultShow.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="messages.aspx.cs">
+      <DependentUpon>messages.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="messages.aspx.designer.cs">
+      <DependentUpon>messages.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="other_calendar.aspx.cs">
+      <DependentUpon>other_calendar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="other_calendar.aspx.designer.cs">
+      <DependentUpon>other_calendar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\IPageUrl.cs" />
+    <Compile Include="ParamBianJieKongZhi.aspx.cs">
+      <DependentUpon>ParamBianJieKongZhi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ParamBianJieKongZhi.aspx.designer.cs">
+      <DependentUpon>ParamBianJieKongZhi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ParamCanShuPeiZhi.aspx.cs">
+      <DependentUpon>ParamCanShuPeiZhi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ParamCanShuPeiZhi.aspx.designer.cs">
+      <DependentUpon>ParamCanShuPeiZhi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ParamChuShiTiaoJian.aspx.cs">
+      <DependentUpon>ParamChuShiTiaoJian.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ParamChuShiTiaoJian.aspx.designer.cs">
+      <DependentUpon>ParamChuShiTiaoJian.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ParamGuoChengKongZhi.aspx.cs">
+      <DependentUpon>ParamGuoChengKongZhi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ParamGuoChengKongZhi.aspx.designer.cs">
+      <DependentUpon>ParamGuoChengKongZhi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultShow.aspx.cs">
+      <DependentUpon>ResultShow.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ResultShow.aspx.designer.cs">
+      <DependentUpon>ResultShow.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ResultShow_Content.aspx.cs">
+      <DependentUpon>ResultShow_Content.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ResultShow_Content.aspx.designer.cs">
+      <DependentUpon>ResultShow_Content.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="runModel.aspx.cs">
+      <DependentUpon>runModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="runModel.aspx.designer.cs">
+      <DependentUpon>runModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\CompositionServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ModelServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ModelTypeServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ResultLogsServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\TaskProcessedDataSetServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\TaskServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\UserServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Single_Model.aspx.cs">
+      <DependentUpon>Single_Model.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Single_Model.aspx.designer.cs">
+      <DependentUpon>Single_Model.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Single_Model_Content.aspx.cs">
+      <DependentUpon>Single_Model_Content.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Single_Model_Content.aspx.designer.cs">
+      <DependentUpon>Single_Model_Content.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="statistics.aspx.cs">
+      <DependentUpon>statistics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="statistics.aspx.designer.cs">
+      <DependentUpon>statistics.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="introduce.aspx.cs">
+      <DependentUpon>introduce.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="introduce.aspx.designer.cs">
+      <DependentUpon>introduce.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tool\Tools.cs" />
+    <Compile Include="ui.aspx.cs">
+      <DependentUpon>ui.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ui.aspx.designer.cs">
+      <DependentUpon>ui.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadHandler.ashx.cs">
+      <DependentUpon>UploadHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadHandler.ashx.designer.cs">
+      <DependentUpon>UploadHandler.ashx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Breadcrumbs.ascx.cs">
+      <DependentUpon>Breadcrumbs.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Breadcrumbs.ascx.designer.cs">
+      <DependentUpon>Breadcrumbs.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\MainNav.ascx.cs">
+      <DependentUpon>MainNav.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\MainNav.ascx.designer.cs">
+      <DependentUpon>MainNav.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\subNav.ascx.cs">
+      <DependentUpon>subNav.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\subNav.ascx.designer.cs">
+      <DependentUpon>subNav.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\top.ascx.cs">
+      <DependentUpon>top.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\top.ascx.designer.cs">
+      <DependentUpon>top.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="css\font\icomoon.eot" />
+    <None Include="images\elements\wysiwyg\Thumbs.db" />
+    <None Include="images\icons\options" />
+    <Content Include="UploadHandler.ashx" />
+    <None Include="js\plugins\layer\skin\default\Thumbs.db" />
+    <None Include="Service References\ModelTypeServiceReference\ModelTypeService.wsdl" />
+    <None Include="Service References\ModelTypeServiceReference\ModelTypeService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\CompositionServiceReference\" />
+    <WCFMetadataStorage Include="Service References\ModelServiceReference\" />
+    <WCFMetadataStorage Include="Service References\ModelTypeServiceReference\" />
+    <WCFMetadataStorage Include="Service References\ResultLogsServiceReference\" />
+    <WCFMetadataStorage Include="Service References\TaskProcessedDataSetServiceReference\" />
+    <WCFMetadataStorage Include="Service References\TaskServiceReference\" />
+    <WCFMetadataStorage Include="Service References\UserServiceReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\OOC.Server\OOC.Server.csproj">
+      <Project>{ba5a6217-8692-4c5c-9152-8ba129b08360}</Project>
+      <Name>OOC.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OOC.Util\OOC.Util.csproj">
+      <Project>{5acdb1c5-29e3-4f1f-9696-e8abaab67f0a}</Project>
+      <Name>OOC.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>13781</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

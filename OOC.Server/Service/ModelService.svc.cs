@@ -4,18 +4,23 @@ using System.Linq;
 using System.ServiceModel;
 using OOC.Contract.Service;
 using OOC.Entity;
+using OOC.Util;
 
 namespace OOC.Service
 {
     public class ModelService : IModelService
     {
-        public void Create(string name, string version, int authorUserId, string className, Int32 topId, Int32 typeId)
+        public string  Create(string name, string version,string modelAbstract, int authorUserId, Boolean isPublic,Boolean isApproved, string className, Int32 topId, Int32 typeId)
         {
             using (var db = new OOCEntities())
             {
                 var model = new Model
                     {
                         name = name,
+                        guid=GuidUtil.newGuid(),
+                        @abstract=modelAbstract,
+                        isPublic=isPublic,
+                        isApproved=isApproved,
                         version = version,
                         authorUserId = authorUserId,
                         className = className,
@@ -24,6 +29,7 @@ namespace OOC.Service
                     };
                 db.Model.AddObject(model);
                 db.SaveChanges();
+                return model.guid;
             }
         }
 

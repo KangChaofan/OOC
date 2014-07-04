@@ -158,6 +158,7 @@ namespace OOC.Service
             {
                 throw new FaultException("FILE_NOT_EXISTS");
             }
+            
             return IOUtil.ReadLines(realPath, lines);
         }
     }

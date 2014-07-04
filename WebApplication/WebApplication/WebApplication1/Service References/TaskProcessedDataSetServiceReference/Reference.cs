@@ -9,7 +9,465 @@
 //------------------------------------------------------------------------------
 
 namespace WebApplication1.TaskProcessedDataSetServiceReference {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TaskProcessedDataSet", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class TaskProcessedDataSet : WebApplication1.TaskProcessedDataSetServiceReference.OOCEntityObject {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string classNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string cmGuidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime creationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string guidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string nameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string taskGuidField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string className {
+            get {
+                return this.classNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.classNameField, value) != true)) {
+                    this.classNameField = value;
+                    this.RaisePropertyChanged("className");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string cmGuid {
+            get {
+                return this.cmGuidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.cmGuidField, value) != true)) {
+                    this.cmGuidField = value;
+                    this.RaisePropertyChanged("cmGuid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime creation {
+            get {
+                return this.creationField;
+            }
+            set {
+                if ((this.creationField.Equals(value) != true)) {
+                    this.creationField = value;
+                    this.RaisePropertyChanged("creation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string guid {
+            get {
+                return this.guidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.guidField, value) != true)) {
+                    this.guidField = value;
+                    this.RaisePropertyChanged("guid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string taskGuid {
+            get {
+                return this.taskGuidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.taskGuidField, value) != true)) {
+                    this.taskGuidField = value;
+                    this.RaisePropertyChanged("taskGuid");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="StructuralObject", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses", IsReference=true)]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.EntityObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.OOCEntityObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.TaskProcessedDataRecord))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.TaskProcessedDataSet))]
+    public partial class StructuralObject : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityObject", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses", IsReference=true)]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.OOCEntityObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.TaskProcessedDataRecord))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.TaskProcessedDataSet))]
+    public partial class EntityObject : WebApplication1.TaskProcessedDataSetServiceReference.StructuralObject {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.TaskProcessedDataSetServiceReference.EntityKey EntityKeyField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.TaskProcessedDataSetServiceReference.EntityKey EntityKey {
+            get {
+                return this.EntityKeyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EntityKeyField, value) != true)) {
+                    this.EntityKeyField = value;
+                    this.RaisePropertyChanged("EntityKey");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OOCEntityObject", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.TaskProcessedDataRecord))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.TaskProcessedDataSet))]
+    public partial class OOCEntityObject : WebApplication1.TaskProcessedDataSetServiceReference.EntityObject {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TaskProcessedDataRecord", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class TaskProcessedDataRecord : WebApplication1.TaskProcessedDataSetServiceReference.OOCEntityObject {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.TaskProcessedDataSetServiceReference.EntityReferenceOfTaskProcessedDataSetdfwjoNxd TaskProcessedDataSetReferenceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string dataSetGuidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string recordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long seqField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.TaskProcessedDataSetServiceReference.EntityReferenceOfTaskProcessedDataSetdfwjoNxd TaskProcessedDataSetReference {
+            get {
+                return this.TaskProcessedDataSetReferenceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TaskProcessedDataSetReferenceField, value) != true)) {
+                    this.TaskProcessedDataSetReferenceField = value;
+                    this.RaisePropertyChanged("TaskProcessedDataSetReference");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string dataSetGuid {
+            get {
+                return this.dataSetGuidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.dataSetGuidField, value) != true)) {
+                    this.dataSetGuidField = value;
+                    this.RaisePropertyChanged("dataSetGuid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string record {
+            get {
+                return this.recordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.recordField, value) != true)) {
+                    this.recordField = value;
+                    this.RaisePropertyChanged("record");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long seq {
+            get {
+                return this.seqField;
+            }
+            set {
+                if ((this.seqField.Equals(value) != true)) {
+                    this.seqField = value;
+                    this.RaisePropertyChanged("seq");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityKey", Namespace="http://schemas.datacontract.org/2004/07/System.Data", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class EntityKey : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EntityContainerNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.TaskProcessedDataSetServiceReference.EntityKeyMember[] EntityKeyValuesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EntitySetNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EntityContainerName {
+            get {
+                return this.EntityContainerNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EntityContainerNameField, value) != true)) {
+                    this.EntityContainerNameField = value;
+                    this.RaisePropertyChanged("EntityContainerName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.TaskProcessedDataSetServiceReference.EntityKeyMember[] EntityKeyValues {
+            get {
+                return this.EntityKeyValuesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EntityKeyValuesField, value) != true)) {
+                    this.EntityKeyValuesField = value;
+                    this.RaisePropertyChanged("EntityKeyValues");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EntitySetName {
+            get {
+                return this.EntitySetNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EntitySetNameField, value) != true)) {
+                    this.EntitySetNameField = value;
+                    this.RaisePropertyChanged("EntitySetName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityKeyMember", Namespace="http://schemas.datacontract.org/2004/07/System.Data")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.EntityObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.StructuralObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.EntityReferenceOfTaskProcessedDataSetdfwjoNxd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.EntityReference))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.RelatedEnd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.TaskProcessedDataSet[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.TaskProcessedDataSet))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.OOCEntityObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.TaskProcessedDataRecord[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.TaskProcessedDataRecord))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.EntityKey))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.EntityKeyMember[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(string[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(string[][]))]
+    public partial class EntityKeyMember : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string KeyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private object ValueField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Key {
+            get {
+                return this.KeyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.KeyField, value) != true)) {
+                    this.KeyField = value;
+                    this.RaisePropertyChanged("Key");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public object Value {
+            get {
+                return this.ValueField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ValueField, value) != true)) {
+                    this.ValueField = value;
+                    this.RaisePropertyChanged("Value");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReferenceOfTaskProcessedDataSetdfwjoNxd", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
+    [System.SerializableAttribute()]
+    public partial class EntityReferenceOfTaskProcessedDataSetdfwjoNxd : WebApplication1.TaskProcessedDataSetServiceReference.EntityReference {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReference", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.EntityReferenceOfTaskProcessedDataSetdfwjoNxd))]
+    public partial class EntityReference : WebApplication1.TaskProcessedDataSetServiceReference.RelatedEnd {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.TaskProcessedDataSetServiceReference.EntityKey EntityKeyField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.TaskProcessedDataSetServiceReference.EntityKey EntityKey {
+            get {
+                return this.EntityKeyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EntityKeyField, value) != true)) {
+                    this.EntityKeyField = value;
+                    this.RaisePropertyChanged("EntityKey");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RelatedEnd", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.EntityReference))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.TaskProcessedDataSetServiceReference.EntityReferenceOfTaskProcessedDataSetdfwjoNxd))]
+    public partial class RelatedEnd : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="TaskProcessedDataSetServiceReference.ITaskProcessedDataService")]
@@ -22,7 +480,7 @@ namespace WebApplication1.TaskProcessedDataSetServiceReference {
         void RemoveDataSetByGuid(string dataSetGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskProcessedDataService/GetDataSetByTaskGuid", ReplyAction="http://tempuri.org/ITaskProcessedDataService/GetDataSetByTaskGuidResponse")]
-        OOC.Entity.TaskProcessedDataSet[] GetDataSetByTaskGuid(string taskGuid);
+        WebApplication1.TaskProcessedDataSetServiceReference.TaskProcessedDataSet[] GetDataSetByTaskGuid(string taskGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskProcessedDataService/InsertIntoDataSet", ReplyAction="http://tempuri.org/ITaskProcessedDataService/InsertIntoDataSetResponse")]
         void InsertIntoDataSet(string dataSetGuid, string[] record);
@@ -34,7 +492,7 @@ namespace WebApplication1.TaskProcessedDataSetServiceReference {
         string[][] QueryDataSetRecords(string dataSetGuid, int start, int limit);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskProcessedDataService/QueryDataSet", ReplyAction="http://tempuri.org/ITaskProcessedDataService/QueryDataSetResponse")]
-        OOC.Entity.TaskProcessedDataRecord[] QueryDataSet(string dataSetGuid, int start, int limit);
+        WebApplication1.TaskProcessedDataSetServiceReference.TaskProcessedDataRecord[] QueryDataSet(string dataSetGuid, int start, int limit);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -72,7 +530,7 @@ namespace WebApplication1.TaskProcessedDataSetServiceReference {
             base.Channel.RemoveDataSetByGuid(dataSetGuid);
         }
         
-        public OOC.Entity.TaskProcessedDataSet[] GetDataSetByTaskGuid(string taskGuid) {
+        public WebApplication1.TaskProcessedDataSetServiceReference.TaskProcessedDataSet[] GetDataSetByTaskGuid(string taskGuid) {
             return base.Channel.GetDataSetByTaskGuid(taskGuid);
         }
         
@@ -88,7 +546,7 @@ namespace WebApplication1.TaskProcessedDataSetServiceReference {
             return base.Channel.QueryDataSetRecords(dataSetGuid, start, limit);
         }
         
-        public OOC.Entity.TaskProcessedDataRecord[] QueryDataSet(string dataSetGuid, int start, int limit) {
+        public WebApplication1.TaskProcessedDataSetServiceReference.TaskProcessedDataRecord[] QueryDataSet(string dataSetGuid, int start, int limit) {
             return base.Channel.QueryDataSet(dataSetGuid, start, limit);
         }
     }

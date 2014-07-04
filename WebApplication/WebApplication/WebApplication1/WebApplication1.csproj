@@ -118,7 +118,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\x86\Debug\Oatc.OpenMI.Examples.ModelComponents.SimpleRiver.Wrapper.dll</HintPath>
     </Reference>
-    <Reference Include="OOC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -432,6 +431,24 @@
     <None Include="Service References\CompositionServiceReference\CompositionService7.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Service References\CompositionServiceReference\WebApplication1.CompositionServiceReference.Composition.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CompositionServiceReference\WebApplication1.CompositionServiceReference.CompositionData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CompositionServiceReference\WebApplication1.CompositionServiceReference.CompositionLink.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CompositionServiceReference\WebApplication1.CompositionServiceReference.CompositionLinkData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CompositionServiceReference\WebApplication1.CompositionServiceReference.CompositionModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CompositionServiceReference\WebApplication1.CompositionServiceReference.CompositionModelData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\ModelServiceReference\ModelService.disco" />
     <None Include="Service References\ModelServiceReference\configuration91.svcinfo" />
     <None Include="Service References\ModelServiceReference\configuration.svcinfo" />
@@ -439,6 +456,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Service References\ModelServiceReference\WebApplication1.ModelServiceReference.Model.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ModelServiceReference\WebApplication1.ModelServiceReference.ModelProperty.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\ModelTypeServiceReference\ModelTypeService.disco" />
     <None Include="Service References\ModelTypeServiceReference\configuration91.svcinfo" />
     <None Include="Service References\ModelTypeServiceReference\configuration.svcinfo" />
@@ -453,13 +476,13 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Service References\ResultLogsServiceReference\ResultLogsService.disco" />
-    <Content Include="Service References\ResultLogsServiceReference\configuration91.svcinfo" />
-    <Content Include="Service References\ResultLogsServiceReference\configuration.svcinfo" />
-    <Content Include="Service References\ResultLogsServiceReference\Reference.svcmap">
+    <None Include="Service References\ResultLogsServiceReference\ResultLogsService.disco" />
+    <None Include="Service References\ResultLogsServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\ResultLogsServiceReference\configuration.svcinfo" />
+    <None Include="Service References\ResultLogsServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <None Include="Service References\TaskProcessedDataSetServiceReference\TaskProcessedDataService.disco" />
     <None Include="Service References\TaskProcessedDataSetServiceReference\configuration91.svcinfo" />
     <None Include="Service References\TaskProcessedDataSetServiceReference\configuration.svcinfo" />
@@ -467,7 +490,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Service References\TaskServiceReference\TaskService.wsdl" />
+    <None Include="Service References\TaskServiceReference\TaskService.wsdl" />
     <None Include="Service References\TaskProcessedDataSetServiceReference\TaskProcessedDataService.wsdl" />
     <None Include="Service References\TaskProcessedDataSetServiceReference\TaskProcessedDataService.xsd">
       <SubType>Designer</SubType>
@@ -487,6 +510,12 @@
     <None Include="Service References\TaskProcessedDataSetServiceReference\TaskProcessedDataService5.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Service References\TaskProcessedDataSetServiceReference\WebApplication1.TaskProcessedDataSetServiceReference.TaskProcessedDataRecord.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\TaskProcessedDataSetServiceReference\WebApplication1.TaskProcessedDataSetServiceReference.TaskProcessedDataSet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\TaskServiceReference\TaskService.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -536,13 +565,13 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Service References\TaskServiceReference\TaskService.disco" />
-    <Content Include="Service References\TaskServiceReference\configuration91.svcinfo" />
-    <Content Include="Service References\TaskServiceReference\configuration.svcinfo" />
-    <Content Include="Service References\TaskServiceReference\Reference.svcmap">
+    <None Include="Service References\TaskServiceReference\TaskService.disco" />
+    <None Include="Service References\TaskServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\TaskServiceReference\configuration.svcinfo" />
+    <None Include="Service References\TaskServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <Content Include="Single_Model.aspx" />
     <Content Include="Single_Model_Content.aspx" />
     <Content Include="statistics.aspx" />
@@ -572,12 +601,6 @@
     <None Include="Service References\ModelServiceReference\ModelService4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Service References\ModelServiceReference\WebApplication1.ModelServiceReference.Model.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ModelServiceReference\WebApplication1.ModelServiceReference.ModelProperty.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <None Include="Service References\ModelTypeServiceReference\ModelTypeService1.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -596,7 +619,7 @@
     <Content Include="Service References\ModelTypeServiceReference\WebApplication1.ModelTypeServiceReference.ModelType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\ResultLogsServiceReference\ResultLogsService.wsdl" />
+    <None Include="Service References\ResultLogsServiceReference\ResultLogsService.wsdl" />
     <None Include="Service References\ResultLogsServiceReference\ResultLogsService.xsd">
       <SubType>Designer</SubType>
     </None>

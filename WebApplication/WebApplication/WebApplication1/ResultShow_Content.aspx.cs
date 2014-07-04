@@ -8,7 +8,7 @@ using WebApplication1.ModelTypeServiceReference;
 using WebApplication1.ResultLogsServiceReference;
 using WebApplication1.CompositionServiceReference;
 using WebApplication1.TaskServiceReference;
-using OOC.Entity;
+
 
 
 namespace WebApplication1
@@ -41,9 +41,9 @@ namespace WebApplication1
             ml.AddRange(ms.ModelSimpleListByTypeID(Convert.ToInt32(_typeID)));
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             foreach (ModelServiceReference.Model oneModel in ml) {
-                List<OOC.Entity.Composition> compositionList = new List<OOC.Entity.Composition>();
+                List<CompositionServiceReference.Composition> compositionList = new List<CompositionServiceReference.Composition>();
                 compositionList.AddRange(compositionService.QueryCompositionByModel(oneModel.guid));
-                foreach (OOC.Entity.Composition oneComposition in compositionList) {
+                foreach (CompositionServiceReference.Composition oneComposition in compositionList) {
                     List<TaskServiceReference.Task> taskList = new List<TaskServiceReference.Task>();
                     taskList.AddRange(ts.GetTaskByCompositionAndUser(oneComposition.guid, Convert.ToInt32(_userid)));
                     foreach (var _oneTask in taskList) 

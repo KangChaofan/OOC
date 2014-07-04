@@ -9,68 +9,1756 @@
 //------------------------------------------------------------------------------
 
 namespace WebApplication1.CompositionServiceReference {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Composition", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class Composition : WebApplication1.CompositionServiceReference.OOCEntityObject {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long authorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime creationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string guidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isFinishedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isSharedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> modificationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string titleField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long authorUserId {
+            get {
+                return this.authorUserIdField;
+            }
+            set {
+                if ((this.authorUserIdField.Equals(value) != true)) {
+                    this.authorUserIdField = value;
+                    this.RaisePropertyChanged("authorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime creation {
+            get {
+                return this.creationField;
+            }
+            set {
+                if ((this.creationField.Equals(value) != true)) {
+                    this.creationField = value;
+                    this.RaisePropertyChanged("creation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string guid {
+            get {
+                return this.guidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.guidField, value) != true)) {
+                    this.guidField = value;
+                    this.RaisePropertyChanged("guid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isFinished {
+            get {
+                return this.isFinishedField;
+            }
+            set {
+                if ((this.isFinishedField.Equals(value) != true)) {
+                    this.isFinishedField = value;
+                    this.RaisePropertyChanged("isFinished");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isShared {
+            get {
+                return this.isSharedField;
+            }
+            set {
+                if ((this.isSharedField.Equals(value) != true)) {
+                    this.isSharedField = value;
+                    this.RaisePropertyChanged("isShared");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> modification {
+            get {
+                return this.modificationField;
+            }
+            set {
+                if ((this.modificationField.Equals(value) != true)) {
+                    this.modificationField = value;
+                    this.RaisePropertyChanged("modification");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string title {
+            get {
+                return this.titleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.titleField, value) != true)) {
+                    this.titleField = value;
+                    this.RaisePropertyChanged("title");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="StructuralObject", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses", IsReference=true)]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.EntityObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.OOCEntityObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionModel))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.Model))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.ModelFileMapping))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.ModelProperty))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionLink))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.Composition))]
+    public partial class StructuralObject : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityObject", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses", IsReference=true)]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.OOCEntityObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionModel))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.Model))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.ModelFileMapping))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.ModelProperty))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionLink))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.Composition))]
+    public partial class EntityObject : WebApplication1.CompositionServiceReference.StructuralObject {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.EntityKey EntityKeyField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.EntityKey EntityKey {
+            get {
+                return this.EntityKeyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EntityKeyField, value) != true)) {
+                    this.EntityKeyField = value;
+                    this.RaisePropertyChanged("EntityKey");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OOCEntityObject", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionModel))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.Model))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.ModelFileMapping))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.ModelProperty))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionLink))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.Composition))]
+    public partial class OOCEntityObject : WebApplication1.CompositionServiceReference.EntityObject {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CompositionModel", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class CompositionModel : WebApplication1.CompositionServiceReference.OOCEntityObject {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.EntityReferenceOfCompositiondfwjoNxd CompositionReferenceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.EntityReferenceOfModeldfwjoNxd ModelReferenceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string compositionGuidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime creationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string guidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string modelGuidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> modificationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string propertiesField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.EntityReferenceOfCompositiondfwjoNxd CompositionReference {
+            get {
+                return this.CompositionReferenceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CompositionReferenceField, value) != true)) {
+                    this.CompositionReferenceField = value;
+                    this.RaisePropertyChanged("CompositionReference");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.EntityReferenceOfModeldfwjoNxd ModelReference {
+            get {
+                return this.ModelReferenceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ModelReferenceField, value) != true)) {
+                    this.ModelReferenceField = value;
+                    this.RaisePropertyChanged("ModelReference");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string compositionGuid {
+            get {
+                return this.compositionGuidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.compositionGuidField, value) != true)) {
+                    this.compositionGuidField = value;
+                    this.RaisePropertyChanged("compositionGuid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime creation {
+            get {
+                return this.creationField;
+            }
+            set {
+                if ((this.creationField.Equals(value) != true)) {
+                    this.creationField = value;
+                    this.RaisePropertyChanged("creation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string guid {
+            get {
+                return this.guidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.guidField, value) != true)) {
+                    this.guidField = value;
+                    this.RaisePropertyChanged("guid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string modelGuid {
+            get {
+                return this.modelGuidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.modelGuidField, value) != true)) {
+                    this.modelGuidField = value;
+                    this.RaisePropertyChanged("modelGuid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> modification {
+            get {
+                return this.modificationField;
+            }
+            set {
+                if ((this.modificationField.Equals(value) != true)) {
+                    this.modificationField = value;
+                    this.RaisePropertyChanged("modification");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string properties {
+            get {
+                return this.propertiesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.propertiesField, value) != true)) {
+                    this.propertiesField = value;
+                    this.RaisePropertyChanged("properties");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Model", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class Model : WebApplication1.CompositionServiceReference.OOCEntityObject {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.EntityReferenceOfUserdfwjoNxd AuthorUserReferenceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string abstractField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long authorUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string classNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime creationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string eNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string guidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isApprovedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isPublicField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> modificationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string nameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string riverBasinField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> topIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> typeIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string versionField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.EntityReferenceOfUserdfwjoNxd AuthorUserReference {
+            get {
+                return this.AuthorUserReferenceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AuthorUserReferenceField, value) != true)) {
+                    this.AuthorUserReferenceField = value;
+                    this.RaisePropertyChanged("AuthorUserReference");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string @abstract {
+            get {
+                return this.abstractField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.abstractField, value) != true)) {
+                    this.abstractField = value;
+                    this.RaisePropertyChanged("abstract");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long authorUserId {
+            get {
+                return this.authorUserIdField;
+            }
+            set {
+                if ((this.authorUserIdField.Equals(value) != true)) {
+                    this.authorUserIdField = value;
+                    this.RaisePropertyChanged("authorUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string className {
+            get {
+                return this.classNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.classNameField, value) != true)) {
+                    this.classNameField = value;
+                    this.RaisePropertyChanged("className");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime creation {
+            get {
+                return this.creationField;
+            }
+            set {
+                if ((this.creationField.Equals(value) != true)) {
+                    this.creationField = value;
+                    this.RaisePropertyChanged("creation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string eName {
+            get {
+                return this.eNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.eNameField, value) != true)) {
+                    this.eNameField = value;
+                    this.RaisePropertyChanged("eName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string guid {
+            get {
+                return this.guidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.guidField, value) != true)) {
+                    this.guidField = value;
+                    this.RaisePropertyChanged("guid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isApproved {
+            get {
+                return this.isApprovedField;
+            }
+            set {
+                if ((this.isApprovedField.Equals(value) != true)) {
+                    this.isApprovedField = value;
+                    this.RaisePropertyChanged("isApproved");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isPublic {
+            get {
+                return this.isPublicField;
+            }
+            set {
+                if ((this.isPublicField.Equals(value) != true)) {
+                    this.isPublicField = value;
+                    this.RaisePropertyChanged("isPublic");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> modification {
+            get {
+                return this.modificationField;
+            }
+            set {
+                if ((this.modificationField.Equals(value) != true)) {
+                    this.modificationField = value;
+                    this.RaisePropertyChanged("modification");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string riverBasin {
+            get {
+                return this.riverBasinField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.riverBasinField, value) != true)) {
+                    this.riverBasinField = value;
+                    this.RaisePropertyChanged("riverBasin");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> topId {
+            get {
+                return this.topIdField;
+            }
+            set {
+                if ((this.topIdField.Equals(value) != true)) {
+                    this.topIdField = value;
+                    this.RaisePropertyChanged("topId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> typeId {
+            get {
+                return this.typeIdField;
+            }
+            set {
+                if ((this.typeIdField.Equals(value) != true)) {
+                    this.typeIdField = value;
+                    this.RaisePropertyChanged("typeId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string version {
+            get {
+                return this.versionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.versionField, value) != true)) {
+                    this.versionField = value;
+                    this.RaisePropertyChanged("version");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ModelFileMapping", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class ModelFileMapping : WebApplication1.CompositionServiceReference.OOCEntityObject {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.EntityReferenceOfModeldfwjoNxd ModelReferenceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime creationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string fileNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isDataProcessorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isDocumentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isMainLibraryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string modelGuidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> modificationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string relativePathField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string signatureField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.EntityReferenceOfModeldfwjoNxd ModelReference {
+            get {
+                return this.ModelReferenceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ModelReferenceField, value) != true)) {
+                    this.ModelReferenceField = value;
+                    this.RaisePropertyChanged("ModelReference");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime creation {
+            get {
+                return this.creationField;
+            }
+            set {
+                if ((this.creationField.Equals(value) != true)) {
+                    this.creationField = value;
+                    this.RaisePropertyChanged("creation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string fileName {
+            get {
+                return this.fileNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.fileNameField, value) != true)) {
+                    this.fileNameField = value;
+                    this.RaisePropertyChanged("fileName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isDataProcessor {
+            get {
+                return this.isDataProcessorField;
+            }
+            set {
+                if ((this.isDataProcessorField.Equals(value) != true)) {
+                    this.isDataProcessorField = value;
+                    this.RaisePropertyChanged("isDataProcessor");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isDocument {
+            get {
+                return this.isDocumentField;
+            }
+            set {
+                if ((this.isDocumentField.Equals(value) != true)) {
+                    this.isDocumentField = value;
+                    this.RaisePropertyChanged("isDocument");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isMainLibrary {
+            get {
+                return this.isMainLibraryField;
+            }
+            set {
+                if ((this.isMainLibraryField.Equals(value) != true)) {
+                    this.isMainLibraryField = value;
+                    this.RaisePropertyChanged("isMainLibrary");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string modelGuid {
+            get {
+                return this.modelGuidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.modelGuidField, value) != true)) {
+                    this.modelGuidField = value;
+                    this.RaisePropertyChanged("modelGuid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> modification {
+            get {
+                return this.modificationField;
+            }
+            set {
+                if ((this.modificationField.Equals(value) != true)) {
+                    this.modificationField = value;
+                    this.RaisePropertyChanged("modification");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string relativePath {
+            get {
+                return this.relativePathField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.relativePathField, value) != true)) {
+                    this.relativePathField = value;
+                    this.RaisePropertyChanged("relativePath");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string signature {
+            get {
+                return this.signatureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.signatureField, value) != true)) {
+                    this.signatureField = value;
+                    this.RaisePropertyChanged("signature");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ModelProperty", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class ModelProperty : WebApplication1.CompositionServiceReference.OOCEntityObject {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.EntityReferenceOfModeldfwjoNxd ModelReferenceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string additionalField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime creationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string defaultField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string descriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string keyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string modelGuidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> modificationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private sbyte typeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.EntityReferenceOfModeldfwjoNxd ModelReference {
+            get {
+                return this.ModelReferenceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ModelReferenceField, value) != true)) {
+                    this.ModelReferenceField = value;
+                    this.RaisePropertyChanged("ModelReference");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string additional {
+            get {
+                return this.additionalField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.additionalField, value) != true)) {
+                    this.additionalField = value;
+                    this.RaisePropertyChanged("additional");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime creation {
+            get {
+                return this.creationField;
+            }
+            set {
+                if ((this.creationField.Equals(value) != true)) {
+                    this.creationField = value;
+                    this.RaisePropertyChanged("creation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string @default {
+            get {
+                return this.defaultField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.defaultField, value) != true)) {
+                    this.defaultField = value;
+                    this.RaisePropertyChanged("default");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.descriptionField, value) != true)) {
+                    this.descriptionField = value;
+                    this.RaisePropertyChanged("description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string key {
+            get {
+                return this.keyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.keyField, value) != true)) {
+                    this.keyField = value;
+                    this.RaisePropertyChanged("key");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string modelGuid {
+            get {
+                return this.modelGuidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.modelGuidField, value) != true)) {
+                    this.modelGuidField = value;
+                    this.RaisePropertyChanged("modelGuid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> modification {
+            get {
+                return this.modificationField;
+            }
+            set {
+                if ((this.modificationField.Equals(value) != true)) {
+                    this.modificationField = value;
+                    this.RaisePropertyChanged("modification");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public sbyte type {
+            get {
+                return this.typeField;
+            }
+            set {
+                if ((this.typeField.Equals(value) != true)) {
+                    this.typeField = value;
+                    this.RaisePropertyChanged("type");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CompositionLink", Namespace="http://schemas.datacontract.org/2004/07/OOC.Entity", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class CompositionLink : WebApplication1.CompositionServiceReference.OOCEntityObject {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.EntityReferenceOfCompositionModeldfwjoNxd CompositionModelSourceReferenceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.EntityReferenceOfCompositionModeldfwjoNxd CompositionModelTargetReferenceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.EntityReferenceOfCompositiondfwjoNxd CompositionReferenceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string compositionGuidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime creationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string dataOperationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string guidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> modificationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string sourceCmGuidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string sourceElementSetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string sourceQuantityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string targetCmGuidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string targetElementSetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string targetQuantityField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.EntityReferenceOfCompositionModeldfwjoNxd CompositionModelSourceReference {
+            get {
+                return this.CompositionModelSourceReferenceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CompositionModelSourceReferenceField, value) != true)) {
+                    this.CompositionModelSourceReferenceField = value;
+                    this.RaisePropertyChanged("CompositionModelSourceReference");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.EntityReferenceOfCompositionModeldfwjoNxd CompositionModelTargetReference {
+            get {
+                return this.CompositionModelTargetReferenceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CompositionModelTargetReferenceField, value) != true)) {
+                    this.CompositionModelTargetReferenceField = value;
+                    this.RaisePropertyChanged("CompositionModelTargetReference");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.EntityReferenceOfCompositiondfwjoNxd CompositionReference {
+            get {
+                return this.CompositionReferenceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CompositionReferenceField, value) != true)) {
+                    this.CompositionReferenceField = value;
+                    this.RaisePropertyChanged("CompositionReference");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string compositionGuid {
+            get {
+                return this.compositionGuidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.compositionGuidField, value) != true)) {
+                    this.compositionGuidField = value;
+                    this.RaisePropertyChanged("compositionGuid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime creation {
+            get {
+                return this.creationField;
+            }
+            set {
+                if ((this.creationField.Equals(value) != true)) {
+                    this.creationField = value;
+                    this.RaisePropertyChanged("creation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string dataOperation {
+            get {
+                return this.dataOperationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.dataOperationField, value) != true)) {
+                    this.dataOperationField = value;
+                    this.RaisePropertyChanged("dataOperation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string guid {
+            get {
+                return this.guidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.guidField, value) != true)) {
+                    this.guidField = value;
+                    this.RaisePropertyChanged("guid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> modification {
+            get {
+                return this.modificationField;
+            }
+            set {
+                if ((this.modificationField.Equals(value) != true)) {
+                    this.modificationField = value;
+                    this.RaisePropertyChanged("modification");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string sourceCmGuid {
+            get {
+                return this.sourceCmGuidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.sourceCmGuidField, value) != true)) {
+                    this.sourceCmGuidField = value;
+                    this.RaisePropertyChanged("sourceCmGuid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string sourceElementSet {
+            get {
+                return this.sourceElementSetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.sourceElementSetField, value) != true)) {
+                    this.sourceElementSetField = value;
+                    this.RaisePropertyChanged("sourceElementSet");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string sourceQuantity {
+            get {
+                return this.sourceQuantityField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.sourceQuantityField, value) != true)) {
+                    this.sourceQuantityField = value;
+                    this.RaisePropertyChanged("sourceQuantity");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string targetCmGuid {
+            get {
+                return this.targetCmGuidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.targetCmGuidField, value) != true)) {
+                    this.targetCmGuidField = value;
+                    this.RaisePropertyChanged("targetCmGuid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string targetElementSet {
+            get {
+                return this.targetElementSetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.targetElementSetField, value) != true)) {
+                    this.targetElementSetField = value;
+                    this.RaisePropertyChanged("targetElementSet");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string targetQuantity {
+            get {
+                return this.targetQuantityField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.targetQuantityField, value) != true)) {
+                    this.targetQuantityField = value;
+                    this.RaisePropertyChanged("targetQuantity");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityKey", Namespace="http://schemas.datacontract.org/2004/07/System.Data", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class EntityKey : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EntityContainerNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.EntityKeyMember[] EntityKeyValuesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EntitySetNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EntityContainerName {
+            get {
+                return this.EntityContainerNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EntityContainerNameField, value) != true)) {
+                    this.EntityContainerNameField = value;
+                    this.RaisePropertyChanged("EntityContainerName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.EntityKeyMember[] EntityKeyValues {
+            get {
+                return this.EntityKeyValuesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EntityKeyValuesField, value) != true)) {
+                    this.EntityKeyValuesField = value;
+                    this.RaisePropertyChanged("EntityKeyValues");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EntitySetName {
+            get {
+                return this.EntitySetNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EntitySetNameField, value) != true)) {
+                    this.EntitySetNameField = value;
+                    this.RaisePropertyChanged("EntitySetName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityKeyMember", Namespace="http://schemas.datacontract.org/2004/07/System.Data")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.EntityKey))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.EntityKeyMember[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionModelData[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionModelData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionModelProperties))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionLinkData[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionLinkData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.LinkDataOperation))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.Dict))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.SerializableData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, string>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(string[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.Composition[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.Composition))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.OOCEntityObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionModel[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionModel))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.Model))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.ModelFileMapping[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.ModelFileMapping))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.ModelProperty[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.ModelProperty))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionLink[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionLink))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.EntityObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.StructuralObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.EntityReferenceOfCompositiondfwjoNxd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.EntityReference))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.RelatedEnd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.EntityReferenceOfModeldfwjoNxd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.EntityReferenceOfUserdfwjoNxd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.EntityReferenceOfCompositionModeldfwjoNxd))]
+    public partial class EntityKeyMember : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string KeyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private object ValueField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Key {
+            get {
+                return this.KeyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.KeyField, value) != true)) {
+                    this.KeyField = value;
+                    this.RaisePropertyChanged("Key");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public object Value {
+            get {
+                return this.ValueField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ValueField, value) != true)) {
+                    this.ValueField = value;
+                    this.RaisePropertyChanged("Value");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CompositionModelData", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common")]
+    [System.SerializableAttribute()]
+    public partial class CompositionModelData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.CompositionModel CompositionModelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.Model ModelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.ModelFileMapping[] ModelFilesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.ModelProperty[] ModelPropertiesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.CompositionModelProperties PropertyValuesField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.CompositionModel CompositionModel {
+            get {
+                return this.CompositionModelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CompositionModelField, value) != true)) {
+                    this.CompositionModelField = value;
+                    this.RaisePropertyChanged("CompositionModel");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.Model Model {
+            get {
+                return this.ModelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ModelField, value) != true)) {
+                    this.ModelField = value;
+                    this.RaisePropertyChanged("Model");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.ModelFileMapping[] ModelFiles {
+            get {
+                return this.ModelFilesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ModelFilesField, value) != true)) {
+                    this.ModelFilesField = value;
+                    this.RaisePropertyChanged("ModelFiles");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.ModelProperty[] ModelProperties {
+            get {
+                return this.ModelPropertiesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ModelPropertiesField, value) != true)) {
+                    this.ModelPropertiesField = value;
+                    this.RaisePropertyChanged("ModelProperties");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.CompositionModelProperties PropertyValues {
+            get {
+                return this.PropertyValuesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PropertyValuesField, value) != true)) {
+                    this.PropertyValuesField = value;
+                    this.RaisePropertyChanged("PropertyValues");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CompositionModelProperties", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common")]
+    [System.SerializableAttribute()]
+    public partial class CompositionModelProperties : WebApplication1.CompositionServiceReference.Dict {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CompositionLinkData", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common")]
+    [System.SerializableAttribute()]
+    public partial class CompositionLinkData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.CompositionLink CompositionLinkField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.LinkDataOperation DataOperationField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.CompositionLink CompositionLink {
+            get {
+                return this.CompositionLinkField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CompositionLinkField, value) != true)) {
+                    this.CompositionLinkField = value;
+                    this.RaisePropertyChanged("CompositionLink");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.LinkDataOperation DataOperation {
+            get {
+                return this.DataOperationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DataOperationField, value) != true)) {
+                    this.DataOperationField = value;
+                    this.RaisePropertyChanged("DataOperation");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LinkDataOperation", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common")]
+    [System.SerializableAttribute()]
+    public partial class LinkDataOperation : WebApplication1.CompositionServiceReference.Dict {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CompositionData", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Common")]
+    [System.SerializableAttribute()]
+    public partial class CompositionData : WebApplication1.CompositionServiceReference.SerializableData {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.Composition CompositionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.CompositionLinkData[] LinksField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.CompositionModelData[] ModelsField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.Composition Composition {
+            get {
+                return this.CompositionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CompositionField, value) != true)) {
+                    this.CompositionField = value;
+                    this.RaisePropertyChanged("Composition");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.CompositionLinkData[] Links {
+            get {
+                return this.LinksField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LinksField, value) != true)) {
+                    this.LinksField = value;
+                    this.RaisePropertyChanged("Links");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.CompositionModelData[] Models {
+            get {
+                return this.ModelsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ModelsField, value) != true)) {
+                    this.ModelsField = value;
+                    this.RaisePropertyChanged("Models");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Dict", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.LinkDataOperation))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionModelProperties))]
+    public partial class Dict : WebApplication1.CompositionServiceReference.SerializableData {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.Dictionary<string, string> KvsField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.Dictionary<string, string> Kvs {
+            get {
+                return this.KvsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.KvsField, value) != true)) {
+                    this.KvsField = value;
+                    this.RaisePropertyChanged("Kvs");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SerializableData", Namespace="http://schemas.datacontract.org/2004/07/OOC.Contract.Data.Abstract")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.Dict))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.CompositionModelProperties))]
+    public partial class SerializableData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReferenceOfCompositiondfwjoNxd", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
+    [System.SerializableAttribute()]
+    public partial class EntityReferenceOfCompositiondfwjoNxd : WebApplication1.CompositionServiceReference.EntityReference {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReference", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.EntityReferenceOfModeldfwjoNxd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.EntityReferenceOfUserdfwjoNxd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.EntityReferenceOfCompositionModeldfwjoNxd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.EntityReferenceOfCompositiondfwjoNxd))]
+    public partial class EntityReference : WebApplication1.CompositionServiceReference.RelatedEnd {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApplication1.CompositionServiceReference.EntityKey EntityKeyField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebApplication1.CompositionServiceReference.EntityKey EntityKey {
+            get {
+                return this.EntityKeyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EntityKeyField, value) != true)) {
+                    this.EntityKeyField = value;
+                    this.RaisePropertyChanged("EntityKey");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RelatedEnd", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.EntityReference))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.EntityReferenceOfModeldfwjoNxd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.EntityReferenceOfUserdfwjoNxd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.EntityReferenceOfCompositionModeldfwjoNxd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebApplication1.CompositionServiceReference.EntityReferenceOfCompositiondfwjoNxd))]
+    public partial class RelatedEnd : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReferenceOfModeldfwjoNxd", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
+    [System.SerializableAttribute()]
+    public partial class EntityReferenceOfModeldfwjoNxd : WebApplication1.CompositionServiceReference.EntityReference {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReferenceOfUserdfwjoNxd", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
+    [System.SerializableAttribute()]
+    public partial class EntityReferenceOfUserdfwjoNxd : WebApplication1.CompositionServiceReference.EntityReference {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReferenceOfCompositionModeldfwjoNxd", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
+    [System.SerializableAttribute()]
+    public partial class EntityReferenceOfCompositionModeldfwjoNxd : WebApplication1.CompositionServiceReference.EntityReference {
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="CompositionServiceReference.ICompositionService")]
     public interface ICompositionService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/QueryCompositionByAuthorUserId", ReplyAction="http://tempuri.org/ICompositionService/QueryCompositionByAuthorUserIdResponse")]
-        OOC.Entity.Composition[] QueryCompositionByAuthorUserId(int authorUserId);
+        WebApplication1.CompositionServiceReference.Composition[] QueryCompositionByAuthorUserId(int authorUserId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/QueryCompositionByKeyword", ReplyAction="http://tempuri.org/ICompositionService/QueryCompositionByKeywordResponse")]
-        OOC.Entity.Composition[] QueryCompositionByKeyword(string keyword);
+        WebApplication1.CompositionServiceReference.Composition[] QueryCompositionByKeyword(string keyword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/QueryCompositionByModel", ReplyAction="http://tempuri.org/ICompositionService/QueryCompositionByModelResponse")]
-        OOC.Entity.Composition[] QueryCompositionByModel(string modelGuid);
+        WebApplication1.CompositionServiceReference.Composition[] QueryCompositionByModel(string modelGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/Create", ReplyAction="http://tempuri.org/ICompositionService/CreateResponse")]
         string Create(int authorUserId, string title, bool isShared, bool isFinished);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/GetCompositionModels", ReplyAction="http://tempuri.org/ICompositionService/GetCompositionModelsResponse")]
-        OOC.Entity.CompositionModel[] GetCompositionModels(string compositionGuid);
+        WebApplication1.CompositionServiceReference.CompositionModel[] GetCompositionModels(string compositionGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/GetCompositionModelsData", ReplyAction="http://tempuri.org/ICompositionService/GetCompositionModelsDataResponse")]
-        OOC.Contract.Data.Common.CompositionModelData[] GetCompositionModelsData(string compositionGuid);
+        WebApplication1.CompositionServiceReference.CompositionModelData[] GetCompositionModelsData(string compositionGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/CreateCompositionModel", ReplyAction="http://tempuri.org/ICompositionService/CreateCompositionModelResponse")]
-        string CreateCompositionModel(string compositionGuid, string modelGuid, OOC.Contract.Data.Common.CompositionModelProperties properties);
+        string CreateCompositionModel(string compositionGuid, string modelGuid, WebApplication1.CompositionServiceReference.CompositionModelProperties properties);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/UpdateCompositionModelProperties", ReplyAction="http://tempuri.org/ICompositionService/UpdateCompositionModelPropertiesResponse")]
-        void UpdateCompositionModelProperties(string cmGuid, OOC.Contract.Data.Common.CompositionModelProperties properties);
+        void UpdateCompositionModelProperties(string cmGuid, WebApplication1.CompositionServiceReference.CompositionModelProperties properties);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/UpdateCompositionModelProperty", ReplyAction="http://tempuri.org/ICompositionService/UpdateCompositionModelPropertyResponse")]
         void UpdateCompositionModelProperty(string cmGuid, string key, string value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/GetCompositionModel", ReplyAction="http://tempuri.org/ICompositionService/GetCompositionModelResponse")]
-        OOC.Entity.CompositionModel GetCompositionModel(string cmGuid);
+        WebApplication1.CompositionServiceReference.CompositionModel GetCompositionModel(string cmGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/GetCompositionModelData", ReplyAction="http://tempuri.org/ICompositionService/GetCompositionModelDataResponse")]
-        OOC.Contract.Data.Common.CompositionModelData GetCompositionModelData(string cmGuid);
+        WebApplication1.CompositionServiceReference.CompositionModelData GetCompositionModelData(string cmGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/RemoveModel", ReplyAction="http://tempuri.org/ICompositionService/RemoveModelResponse")]
         void RemoveModel(string cmGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/GetCompositionLinks", ReplyAction="http://tempuri.org/ICompositionService/GetCompositionLinksResponse")]
-        OOC.Entity.CompositionLink[] GetCompositionLinks(string compositionGuid);
+        WebApplication1.CompositionServiceReference.CompositionLink[] GetCompositionLinks(string compositionGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/GetCompositionLinksData", ReplyAction="http://tempuri.org/ICompositionService/GetCompositionLinksDataResponse")]
-        OOC.Contract.Data.Common.CompositionLinkData[] GetCompositionLinksData(string compositionGuid);
+        WebApplication1.CompositionServiceReference.CompositionLinkData[] GetCompositionLinksData(string compositionGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/CreateCompositionLink", ReplyAction="http://tempuri.org/ICompositionService/CreateCompositionLinkResponse")]
-        string CreateCompositionLink(string compositionGuid, string sourceCmGuid, string targetCmGuid, string sourceQuantity, string targetQuantity, string sourceElementSet, string targetElementSet, OOC.Contract.Data.Common.LinkDataOperation dataOperation);
+        string CreateCompositionLink(string compositionGuid, string sourceCmGuid, string targetCmGuid, string sourceQuantity, string targetQuantity, string sourceElementSet, string targetElementSet, WebApplication1.CompositionServiceReference.LinkDataOperation dataOperation);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/GetCompositionLink", ReplyAction="http://tempuri.org/ICompositionService/GetCompositionLinkResponse")]
-        OOC.Entity.CompositionLink GetCompositionLink(string linkGuid);
+        WebApplication1.CompositionServiceReference.CompositionLink GetCompositionLink(string linkGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/GetCompositionLinkData", ReplyAction="http://tempuri.org/ICompositionService/GetCompositionLinkDataResponse")]
-        OOC.Contract.Data.Common.CompositionLinkData GetCompositionLinkData(string linkGuid);
+        WebApplication1.CompositionServiceReference.CompositionLinkData GetCompositionLinkData(string linkGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/RemoveCompositionLink", ReplyAction="http://tempuri.org/ICompositionService/RemoveCompositionLinkResponse")]
         void RemoveCompositionLink(string linkGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/GetCompositionData", ReplyAction="http://tempuri.org/ICompositionService/GetCompositionDataResponse")]
-        OOC.Contract.Data.Common.CompositionData GetCompositionData(string compositionGuid);
+        WebApplication1.CompositionServiceReference.CompositionData GetCompositionData(string compositionGuid);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICompositionService/GenerateInputFileName", ReplyAction="http://tempuri.org/ICompositionService/GenerateInputFileNameResponse")]
         string GenerateInputFileName(string compositionGuid, string modelGuid, string relativePath);
@@ -109,15 +1797,15 @@ namespace WebApplication1.CompositionServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public OOC.Entity.Composition[] QueryCompositionByAuthorUserId(int authorUserId) {
+        public WebApplication1.CompositionServiceReference.Composition[] QueryCompositionByAuthorUserId(int authorUserId) {
             return base.Channel.QueryCompositionByAuthorUserId(authorUserId);
         }
         
-        public OOC.Entity.Composition[] QueryCompositionByKeyword(string keyword) {
+        public WebApplication1.CompositionServiceReference.Composition[] QueryCompositionByKeyword(string keyword) {
             return base.Channel.QueryCompositionByKeyword(keyword);
         }
         
-        public OOC.Entity.Composition[] QueryCompositionByModel(string modelGuid) {
+        public WebApplication1.CompositionServiceReference.Composition[] QueryCompositionByModel(string modelGuid) {
             return base.Channel.QueryCompositionByModel(modelGuid);
         }
         
@@ -125,19 +1813,19 @@ namespace WebApplication1.CompositionServiceReference {
             return base.Channel.Create(authorUserId, title, isShared, isFinished);
         }
         
-        public OOC.Entity.CompositionModel[] GetCompositionModels(string compositionGuid) {
+        public WebApplication1.CompositionServiceReference.CompositionModel[] GetCompositionModels(string compositionGuid) {
             return base.Channel.GetCompositionModels(compositionGuid);
         }
         
-        public OOC.Contract.Data.Common.CompositionModelData[] GetCompositionModelsData(string compositionGuid) {
+        public WebApplication1.CompositionServiceReference.CompositionModelData[] GetCompositionModelsData(string compositionGuid) {
             return base.Channel.GetCompositionModelsData(compositionGuid);
         }
         
-        public string CreateCompositionModel(string compositionGuid, string modelGuid, OOC.Contract.Data.Common.CompositionModelProperties properties) {
+        public string CreateCompositionModel(string compositionGuid, string modelGuid, WebApplication1.CompositionServiceReference.CompositionModelProperties properties) {
             return base.Channel.CreateCompositionModel(compositionGuid, modelGuid, properties);
         }
         
-        public void UpdateCompositionModelProperties(string cmGuid, OOC.Contract.Data.Common.CompositionModelProperties properties) {
+        public void UpdateCompositionModelProperties(string cmGuid, WebApplication1.CompositionServiceReference.CompositionModelProperties properties) {
             base.Channel.UpdateCompositionModelProperties(cmGuid, properties);
         }
         
@@ -145,11 +1833,11 @@ namespace WebApplication1.CompositionServiceReference {
             base.Channel.UpdateCompositionModelProperty(cmGuid, key, value);
         }
         
-        public OOC.Entity.CompositionModel GetCompositionModel(string cmGuid) {
+        public WebApplication1.CompositionServiceReference.CompositionModel GetCompositionModel(string cmGuid) {
             return base.Channel.GetCompositionModel(cmGuid);
         }
         
-        public OOC.Contract.Data.Common.CompositionModelData GetCompositionModelData(string cmGuid) {
+        public WebApplication1.CompositionServiceReference.CompositionModelData GetCompositionModelData(string cmGuid) {
             return base.Channel.GetCompositionModelData(cmGuid);
         }
         
@@ -157,23 +1845,23 @@ namespace WebApplication1.CompositionServiceReference {
             base.Channel.RemoveModel(cmGuid);
         }
         
-        public OOC.Entity.CompositionLink[] GetCompositionLinks(string compositionGuid) {
+        public WebApplication1.CompositionServiceReference.CompositionLink[] GetCompositionLinks(string compositionGuid) {
             return base.Channel.GetCompositionLinks(compositionGuid);
         }
         
-        public OOC.Contract.Data.Common.CompositionLinkData[] GetCompositionLinksData(string compositionGuid) {
+        public WebApplication1.CompositionServiceReference.CompositionLinkData[] GetCompositionLinksData(string compositionGuid) {
             return base.Channel.GetCompositionLinksData(compositionGuid);
         }
         
-        public string CreateCompositionLink(string compositionGuid, string sourceCmGuid, string targetCmGuid, string sourceQuantity, string targetQuantity, string sourceElementSet, string targetElementSet, OOC.Contract.Data.Common.LinkDataOperation dataOperation) {
+        public string CreateCompositionLink(string compositionGuid, string sourceCmGuid, string targetCmGuid, string sourceQuantity, string targetQuantity, string sourceElementSet, string targetElementSet, WebApplication1.CompositionServiceReference.LinkDataOperation dataOperation) {
             return base.Channel.CreateCompositionLink(compositionGuid, sourceCmGuid, targetCmGuid, sourceQuantity, targetQuantity, sourceElementSet, targetElementSet, dataOperation);
         }
         
-        public OOC.Entity.CompositionLink GetCompositionLink(string linkGuid) {
+        public WebApplication1.CompositionServiceReference.CompositionLink GetCompositionLink(string linkGuid) {
             return base.Channel.GetCompositionLink(linkGuid);
         }
         
-        public OOC.Contract.Data.Common.CompositionLinkData GetCompositionLinkData(string linkGuid) {
+        public WebApplication1.CompositionServiceReference.CompositionLinkData GetCompositionLinkData(string linkGuid) {
             return base.Channel.GetCompositionLinkData(linkGuid);
         }
         
@@ -181,7 +1869,7 @@ namespace WebApplication1.CompositionServiceReference {
             base.Channel.RemoveCompositionLink(linkGuid);
         }
         
-        public OOC.Contract.Data.Common.CompositionData GetCompositionData(string compositionGuid) {
+        public WebApplication1.CompositionServiceReference.CompositionData GetCompositionData(string compositionGuid) {
             return base.Channel.GetCompositionData(compositionGuid);
         }
         

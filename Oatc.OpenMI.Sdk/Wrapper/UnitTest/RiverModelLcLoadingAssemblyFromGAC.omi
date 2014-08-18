@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 <?xml version="1.0"?>
 <LinkableComponent Type="org.OpenMI.Utilities.Wrapper.UnitTest.RiverModelLC" Assembly="org.OpenMI.Utilities.Wrapper.UnitTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d4fe0bd3160b18a7" xmlns="http://www.openmi.org/LinkableComponent.xsd">">
   <Arguments>
     <Argument Key="Dummy" ReadOnly="true" Value="DummyValue" />
    </Arguments>
+=======
+<?xml version="1.0"?>
+<LinkableComponent Type="org.OpenMI.Utilities.Wrapper.UnitTest.RiverModelLC" Assembly="org.OpenMI.Utilities.Wrapper.UnitTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d4fe0bd3160b18a7" xmlns="http://www.openmi.org/LinkableComponent.xsd">">
+  <Arguments>
+    <Argument Key="Dummy" ReadOnly="true" Value="DummyValue" />
+   </Arguments>
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
 </LinkableComponent>

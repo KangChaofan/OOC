@@ -1,20 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text;
 using WebApplication1.ResultLogsServiceReference;
 using System.Text.RegularExpressions;
+<<<<<<< HEAD
 using WebApplication1.TaskProcessedDataSetServiceReference;
 using OOC.Util;
 
+=======
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
 
 namespace WebApplication1
 {
     public partial class statistics : System.Web.UI.Page
     {
+<<<<<<< HEAD
                 //public ResultLogs ModelResultLogs;
+=======
+                public ResultLogs ModelResultLogs;
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
                 protected void Page_Load(object sender, EventArgs e)
                 {
                     if (!IsPostBack)
@@ -29,6 +40,7 @@ namespace WebApplication1
                         //显示初始化三个ref的值
                         double ymax = 0;
                         double xmax = 0;
+<<<<<<< HEAD
                         StringBuilder sb = new StringBuilder();                      
                         string TaskID = Request["TaskID"];
                         //ModelYunBLL.ResultLogs BLLResultLogs = new ModelYunBLL.ResultLogs();
@@ -50,6 +62,17 @@ namespace WebApplication1
                         //   string temp = "sin.push([" + ss[Col1year] + "," + ss[Col2SEQ] + "]);";
                         //   strForScript.Append(temp);
                         //      
+=======
+                        StringBuilder sb = new StringBuilder();
+
+                 
+                        string ResultLogsID = Request["ResultLogsID"];
+                        //ModelYunBLL.ResultLogs BLLResultLogs = new ModelYunBLL.ResultLogs();
+                        ResultLogsServiceClient rs = new ResultLogsServiceClient();
+                        ModelResultLogs = new ResultLogs();
+                        ModelResultLogs = rs.GetModelOne(ResultLogsID);
+                        ReadFileForChart(ModelResultLogs.FileFolder + @"\Result\initialization.dat", 3, 1, 3, ref ymax, ref xmax, ref sb);
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
                         litForScript.Value = sb.ToString();
                     }
                 }
@@ -64,5 +87,36 @@ namespace WebApplication1
         /// <param name="YMax">ref Y轴最大值</param>
         /// <param name="XMax">ref X轴最大值</param>
         /// <param name="strForScript">ref 数据script</param>
+<<<<<<< HEAD
+=======
+        public void ReadFileForChart(string FilePath, int StartRow, int Col1, int Col2, ref double YMaxData, ref double XMaxDate, ref StringBuilder strForScript)
+        {
+            System.IO.StreamReader my = new System.IO.StreamReader(FilePath, System.Text.Encoding.Default);
+            string line;
+            int countRow = 0;
+
+            while ((line = my.ReadLine()) != null)
+            {
+                string lineTemp = line;
+
+                string[] ss = Regex.Split(lineTemp, "\u0020+");
+                if (countRow >= StartRow)
+                {
+                    if (ss.Length < 4)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        string temp = "sin.push([" + ss[Col1] + "," + ss[Col2] + "]);";
+                        strForScript.Append(temp);
+                    }
+
+                }
+                countRow++;
+            }
+            my.Close();
+        }
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
     }
 }

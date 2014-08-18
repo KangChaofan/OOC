@@ -10,7 +10,11 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("td input").click(function () {
+<<<<<<< HEAD
                 window.location.replace("/statistics.aspx?Type=" + $(this).attr("title") + "&TaskID=" + $(this).attr("id"));
+=======
+                window.location.replace("/statistics.aspx?Type=" + $(this).attr("name") + "&ResultLogsID="+$(this).attr("id"));
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
             });
         });        
     </script>
@@ -37,10 +41,17 @@
                                 名称
                             </td>
                             <td>
+<<<<<<< HEAD
                                 开始时间
                             </td>
                             <td>
                                 结束时间
+=======
+                                模型
+                            </td>
+                            <td>
+                                时间
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
                             </td>
                             <td>
                                 查看

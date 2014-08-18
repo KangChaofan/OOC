@@ -8,10 +8,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <title>水利数值模拟云服务平台</title>
 <link href="css/styles.css" rel="stylesheet" type="text/css" />
+<<<<<<< HEAD
 <script type="text/javascript" src="Scripts/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="js/plugins/forms/ui.spinner.js"></script>
 <script type="text/javascript" src="js/plugins/forms/jquery.mousewheel.js"></script>
 <script type="text/javascript" src="Scripts/jquery-ui.min.js"></script>
+=======
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript" src="js/plugins/forms/ui.spinner.js"></script>
+<script type="text/javascript" src="js/plugins/forms/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
 <script type="text/javascript" src="js/plugins/charts/excanvas.min.js"></script>
 <script type="text/javascript" src="js/plugins/charts/jquery.flot.js"></script>
 <script type="text/javascript" src="js/plugins/charts/jquery.flot.orderBars.js"></script>
@@ -67,11 +74,19 @@
 <script type="text/javascript" src="js/charts/hBar.js"></script>
 <script type="text/javascript" src="js/charts/updating.js"></script>
 <script type="text/javascript" src="js/charts/pie.js"></script>
+<<<<<<< HEAD
 
 <script type="text/javascript" src="js/charts/bar_side.js"></script>
 <script type="text/javascript" src="js/charts/hBar_side.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+=======
+<script type="text/javascript" src="js/charts/chart_side.js"></script>
+<script type="text/javascript" src="js/charts/bar_side.js"></script>
+<script type="text/javascript" src="js/charts/hBar_side.js"></script>
+<script type="text/javascript">
+    $(function () {
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
         var sin = [];
         var ChartName = "Y-水位 X-流量";
         var strVal = $("#litForScript").val();
@@ -84,8 +99,13 @@
                    points: { show: true }
                },
                grid: { hoverable: true, clickable: true },
+<<<<<<< HEAD
                yaxis: { min: 1990, max: 2000 },
                xaxis: { min: 14002, max: 80000 }
+=======
+               yaxis: { min: 0, max: 150 },
+               xaxis: { min: 0, max: 300 }
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
            });
 
         function showTooltip(x, y, contents) {

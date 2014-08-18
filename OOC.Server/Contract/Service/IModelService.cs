@@ -9,7 +9,11 @@ namespace OOC.Contract.Service
     public interface IModelService
     {
         [OperationContract]
+<<<<<<< HEAD
         string Create(string name, string version, string modelAbstract, int authorUserId, Boolean isPublic, Boolean isApproved, string className, Int32 topId, Int32 typeId);
+=======
+        void Create(string name, string version, int authorUserId, string className,Int32 topId,Int32 typeId);
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
 
         [OperationContract]
         Model GetByGuid(string guid);

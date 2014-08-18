@@ -117,7 +117,11 @@
                     $.layer({
                         type: 2,
                         title: false,
+<<<<<<< HEAD
                         iframe: { src: 'statistics.aspx?TaskID=' + result },
+=======
+                        iframe: { src: 'LatestResultShow.aspx?ResultLogsID=' + result },
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
                         area: ['80%', '60%'],
                         success: function () {
                             layer.shift('bottom', 200)

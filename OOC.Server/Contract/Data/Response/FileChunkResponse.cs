@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System.Runtime.Serialization;
 
 namespace OOC.Contract.Data.Response
@@ -25,4 +26,33 @@ namespace OOC.Contract.Data.Response
             Chunk = chunk;
         }
     }
+=======
+﻿using System.Runtime.Serialization;
+
+namespace OOC.Contract.Data.Response
+{
+    [DataContract]
+    public class FileChunkResponse
+    {
+        [DataMember]
+        public string FileName { get; set; }
+
+        [DataMember]
+        public long Offset { get; set; }
+
+        [DataMember]
+        public long Length { get; set; }
+
+        [DataMember]
+        public byte[] Chunk { get; set; }
+
+        public FileChunkResponse(string fileName, long offset, long length, byte[] chunk)
+        {
+            FileName = fileName;
+            Offset = offset;
+            Length = length;
+            Chunk = chunk;
+        }
+    }
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
 }

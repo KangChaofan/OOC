@@ -4,13 +4,19 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text;
+<<<<<<< HEAD
 using Oatc.OpenMI.Examples.ModelComponents.SimpleRiver.Wrapper;
+=======
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Xml;
 using System.IO;
+<<<<<<< HEAD
 using WebApplication1.CompositionServiceReference;
 using WebApplication1.TaskServiceReference;
+=======
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
 
 
 using System.Collections;
@@ -73,6 +79,7 @@ namespace WebApplication1
            //RunOne(_FileFolder);
            //BllResultLogs.AddOne(ModelResultLogs);
            //Response.Write(ModelResultLogs.ID);
+<<<<<<< HEAD
 
 
 
@@ -94,6 +101,8 @@ namespace WebApplication1
            taskService.UpdateState(taskGuid, TaskState.Ready);
            Response.Write(taskGuid);
 
+=======
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
        }
         public void method(object o) //注意参数.
         {
@@ -134,7 +143,11 @@ namespace WebApplication1
         private void CreateAndThrowException()
         {
             int numberOfMessages = 0;
+<<<<<<< HEAD
             numberOfMessages = SimpleRiverEngineDllAccess.GetNumberOfMessages();
+=======
+            //numberOfMessages = SimpleRiverEngineDllAccess.GetNumberOfMessages();
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
             string message = "Error Message from SimpleRiver Fortran Core ";
 
             for (int i = 0; i < numberOfMessages; i++)

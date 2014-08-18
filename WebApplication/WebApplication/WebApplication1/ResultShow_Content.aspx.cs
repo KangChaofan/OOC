@@ -6,9 +6,12 @@ using System.Web.UI.WebControls;
 using WebApplication1.ModelServiceReference;
 using WebApplication1.ModelTypeServiceReference;
 using WebApplication1.ResultLogsServiceReference;
+<<<<<<< HEAD
 using WebApplication1.CompositionServiceReference;
 using WebApplication1.TaskServiceReference;
 
+=======
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
 
 
 namespace WebApplication1
@@ -30,6 +33,7 @@ namespace WebApplication1
             //ModelYunBLL.ModelType _ModelTypeBLL = new ModelYunBLL.ModelType();
             ModelTypeServiceClient mts = new ModelTypeServiceClient();
             ModelServiceClient ms = new ModelServiceClient();
+<<<<<<< HEAD
             CompositionServiceClient compositionService = new CompositionServiceClient();
             //System.Data.DataSet ModelTypeDS = mts.GetTypeListDS();
             TaskServiceClient ts=new TaskServiceClient();
@@ -58,6 +62,25 @@ namespace WebApplication1
                     }
                 
                 }            
+=======
+            //System.Data.DataSet ModelTypeDS = mts.GetTypeListDS();
+
+            List<ResultLogs> list = new List<ResultLogs>();
+            list.AddRange(rs.GetLogsList());
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            foreach (ResultLogs one in list)
+            {
+                //获取模型名称
+                //string _ModelName = GetModelNameByID(one.ModelID, ModelTypeDS);
+                Model model = ms.GetByGuid(one.ModelID);
+                sb.Append(" <tr>");
+                sb.Append(" <td>" + one.ID + "</td>");
+                sb.Append(" <td>" + model.name + "</td>");
+                sb.Append(" <td>" + one.CalTime.ToString("yyyy-MM-dd hh:MM:ss") + "</td>");
+                sb.Append(" <td><input type=\"button\" class=\"buttonS bGreen\" id=\"" + one.ID + "\" value=\"查看\" name=\"" +one.ModelID+ "\" /> </td>");
+                sb.Append("  <td><input type=\"button\" class=\"buttonS bRed\" id=\"EditReCal\" value=\"编辑重算\" />   </td>");
+                sb.Append("</tr>");
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
             }
             lit.Text = sb.ToString();
         }

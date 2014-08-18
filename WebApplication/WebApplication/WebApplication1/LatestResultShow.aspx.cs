@@ -6,13 +6,17 @@ using System.Web.UI.WebControls;
 using System.Text;
 using WebApplication1.ResultLogsServiceReference;
 using System.Text.RegularExpressions;
+<<<<<<< HEAD
 using WebApplication1.TaskProcessedDataSetServiceReference;
 using OOC.Util;
+=======
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
 
 namespace WebApplication1
 {
     public partial class LatestResultShow : System.Web.UI.Page
     {
+<<<<<<< HEAD
         //public ResultLogs ModelResultLogs;
         protected void Page_Load(object sender, EventArgs e) {
             /*
@@ -39,11 +43,18 @@ namespace WebApplication1
                 //ReadFileForChart("C:\\out\\initialization.dat", 3, 1, 3, ref ymax, ref xmax, ref sb);
                 //litForScript.Value = sb.ToString();
 
+=======
+        public ResultLogs ModelResultLogs;
+        protected void Page_Load(object sender, EventArgs e)
+        {
+ 
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
                 //显示初始化三个ref的值
                 double ymax = 0;
                 double xmax = 0;
                 StringBuilder sb = new StringBuilder();
 
+<<<<<<< HEAD
 
                 string TaskID = Request["TaskID"];
                 //ModelYunBLL.ResultLogs BLLResultLogs = new ModelYunBLL.ResultLogs();
@@ -73,6 +84,18 @@ namespace WebApplication1
 
                 litForScript.Value = sb.ToString();
             }
+=======
+          
+                string ResultLogsID = Request["ResultLogsID"];
+                //ModelYunBLL.ResultLogs BLLResultLogs = new ModelYunBLL.ResultLogs();
+                ResultLogsServiceClient rs = new ResultLogsServiceClient();
+                ModelResultLogs = new ResultLogs();
+                ModelResultLogs = rs.GetModelOne(ResultLogsID);
+
+                ReadFileForChart(ModelResultLogs.FileFolder + @"\Result\initialization.dat", 3, 1, 3, ref ymax, ref xmax, ref sb);
+                litForScript.Value = sb.ToString();
+     
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
         }
 
         /// <summary>

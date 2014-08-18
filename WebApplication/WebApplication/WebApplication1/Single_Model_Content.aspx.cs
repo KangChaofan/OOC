@@ -100,14 +100,22 @@ namespace WebApplication1
             {
                 //string _ModelTypeName = GetModelNameByID(one.TypeID, ModelTypeDS);
                 ModelType mt = mts.GetTypeByID((Int32)one.typeId);
+<<<<<<< HEAD
                 //ModelProperty mp = ms.GetRiverBasinByModelGuid(one.guid);
+=======
+                ModelProperty mp = ms.GetRiverBasinByModelGuid(one.guid);
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
                 sb.Append(" <tr>");
                 sb.Append(" <td>" + one.name + "</td>");
                 sb.Append(" <td>" + one.eName + "</td>");
                 sb.Append(" <td id=\"ModelTypeName\" name=\"" + one.typeId + "\">" + mt.typeName + "</td>");
                 sb.Append(" <td>" + one.@abstract + "</td>");
+<<<<<<< HEAD
                 //sb.Append(" <td>" + mp.@default+ "</td>");
                 sb.Append(" <td>" + one.riverBasin + "</td>");
+=======
+                sb.Append(" <td>" + mp.@default+ "</td>");
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
                 sb.Append(" <td><input type=\"button\" class=\"buttonS bLightBlue\" id=\"" + one.guid+ "\" name=\"" + one.name + "\" value=\"配置计算\" alt=\"" + one.typeId+ "\" /> </td>");
                 sb.Append("</tr>");
             }

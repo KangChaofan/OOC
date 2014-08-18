@@ -33,7 +33,11 @@ namespace WebApplication1
             {
                 saveFile(this.Context, "UploadDLL");
             }
+<<<<<<< HEAD
             else if (Method == "ModelInfo")//!!!!!!!!!!!!!!!!!!!!!!!!!与下面的switch重复了！！！！！！！！！！！！！！！！！！
+=======
+            else if (Method == "ModelInfo")
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
             {
                 //ModelYunModel.ModelInfo _oneModel = new ModelYunModel.ModelInfo();
                 Model _oneModel = new Model();
@@ -52,19 +56,28 @@ namespace WebApplication1
                 case "Login":
                     string username = Request["UserName"];
                     string password = Request["Password"];
+<<<<<<< HEAD
                     int userID = 0;
                     //ModelYunBLL.Users UsersBll = new ModelYunBLL.Users();
                     UserServiceClient UsersBll = new UserServiceClient();
                     bool IsAccountOK = UsersBll.Auth(username, password);
                     userID = Convert.ToInt32(UsersBll.GetByUsername(username).id);
+=======
+                    //ModelYunBLL.Users UsersBll = new ModelYunBLL.Users();
+                    UserServiceClient UsersBll = new UserServiceClient();
+                    bool IsAccountOK = UsersBll.Auth(username, password);
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
                     if (IsAccountOK == true)
                     {
                         Response.Write("OK");
                         Response.Cookies["DigitalBasinUserName"].Value = username;
                         Response.Cookies["DigitalBasinUserName"].Expires = DateTime.MaxValue;
+<<<<<<< HEAD
                         Response.Cookies["DigitalBasinUserID"].Value = userID.ToString();
                         Response.Cookies["DigitalBasinUserID"].Expires = DateTime.MaxValue;
 
+=======
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
                     }
                     else
                     {
@@ -171,7 +184,11 @@ namespace WebApplication1
         /// 新增模型
         /// </summary>
         /// <param name="modelInfo"></param>
+<<<<<<< HEAD
         public void AddModel(Model  model)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!要它干嘛？
+=======
+        public void AddModel(Model  model)
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
         {
             //ModelYunBLL.ModelInfo modelBLL = new ModelYunBLL.ModelInfo();
             ModelServiceClient ms=new ModelServiceClient();

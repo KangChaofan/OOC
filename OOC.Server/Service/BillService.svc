@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 ﻿<%@ ServiceHost Language="C#" Debug="true" Service="OOC.Service.BillService" CodeBehind="BillService.svc.cs" %>
+=======
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="OOC.Service.ModelTypeService" CodeBehind="BillService.svc.cs" %>
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64

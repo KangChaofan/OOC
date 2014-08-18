@@ -12,7 +12,11 @@
     <GenerateSerializableTypes>true</GenerateSerializableTypes>
     <Serializer>Auto</Serializer>
     <UseSerializerForFaults>true</UseSerializerForFaults>
+<<<<<<< HEAD
     <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+=======
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
     <ReferencedAssemblies />
     <ReferencedDataContractTypes />
     <ServiceContractMappings />

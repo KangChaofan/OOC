@@ -121,7 +121,10 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+<<<<<<< HEAD
     <Reference Include="System.Data.Entity" />
+=======
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -392,12 +395,16 @@
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Scripts\jquery-1.8.0.js" />
     <Content Include="Scripts\jquery-1.8.0.min.js" />
+<<<<<<< HEAD
     <Content Include="Scripts\jquery-ui.min.js" />
+=======
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
     <Content Include="Scripts\jquery.cookie.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\Jquery.Query.js" />
     <Content Include="Scripts\JScript1.js" />
     <Content Include="Properties\DataSources\System.Data.DataSet.datasource" />
+<<<<<<< HEAD
     <Content Include="Properties\DataSources\OOC.Contract.Data.Common.CompositionData.datasource" />
     <Content Include="Properties\DataSources\OOC.Contract.Data.Common.CompositionLinkData.datasource" />
     <Content Include="Properties\DataSources\OOC.Contract.Data.Common.CompositionModelData.datasource" />
@@ -449,6 +456,8 @@
     <Content Include="Service References\CompositionServiceReference\WebApplication1.CompositionServiceReference.CompositionModelData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+=======
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
     <None Include="Service References\ModelServiceReference\ModelService.disco" />
     <None Include="Service References\ModelServiceReference\configuration91.svcinfo" />
     <None Include="Service References\ModelServiceReference\configuration.svcinfo" />
@@ -456,12 +465,15 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+<<<<<<< HEAD
     <Content Include="Service References\ModelServiceReference\WebApplication1.ModelServiceReference.Model.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\ModelServiceReference\WebApplication1.ModelServiceReference.ModelProperty.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+=======
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
     <None Include="Service References\ModelTypeServiceReference\ModelTypeService.disco" />
     <None Include="Service References\ModelTypeServiceReference\configuration91.svcinfo" />
     <None Include="Service References\ModelTypeServiceReference\configuration.svcinfo" />
@@ -469,6 +481,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+<<<<<<< HEAD
     <None Include="Service References\CompositionServiceReference\CompositionService.disco" />
     <None Include="Service References\CompositionServiceReference\configuration91.svcinfo" />
     <None Include="Service References\CompositionServiceReference\configuration.svcinfo" />
@@ -572,6 +585,22 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+=======
+    <Content Include="Service References\ResultLogsServiceReference\ResultLogsService.disco" />
+    <Content Include="Service References\ResultLogsServiceReference\configuration91.svcinfo" />
+    <Content Include="Service References\ResultLogsServiceReference\configuration.svcinfo" />
+    <Content Include="Service References\ResultLogsServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Service References\UserServiceReference\UserService.disco" />
+    <Content Include="Service References\UserServiceReference\configuration91.svcinfo" />
+    <Content Include="Service References\UserServiceReference\configuration.svcinfo" />
+    <Content Include="Service References\UserServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
     <Content Include="Single_Model.aspx" />
     <Content Include="Single_Model_Content.aspx" />
     <Content Include="statistics.aspx" />
@@ -601,6 +630,15 @@
     <None Include="Service References\ModelServiceReference\ModelService4.xsd">
       <SubType>Designer</SubType>
     </None>
+<<<<<<< HEAD
+=======
+    <Content Include="Service References\ModelServiceReference\WebApplication1.ModelServiceReference.Model.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ModelServiceReference\WebApplication1.ModelServiceReference.ModelProperty.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
     <None Include="Service References\ModelTypeServiceReference\ModelTypeService1.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -619,7 +657,11 @@
     <Content Include="Service References\ModelTypeServiceReference\WebApplication1.ModelTypeServiceReference.ModelType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+<<<<<<< HEAD
     <None Include="Service References\ResultLogsServiceReference\ResultLogsService.wsdl" />
+=======
+    <Content Include="Service References\ResultLogsServiceReference\ResultLogsService.wsdl" />
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
     <None Include="Service References\ResultLogsServiceReference\ResultLogsService.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -638,7 +680,11 @@
     <Content Include="Service References\ResultLogsServiceReference\WebApplication1.ResultLogsServiceReference.ResultLogs.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+<<<<<<< HEAD
     <None Include="Service References\UserServiceReference\UserService.wsdl" />
+=======
+    <Content Include="Service References\UserServiceReference\UserService.wsdl" />
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
     <None Include="Service References\UserServiceReference\UserService.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -783,11 +829,14 @@
     <Compile Include="runModel.aspx.designer.cs">
       <DependentUpon>runModel.aspx</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Service References\CompositionServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+=======
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
     <Compile Include="Service References\ModelServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -803,6 +852,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Service References\TaskProcessedDataSetServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -813,6 +863,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+=======
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
     <Compile Include="Service References\UserServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -914,6 +966,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <WCFMetadataStorage Include="Service References\CompositionServiceReference\" />
     <WCFMetadataStorage Include="Service References\ModelServiceReference\" />
     <WCFMetadataStorage Include="Service References\ModelTypeServiceReference\" />
@@ -932,6 +985,13 @@
       <Name>OOC.Util</Name>
     </ProjectReference>
   </ItemGroup>
+=======
+    <WCFMetadataStorage Include="Service References\ModelServiceReference\" />
+    <WCFMetadataStorage Include="Service References\ModelTypeServiceReference\" />
+    <WCFMetadataStorage Include="Service References\ResultLogsServiceReference\" />
+    <WCFMetadataStorage Include="Service References\UserServiceReference\" />
+  </ItemGroup>
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -945,7 +1005,11 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
+<<<<<<< HEAD
           <DevelopmentServerPort>13781</DevelopmentServerPort>
+=======
+          <DevelopmentServerPort>10796</DevelopmentServerPort>
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

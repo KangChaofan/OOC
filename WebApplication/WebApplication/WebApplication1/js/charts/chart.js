@@ -11,8 +11,13 @@ $(function () {
                    points: { show: true }
                },
                grid: { hoverable: true, clickable: true },
+<<<<<<< HEAD
                yaxis: { min: 1990, max: 20000 },
                xaxis: { min: 1990, max: 20000 }
+=======
+               yaxis: { min: 0, max: 2000 },
+               xaxis: { min: 0, max: 2000 }
+>>>>>>> 0daec768afcc757c83c424118f28374d34e3dc64
            });
 
 

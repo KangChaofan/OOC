@@ -45,7 +45,7 @@ namespace WebApplication1
                 compositionList.AddRange(compositionService.QueryCompositionByModel(oneModel.guid));
                 foreach (CompositionServiceReference.Composition oneComposition in compositionList) {
                     List<TaskServiceReference.Task> taskList = new List<TaskServiceReference.Task>();
-                    taskList.AddRange(ts.GetTaskByCompositionAndUser(oneComposition.guid, Convert.ToInt32(_userid)));
+                    taskList.AddRange(ts.GetTaskByCompositionAndUser(oneComposition.guid, Convert.ToInt32(_userid)));//！！！！！！！！！！！！！！！应该对任务的状态信息进行二次的筛选，因为不是所有的任务都是已经计算完毕的
                     foreach (var _oneTask in taskList) 
                     {
                         sb.Append(" <tr>");

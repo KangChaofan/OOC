@@ -33,7 +33,7 @@ namespace WebApplication1
             {
                 saveFile(this.Context, "UploadDLL");
             }
-            else if (Method == "ModelInfo")
+            else if (Method == "ModelInfo")//!!!!!!!!!!!!!!!!!!!!!!!!!与下面的switch重复了！！！！！！！！！！！！！！！！！！
             {
                 //ModelYunModel.ModelInfo _oneModel = new ModelYunModel.ModelInfo();
                 Model _oneModel = new Model();
@@ -171,7 +171,7 @@ namespace WebApplication1
         /// 新增模型
         /// </summary>
         /// <param name="modelInfo"></param>
-        public void AddModel(Model  model)
+        public void AddModel(Model  model)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!要它干嘛？
         {
             //ModelYunBLL.ModelInfo modelBLL = new ModelYunBLL.ModelInfo();
             ModelServiceClient ms=new ModelServiceClient();
